@@ -12,3 +12,11 @@ all: ${PAPER}.tex
 	pdflatex ${PAPER}.tex
 	pdflatex ${PAPER}.tex
 	pdflatex ${PAPER}.tex
+
+clean:
+	rm -f ${PAPER}.pdf
+	rm -f ${PAPER}.dvi
+	rm -f ${PAPER}.aux
+	rm -f ${PAPER}.bbl
+	rm -f ${PAPER}.log
+	rm -f ${PAPER}.blg
