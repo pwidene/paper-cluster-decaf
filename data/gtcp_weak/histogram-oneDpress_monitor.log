@@ -1,0 +1,220 @@
+*****************************
+64:10:6:6:2 gtcp weak scaling
+BAD DATA!
+*****************************
+
+histogram-oneDpress step 0
+ave vm = 100602.000000, ave resident memory = 77768.500000
+my array bytes (rank 0): 102471304
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole timestep      1.196190       1.187299       1.205080       0.008891       
+perform_reads       0.394553       0.280168       0.508938       0.114385       
+
+histogram-oneDpress step 5
+ave vm = 108952.000000, ave resident memory = 86160.500000
+my array bytes (rank 0): 102471304
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole timestep      1.052908       1.046395       1.059421       0.006513       
+perform_reads       0.419737       0.310743       0.528731       0.108994       
+
+histogram-oneDpress step 10
+ave vm = 108952.000000, ave resident memory = 86172.000000
+my array bytes (rank 0): 102471304
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole timestep      0.931127       0.927098       0.935156       0.004029       
+perform_reads       0.364739       0.317327       0.412150       0.047412       
+
+histogram-oneDpress step 15
+ave vm = 108952.000000, ave resident memory = 86180.000000
+my array bytes (rank 0): 102471304
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole timestep      0.939797       0.935518       0.944076       0.004279       
+perform_reads       0.369454       0.323253       0.415654       0.046201       
+
+histogram-oneDpress step 20
+ave vm = 108952.000000, ave resident memory = 86188.000000
+my array bytes (rank 0): 102471304
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole timestep      0.840314       0.839093       0.841536       0.001221       
+perform_reads       0.312636       0.310052       0.315219       0.002583       
+
+*****************************
+84:16:10:10:2 gtcp weak scaling
+*****************************
+
+histogram-oneDpress step 0
+ave vm = 90594.000000, ave resident memory = 67770.000000
+my array bytes (rank 0): 102471304
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole timestep      1.146662       1.136517       1.156806       0.010144       
+perform_reads       0.317251       0.305593       0.328909       0.011658       
+
+histogram-oneDpress step 5
+ave vm = 95608.000000, ave resident memory = 72961.000000
+my array bytes (rank 0): 102471304
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole timestep      0.841419       0.838280       0.844558       0.003139       
+perform_reads       0.311854       0.306003       0.317705       0.005851       
+
+histogram-oneDpress step 10
+ave vm = 95608.000000, ave resident memory = 72973.000000
+my array bytes (rank 0): 102471304
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole timestep      0.777747       0.773502       0.781992       0.004245       
+perform_reads       0.302263       0.302083       0.302442       0.000180       
+
+histogram-oneDpress step 15
+ave vm = 95608.000000, ave resident memory = 72982.000000
+my array bytes (rank 0): 102471304
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole timestep      0.849787       0.845613       0.853961       0.004174       
+perform_reads       0.316332       0.309503       0.323161       0.006829       
+
+histogram-oneDpress step 20
+ave vm = 95608.000000, ave resident memory = 72990.000000
+my array bytes (rank 0): 102471304
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole timestep      0.841571       0.834544       0.848598       0.007027       
+perform_reads       0.310640       0.305982       0.315297       0.004658       
+
+*****************************
+156:18:14:14:4 gtcp weak scaling
+*****************************
+
+histogram-oneDpress step 0
+ave vm = 85942.750000, ave resident memory = 54179.000000
+my array bytes (rank 0): 73770784
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole timestep      1.009633       0.999682       1.022857       0.008822       
+perform_reads       0.334425       0.244068       0.454604       0.087504       
+
+histogram-oneDpress step 5
+ave vm = 91273.000000, ave resident memory = 59632.000000
+my array bytes (rank 0): 73770784
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole timestep      0.694028       0.679969       0.714973       0.013156       
+perform_reads       0.290160       0.278494       0.310301       0.012441       
+
+histogram-oneDpress step 10
+ave vm = 91297.750000, ave resident memory = 59627.000000
+my array bytes (rank 0): 73770784
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole timestep      0.713455       0.700999       0.736697       0.013747       
+perform_reads       0.300852       0.283113       0.318090       0.015994       
+
+histogram-oneDpress step 15
+ave vm = 91306.000000, ave resident memory = 59683.750000
+my array bytes (rank 0): 73770784
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole timestep      0.701211       0.691754       0.725900       0.014292       
+perform_reads       0.293612       0.281083       0.312313       0.011904       
+
+histogram-oneDpress step 20
+ave vm = 91306.000000, ave resident memory = 59732.250000
+my array bytes (rank 0): 73770784
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole timestep      0.721524       0.664609       0.812314       0.056166       
+perform_reads       0.297485       0.277954       0.321808       0.016468       
+
+*****************************
+234:25:19:19:5 gtcp weak scaling
+*****************************
+
+histogram-oneDpress step 0
+ave vm = 93816.600000, ave resident memory = 57536.000000
+my array bytes (rank 0): 80321536
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole timestep      1.093119       1.080867       1.118286       0.014604       
+perform_reads       0.296386       0.231383       0.344123       0.036428       
+
+histogram-oneDpress step 5
+ave vm = 96051.200000, ave resident memory = 59876.400000
+my array bytes (rank 0): 80321536
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole timestep      0.922521       0.691824       0.999786       0.115800       
+perform_reads       0.346038       0.282819       0.543611       0.099539       
+
+histogram-oneDpress step 10
+ave vm = 96051.200000, ave resident memory = 59910.600000
+my array bytes (rank 0): 80321536
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole timestep      0.890755       0.710034       1.013400       0.136757       
+perform_reads       0.358071       0.276128       0.570568       0.110373       
+
+histogram-oneDpress step 15
+ave vm = 96051.200000, ave resident memory = 59929.800000
+my array bytes (rank 0): 80321536
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole timestep      0.902545       0.722684       1.025728       0.137701       
+perform_reads       0.398862       0.273063       0.569096       0.129388       
+
+histogram-oneDpress step 20
+ave vm = 96051.200000, ave resident memory = 59949.600000
+my array bytes (rank 0): 80321536
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole timestep      1.080944       0.900060       1.205111       0.134578       
+perform_reads       0.459053       0.262371       0.779276       0.184401       
+
+*****************************
+64:10:6:6:2 gtcp weak scaling
+*****************************
+
+histogram-oneDpress step 0
+ave vm = 73591.000000, ave resident memory = 50732.500000
+my array bytes (rank 0): 65593048
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole timestep      0.917618       0.899664       0.935572       0.017954       
+perform_reads       0.291397       0.182823       0.399971       0.108574       
+
+histogram-oneDpress step 5
+ave vm = 78940.000000, ave resident memory = 56202.500000
+my array bytes (rank 0): 65593048
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole timestep      0.556193       0.552523       0.559863       0.003670       
+perform_reads       0.213402       0.210714       0.216089       0.002687       
+
+histogram-oneDpress step 10
+ave vm = 78940.000000, ave resident memory = 56128.000000
+my array bytes (rank 0): 65593048
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole timestep      0.605644       0.601262       0.610025       0.004381       
+perform_reads       0.247330       0.218377       0.276284       0.028954       
+
+histogram-oneDpress step 15
+ave vm = 78940.000000, ave resident memory = 56182.000000
+my array bytes (rank 0): 65593048
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole timestep      0.610824       0.606940       0.614708       0.003884       
+perform_reads       0.249529       0.220017       0.279040       0.029512       
+
+histogram-oneDpress step 20
+ave vm = 78940.000000, ave resident memory = 56303.000000
+my array bytes (rank 0): 65593048
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole timestep      0.613300       0.610143       0.616458       0.003157       
+perform_reads       0.248779       0.219695       0.277862       0.029083       

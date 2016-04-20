@@ -1,0 +1,24 @@
+#!/bin/bash
+#PBS -A CSC094
+#PBS -N miniapp
+#PBS -j oe
+#PBS -V
+#PBS -l walltime=00:07:00
+#PBS -l nodes=144
+
+# export CMTransportVerbose=1
+#export CMTraceFile=1
+export CMSelfFormats=1
+#export CMTransport="enet"
+cd $MINIAPPRUN
+
+#aprun -n 65536 ./3D_Grid -g 4096x4096x4096 -l 64x128x128 &> grid.out &
+#aprun -n 8192 $GEN/install/bin/histogram 3Ddump.fp 128 pressure density temperature &> histo.out & 
+#aprun -n 2048 ./3D_Grid -g 4096x2048x1024 -l 256x128x128 &> grid.out &
+#aprun -n 512 $GEN/histogram 3Ddump.fp 128 pressure density temperature &> histo.out &
+#aprun -n 16 ./3D_Grid -g 256x256x256 -l 64x128x128 &> grid.out &
+#aprun -n 2 $GEN/install/bin/histogram 3Ddump.fp 128 pressure &> histo.out &
+aprun -n 2048 $MINIAPP/3D_Grid -g 2048x2048x2048 -l 256x128x128 &> grid0.out &
+aprun -n 256 $GEN/install/bin/histogram 3Ddump.fp 128 density pressure temperature &> histo0.out &
+
+wait

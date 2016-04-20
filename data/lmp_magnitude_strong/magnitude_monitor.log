@@ -1,0 +1,403 @@
+**********************
+lammps workflow, magnitude monitor
+256:60:8:8
+**********************
+magnitude step 0
+ave vm = 183401.875000, ave resident memory = 105985.875000
+my array bytes (rank 0): 96024024
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         1.854957       1.849361       1.861122       0.003405       
+perform_reads       0.442033       0.309120       0.492980       0.054687       
+
+magnitude step 500
+ave vm = 250392.125000, ave resident memory = 171793.750000
+my array bytes (rank 0): 96024024
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         1.082540       1.044427       1.091106       0.014821       
+perform_reads       0.507634       0.474634       0.533398       0.018217       
+
+magnitude step 1000
+ave vm = 282853.250000, ave resident memory = 204280.500000
+my array bytes (rank 0): 96024024
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         1.088254       1.081232       1.093044       0.004918       
+perform_reads       0.514777       0.487795       0.539428       0.017244       
+**********************
+lammps workflow, magnitude monitor
+256:60:4:8
+**********************
+
+magnitude step 0
+ave vm = 290275.500000, ave resident memory = 208653.500000
+my array bytes (rank 0): 192048024
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         2.494987       2.486793       2.515046       0.011715       
+perform_reads       0.658589       0.600066       0.681277       0.033850       
+
+magnitude step 500
+ave vm = 420759.750000, ave resident memory = 337924.250000
+my array bytes (rank 0): 192048024
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         1.595436       1.594355       1.596952       0.001065       
+perform_reads       0.632601       0.617543       0.645076       0.010332       
+
+magnitude step 1000
+ave vm = 483275.750000, ave resident memory = 400491.250000
+my array bytes (rank 0): 192048024
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         1.600738       1.599477       1.603059       0.001439       
+perform_reads       0.642071       0.634180       0.650179       0.007067       
+
+**********************
+lammps workflow, magnitude monitor
+256:60:2:8
+**********************
+
+magnitude step 0
+ave vm = 533882.500000, ave resident memory = 414227.500000
+my array bytes (rank 0): 384096024
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         4.422800       4.418836       4.426764       0.003964       
+perform_reads       1.050454       1.033786       1.067121       0.016667       
+
+magnitude step 500
+ave vm = 789226.500000, ave resident memory = 668417.000000
+my array bytes (rank 0): 384096024
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         3.017559       2.874209       3.160910       0.143350       
+perform_reads       1.008508       1.004666       1.012350       0.003842       
+
+magnitude step 1000
+ave vm = 914258.500000, ave resident memory = 793491.000000
+my array bytes (rank 0): 384096024
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         3.055204       3.053587       3.056821       0.001617       
+perform_reads       1.093381       0.997390       1.189372       0.095991       
+
+**********************
+lammps workflow, magnitude monitor
+256:60:12:8
+**********************
+
+magnitude step 0
+ave vm = 166579.166667, ave resident memory = 75584.500000
+my array bytes (rank 0): 64016016
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         1.378381       1.362107       1.387166       0.008594       
+perform_reads       0.406769       0.205754       0.455827       0.062884       
+
+magnitude step 500
+ave vm = 215908.250000, ave resident memory = 123714.750000
+my array bytes (rank 0): 64016016
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         0.920440       0.914652       0.929811       0.005925       
+perform_reads       0.417531       0.352437       0.545919       0.049350       
+
+magnitude step 1000
+ave vm = 232117.250000, ave resident memory = 139992.666667
+my array bytes (rank 0): 64016016
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         0.903187       0.897921       0.911228       0.005443       
+perform_reads       0.452288       0.417005       0.532883       0.047526       
+
+**********************
+lammps workflow, magnitude monitor
+256:60:16:8
+**********************
+
+magnitude step 0
+ave vm = 166021.062500, ave resident memory = 55323.062500
+my array bytes (rank 0): 48012024
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         1.630755       1.622168       1.636813       0.003021       
+perform_reads       0.412477       0.140218       0.612570       0.120993       
+
+magnitude step 500
+ave vm = 204061.812500, ave resident memory = 92132.937500
+my array bytes (rank 0): 48012024
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         1.025314       1.011325       1.028781       0.005317       
+perform_reads       0.571350       0.295023       0.749082       0.174439       
+
+magnitude step 1000
+ave vm = 220359.250000, ave resident memory = 108401.250000
+my array bytes (rank 0): 48012024
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         0.939761       0.927200       0.942618       0.004564       
+perform_reads       0.516110       0.289553       0.663738       0.147417       
+
+**********************
+lammps workflow, magnitude monitor
+256:60:18:8
+**********************
+
+magnitude step 0
+ave vm = 3299987.611111, ave resident memory = 52920.555556
+my array bytes (rank 0): 42677352
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         1.423895       1.410318       1.433316       0.005604       
+perform_reads       0.265369       0.132140       0.365946       0.061760       
+
+magnitude step 500
+ave vm = 3332987.111111, ave resident memory = 84703.166667
+my array bytes (rank 0): 42677352
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         0.775145       0.757787       0.789168       0.009893       
+perform_reads       0.367914       0.164552       0.520147       0.081191       
+
+magnitude step 1000
+ave vm = 3346932.611111, ave resident memory = 98653.944444
+my array bytes (rank 0): 42677352
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         0.757348       0.437877       0.789492       0.078020       
+perform_reads       0.343850       0.164661       0.520588       0.087519       
+
+**********************
+lammps workflow, magnitude monitor
+256:60:20:8
+**********************
+magnitude step 0
+ave vm = 3289601.550000, ave resident memory = 48336.800000
+my array bytes (rank 0): 38409624
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         1.281213       1.277182       1.286176       0.002536       
+perform_reads       0.334657       0.102888       0.563564       0.124632       
+
+magnitude step 500
+ave vm = 3320807.750000, ave resident memory = 78326.000000
+my array bytes (rank 0): 38409624
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         0.696132       0.334554       0.774257       0.095630       
+perform_reads       0.296982       0.111435       0.370596       0.076703       
+
+magnitude step 1000
+ave vm = 3333358.600000, ave resident memory = 90882.800000
+my array bytes (rank 0): 38409624
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         0.700977       0.679544       0.750558       0.023715       
+perform_reads       0.348331       0.285667       0.458478       0.052921       
+
+**********************
+lammps workflow, magnitude monitor
+256:60:24:8
+**********************
+
+magnitude step 0
+ave vm = 3278974.875000, ave resident memory = 41449.916667
+my array bytes (rank 0): 32008008
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         1.199643       1.186597       1.209929       0.004226       
+perform_reads       0.210699       0.094503       0.366439       0.058547       
+
+magnitude step 500
+ave vm = 3305743.833333, ave resident memory = 66931.541667
+my array bytes (rank 0): 32008008
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         0.606974       0.331803       0.622707       0.057609       
+perform_reads       0.276471       0.138013       0.425902       0.053222       
+
+magnitude step 1000
+ave vm = 3315771.833333, ave resident memory = 84840.375000
+my array bytes (rank 0): 32008008
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         0.544192       0.519613       0.547970       0.008323       
+perform_reads       0.285337       0.141440       0.359282       0.050869       
+
+**********************
+lammps workflow, magnitude monitor
+256:60:28:8
+**********************
+
+
+magnitude step 0
+ave vm = 3279474.607143, ave resident memory = 38187.428571
+my array bytes (rank 0): 27435432
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         1.099589       1.087338       1.109708       0.004711       
+perform_reads       0.207522       0.103304       0.336528       0.043596       
+
+magnitude step 500
+ave vm = 3303709.571429, ave resident memory = 61144.357143
+my array bytes (rank 0): 27435432
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         0.665589       0.622030       0.683499       0.019701       
+perform_reads       0.292227       0.201210       0.500472       0.079069       
+
+magnitude step 1000
+ave vm = 3311969.714286, ave resident memory = 76178.214286
+my array bytes (rank 0): 27435432
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         0.524301       0.468904       0.540730       0.024983       
+perform_reads       0.247181       0.167297       0.380529       0.055870       
+
+**********************
+lammps workflow, magnitude monitor
+256:60:32:8
+**********************
+
+magnitude step 0
+ave vm = 3286111.093750, ave resident memory = 35505.218750
+my array bytes (rank 0): 24006024
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         1.048681       1.039070       1.052624       0.002308       
+perform_reads       0.216202       0.070394       0.318630       0.061441       
+
+magnitude step 500
+ave vm = 3306558.500000, ave resident memory = 54668.812500
+my array bytes (rank 0): 24006024
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         0.733750       0.715927       0.736643       0.004637       
+perform_reads       0.280820       0.223828       0.592242       0.061393       
+
+magnitude step 1000
+ave vm = 3313846.750000, ave resident memory = 67868.593750
+my array bytes (rank 0): 24006024
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         0.493687       0.467238       0.495898       0.006725       
+perform_reads       0.256665       0.184811       0.355338       0.034556       
+
+**********************
+lammps workflow, magnitude monitor
+256:60:36:8
+**********************
+
+magnitude step 0
+ave vm = 3273657.305556, ave resident memory = 30820.000000
+my array bytes (rank 0): 21338688
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         0.985370       0.967865       0.994772       0.005248       
+perform_reads       0.145061       0.067987       0.234083       0.046503       
+
+magnitude step 500
+ave vm = 3291941.138889, ave resident memory = 47771.250000
+my array bytes (rank 0): 21338688
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         0.475444       0.456487       0.480023       0.004775       
+perform_reads       0.241505       0.135355       0.350947       0.049695       
+
+magnitude step 1000
+ave vm = 3299406.388889, ave resident memory = 60495.805556
+my array bytes (rank 0): 21338688
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         0.530650       0.503270       0.532846       0.006094       
+perform_reads       0.218503       0.099751       0.405751       0.059867       
+
+**********************
+lammps workflow, magnitude monitor
+256:60:40:8
+**********************
+
+magnitude step 0
+ave vm = 3271201.300000, ave resident memory = 30715.975000
+my array bytes (rank 0): 19204824
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         1.156353       1.148124       1.163399       0.004622       
+perform_reads       0.197405       0.062834       0.365866       0.053177       
+
+magnitude step 500
+ave vm = 3287817.525000, ave resident memory = 45995.150000
+my array bytes (rank 0): 19204824
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         0.426429       0.406839       0.429586       0.004519       
+perform_reads       0.221229       0.138376       0.314001       0.037279       
+
+magnitude step 1000
+ave vm = 3293673.150000, ave resident memory = 56592.900000
+my array bytes (rank 0): 19204824
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         0.519213       0.493205       0.521153       0.005362       
+perform_reads       0.211774       0.139720       0.407060       0.055296       
+
+**********************
+lammps workflow, magnitude monitor
+256:60:44:8
+**********************
+
+magnitude step 0
+ave vm = 3269008.545455, ave resident memory = 26436.340909
+my array bytes (rank 0): 17458920
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         0.941267       0.922706       0.951644       0.006301       
+perform_reads       0.147379       0.056442       0.285494       0.037471       
+
+magnitude step 500
+ave vm = 3285509.863636, ave resident memory = 41572.454545
+my array bytes (rank 0): 17458920
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         0.405683       0.384650       0.410241       0.005493       
+perform_reads       0.214004       0.147161       0.298036       0.030804       
+
+magnitude step 1000
+ave vm = 3292919.590909, ave resident memory = 53311.977273
+my array bytes (rank 0): 17458920
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         0.496458       0.466729       0.498938       0.006576       
+perform_reads       0.219907       0.134532       0.395997       0.072511       
+
+**********************
+lammps workflow, magnitude monitor
+256:60:22:8
+**********************
+
+magnitude step 0
+ave vm = 3282861.954545, ave resident memory = 44607.136364
+my array bytes (rank 0): 34917840
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         1.246321       1.230045       1.251088       0.004445       
+perform_reads       0.220948       0.096673       0.304127       0.060482       
+
+magnitude step 500
+ave vm = 3309429.636364, ave resident memory = 69979.136364
+my array bytes (rank 0): 34917840
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         0.660950       0.645412       0.665611       0.005297       
+perform_reads       0.307672       0.200995       0.444951       0.075296       
+
+magnitude step 1000
+ave vm = 3320414.545455, ave resident memory = 80981.500000
+my array bytes (rank 0): 34917840
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         0.655495       0.637934       0.660517       0.005859       
+perform_reads       0.301135       0.182179       0.450251       0.073760       

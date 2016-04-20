@@ -1,0 +1,287 @@
+select step 0
+ave vm = 3329483.411765, ave resident memory = 87125.078431
+my array bytes (rank 0): 107988720
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         4.773482       4.086616       4.820756       0.120337       
+perform_reads       0.917301       0.162241       1.216476       0.274685       
+
+select step 5
+ave vm = 3366017.745098, ave resident memory = 119046.000000
+my array bytes (rank 0): 107988720
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         2.896642       2.831382       2.904302       0.017127       
+perform_reads       0.949532       0.407131       1.730754       0.228742       
+
+select step 10
+ave vm = 3392279.333333, ave resident memory = 138272.843137
+my array bytes (rank 0): 107988720
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         2.534773       2.466406       2.542398       0.018178       
+perform_reads       0.918391       0.313194       1.441430       0.222783       
+
+select step 15
+ave vm = 3409810.627451, ave resident memory = 154546.254902
+my array bytes (rank 0): 107988720
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         2.422466       2.350836       2.430582       0.019093       
+perform_reads       0.909028       0.270553       1.337981       0.213791       
+
+select step 20
+ave vm = 3409810.627451, ave resident memory = 154575.117647
+my array bytes (rank 0): 107988720
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         2.306408       2.022299       2.347793       0.052263       
+perform_reads       0.814056       0.246749       1.232460       0.248345       
+
+select step 0
+ave vm = 3327555.882353, ave resident memory = 87124.901961
+my array bytes (rank 0): 107988720
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         3.526450       3.294867       3.547354       0.058282       
+perform_reads       0.796400       0.281950       1.286142       0.235370       
+
+select step 5
+ave vm = 3362162.803922, ave resident memory = 119042.764706
+my array bytes (rank 0): 107988720
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         2.577957       2.467403       2.588546       0.028084       
+perform_reads       0.911941       0.245233       1.320673       0.213637       
+
+select step 10
+ave vm = 3383926.588235, ave resident memory = 138264.137255
+my array bytes (rank 0): 107988720
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         2.388978       2.316431       2.396728       0.017577       
+perform_reads       0.898052       0.159454       1.263160       0.208463       
+
+select step 15
+ave vm = 3400172.862745, ave resident memory = 154536.196078
+my array bytes (rank 0): 107988720
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         2.384204       2.274898       2.392517       0.022301       
+perform_reads       0.933405       0.165120       1.242427       0.188587       
+
+select step 20
+ave vm = 3400172.862745, ave resident memory = 154564.176471
+my array bytes (rank 0): 107988720
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         2.372739       2.258526       2.381047       0.022899       
+perform_reads       0.843499       0.157867       1.232922       0.254168       
+
+select step 0
+ave vm = 3329483.431373, ave resident memory = 87125.058824
+my array bytes (rank 0): 107988720
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         4.521734       4.159538       4.642913       0.099798       
+perform_reads       0.799361       0.147257       1.292809       0.271274       
+
+select step 5
+ave vm = 3366018.254902, ave resident memory = 119049.529412
+my array bytes (rank 0): 107988720
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         2.572368       2.434255       2.584287       0.029668       
+perform_reads       0.971956       0.379084       1.327883       0.194829       
+
+select step 10
+ave vm = 3393565.882353, ave resident memory = 138276.333333
+my array bytes (rank 0): 107988720
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         2.497370       2.407370       2.507949       0.023365       
+perform_reads       1.009231       0.412844       1.358139       0.181191       
+
+select step 15
+ave vm = 3413668.156863, ave resident memory = 154547.509804
+my array bytes (rank 0): 107988720
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         2.396810       2.324852       2.404788       0.018980       
+perform_reads       0.923427       0.294064       1.320691       0.232401       
+
+select step 0
+ave vm = 3329483.411765, ave resident memory = 87125.176471
+my array bytes (rank 0): 107988720
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         5.322827       5.281680       5.333680       0.012323       
+perform_reads       0.813032       0.207103       1.150462       0.292131       
+
+select step 5
+ave vm = 3362777.745098, ave resident memory = 119018.843137
+my array bytes (rank 0): 107988720
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         2.978426       2.898144       2.986698       0.020920       
+perform_reads       0.958861       0.533307       1.778446       0.244820       
+
+select step 0
+ave vm = 3331410.921569, ave resident memory = 87125.509804
+my array bytes (rank 0): 107988720
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         3.534147       3.320197       3.565288       0.054607       
+perform_reads       0.842179       0.211414       1.293783       0.240515       
+
+select step 5
+ave vm = 3369231.784314, ave resident memory = 119044.960784
+my array bytes (rank 0): 107988720
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         2.490638       2.416647       2.498709       0.019831       
+perform_reads       0.913093       0.201941       1.273402       0.213669       
+
+select step 10
+ave vm = 3397421.803922, ave resident memory = 138271.274510
+my array bytes (rank 0): 107988720
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         2.768762       2.697755       2.776814       0.018986       
+perform_reads       0.915256       0.172594       1.671136       0.297414       
+
+select step 15
+ave vm = 3418166.666667, ave resident memory = 154543.549020
+my array bytes (rank 0): 107988720
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         2.496519       2.399935       2.505956       0.023004       
+perform_reads       0.941857       0.156536       1.273455       0.194209       
+
+select step 20
+ave vm = 3427161.803922, ave resident memory = 154571.039216
+my array bytes (rank 0): 107988720
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         2.279297       2.150440       2.320016       0.032142       
+perform_reads       0.836044       0.145815       1.208192       0.237714       
+
+select step 0
+ave vm = 3327555.901961, ave resident memory = 87124.254902
+my array bytes (rank 0): 107988720
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         3.717997       3.371907       3.759638       0.079372       
+perform_reads       0.901416       0.204011       1.255364       0.280795       
+
+select step 5
+ave vm = 3364726.568627, ave resident memory = 119020.490196
+my array bytes (rank 0): 107988720
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         3.065990       3.008283       3.073212       0.015403       
+perform_reads       0.937356       0.263857       1.925964       0.317706       
+
+select step 10
+ave vm = 3387773.137255, ave resident memory = 138243.725490
+my array bytes (rank 0): 107988720
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         2.339305       2.275841       2.368208       0.017388       
+perform_reads       0.915147       0.249754       1.238561       0.216923       
+
+select step 15
+ave vm = 3404019.686275, ave resident memory = 154514.000000
+my array bytes (rank 0): 107988720
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         2.348885       2.278771       2.357618       0.018672       
+perform_reads       0.960762       0.463911       1.288349       0.154298       
+
+select step 20
+ave vm = 3405304.705882, ave resident memory = 154541.745098
+my array bytes (rank 0): 107988720
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         2.331780       2.265227       2.340089       0.018081       
+perform_reads       0.899064       0.192237       1.256398       0.215770       
+
+select step 0
+ave vm = 3329483.431373, ave resident memory = 87124.882353
+my array bytes (rank 0): 107988720
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         3.651131       3.458162       3.670283       0.034513       
+perform_reads       0.891310       0.200082       1.143385       0.260169       
+
+select step 5
+ave vm = 3362806.294118, ave resident memory = 119047.509804
+my array bytes (rank 0): 107988720
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         2.470826       2.411448       2.478752       0.015716       
+perform_reads       0.926560       0.323419       1.311437       0.209192       
+
+select step 10
+ave vm = 3382642.745098, ave resident memory = 138270.058824
+my array bytes (rank 0): 107988720
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         2.640920       2.572874       2.648460       0.017782       
+perform_reads       0.917226       0.319426       1.548711       0.226358       
+
+select step 15
+ave vm = 3400175.333333, ave resident memory = 154542.862745
+my array bytes (rank 0): 107988720
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         2.363365       2.272642       2.372804       0.023098       
+perform_reads       0.920702       0.344198       1.284321       0.172301       
+
+select step 20
+ave vm = 3400175.333333, ave resident memory = 154570.313725
+my array bytes (rank 0): 107988720
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         2.578975       2.507574       2.587579       0.018259       
+perform_reads       0.890714       0.257136       1.506892       0.231284       
+
+select step 0
+ave vm = 3327583.568627, ave resident memory = 87153.764706
+my array bytes (rank 0): 107988720
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         3.589159       3.563027       3.599830       0.009571       
+perform_reads       0.893190       0.278537       1.156821       0.256333       
+
+select step 5
+ave vm = 3370518.372549, ave resident memory = 119046.333333
+my array bytes (rank 0): 107988720
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         2.543649       2.262239       2.563879       0.066608       
+perform_reads       0.881012       0.334052       1.321714       0.214408       
+
+select step 10
+ave vm = 3408990.274510, ave resident memory = 138279.843137
+my array bytes (rank 0): 107988720
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         2.527114       2.372600       2.539082       0.033989       
+perform_reads       0.922469       0.329463       1.330378       0.216483       
+
+select step 15
+ave vm = 3433589.725490, ave resident memory = 154557.039216
+my array bytes (rank 0): 107988720
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         2.467160       2.320506       2.478841       0.033182       
+perform_reads       0.911401       0.323096       1.321990       0.230581       
+
+select step 20
+ave vm = 3436802.274510, ave resident memory = 154584.745098
+my array bytes (rank 0): 107988720
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         2.337554       2.264595       2.345588       0.018105       
+perform_reads       0.894625       0.278666       1.260495       0.199836       

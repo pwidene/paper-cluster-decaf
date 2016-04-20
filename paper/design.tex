@@ -1,0 +1,41 @@
+\section{Design}
+\label{s:design}
+
+In this project, our main
+goal is obtain noticeable scaling of
+\fakeroot for increasing
+core count on a single node.
+Because \make works on an entire code
+base at a time, we will focus on
+\textit{strong}, rather than \textit{weak} scaling.
+Indeed, testing for weak scaling would involve
+testing the performance of \make with code
+bases of increasing sizes, trying to keep the amount
+of work per core the same; though theoretically possible,
+this is a much larger and more complex project,
+unreasonable in the scope of this class.
+If time permits, then we will
+move on to utilizing multiple
+nodes in a distributed fashion.
+For a single node, these are the
+following design decisions we
+have come up with:
+\squishlist
+\item We will rely on the idea
+of process pool (per-cpu threads)
+with many-to-many messaging model to handle
+multiple file-manipulation operations
+in parallel.
+\item Since \fakeroot relies on
+a single gigantic hash table, we
+will try to use a concurrent
+hash table with NUMA awareness,
+so that multiple server threads
+can update the table in parallel.
+If possible, we will try to use
+lock-free hash tables.
+\item In the multiple-node case,
+we can leverage the idea of
+map-reduce model~\cite{mapreduce}
+with distributed shared memory~\cite{grappa}.
+\squishend

@@ -1,0 +1,583 @@
+******************
+8 Select procs, gtcp workflow
+64:8:4:4:4
+******************
+
+select step 0
+ave vm = 141066.666667, ave resident memory = 87208.583333
+my array bytes (rank 0): 113194704
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         3.291776       3.232355       3.304268       0.022572       
+perform_reads       0.550324       0.508630       0.624353       0.034414       
+
+select step 5
+ave vm = 168399.583333, ave resident memory = 113179.083333
+my array bytes (rank 0): 113194704
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         1.836949       1.808518       1.846212       0.014740       
+perform_reads       0.554470       0.426722       0.665137       0.070680       
+
+select step 10
+ave vm = 189503.416667, ave resident memory = 134314.333333
+my array bytes (rank 0): 113194704
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         1.788129       1.761212       1.797591       0.015106       
+perform_reads       0.573426       0.447224       0.674023       0.070440       
+
+select step 15
+ave vm = 210756.250000, ave resident memory = 150125.416667
+my array bytes (rank 0): 113194704
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         1.712625       1.679179       1.723291       0.016742       
+perform_reads       0.553119       0.519422       0.604292       0.024280       
+
+select step 20
+ave vm = 221678.916667, ave resident memory = 150146.833333
+my array bytes (rank 0): 113194704
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         1.738109       1.715691       1.757128       0.013488       
+perform_reads       0.529473       0.436997       0.603638       0.048587       
+
+******************
+12 Select procs, gtcp workflow
+64:12:4:4:4
+******************
+
+select step 0
+ave vm = 134413.888889, ave resident memory = 59207.611111
+my array bytes (rank 0): 75463136
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         2.609954       2.595857       2.623541       0.010007       
+perform_reads       0.522378       0.128109       0.713803       0.154989       
+
+select step 5
+ave vm = 155902.277778, ave resident memory = 79384.666667
+my array bytes (rank 0): 75463136
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         1.551400       1.526735       1.563838       0.013094       
+perform_reads       0.509088       0.348671       0.752867       0.105745       
+
+select step 10
+ave vm = 170019.722222, ave resident memory = 93520.444444
+my array bytes (rank 0): 75463136
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         1.450068       1.368517       1.470917       0.030673       
+perform_reads       0.524633       0.396715       0.678527       0.097279       
+
+select step 15
+ave vm = 186009.055556, ave resident memory = 104075.277778
+my array bytes (rank 0): 75463136
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         1.339636       1.317956       1.351516       0.012516       
+perform_reads       0.502449       0.399640       0.586831       0.049746       
+
+select step 20
+ave vm = 196931.722222, ave resident memory = 104106.944444
+my array bytes (rank 0): 75463136
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         1.377102       1.350114       1.394672       0.015094       
+perform_reads       0.497873       0.409722       0.634890       0.058481       
+
+******************
+16 Select procs, gtcp workflow
+64:16:4:4:4
+******************
+
+select step 0
+ave vm = 144665.583333, ave resident memory = 45731.000000
+my array bytes (rank 0): 56597408
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         2.571156       2.562518       2.577245       0.003887       
+perform_reads       0.657441       0.162496       0.796147       0.194019       
+
+select step 5
+ave vm = 162878.500000, ave resident memory = 62522.000000
+my array bytes (rank 0): 56597408
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         1.457303       1.431448       1.464631       0.009440       
+perform_reads       0.706845       0.473735       0.831432       0.078835       
+
+select step 10
+ave vm = 173424.833333, ave resident memory = 73148.041667
+my array bytes (rank 0): 56597408
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         1.419665       1.382625       1.425787       0.013394       
+perform_reads       0.674763       0.489500       0.801743       0.065138       
+
+select step 15
+ave vm = 181320.833333, ave resident memory = 81065.833333
+my array bytes (rank 0): 56597408
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         1.403821       1.378478       1.408680       0.009523       
+perform_reads       0.704385       0.482404       0.817433       0.069526       
+
+select step 20
+ave vm = 181320.833333, ave resident memory = 81093.208333
+my array bytes (rank 0): 56597408
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         1.419604       1.392812       1.424132       0.009901       
+perform_reads       0.689335       0.559024       0.834352       0.057228       
+
+******************
+20 Select procs, gtcp workflow
+64:20:4:4:4
+******************
+
+select step 0
+ave vm = 3272293.000000, ave resident memory = 40457.166667
+my array bytes (rank 0): 45277904
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         1.997446       1.960575       2.009980       0.009775       
+perform_reads       0.310813       0.087518       0.475506       0.113020       
+
+select step 5
+ave vm = 3294637.100000, ave resident memory = 57078.033333
+my array bytes (rank 0): 45277904
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         1.158768       1.084509       1.168276       0.019659       
+perform_reads       0.392724       0.112028       0.514594       0.113417       
+
+select step 10
+ave vm = 3306402.700000, ave resident memory = 65598.966667
+my array bytes (rank 0): 45277904
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         1.113359       1.081459       1.119482       0.009423       
+perform_reads       0.399220       0.161191       0.555088       0.108541       
+
+select step 15
+ave vm = 3314903.633333, ave resident memory = 71939.466667
+my array bytes (rank 0): 45277904
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         1.022356       0.995299       1.028081       0.008849       
+perform_reads       0.427634       0.183383       0.537150       0.122096       
+
+select step 20
+ave vm = 3314903.633333, ave resident memory = 71963.766667
+my array bytes (rank 0): 45277904
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         1.034434       1.006967       1.040156       0.008757       
+perform_reads       0.373604       0.075313       0.505140       0.135561       
+
+******************
+10 Select procs, gtcp workflow
+64:10:4:4:4
+******************
+
+select step 0
+ave vm = 134717.733333, ave resident memory = 70419.600000
+my array bytes (rank 0): 90555808
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         2.763611       2.742353       2.777801       0.012265       
+perform_reads       0.442797       0.190628       0.527530       0.091294       
+
+select step 5
+ave vm = 158461.933333, ave resident memory = 92827.333333
+my array bytes (rank 0): 90555808
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         1.618807       1.355236       1.662936       0.088504       
+perform_reads       0.395337       0.228642       0.481288       0.070358       
+
+select step 10
+ave vm = 179741.266667, ave resident memory = 109764.666667
+my array bytes (rank 0): 90555808
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         1.465801       1.445043       1.478205       0.014486       
+perform_reads       0.465095       0.417048       0.555976       0.042764       
+
+select step 15
+ave vm = 201112.200000, ave resident memory = 122424.133333
+my array bytes (rank 0): 90555808
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         1.630525       1.611250       1.642302       0.013966       
+perform_reads       0.474067       0.371866       0.723096       0.097966       
+
+select step 20
+ave vm = 201112.200000, ave resident memory = 122446.133333
+my array bytes (rank 0): 90555808
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         1.430322       1.410169       1.442337       0.014110       
+perform_reads       0.417367       0.328641       0.534654       0.065282       
+
+******************
+6 Select procs, gtcp workflow
+64:6:4:4:4
+******************
+
+select step 0
+ave vm = 159239.555556, ave resident memory = 115284.666667
+my array bytes (rank 0): 150926272
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         3.735177       3.720787       3.739624       0.006735       
+perform_reads       0.446313       0.370496       0.502598       0.039917       
+
+select step 5
+ave vm = 195921.888889, ave resident memory = 146964.888889
+my array bytes (rank 0): 150926272
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         1.972058       1.951541       1.981868       0.012993       
+perform_reads       0.525930       0.492231       0.573502       0.029780       
+
+select step 10
+ave vm = 234968.555556, ave resident memory = 175120.555556
+my array bytes (rank 0): 150926272
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         2.073612       2.049857       2.085224       0.016023       
+perform_reads       0.488658       0.417179       0.671168       0.095516       
+
+select step 15
+ave vm = 266947.222222, ave resident memory = 196198.222222
+my array bytes (rank 0): 150926272
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         1.995048       1.965401       2.008216       0.018037       
+perform_reads       0.512359       0.460326       0.635529       0.059293       
+
+select step 20
+ave vm = 274229.000000, ave resident memory = 196220.444444
+my array bytes (rank 0): 150926272
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         1.903736       1.887213       1.913296       0.008312       
+perform_reads       0.479854       0.391455       0.556396       0.048772       
+
+******************
+6 Select procs, gtcp workflow
+(again), couple days later
+64:6:4:4:4
+******************
+
+select step 0
+ave vm = 159239.555556, ave resident memory = 115284.222222
+my array bytes (rank 0): 150926272
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         3.759680       3.751255       3.768906       0.006314       
+perform_reads       0.490571       0.426462       0.586599       0.050109       
+
+select step 5
+ave vm = 199562.555556, ave resident memory = 146958.333333
+my array bytes (rank 0): 150926272
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         2.190610       1.958990       2.242358       0.103946       
+perform_reads       0.456711       0.322098       0.522481       0.069773       
+
+select step 10
+ave vm = 249530.777778, ave resident memory = 175116.666667
+my array bytes (rank 0): 150926272
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         2.048569       2.026598       2.059009       0.014103       
+perform_reads       0.508900       0.454024       0.688297       0.081440       
+
+select step 15
+ave vm = 285150.333333, ave resident memory = 196196.777778
+my array bytes (rank 0): 150926272
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         1.911045       1.888634       1.921629       0.014862       
+perform_reads       0.534493       0.517462       0.582173       0.022011       
+
+select step 20
+ave vm = 285150.333333, ave resident memory = 196214.777778
+my array bytes (rank 0): 150926272
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         1.847750       1.826425       1.858416       0.014510       
+perform_reads       0.527790       0.503491       0.550825       0.017865       
+
+******************
+4 Select procs, gtcp workflow
+64:4:4:4:4
+******************
+
+select step 0
+ave vm = 205992.666667, ave resident memory = 171426.833333
+my array bytes (rank 0): 226389408
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         5.039174       5.029046       5.046717       0.006463       
+perform_reads       0.476790       0.423468       0.527586       0.038906       
+
+select step 5
+ave vm = 250679.166667, ave resident memory = 214766.833333
+my array bytes (rank 0): 226389408
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         2.661249       2.646687       2.676862       0.014527       
+perform_reads       0.643116       0.580491       0.734691       0.056435       
+
+select step 10
+ave vm = 292834.500000, ave resident memory = 256940.000000
+my array bytes (rank 0): 226389408
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         2.500949       2.482011       2.517153       0.015381       
+perform_reads       0.636222       0.581620       0.676736       0.034630       
+
+select step 15
+ave vm = 335341.166667, ave resident memory = 288548.666667
+my array bytes (rank 0): 226389408
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         2.714701       2.531671       2.786783       0.106320       
+perform_reads       0.554353       0.511010       0.625783       0.044091       
+
+select step 20
+ave vm = 357186.500000, ave resident memory = 288576.000000
+my array bytes (rank 0): 226389408
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         2.402083       2.385788       2.410431       0.009584       
+perform_reads       0.578852       0.568785       0.588054       0.006914       
+
+******************
+2 Select procs, gtcp workflow
+64:4:4:4:4
+******************
+
+select step 0
+ave vm = 365595.333333, ave resident memory = 339875.666667
+my array bytes (rank 0): 452778704
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         7.837076       7.830996       7.843155       0.006080       
+perform_reads       0.926888       0.898980       0.954796       0.027908       
+
+select step 5
+ave vm = 453325.666667, ave resident memory = 415288.000000
+my array bytes (rank 0): 452778704
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         4.616610       4.586527       4.646693       0.030083       
+perform_reads       0.898979       0.898435       0.899523       0.000544       
+
+select step 10
+ave vm = 475171.000000, ave resident memory = 415337.333333
+my array bytes (rank 0): 452778704
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         4.718770       4.694865       4.742674       0.023904       
+perform_reads       0.892983       0.869098       0.916868       0.023885       
+
+select step 15
+ave vm = 475171.000000, ave resident memory = 415355.333333
+my array bytes (rank 0): 452778704
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         5.076476       5.049544       5.103408       0.026932       
+perform_reads       0.941584       0.873238       1.009930       0.068346       
+
+select step 20
+ave vm = 486093.666667, ave resident memory = 415378.000000
+my array bytes (rank 0): 452778704
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         4.652674       4.643717       4.661630       0.008957       
+perform_reads       0.701397       0.692878       0.709916       0.008519       
+
+******************
+14 Select procs, gtcp workflow
+64:14:4:4:4
+******************
+
+select step 0
+ave vm = 137862.619048, ave resident memory = 51231.095238
+my array bytes (rank 0): 64682688
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         2.395364       2.383833       2.421711       0.010911       
+perform_reads       0.392194       0.146413       0.511317       0.098094       
+
+select step 5
+ave vm = 157707.000000, ave resident memory = 69725.952381
+my array bytes (rank 0): 64682688
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         1.255583       1.233559       1.263889       0.009845       
+perform_reads       0.495478       0.400968       0.575572       0.047499       
+
+select step 10
+ave vm = 169766.714286, ave resident memory = 81838.714286
+my array bytes (rank 0): 64682688
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         1.206995       1.152312       1.219578       0.019839       
+perform_reads       0.487470       0.425847       0.561645       0.042139       
+
+select step 15
+ave vm = 178790.714286, ave resident memory = 90890.952381
+my array bytes (rank 0): 64682688
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         1.290624       1.265096       1.299022       0.010612       
+perform_reads       0.485471       0.409583       0.630784       0.062372       
+
+select step 20
+ave vm = 180351.095238, ave resident memory = 90911.380952
+my array bytes (rank 0): 64682688
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         1.186238       1.171708       1.210276       0.010301       
+perform_reads       0.476715       0.436815       0.519142       0.030702       
+
+******************
+18 Select procs, gtcp workflow
+64:18:4:4:4
+******************
+select step 0
+ave vm = 3284450.481481, ave resident memory = 44236.851852
+my array bytes (rank 0): 50308832
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         2.322147       2.305093       2.330070       0.007628       
+perform_reads       0.393556       0.077765       0.617591       0.173903       
+
+select step 5
+ave vm = 3302904.851852, ave resident memory = 61352.185185
+my array bytes (rank 0): 50308832
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         1.216754       1.191961       1.223100       0.009455       
+perform_reads       0.469388       0.191874       0.655788       0.119189       
+
+select step 10
+ave vm = 3312326.851852, ave resident memory = 70783.555556
+my array bytes (rank 0): 50308832
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         1.170843       1.144467       1.177221       0.010089       
+perform_reads       0.424713       0.198453       0.626272       0.121149       
+
+select step 15
+ave vm = 3319345.740741, ave resident memory = 77825.629630
+my array bytes (rank 0): 50308832
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         1.155082       1.094488       1.163350       0.016891       
+perform_reads       0.425753       0.147300       0.618875       0.134616       
+
+select step 20
+ave vm = 3319345.740741, ave resident memory = 77847.444444
+my array bytes (rank 0): 50308832
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         1.130943       1.105203       1.137034       0.010070       
+perform_reads       0.452417       0.137053       0.599490       0.123127       
+
+******************
+22 Select procs, gtcp workflow
+64:22:4:4:4
+******************
+
+select step 0
+ave vm = 3270369.696970, ave resident memory = 37661.606061
+my array bytes (rank 0): 41161792
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         2.096269       2.083258       2.106906       0.007171       
+perform_reads       0.300634       0.074815       0.495918       0.134958       
+
+select step 5
+ave vm = 3287564.515152, ave resident memory = 53557.909091
+my array bytes (rank 0): 41161792
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         1.028450       0.999953       1.034852       0.010037       
+perform_reads       0.353833       0.220444       0.558169       0.097786       
+
+select step 10
+ave vm = 3295285.666667, ave resident memory = 61304.000000
+my array bytes (rank 0): 41161792
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         0.977527       0.950193       0.984161       0.010155       
+perform_reads       0.353796       0.214915       0.542163       0.092134       
+
+select step 15
+ave vm = 3302021.000000, ave resident memory = 67075.303030
+my array bytes (rank 0): 41161792
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         1.082999       1.056385       1.089211       0.009702       
+perform_reads       0.386870       0.184540       0.655058       0.116944       
+
+select step 20
+ave vm = 3304999.909091, ave resident memory = 67104.424242
+my array bytes (rank 0): 41161792
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         0.964008       0.936633       0.970126       0.009679       
+perform_reads       0.348208       0.174764       0.530504       0.099431       
+
+******************
+24 Select procs, gtcp workflow
+64:24:4:4:4
+******************
+select step 0
+ave vm = 3264752.250000, ave resident memory = 35085.638889
+my array bytes (rank 0): 37731568
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         2.039625       2.029455       2.042702       0.002553       
+perform_reads       0.254060       0.127893       0.441735       0.110603       
+
+select step 5
+ave vm = 3281466.555556, ave resident memory = 50468.222222
+my array bytes (rank 0): 37731568
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         1.005463       0.959277       1.012559       0.016173       
+perform_reads       0.384173       0.253578       0.556161       0.085515       
+
+select step 10
+ave vm = 3288554.944444, ave resident memory = 57588.861111
+my array bytes (rank 0): 37731568
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         1.011005       0.944566       1.018695       0.019030       
+perform_reads       0.380698       0.223766       0.573093       0.096677       
+
+select step 15
+ave vm = 3293818.777778, ave resident memory = 62881.861111
+my array bytes (rank 0): 37731568
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         0.972490       0.933104       0.978850       0.013002       
+perform_reads       0.380814       0.226578       0.562536       0.091974       
+
+select step 20
+ave vm = 3293818.777778, ave resident memory = 62906.194444
+my array bytes (rank 0): 37731568
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         0.963762       0.934640       0.968269       0.009827       
+perform_reads       0.378904       0.211515       0.552124       0.095022       

@@ -1,0 +1,76 @@
+\documentclass[times,10pt,twocolumn]{IEEEtran}
+%\documentclass[10pt,preprint]{sigplanconf}
+%\usepackage[square,comma,numbers,sort&compress]{natbib}
+%\usepackage[hyphens]{url}
+%\usepackage[breaklinks,colorlinks]{hyperref}
+%\usepackage[usenames,dvipsnames]{color}
+%\hypersetup{
+%  colorlinks,
+%  linkcolor={red!50!black},
+%  citecolor={blue!50!black},
+%  urlcolor={blue!50!black}
+%}
+%\usepackage{subfig}
+%\usepackage[labelfont=bf,font=small,skip=5pt]{caption}
+%\captionsetup[subfloat]{captionskip=5pt}
+%\usepackage{amsmath,amsopn,amssymb}
+%\usepackage{endnotes,microtype,xspace,graphicx,fancyvrb,multirow}
+%\usepackage{booktabs}
+%\usepackage{array,underscore,relsize}
+%\usepackage[T1]{fontenc}
+%\usepackage{times}
+%\usepackage{fancyhdr,lastpage}
+%\usepackage{enumitem}
+%\usepackage{soul}
+%\usepackage{float}
+%\usepackage{balance}
+\usepackage{graphicx}
+%\graphicspath{{./diagrams/}}
+%\pagestyle{fancy}
+%\usepackage{authblk}
+
+%\fancyhf{}
+%\renewcommand{\headrulewidth}{0pt}
+%\cfoot{\thepage}
+
+
+% adjust spacious title
+%\usepackage[compact,small]{titlesec}
+%\usepackage{titling}
+%\renewcommand{\maketitlehookb}{\vspace{-0.1in}}
+%\renewcommand{\maketitlehookc}{\vspace{-0.3in}}
+%\setlength{\droptitle}{-0.5in}
+
+% name your project
+\newcommand{\sys}{SuperGlue}
+
+%\input{cmds}
+\input{rev}
+
+\begin{document}
+
+\input{hdr}
+%\date{}
+\maketitle
+
+\input{abstract}
+
+%\terms
+%Design, experimentation, performance
+\keywords
+hpc, workflows, in situ
+\input{intro}
+\input{background}
+\input{setup}
+%\input{approach}
+%\input{eval}
+%\input{discuss}
+%\input{relwk}
+%\input{conclusion}
+\input{ack}
+
+%\balance
+\bibliographystyle{IEEEtran}
+\footnotesize
+\bibliography{gcomps,p,fakeroot,sslab,manycore,conf}
+\end{document}

@@ -1,0 +1,220 @@
+*****************************
+64:10:6:6:2 gtcp weak scaling
+BAD DATA!
+*****************************
+
+select step 0
+ave vm = 174080.400000, ave resident memory = 109752.000000
+my array bytes (rank 0): 143459904
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         3.811705       3.770958       3.823491       0.016892       
+perform_reads       0.785866       0.651174       0.965925       0.094995       
+
+select step 5
+ave vm = 216599.933333, ave resident memory = 144410.666667
+my array bytes (rank 0): 143459904
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         2.279517       2.240673       2.299418       0.023590       
+perform_reads       0.674578       0.528352       0.812059       0.076531       
+
+select step 10
+ave vm = 256443.000000, ave resident memory = 171175.333333
+my array bytes (rank 0): 143459904
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         2.241807       2.157740       2.270232       0.039085       
+perform_reads       0.685148       0.488914       0.851854       0.122884       
+
+select step 15
+ave vm = 278643.133333, ave resident memory = 191213.333333
+my array bytes (rank 0): 143459904
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         2.242065       2.190430       2.264205       0.027640       
+perform_reads       0.716647       0.595136       0.853527       0.075004       
+
+select step 20
+ave vm = 283012.200000, ave resident memory = 191236.666667
+my array bytes (rank 0): 143459904
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         2.114632       1.886277       2.182067       0.114926       
+perform_reads       0.535821       0.337083       0.747931       0.140912       
+
+*****************************
+84:16:10:10:2 gtcp weak scaling
+*****************************
+
+select step 0
+ave vm = 168792.208333, ave resident memory = 69818.666667
+my array bytes (rank 0): 89662496
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         3.396931       3.291456       3.423610       0.031249       
+perform_reads       0.805789       0.195805       1.098968       0.277620       
+
+select step 5
+ave vm = 196514.458333, ave resident memory = 93406.416667
+my array bytes (rank 0): 89662496
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         2.377561       2.346426       2.383502       0.011388       
+perform_reads       1.253473       0.878717       1.440587       0.177176       
+
+select step 10
+ave vm = 217759.041667, ave resident memory = 109274.541667
+my array bytes (rank 0): 89662496
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         2.340355       2.304304       2.346622       0.013238       
+perform_reads       1.249772       0.955926       1.436561       0.167285       
+
+select step 15
+ave vm = 232352.875000, ave resident memory = 123896.500000
+my array bytes (rank 0): 89662496
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         2.299339       1.698743       2.342892       0.155364       
+perform_reads       1.212997       0.323712       1.454798       0.278495       
+
+select step 20
+ave vm = 235083.541667, ave resident memory = 123920.166667
+my array bytes (rank 0): 89662496
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         2.288968       2.253644       2.328852       0.018286       
+perform_reads       1.228010       0.877365       1.402458       0.161573       
+
+*****************************
+156:18:14:14:4 gtcp weak scaling
+*****************************
+
+select step 0
+ave vm = 3328806.703704, ave resident memory = 92194.592593
+my array bytes (rank 0): 114754640
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         4.064684       3.954079       4.101989       0.037225       
+perform_reads       0.743128       0.249620       0.917531       0.218839       
+
+select step 5
+ave vm = 3357482.222222, ave resident memory = 118089.777778
+my array bytes (rank 0): 114754640
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         2.560582       2.535506       2.569374       0.012480       
+perform_reads       0.836987       0.262366       0.988391       0.244480       
+
+select step 10
+ave vm = 3383143.259259, ave resident memory = 145262.074074
+my array bytes (rank 0): 114754640
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         2.319802       2.291686       2.329122       0.013666       
+perform_reads       0.840876       0.235282       1.154452       0.214481       
+
+select step 15
+ave vm = 3406407.407407, ave resident memory = 162486.444444
+my array bytes (rank 0): 114754640
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         2.461092       2.432731       2.469876       0.013731       
+perform_reads       0.861038       0.302710       1.332364       0.227790       
+
+select step 20
+ave vm = 3418543.703704, ave resident memory = 162523.444444
+my array bytes (rank 0): 114754640
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         2.278745       2.251307       2.287199       0.013502       
+perform_reads       0.817267       0.238895       1.124984       0.224147       
+
+*****************************
+234:25:19:19:5 gtcp weak scaling
+*****************************
+
+select step 0
+ave vm = 3320757.893333, ave resident memory = 90435.440000
+my array bytes (rank 0): 112450240
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         4.117239       3.928581       4.200707       0.055143       
+perform_reads       0.673740       0.200591       1.116080       0.197698       
+
+select step 5
+ave vm = 3350881.386667, ave resident memory = 115599.706667
+my array bytes (rank 0): 112450240
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         2.295632       2.240792       2.303554       0.015468       
+perform_reads       0.753034       0.321939       1.088244       0.180413       
+
+select step 10
+ave vm = 3381882.533333, ave resident memory = 142447.840000
+my array bytes (rank 0): 112450240
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         2.188301       1.918368       2.205092       0.055802       
+perform_reads       0.710060       0.310634       1.065835       0.185316       
+
+select step 15
+ave vm = 3407145.040000, ave resident memory = 158999.466667
+my array bytes (rank 0): 112450240
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         2.211458       2.179954       2.216797       0.010468       
+perform_reads       0.739732       0.380964       1.080752       0.161738       
+
+select step 20
+ave vm = 3418504.613333, ave resident memory = 159033.040000
+my array bytes (rank 0): 112450240
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         2.197936       2.168853       2.204596       0.010504       
+perform_reads       0.698293       0.275133       1.050518       0.197974       
+
+*****************************
+64:10:6:6:2 gtcp weak scaling
+*****************************
+
+select step 0
+ave vm = 135664.400000, ave resident memory = 71360.666667
+my array bytes (rank 0): 91830368
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         2.974870       2.950597       2.989410       0.012200       
+perform_reads       0.521538       0.181055       0.893689       0.172058       
+
+select step 5
+ave vm = 166238.533333, ave resident memory = 94064.333333
+my array bytes (rank 0): 91830368
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         1.517545       1.478942       1.532793       0.018961       
+perform_reads       0.461199       0.359647       0.547140       0.055653       
+
+select step 10
+ave vm = 198672.800000, ave resident memory = 111220.133333
+my array bytes (rank 0): 91830368
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         1.552867       1.532545       1.564974       0.014393       
+perform_reads       0.468192       0.362439       0.648682       0.089317       
+
+select step 15
+ave vm = 215853.466667, ave resident memory = 124055.866667
+my array bytes (rank 0): 91830368
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         1.639479       1.410984       1.675975       0.077503       
+perform_reads       0.462852       0.307265       0.557443       0.082576       
+
+select step 20
+ave vm = 218038.000000, ave resident memory = 124080.800000
+my array bytes (rank 0): 91830368
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         1.402708       1.381171       1.415090       0.014879       
+perform_reads       0.431933       0.365724       0.516497       0.049807       

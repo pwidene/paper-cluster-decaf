@@ -1,0 +1,17 @@
+\section{Problem Formulation}
+\label{s:problem}
+Below are some questions that we address in this work. The goal in answering these questions is to provide 
+guidelines that facilitate the assembly and configuration of \sys-based workflows.
+\begin{outline}
+  \1 What are the weak scaling properties of the various components?
+  \1 Can we expect similar weak scaling properties from the same component in different workflows?
+  \1 What are the strong scaling properties of the various components?
+    \2 Can similar properties be expected from the same components in different workflows? Different machines? Different times?
+    \2 Is there an ideal range of process sizes for a given global data size? If so, what are these ranges for the various components?
+  \1 How much do the above properties vary according to the nature of the data?
+  \1 Limits
+    \2 Can we enforce limits on the execution time of individual time steps for the \sys components?
+    \2 Can we enforce limits on the memory usage of the components?
+  \1 Inter-component effects
+    \2 How is the performance of one fixed-size component affected by varying the process size of another component in the workflow?
+\end{outline}

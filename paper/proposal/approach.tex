@@ -1,0 +1,12 @@
+\section{Approach}
+\label{s:approach}
+\begin{outline}
+  \1 Fixing the size of all but target component, strong scaling measurements of all components in all workflows will be obtained
+    \2  A comparison of the strong scaling properties of the same component 
+    in separate workflows will allow us to determine whether there exists an ideal proc size or range thereof 
+    given a certain data size.
+    \2 The inter-component performance defined in \ref{s:problem} can further narrow these expectations.
+  \1 With the configuration of all components other than ``A'' in a workflow pushed outside of their ideal range, a range of process sizes for ``A'' will be determined so as to place limits on timestep completion time of ``A''.
+  \1 The weak scaling properties of the components will be measured in different workflows, with all components scaling in process size accordingly. This provides an understanding of the weak scaling potential of \sys.
+  \1 Less involved measurements will be taken to determine the effect of platform used and inter-component effects on the performance of \sys.
+\end{outline}

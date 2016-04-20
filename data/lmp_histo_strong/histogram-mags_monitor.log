@@ -1,0 +1,540 @@
+**********************************************
+4 histogram procs, lmp workflow
+256:32:16:4
+**********************************************
+
+histogram-mags step 0
+ave vm = 77473.000000, ave resident memory = 45863.250000
+my array bytes (rank 0): 64016008
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole timestep      0.682259       0.679648       0.685585       0.002141       
+perform_reads       0.211860       0.205473       0.219558       0.005346       
+
+histogram-mags step 500
+ave vm = 81587.000000, ave resident memory = 49897.500000
+my array bytes (rank 0): 64016008
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole timestep      0.566082       0.560763       0.571851       0.003928       
+perform_reads       0.240808       0.237745       0.243810       0.002811       
+
+histogram-mags step 1000
+ave vm = 81587.000000, ave resident memory = 49923.250000
+my array bytes (rank 0): 64016008
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole timestep      0.576335       0.573080       0.580564       0.003278       
+perform_reads       0.247031       0.242188       0.252031       0.004213       
+
+histogram-mags step 1500
+ave vm = 81587.000000, ave resident memory = 50010.500000
+my array bytes (rank 0): 64016008
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole timestep      0.573737       0.570635       0.578526       0.003143       
+perform_reads       0.238544       0.234150       0.244983       0.003987       
+
+histogram-mags step 2000
+ave vm = 81587.000000, ave resident memory = 50098.250000
+my array bytes (rank 0): 64016008
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole timestep      0.573951       0.572197       0.576084       0.001650       
+perform_reads       0.243619       0.237814       0.247515       0.004122       
+
+
+**********************************************
+3 histogram procs, lmp workflow
+256:32:16:3
+**********************************************
+
+histogram-mags step 0
+ave vm = 83400.333333, ave resident memory = 56309.666667
+my array bytes (rank 0): 85354672
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole timestep      1.004245       0.981632       1.018073       0.016122       
+perform_reads       0.276851       0.258970       0.304504       0.019832       
+
+histogram-mags step 500
+ave vm = 87580.333333, ave resident memory = 60415.333333
+my array bytes (rank 0): 85354672
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole timestep      0.773820       0.741997       0.793779       0.022744       
+perform_reads       0.300717       0.293385       0.313913       0.009350       
+
+histogram-mags step 1000
+ave vm = 87591.333333, ave resident memory = 60452.000000
+my array bytes (rank 0): 85354672
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole timestep      0.774850       0.747221       0.793275       0.019896       
+perform_reads       0.305910       0.295242       0.323693       0.012658       
+
+histogram-mags step 1500
+ave vm = 87591.333333, ave resident memory = 60555.666667
+my array bytes (rank 0): 85354672
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole timestep      0.774958       0.746967       0.798269       0.021204       
+perform_reads       0.303990       0.295678       0.319786       0.011175       
+
+histogram-mags step 2000
+ave vm = 87591.333333, ave resident memory = 60658.000000
+my array bytes (rank 0): 85354672
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole timestep      0.777455       0.759187       0.795647       0.014885       
+perform_reads       0.303260       0.289888       0.324709       0.015320       
+
+**********************************************
+2 histogram procs, lmp workflow
+256:32:16:2
+**********************************************
+
+histogram-mags step 0
+ave vm = 99786.000000, ave resident memory = 76882.500000
+my array bytes (rank 0): 128032008
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole timestep      1.548989       1.542978       1.555000       0.006011       
+perform_reads       0.473214       0.344440       0.601988       0.128774       
+
+histogram-mags step 500
+ave vm = 103702.000000, ave resident memory = 80911.500000
+my array bytes (rank 0): 128032008
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole timestep      0.995202       0.988230       1.002175       0.006972       
+perform_reads       0.346828       0.346583       0.347073       0.000245       
+
+histogram-mags step 1000
+ave vm = 103702.000000, ave resident memory = 81048.000000
+my array bytes (rank 0): 128032008
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole timestep      1.005090       0.995454       1.014726       0.009636       
+perform_reads       0.349754       0.349717       0.349791       0.000037       
+
+histogram-mags step 1500
+ave vm = 103702.000000, ave resident memory = 80984.000000
+my array bytes (rank 0): 128032008
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole timestep      1.010628       1.005951       1.015305       0.004677       
+perform_reads       0.352998       0.352784       0.353212       0.000214       
+
+histogram-mags step 2000
+ave vm = 103702.000000, ave resident memory = 81050.000000
+my array bytes (rank 0): 128032008
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole timestep      1.008514       0.998167       1.018862       0.010348       
+perform_reads       0.351390       0.349997       0.352784       0.001393       
+
+**********************************************
+5 histogram procs, lmp workflow
+256:32:16:5
+**********************************************
+
+histogram-mags step 0
+ave vm = 75846.000000, ave resident memory = 39492.800000
+my array bytes (rank 0): 51212808
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole timestep      0.668667       0.650425       0.694214       0.017628       
+perform_reads       0.222539       0.206868       0.230099       0.008166       
+
+histogram-mags step 500
+ave vm = 79921.600000, ave resident memory = 43711.800000
+my array bytes (rank 0): 51212808
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole timestep      0.530943       0.521751       0.546141       0.010699       
+perform_reads       0.253769       0.239390       0.263332       0.008052       
+
+histogram-mags step 1000
+ave vm = 79921.600000, ave resident memory = 43688.800000
+my array bytes (rank 0): 51212808
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole timestep      0.527389       0.497159       0.555110       0.018871       
+perform_reads       0.245313       0.236294       0.260786       0.009762       
+
+histogram-mags step 1500
+ave vm = 79921.600000, ave resident memory = 43796.000000
+my array bytes (rank 0): 51212808
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole timestep      0.537670       0.526082       0.554280       0.010060       
+perform_reads       0.247925       0.232599       0.268507       0.013964       
+
+histogram-mags step 2000
+ave vm = 79921.600000, ave resident memory = 43774.400000
+my array bytes (rank 0): 51212808
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole timestep      0.539433       0.524602       0.563003       0.014393       
+perform_reads       0.256860       0.240371       0.270954       0.009738       
+
+**********************************************
+6 histogram procs, lmp workflow
+256:32:16:6
+**********************************************
+
+histogram-mags step 0
+ave vm = 76432.666667, ave resident memory = 35449.833333
+my array bytes (rank 0): 42677336
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole timestep      0.767974       0.766121       0.770292       0.001284       
+perform_reads       0.150480       0.121680       0.172658       0.017031       
+
+histogram-mags step 500
+ave vm = 78529.166667, ave resident memory = 37647.666667
+my array bytes (rank 0): 42677336
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole timestep      0.464043       0.452260       0.470336       0.005803       
+perform_reads       0.229281       0.209705       0.242705       0.011097       
+
+histogram-mags step 1000
+ave vm = 80482.666667, ave resident memory = 39508.833333
+my array bytes (rank 0): 42677336
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole timestep      0.470633       0.448870       0.476912       0.009996       
+perform_reads       0.225069       0.214792       0.236116       0.007362       
+
+histogram-mags step 1500
+ave vm = 80482.666667, ave resident memory = 39486.833333
+my array bytes (rank 0): 42677336
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole timestep      0.475272       0.460480       0.480421       0.006841       
+perform_reads       0.231062       0.206900       0.248160       0.012880       
+
+histogram-mags step 2000
+ave vm = 80482.666667, ave resident memory = 39545.166667
+my array bytes (rank 0): 42677336
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole timestep      0.475752       0.458110       0.481726       0.008302       
+perform_reads       0.223500       0.206293       0.237936       0.011231       
+
+**********************************************
+7 histogram procs, lmp workflow
+256:32:16:7
+**********************************************
+
+histogram-mags step 0
+ave vm = 78376.142857, ave resident memory = 32417.428571
+my array bytes (rank 0): 36580576
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole timestep      0.637315       0.603622       0.708009       0.038537       
+perform_reads       0.169042       0.136825       0.197069       0.024105       
+
+histogram-mags step 500
+ave vm = 82523.142857, ave resident memory = 36651.428571
+my array bytes (rank 0): 36580576
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole timestep      0.448995       0.424157       0.473244       0.020272       
+perform_reads       0.227918       0.212438       0.240422       0.008428       
+
+histogram-mags step 1000
+ave vm = 82523.142857, ave resident memory = 36730.571429
+my array bytes (rank 0): 36580576
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole timestep      0.455303       0.433353       0.477837       0.018992       
+perform_reads       0.229975       0.220351       0.240053       0.006839       
+
+histogram-mags step 1500
+ave vm = 82523.142857, ave resident memory = 36709.142857
+my array bytes (rank 0): 36580576
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole timestep      0.454674       0.431957       0.482744       0.020530       
+perform_reads       0.230677       0.211877       0.250072       0.012813       
+
+histogram-mags step 2000
+ave vm = 82523.142857, ave resident memory = 36660.714286
+my array bytes (rank 0): 36580576
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole timestep      0.455191       0.427273       0.481173       0.022680       
+perform_reads       0.228509       0.213566       0.240924       0.011627       
+
+**********************************************
+8 histogram procs, lmp workflow
+256:32:16:8
+**********************************************
+
+histogram-mags step 0
+ave vm = 81116.125000, ave resident memory = 30144.625000
+my array bytes (rank 0): 32008008
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole timestep      0.406676       0.381626       0.417842       0.011662       
+perform_reads       0.167348       0.151726       0.176258       0.007131       
+
+histogram-mags step 500
+ave vm = 93128.500000, ave resident memory = 42259.625000
+my array bytes (rank 0): 32008008
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole timestep      0.382036       0.375084       0.386899       0.004254       
+perform_reads       0.203943       0.177408       0.213168       0.011680       
+
+histogram-mags step 1000
+ave vm = 124404.375000, ave resident memory = 73509.375000
+my array bytes (rank 0): 32008008
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole timestep      0.388242       0.379840       0.400039       0.005954       
+perform_reads       0.209216       0.192750       0.219922       0.007921       
+
+histogram-mags step 1500
+ave vm = 132219.500000, ave resident memory = 81339.625000
+my array bytes (rank 0): 32008008
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole timestep      0.354748       0.352401       0.364532       0.003728       
+perform_reads       0.177026       0.161373       0.187642       0.009105       
+
+histogram-mags step 2000
+ave vm = 132219.500000, ave resident memory = 81372.250000
+my array bytes (rank 0): 32008008
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole timestep      0.350454       0.345149       0.361911       0.004800       
+perform_reads       0.168694       0.136919       0.179616       0.013858       
+
+**********************************************
+9 histogram procs, lmp workflow
+256:32:16:9
+**********************************************
+
+histogram-mags step 0
+ave vm = 84528.555556, ave resident memory = 28457.000000
+my array bytes (rank 0): 28451560
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole timestep      0.618089       0.596438       0.667416       0.025864       
+perform_reads       0.140503       0.089392       0.169464       0.025604       
+
+histogram-mags step 500
+ave vm = 95658.555556, ave resident memory = 39515.888889
+my array bytes (rank 0): 28451560
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole timestep      0.572988       0.552238       0.587622       0.008692       
+perform_reads       0.242190       0.195646       0.428332       0.067467       
+
+histogram-mags step 1000
+ave vm = 107255.777778, ave resident memory = 51144.333333
+my array bytes (rank 0): 28451560
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole timestep      0.413859       0.351036       0.438311       0.023939       
+perform_reads       0.209678       0.178389       0.227802       0.014458       
+
+histogram-mags step 1500
+ave vm = 118062.888889, ave resident memory = 62055.222222
+my array bytes (rank 0): 28451560
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole timestep      0.418995       0.385812       0.434561       0.012493       
+perform_reads       0.217898       0.174605       0.274457       0.030594       
+
+histogram-mags step 2000
+ave vm = 123467.000000, ave resident memory = 67524.777778
+my array bytes (rank 0): 28451560
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole timestep      0.405213       0.393814       0.418991       0.006135       
+perform_reads       0.203076       0.163952       0.259220       0.031192       
+
+**********************************************
+10 histogram procs, lmp workflow
+256:32:16:10
+**********************************************
+
+histogram-mags step 0
+ave vm = 88411.400000, ave resident memory = 27186.400000
+my array bytes (rank 0): 25606408
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole timestep      0.773498       0.765189       0.777663       0.003434       
+perform_reads       0.145543       0.083106       0.330097       0.064395       
+
+histogram-mags step 500
+ave vm = 98834.400000, ave resident memory = 37466.800000
+my array bytes (rank 0): 25606408
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole timestep      0.375004       0.354189       0.381448       0.007609       
+perform_reads       0.220441       0.189498       0.239801       0.014679       
+
+histogram-mags step 1000
+ave vm = 114486.500000, ave resident memory = 53111.200000
+my array bytes (rank 0): 25606408
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole timestep      0.404831       0.383471       0.410070       0.007565       
+perform_reads       0.218026       0.186967       0.253915       0.021643       
+
+histogram-mags step 1500
+ave vm = 123240.500000, ave resident memory = 61916.000000
+my array bytes (rank 0): 25606408
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole timestep      0.384057       0.362548       0.399408       0.008530       
+perform_reads       0.201056       0.179305       0.232958       0.020504       
+
+histogram-mags step 2000
+ave vm = 126992.900000, ave resident memory = 65715.300000
+my array bytes (rank 0): 25606408
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole timestep      0.592535       0.571877       0.597317       0.007493       
+perform_reads       0.216730       0.162105       0.463911       0.084263       
+
+**********************************************
+11 histogram procs, lmp workflow
+256:32:16:11
+**********************************************
+
+histogram-mags step 0
+ave vm = 92727.909091, ave resident memory = 26024.545455
+my array bytes (rank 0): 23278552
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole timestep      0.540294       0.529945       0.553379       0.007403       
+perform_reads       0.117317       0.079196       0.158474       0.021159       
+
+histogram-mags step 500
+ave vm = 102617.545455, ave resident memory = 35868.818182
+my array bytes (rank 0): 23278552
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole timestep      0.381220       0.359200       0.391374       0.009341       
+perform_reads       0.229208       0.198654       0.263224       0.019700       
+
+histogram-mags step 1000
+ave vm = 117623.363636, ave resident memory = 50862.272727
+my array bytes (rank 0): 23278552
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole timestep      0.370678       0.339093       0.384567       0.012691       
+perform_reads       0.224209       0.200498       0.255160       0.016771       
+
+histogram-mags step 1500
+ave vm = 128475.909091, ave resident memory = 61727.090909
+my array bytes (rank 0): 23278552
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole timestep      0.488125       0.461156       0.495975       0.011236       
+perform_reads       0.223225       0.157719       0.374251       0.055467       
+
+histogram-mags step 2000
+ave vm = 131060.000000, ave resident memory = 64334.000000
+my array bytes (rank 0): 23278552
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole timestep      0.375534       0.357816       0.386751       0.008616       
+perform_reads       0.216620       0.152871       0.257306       0.026434       
+
+**********************************************
+12 histogram procs, lmp workflow
+256:32:16:12
+**********************************************
+
+histogram-mags step 0
+ave vm = 97317.333333, ave resident memory = 25122.833333
+my array bytes (rank 0): 21338672
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole timestep      0.521475       0.513378       0.539146       0.006017       
+perform_reads       0.121844       0.069702       0.169364       0.027956       
+
+histogram-mags step 500
+ave vm = 106719.166667, ave resident memory = 34541.916667
+my array bytes (rank 0): 21338672
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole timestep      0.365849       0.339931       0.372354       0.010447       
+perform_reads       0.225725       0.191400       0.257515       0.021812       
+
+histogram-mags step 1000
+ave vm = 123661.583333, ave resident memory = 51528.500000
+my array bytes (rank 0): 21338672
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole timestep      0.358688       0.338513       0.373480       0.013041       
+perform_reads       0.232216       0.206464       0.256886       0.014049       
+
+histogram-mags step 1500
+ave vm = 131477.500000, ave resident memory = 59384.083333
+my array bytes (rank 0): 21338672
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole timestep      0.554817       0.528617       0.563552       0.010979       
+perform_reads       0.232035       0.186977       0.451558       0.068294       
+
+histogram-mags step 2000
+ave vm = 132780.333333, ave resident memory = 60715.916667
+my array bytes (rank 0): 21338672
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole timestep      0.347771       0.322028       0.355016       0.010036       
+perform_reads       0.213667       0.189760       0.241372       0.017182       
+
+**********************************************
+13 histogram procs, lmp workflow
+256:32:16:13
+**********************************************
+
+histogram-mags step 0
+ave vm = 102249.230769, ave resident memory = 24340.153846
+my array bytes (rank 0): 19697232
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole timestep      0.516825       0.505143       0.528373       0.005736       
+perform_reads       0.130962       0.108576       0.163506       0.014999       
+
+histogram-mags step 500
+ave vm = 111169.846154, ave resident memory = 33375.307692
+my array bytes (rank 0): 19697232
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole timestep      0.419912       0.358104       0.460434       0.032259       
+perform_reads       0.255136       0.217879       0.307272       0.029775       
+
+histogram-mags step 1000
+ave vm = 124859.384615, ave resident memory = 46995.000000
+my array bytes (rank 0): 19697232
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole timestep      0.403367       0.355446       0.430419       0.025059       
+perform_reads       0.260081       0.223869       0.305606       0.026246       
+
+histogram-mags step 1500
+ave vm = 132260.000000, ave resident memory = 54336.230769
+my array bytes (rank 0): 19697232
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole timestep      0.376139       0.320840       0.402165       0.026327       
+perform_reads       0.235480       0.172350       0.292113       0.036130       
+
+histogram-mags step 2000
+ave vm = 133740.307692, ave resident memory = 55824.230769
+my array bytes (rank 0): 19697232
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole timestep      0.570924       0.530173       0.596584       0.024772       
+perform_reads       0.261469       0.203190       0.487373       0.070740       

@@ -1,0 +1,330 @@
+*********************
+16 dimreduce procs
+gtcp workflow
+128:34:16:16:16
+*********************
+
+dimreduce step 0
+ave vm = 161627.500000, ave resident memory = 62538.375000
+my array bytes (rank 0): 32782272
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         3.096572       3.069890       3.110003       0.015326       
+perform_reads       0.200867       0.064270       0.241739       0.047838       
+
+dimreduce step 5
+ave vm = 228343.031250, ave resident memory = 109655.031250
+my array bytes (rank 0): 32782272
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         2.850579       2.820339       2.884569       0.029997       
+perform_reads       0.258805       0.089249       0.308244       0.046571       
+
+dimreduce step 10
+ave vm = 290895.125000, ave resident memory = 149780.093750
+my array bytes (rank 0): 32782272
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         2.535979       2.501136       2.567937       0.031644       
+perform_reads       0.257875       0.094104       0.309513       0.046492       
+
+dimreduce step 15
+ave vm = 327100.250000, ave resident memory = 177836.187500
+my array bytes (rank 0): 32782272
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         2.505383       2.472902       2.535546       0.029688       
+perform_reads       0.278697       0.248611       0.339506       0.024327       
+
+dimreduce step 20
+ave vm = 335292.250000, ave resident memory = 177866.343750
+my array bytes (rank 0): 32782272
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         2.504681       2.467803       2.537028       0.032028       
+perform_reads       0.269242       0.228730       0.340925       0.026106       
+
+*********************
+16 dimreduce procs
+gtcp workflow
+128:34:16:16:16
+bigger buffer
+*********************
+dimreduce step 0
+ave vm = 161627.500000, ave resident memory = 62537.656250
+my array bytes (rank 0): 32782272
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         2.941654       2.937305       2.946978       0.003181       
+perform_reads       0.172900       0.061430       0.322443       0.048157       
+
+dimreduce step 5
+ave vm = 228343.156250, ave resident memory = 109641.875000
+my array bytes (rank 0): 32782272
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         2.841870       2.791414       2.866446       0.025456       
+perform_reads       0.252257       0.078956       0.309890       0.049982       
+
+dimreduce step 10
+ave vm = 292942.937500, ave resident memory = 149758.437500
+my array bytes (rank 0): 32782272
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         2.521793       2.227800       2.563642       0.079508       
+perform_reads       0.252763       0.081347       0.315136       0.052515       
+
+dimreduce step 15
+ave vm = 329148.500000, ave resident memory = 177806.812500
+my array bytes (rank 0): 32782272
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         2.545581       2.252371       2.586242       0.078925       
+perform_reads       0.263852       0.069789       0.386110       0.061746       
+
+dimreduce step 20
+ave vm = 333244.500000, ave resident memory = 177840.218750
+my array bytes (rank 0): 32782272
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         2.466427       2.176532       2.509111       0.078679       
+perform_reads       0.258031       0.078350       0.343847       0.055994       
+
+*********************
+14 dimreduce procs
+gtcp workflow
+128:34:14:16:16
+bigger buffer
+*********************
+fail to run
+
+*********************
+32 dimreduce procs
+gtcp workflow
+128:34:20:16:16
+bigger buffer
+*********************
+
+dimreduce step 0
+ave vm = 3287071.828125, ave resident memory = 42215.000000
+my array bytes (rank 0): 16391136
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         1.762165       1.754866       1.772957       0.005496       
+perform_reads       0.169537       0.060742       0.258941       0.034271       
+
+dimreduce step 5
+ave vm = 3318414.015625, ave resident memory = 68317.953125
+my array bytes (rank 0): 16391136
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         1.695533       1.617329       1.746875       0.051427       
+perform_reads       0.210317       0.157247       0.438316       0.047986       
+
+dimreduce step 10
+ave vm = 3348672.531250, ave resident memory = 88464.218750
+my array bytes (rank 0): 16391136
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         1.409932       1.197457       1.462330       0.061066       
+perform_reads       0.183755       0.066331       0.259260       0.041063       
+
+dimreduce step 15
+ave vm = 3380086.875000, ave resident memory = 102508.546875
+my array bytes (rank 0): 16391136
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         1.432370       1.350016       1.483071       0.051225       
+perform_reads       0.197329       0.066450       0.252899       0.030902       
+
+dimreduce step 20
+ave vm = 3395509.406250, ave resident memory = 102606.875000
+my array bytes (rank 0): 16391136
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         1.359748       1.239427       1.412696       0.055346       
+perform_reads       0.198221       0.078089       0.255515       0.037706       
+
+*********************
+8 dimreduce procs
+gtcp workflow
+128:34:8:8:16
+*********************
+
+dimreduce step 0
+ave vm = 164458.625000, ave resident memory = 110446.687500
+my array bytes (rank 0): 65564528
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         5.224002       5.206354       5.235534       0.011030       
+perform_reads       0.179830       0.089260       0.359047       0.073245       
+
+dimreduce step 5
+ave vm = 249558.250000, ave resident memory = 178015.812500
+my array bytes (rank 0): 65564528
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         5.154186       4.741398       5.234297       0.156970       
+perform_reads       0.250352       0.107617       0.283953       0.055555       
+
+dimreduce step 10
+ave vm = 274134.250000, ave resident memory = 178079.625000
+my array bytes (rank 0): 65564528
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         5.045944       5.007446       5.075542       0.024522       
+perform_reads       0.255750       0.110122       0.314370       0.057654       
+
+dimreduce step 15
+ave vm = 290518.250000, ave resident memory = 178108.375000
+my array bytes (rank 0): 65564528
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         5.001472       4.962474       5.030067       0.024021       
+perform_reads       0.249721       0.125585       0.376806       0.063481       
+
+dimreduce step 20
+ave vm = 298710.250000, ave resident memory = 178128.687500
+my array bytes (rank 0): 65564528
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         4.976185       4.937078       5.005286       0.024332       
+perform_reads       0.261606       0.112294       0.297374       0.057217       
+
+*********************
+24 dimreduce procs
+gtcp workflow
+128:34:24:24:16
+*********************
+
+dimreduce step 0
+ave vm = 3280402.062500, ave resident memory = 50193.395833
+my array bytes (rank 0): 21854848
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         2.304104       2.229882       2.354745       0.050989       
+perform_reads       0.088827       0.048758       0.225794       0.034353       
+
+dimreduce step 5
+ave vm = 3322783.604167, ave resident memory = 82215.125000
+my array bytes (rank 0): 21854848
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         1.920093       1.645732       1.935908       0.058128       
+perform_reads       0.189023       0.075849       0.263526       0.049534       
+
+dimreduce step 10
+ave vm = 3369950.020833, ave resident memory = 109054.354167
+my array bytes (rank 0): 21854848
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         1.820592       1.786036       1.825326       0.011186       
+perform_reads       0.207399       0.091910       0.396624       0.062075       
+
+dimreduce step 15
+ave vm = 3406373.750000, ave resident memory = 127766.145833
+my array bytes (rank 0): 21854848
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         1.727362       1.692708       1.732190       0.011418       
+perform_reads       0.207702       0.082868       0.289100       0.050741       
+
+dimreduce step 20
+ave vm = 3410469.750000, ave resident memory = 127796.583333
+my array bytes (rank 0): 21854848
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         1.668576       1.634438       1.673388       0.011252       
+perform_reads       0.210348       0.101536       0.290754       0.052529       
+
+*********************
+40 dimreduce procs
+gtcp workflow
+128:34:40:40:16
+*********************
+
+dimreduce step 0
+ave vm = 3274805.487500, ave resident memory = 37282.000000
+my array bytes (rank 0): 13112912
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         1.614199       1.604817       1.647772       0.009248       
+perform_reads       0.142980       0.061187       0.293414       0.059343       
+
+dimreduce step 5
+ave vm = 3300315.675000, ave resident memory = 56666.525000
+my array bytes (rank 0): 13112912
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         1.282030       1.242980       1.296353       0.020788       
+perform_reads       0.203517       0.074065       0.335087       0.050799       
+
+dimreduce step 10
+ave vm = 3331072.862500, ave resident memory = 72797.662500
+my array bytes (rank 0): 13112912
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         1.167667       1.115836       1.181788       0.022438       
+perform_reads       0.194346       0.063396       0.280214       0.053941       
+
+dimreduce step 15
+ave vm = 3352107.900000, ave resident memory = 84036.062500
+my array bytes (rank 0): 13112912
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         1.198910       1.043075       1.216705       0.033441       
+perform_reads       0.194872       0.065965       0.285792       0.059132       
+
+dimreduce step 20
+ave vm = 3354565.500000, ave resident memory = 84063.525000
+my array bytes (rank 0): 13112912
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         1.191066       1.140993       1.205742       0.023361       
+perform_reads       0.201441       0.084601       0.285136       0.052471       
+
+*********************
+48 dimreduce procs
+gtcp workflow
+128:34:48:48:16
+*********************
+
+dimreduce step 0
+ave vm = 3278974.812500, ave resident memory = 34096.218750
+my array bytes (rank 0): 10927424
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         1.372696       1.351992       1.396519       0.014329       
+perform_reads       0.112372       0.065394       0.168379       0.030125       
+
+dimreduce step 5
+ave vm = 3296294.729167, ave resident memory = 50189.406250
+my array bytes (rank 0): 10927424
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         1.188047       0.876797       1.198336       0.046326       
+perform_reads       0.212531       0.066202       0.285244       0.056212       
+
+dimreduce step 10
+ave vm = 3317148.208333, ave resident memory = 63643.302083
+my array bytes (rank 0): 10927424
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         1.222792       1.187908       1.226802       0.009288       
+perform_reads       0.218357       0.068459       0.507717       0.074769       
+
+dimreduce step 15
+ave vm = 3334021.583333, ave resident memory = 73040.062500
+my array bytes (rank 0): 10927424
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         1.054737       1.019842       1.058998       0.009317       
+perform_reads       0.228214       0.094574       0.298530       0.059278       
+
+dimreduce step 20
+ave vm = 3338339.916667, ave resident memory = 73294.510417
+my array bytes (rank 0): 10927424
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole tstep         1.029291       0.993294       1.033703       0.009555       
+perform_reads       0.218278       0.098031       0.298833       0.064394       
