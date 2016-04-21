@@ -331,7 +331,7 @@ for this pairing only.
 \begin{figure}[htbp]
 %\vspace{-0.10in}
 \centering
-\includegraphics[width=\columnwidth]{fig/Generic-Start}
+\includegraphics[width=\columnwidth]{fig/gwflow}
 %\vspace{-0.15in}
 \caption{Generic Workflow Illustration}
 \label{fig:generic-workflow}
@@ -564,7 +564,7 @@ Figure~\ref{fig:lammps-workflow}. We annotate the figure with details about how
 the data is manipulated at each step.
 
 \begin{figure}
-  \includegraphics[width=\linewidth]{fig/wflow1}
+  \includegraphics[width=\columnwidth]{fig/wflow1}
   \caption{LAMMPS Workflow}
   \label{fig:lammps-workflow}
 \end{figure}
@@ -580,16 +580,18 @@ end result of this workflow is a series of histograms of the total velocities
 of the particles. There is one histogram created at each timestep at which the
 simulation would normally dump its data to disk.
 
+
+
+\begin{figure}
+  \includegraphics[width=\columnwidth]{fig/wflow2}
+  \caption{GTCP Workflow}
+  \label{fig:gtcp-workflow}
+\end{figure}
+
 The GTC workflow after reconstruction is illustrated in
 Figure~\ref{fig:gtc-workflow}. As with the LAMMPS workflow, this is annotated
 with details about data for each step. Also note that while there are shared
 components, the workflow is a little different.
-
-\begin{figure}
-  \includegraphics[width=\linewidth]{fig/wflow2}
-  \caption{GTCP Workflow}
-  \label{fig:gtcp-workflow}
-\end{figure}
 
 In our workflow, data first arrives at an instance of Select, which extracts
 one quantity of interest out of the 7. This quantity is the ``perpendicular
