@@ -319,11 +319,11 @@ an intuitive interface to the scientist constructing the workflow and (b) is use
 types of workflows, in which data have different sizes and dimensions.
 This difficulty arises because (a) the data at each stage of the workflow
 is distributed over the collection of processes
-involved in each component, even if it forms a coherent whole and (b)
-the extraction and re-arrangement of multi-dimensional data, particularly when it is
-distributed over a collection of processes, is challenging. In both workflows, the
-calculation is essentially the same operation except that the source data is
-different. The biggest difference is actually selecting out the relevant data
+involved in each component, even if it forms a coherent whole, (b)
+the extraction and re-arrangement of multi-dimensional, distributed data,
+in a way that is configurable by the user at runtime, is challenging.
+In both workflows, the calculation is essentially the same operation except
+that the source data is different. The biggest difference is actually selecting out the relevant data
 subset for the workflow. In some cases, such as between the magnitude
 calculation and the histogram generation, the glue code may be reusable--but
 for this pairing only.
