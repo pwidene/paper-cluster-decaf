@@ -9,6 +9,7 @@
 \usepackage{listings}
 \usepackage{hyperref}
 \usepackage{url}
+\usepackage{todonotes}
 \lstset {% general command to set parameter(s)
          language=C,
      basicstyle=\footnotesize,               % print whole listing small
@@ -52,7 +53,7 @@ analysis components, or the visualization tools. Usable, off the shelf tools to
 suit most needs are available. Instead, the labor and complexity is connecting
 these components together. Typically, an application scientist will write
 ``glue'' scripts that convert the output of one workflow phase to the input of
-the next.  In nearly all cases, the outwput is written to disk after ecah
+the next.  In nearly all cases, the output is written to disk after each
 phase, read and written for the ``glue'' conversion, and then read for the next
 phase. This heavy lifting is one of the major stumbling blocks preventing
 standardized workflow frameworks from broad, general adoption. Attempts to
@@ -94,7 +95,7 @@ with rich functionality to manage the control flow. What they both lack is a
 way to easily deploy and manage the glue code required to connect the various
 components. One example illustrating the complexities comes from the OLCF.
 Kepler was used for several workflows for the fusion simulation community at
-the OLCF.  While the initial goal was for an internal, expert resource would
+the OLCF.  While the initial goal was that an internal, expert resource would
 create the workflow, including glue components, it should be able to be
 maintained easily by the application scientists. Unfortunately, the
 complexities of making and maintaining the glue components as the output
@@ -102,7 +103,7 @@ shifted and managing the deployment required the expert to be involved
 regularly as the configuration evolved and scaled.  Falling back to Python
 scripts managed by the application scientist proved easier and faster to make
 changes to. While this approach using the parallel file system to stage
-intermediate data was sufficient, it is quickly becoming infeasible. The IO
+intermediate data was sufficient, it quickly becoming infeasible. The IO
 overhead for using the parallel file system is exceeding acceptable runtime
 percentages forcing a reduction in output and making scientific insights more
 difficult to discover.
@@ -126,7 +127,7 @@ projects over the last several years.
 Several frameworks have been developed that offer some functionality for
 supporting online workflows. The more advanced examples incorporate some data
 processing components, sometimes of limited scope, for performing in situ or in
-transit processing. Data Staging~\cite{nisar:2008:staging} and in particlar
+transit processing. Data Staging~\cite{nisar:2008:staging} and in particular
 data staging with processing
 capabilities~\cite{abbasi:2009:datastaging,ober:seismic}, are a solid step
 forward. The ADIOS IO library~\cite{lofstead:2009:adaptable} was designed with
@@ -158,7 +159,7 @@ these transports and the particular mechanism selected is not critical.
 
 In this work, we present a number of SuperGlue components that may be
 assembled to create workflows. We discuss how they work and why the particular
-appraoch was taken.  We also present guidelines for the design of additional
+approach was taken.  We also present guidelines for the design of additional
 components so as to allow them to fit in as wide a variety of workflows as
 possible. 
 
@@ -181,8 +182,8 @@ the next work queue, or completed state, according to hand-coded
 rules~\cite{mckesson-workflow}. The Workflow Management Coalition~\cite{wfmc}
 has developed standards to make enterprise process workflows more portable.
 These standards are not intended to make components reusable, but to make
-different workflow enines able to interoperate or to port a workflow from one
-engine to another.  Tha acutal communication interfaces and data types are left
+different workflow engines able to inter-operate or to port a workflow from one
+engine to another.  The actual communication interfaces and data types are left
 to the components themselves.
 
 More directly related to this work and the scientific community are workflow
@@ -215,7 +216,7 @@ reduce the memory footprint and then requires explicit calls from the host
 application into Catalyst routines with predictable data types on in-memory
 data structures. While this can work for limited kinds of data processing, two
 limitations can cause problems. First, in an internal Sandia project in 2012,
-the CTH shock physics code used both ParaView in situ and also in transit. The
+the CTH shock physics code used ParaView both in situ and also in transit. The
 in situ integration saw the executable grow from 30 MB to 300 MB and the
 scalability was strictly limited due to design flaws in ParaView for in situ
 use. While this project prompted the creation of Catalyst, this stripped down
@@ -231,26 +232,34 @@ analysis and visualization can be difficult or impossible. The potential
 scaling impact on the simulation because of limitations in Libsim or Catalyst
 can prevent their use for the most important use cases at extreme scale.
 
-A middle path between in situ and offline processing was investigated in PreDatA~\cite{zheng:2010:predata}. This work demonstrates that where the analytics run matters depending on the analytics communication characteristics.
+A middle path between in situ and offline processing was investigated in
+PreDatA~\cite{zheng:2010:predata}.
+This work demonstrates that the placement of the analytics can significantly
+affect the performance of workflows, and that this placement can be determined
+in part by the communication characteristics of the analytics components.
 
 Glean~\cite{vishwanath:2011:glean}, Nessie~\cite{oldfield:lwfs-data-movement},
 and Mercury~\cite{Soumagne:2013:mercury} are intended to facilitate offering
 portable workflows across different interconnect technologies. While their
 origins may not have been directly for addressing workflows, they have been
-repurposed to address this field. Rather than offering anything related to
+re-purposed to address this field. Rather than offering anything related to
 managing data types, these tools simply offer a portable way to construct
 workflows.
 
 A more active approach to managing workflow throughput was attempted in
-Flexpath~\cite{Dayal:2014:flexpath}. Rather than focusing on the components
+FlexPath~\cite{Dayal:2014:flexpath}. Rather than focusing on the components
 themselves, Flexpath offers mechanisms to monitor input queues for workflow
 components and to redeploy components to reduce bottlenecks. It also has the
 ability to redirect output from an online workflow to disk in the case of an
-unrecoverable failure.
+unrecoverable failure. Due to its ability to support data transport between
+distributed executables regardless of their placement, and due to the simple I/O
+interface provided by ADIOS, which supports FlexPath as one of its underlying
+transport mechanisms, we use FlexPath and ADIOS in the workflows described
+in this work.
 
-Compoanion work on the same project is Bredala~\cite{dreher:2016:bredala}. This
-work offers an attempt to build a data model for in situ workflows. It has
-some similiarity to FFS~\cite{eisenhauer:2011:ffs}. Unlike FFS, which is part
+Companion work on the same project is Bredala~\cite{dreher:2016:bredala}. This
+work presents an attempt to build a data model for in situ workflows. It has
+some similarity to FFS~\cite{eisenhauer:2011:ffs}. Unlike FFS, which is part
 of a much more complex infrastructure for typed messaging between distributed
 processes, Bredala is strictly focusing on the data model.
 
@@ -263,23 +272,25 @@ reusable components for scientific workflows.
 
 We designed and implemented two realistic real-time workflows based on
 scientific codes having large user bases: the LAMMPS Newtonian particle
-simulator~\cite{plimpton:1997:lammps}, and GTCP, a proxy version of the
-particle-in-cell Tokamak simulator GTC~\cite{lin:gtc}. While both of these
+simulator~\cite{plimpton:1997:lammps}, and GTCP, a particle-in-cell
+Tokamak simulator GTC~\cite{lin:gtc}. While both of these
 workflows eventually turn the simulation data into histograms of certain
 quantities of interest, how they arrive at their final result varies
 significantly. Creating similar types of results, and this using some of the
 same components but in significantly different ways, has allowed us to gain
-important insight into how best to design components that can be used in a wide
+important insight into how best to design glue components that can be used in a wide
 variety of workflows. We first describe the workflows from a general point of
-view, and then describe the individual components in greater detail.
+view, and we then describe the individual components in greater detail.
 
 \subsection{LAMMPS Workflow}
 
-In the first workflow we implemented, LAMMPS outputs a number of quantities for
+In the first workflow we implemented, LAMMPS simulates a disruption (a ``crack'')
+in a thin layer of particles and then outputs a number of quantities for
 each particle in the simulation at certain timestep intervals.  This
-corresponds to two-dimensional data, and among the output quantities are the
-three-dimensional components of the particles’ velocities. In this case, the
-histogram will show the distribution of total particle velocities in the
+corresponds to two-dimensional data (particles as one dimension, and particle properties
+of interest as another), and among these properties are the
+three-dimensional components of the particles’ velocities. In this case, the final
+histogram will show the distribution of the velocities of all particles in the
 simulation.  From the LAMMPS output, the particular quantities of interest must
 be extracted and then a histogram generated.
 
@@ -303,7 +314,14 @@ output data set, a calculation is performed, and then the histogram is
 generated. This is illustrated in Figure~\ref{fig:generic-workflow}. In many
 cases, the ``Generate histogram'' component may be some standard operation that
 can be reused. The challenge is the data selection and mathematical
-manipulation to obtain the quantities of interest. In both workflows, the
+manipulation to obtain the quantities of interest in a way that (a) presents
+an intuitive interface to the scientist constructing the workflow and (b) is useful in different
+types of workflows, in which data have different sizes and dimensions.
+This difficulty arises because (a) the data at each stage of the workflow
+is distributed over the collection of processes
+involved in each component, even if it forms a coherent whole and (b)
+the extraction and re-arrangement of multi-dimensional data, particularly when it is
+distributed over a collection of processes, is challenging. In both workflows, the
 calculation is essentially the same operation except that the source data is
 different. The biggest difference is actually selecting out the relevant data
 subset for the workflow. In some cases, such as between the magnitude
@@ -327,12 +345,14 @@ calculation process to something the histogram generator can process.  Finally,
 potentially additional custom glue code will fix the histogram calculation into
 something that can be rendered or saved as desired.  In this work, we
 demonstrate general, reusable components capable of handling the operation
-represented by all three intermediate operations. As we describe below, the
-granularity of these glue components is a bit different to aid reusability, but
+represented by all three intermediate operations.
+\todo[inline]{revise below}
+As we describe below, the
+granularity of these glue components is a bit different to aid re-usability, but
 achieve the same workflow with no custom glue code required. At most, the user
-will specify a few paramters and organize the components into a proper
-pipeline. Both of these operations are easy enough a non-expert application
-scientist can create workflows through GUIs or other guided assembly techniqes.
+will specify a few parameters and organize the components into a proper
+pipeline. Both of these operations are easy enough that a non-expert application
+scientist can create workflows through GUIs or other guided assembly techniques.
 
 \section{Design}
 \label{s:design}
@@ -352,7 +372,7 @@ which the authors are familiar, four particular insights are revealed.
 
 \item To allow for the greatest variety of workflows, data manipulation
 primitives and data analysis components should be packaged in similar ways —-
-that is, regardless of their invidual complexity, the pieces that make up these
+that is, regardless of their individual complexity, the pieces that make up these
 workflows should export compatible interfaces as much as possible.
 
 \item The ability to handle multi-dimensional data, along with the consistent
@@ -482,7 +502,7 @@ start-up parameters could generalize this code to work for many more cases.
 
 The processes that make up the Histogram component partition among themselves
 a one-dimensional array of data. They communicate to discover the global
-mininum and maximum values in the array, create a number of bins between these
+minimum and maximum values in the array, create a number of bins between these
 two extremes, and then communicate again to count the number of values in the
 globally partitioned array that fall in each bin. The number of bins to use
 must be passed to the component when it is launched.
@@ -752,7 +772,7 @@ universal reusable components are unlikely possible due to edge cases with
 irregular data organizations or formats, the bulk show promise for being
 addressed using SuperGlue-style components.
 
-\section*{Acknowledgements}
+\section*{Acknowledgments}
 
 \includegraphics[scale=0.07]{logos/doe_logo}
 \includegraphics[scale=0.30]{logos/snl_logo}
