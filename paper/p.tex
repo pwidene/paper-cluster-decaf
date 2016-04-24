@@ -26,6 +26,7 @@
 
 \newcommand{\DDT}{D\textsuperscript{2}T~}
 \newcommand{\DDTns}{D\textsuperscript{2}T}
+\newcommand{\subsubsubsection}{\noindent\textbf}
 
 %\addtolength{\parskip}{-0.08in}
 
@@ -166,7 +167,10 @@ possible.
 The rest of the paper is organized as follows. First is a survey or related
 work in Section~\ref{s:related}. Second, in Section~\ref{s:workflow}, is a
 discussion of the two workflows we use to drive our insights. Next is an
-overview of the concepts behind SuperGlue in~\ref{s:design}. An evaluation is
+overview of the concepts behind SuperGlue in~\ref{s:design}.  In
+Section~\ref{s:reusable-components}, we provide an overview of the reusable
+compoents created. In Section~\ref{s:integrating-reusable-components}, we
+discuss the challenges of integrating reusable components.  An evaluation is
 presented next in Section~\ref{s:eval}. Finally is a discussion of Conclusions
 and Future Work in Section~\ref{s:conclusion}.
 
@@ -372,8 +376,8 @@ which the authors are familiar, four particular insights are revealed.
 
 \item To allow for the greatest variety of workflows, data manipulation
 primitives and data analysis components should be packaged in similar ways —-
-that is, regardless of their individual complexity, the pieces that make up these
-workflows should export compatible interfaces as much as possible.
+that is, regardless of their individual complexity, the pieces that make up
+these workflows should export compatible interfaces as much as possible.
 
 \item The ability to handle multi-dimensional data, along with the consistent
 labeling of dimensions and quantities as meta-data, allows for components that
@@ -401,6 +405,234 @@ generalizable fashion.
 These insights guide the design for the reusable components presented in this
 paper. In particular, step decomposition for a workflow to enable more general
 processing is preferred over more numerous, richer functionality components.
+
+\subsubsection{Multi-Dimensional Data Support}
+
+Many scientific codes serialize their output, effectively packing
+multi-dimensional data into a single dimension. However, this technique offers
+little information on the data to downstream components in a workflow. In the
+case of our LAMMPS workflow, for example, if we kept the simulation output
+one-dimensional, downstream components would have to be specifically designed
+to read data in this format, and such components could not be easily made to
+work with serialized data having other formats. In our example, a separate
+component would have to be designed to work with the output of GTCP.
+
+In order to use the same {\em Select} component downstream from both LAMMPS and
+GTC, we had to (a) modify the output of LAMMPS to let it output data in a
+format where the dimensions are clearly defined, and (b) we had to design {\em
+Select} in such a way that it understand input data having any number of
+dimensions.  Indeed, even with the modification to LAMMPS, the simulation’s
+output is two-dimensional, whereas the output of GTCP is three-dimensional.
+
+In general, it is advantageous to (1) design components that can operate on
+multi-dimensional data as much as possible, and (2) format the ouput data of
+scientific applications as having well-defined dimensions. Emphasizing the
+support for multi-dimensional data in the design of workflow components allows
+for maximum compatibility between the interfaces of components by providing a
+consistent way to refer to the data. With {\em Select} supporting any number of
+dimensions, the user can simply indicate at runtime which dimension to select
+from. Similarly, in {\em Dim-Reduce}, any dimension can ``absorb'' any other
+dimension, as long as these dimensions are correctly specified by the user.
+Such functionality increases the generic quality of these components and
+simplifies their use. In our implementation, {\em Magnitude} expects
+two-dimensional data, but allowing this component to support any number of
+dimensions would be both feasible and advantageous.
+
+Still, while multi-dimensional data support provides a consistent way to refer
+to the data, not all components should be designed so as to work with
+\textbf{\em any number} of dimensions. For example, we found it advantageous to
+design {\em Histogram} to work with only one dimension. Creating a histogram is
+a calculation that makes sense for one-dimensional data, and supporting a
+higher number of dimensions would add unnecessary complexity this component. If
+the data has more dimensions than are expected, or if only certain indices in
+one dimension hold values of interest, we can use the {\em Dim-Reduce} and {\em
+Select} components to properly format the data for {\em Histogram}, as we do in
+the GTCP workflow.
+
+\subsubsection{Semantics}
+
+When data is organized under clearly defined dimensions, labeling these
+dimensions as the data goes through each component lets downstream subscribers
+refer to dimensions using their names. Because the data is potentially re-sized
+and re-arranged in the course of a workflow, it is useful to maintain such
+semantics as much as possible. However, the absence of labels should not block
+the workflow execution. We did not label dimensions in the components and
+workflows we implemented, rather refering to them by number, but this optional
+functionality can be easily added and the advantage of doing so in the
+development of more complex workflows is clear.
+
+In both workflows, we do however label the \textbf{\em quantities} in one of
+the dimensions so that the {\em Select} component can extract some of these
+quantities using their names. These names are concatenated into a ``header
+string'' using a well-known character as a separator. Because {\em Select} is
+used as the first analytical component in both workflows, we are only concerned
+with the existence of this header in the simulations and in the {\em Select}
+components. We write this header in the output of the simulations and read it
+when the data arrives at {\em Select}.  Using {\em Select} further downstream
+poses a problem, however. In our current implementation, knowning which
+quantities to select requires such a header, and ensuring the existence of this
+header at any point downstream would require labeling all quantities at every
+component, which would be highly impractical.  As a solution, we suggest
+providing a choice to the user between using a header and using index numbers
+to select quantities. Then, if the header exists, the quantities' names can be
+used, and if {\em Select} needs to be used downstream and there is no header
+describing the quantities, the user can provide the indices of the quantities
+to select. We see here that labels should be used as much as possible, but that
+they should also be kept {\em optional}.
+
+\subsubsection{Dimension Recution (\em Dim-Reduce)}
+
+In the context of scientific workflows, there are some situations where it is
+desirable to eliminate one of the dimensions of a multi-dimensional array
+without losing any of the values stored in the data set, and without changing
+the meaning of some of the other dimensions. For example, in its output, GTCP
+keeps track of the toroidal slice that produces the data of interest by using a
+dimension that spans the ``Toroidal rank'' of grid points. In our workflow, we
+wish to create histograms encompassing all grid points in the toroid, thereby
+eliminating the concept of ``Toroidal rank'' and instead growing the dimension
+that spans the number of grid points.
+
+Programming languages represent multi-dimensional arrays in a specific order in
+memory, so we cannot simply keep the data ordered as it is, change the number
+of dimensions and their sizes, and assume that the new dimensions correctly
+reference the data. In fact, here we demonstrate that even though {\em
+Dim-Reduce} does not modify the size of the data, it potentially requires a
+rearrangement of the data in memory, so that the data is correctly represented
+by the new dimensions. We also show that a simple calculation can be used to
+obtain new indices in the dimension that grows.
+
+\subsubsubsection{Dim-Reduce: Description}
+
+Because the motivation for this operation is based on how people understand
+data, rather than how it is represented internally, it is best explained
+through an example. Say that we have a solid divided into 6 sections. In each
+section, there are 3 particles for each of 4 charge types and 2 colors. We have
+a 4-dimensional array holding the speeds of all particles, for each value of
+these attributes (section, particle number, charge type, color). The dimensions
+of the array are $N_0{\times}N_1{\times}N_2{\times}N_3$, where:
+
+\begin{itemize}
+
+\item $N_0 = 6$ is the size of the {\em section} dimension $D_0$
+
+\item $N_1 = 3$ is the size of the {\em particle number} dimension $D_1$
+
+\item $N_2 = 4$ is the size of the {\em charge type} dimension $D_2$
+
+\item $N_3 = 2$ is the size of the {\em color} dimension $D_3$
+
+\end{itemize}
+
+Now, say that for the purpose of performing some type of analysis on the
+dataset, we wish to eliminate the concept of {\em color} of a particle and
+compensate by changing the concept of {\em particle number}, so that $D_1$
+spans all particles in a particular section and of a particular charge type,
+regardless of color. We still wish, however, to keep track of the original
+section where the particle is located and of its original charge type. The
+desired result of this operation is that:
+
+\begin{itemize}
+
+\item The concept of {\em color} of a particle disappears
+
+\item The concept of {\em particle number} loses its original meaning and takes
+on a new one. Its dimension now spans all particles in a particular section and
+of a particular charge type, regardless of color.
+
+\item The concepts of {\em section} and {\em charge} keep their original
+meanings, and the sizes of their dimensions are unchanged.
+
+\end{itemize}
+
+We can say that $D_1$, the {\em particle number} dimension, \textbf{\em
+absorbs} $D_3$, the {\em color} dimension. The array resulting from this
+operation has dimensions $N_0'{\times}N_1'{\times}N_2'$ , where:
+
+\begin{itemize}
+
+\item $N_0' = 6$ is the size of the {\em section} dimenson $D_0'$
+
+\item $N_1' = N_1{\times}N_3 = 6$ is the new size of the {\em particle number} dimension $D_1'$
+
+\item $N_2' = 4$ is the size of the {\em charge} dimension $D_2'$
+
+\end{itemize}
+
+We call this operation {\em dimension reduction}. Even though it does not
+change the size of the data set, we can show that it potentially changes the
+ordering of data in memory.
+
+\subsubsubsection{Dim-Reduce: Data Re-Ordering}
+
+In the original array, say we are interested in the speeds of the particles in
+section number 3, and having charge type 1. This corresponds to all of the
+particles with indices $(3, p, 1, c)$, where $p$ is any particle number and $c$
+is any charge type. Assuming row-major order, the one-dimensional indices of
+these quantities of interest are:
+
+\begin{itemize}
+
+\item 1-D indices of $(3, p, 1, c)$: 74, 75, 82, 83, 90 ,91.
+
+\end{itemize}
+
+After the dim-reduce operation described above, even though the concepts of
+particle number and color have changed, we would like the indices in the
+dimensions $D_0'$ and $D_2'$ to keep their original meanings. The operation
+leaves us with a $6{\times}6{\times}4$ array, in which the 1-D indices of the
+quantities of interest, that is, the speeds of the particles of charge type 1
+in section number 3, are:
+
+\begin{itemize}
+
+\item 1-D indices of $(3, p' , 1)$: 73, 77, 81, 85, 89, 93.
+
+\end{itemize}
+
+In this case, we see that the one-dimensional indices of the same values before
+and after the dim-reduce operation all differ. Therefore, in order to satisfy
+the desired qualities of the dim-reduce operation, we potentially have to
+re-order the data in its one-dimensional representation.
+
+\subsubsubsection{Dim-Reduce: Calculation}
+
+Using the same example, say $(s, p, ch, cl)$ are the indices of a value in the
+original array, and $(s', p', ch')$ are the indices of the same value in the
+new array (after the {\em dim-reduce} operation).
+
+Because the new dimension $D_1'$ holds the new meaning for the particles, we
+have some freedom in hat its indices represent, as long as they range from 0 to
+$N_1{\times}N_3$ in increments of 1.
+
+If we define the dim-reduce operation as:
+
+\begin{itemize}
+
+\item $s' = s$
+
+\item $p' = p + (cl{\times}N_1)$
+
+\item $ch' = ch$,
+
+\end{itemize}
+
+then the above requirements are met. This is simple to generalize to any number
+of dimensions.
+
+\subsubsubsection{Dim-Reduce: Conclusions}
+
+\begin{itemize}
+
+\item One dimension is eliminated, another dimension takes on a new meaning, and all other dimensions keep their original meanings.
+
+\item This is useful in scientific workflows.
+
+\item It potentially requires a re-ordering of data in its 1-D representation.
+
+\item We can use a simple arithmetic operation to create new indices in the
+dimension that grows.
+
+\end{itemize}
 
 \subsection{Implementation Artifacts}
 
@@ -452,6 +684,7 @@ information from the user. For example, Select must know from which dimension
 to select the quantities of interest.
 
 \section{Reusable Components}
+\label{s:reusable-components}
 
 After evaluating the example workflows selected the following components are
 created to demonstrate the potential for reusable components.
@@ -535,6 +768,7 @@ additional Dumper that writes an image file in a particular format, such as
 JPEG, PNG, or SVG, would be a valuable addition.
 
 \section{Integrating Reusable Components}
+\label{s:integrating-reusable-components}
 
 
 \begin{figure*}
@@ -593,7 +827,7 @@ simulation would normally dump its data to disk.
 
 
 The GTC workflow after reconstruction is illustrated in
-Figure~\ref{fig:gtc-workflow}. As with the LAMMPS workflow, this is annotated
+Figure~\ref{fig:gtcp-workflow}. As with the LAMMPS workflow, this is annotated
 with details about data for each step. Also note that while there are shared
 components, the workflow is a little different.
 
@@ -626,6 +860,53 @@ node.
 
 \subsection{Strong Scaling Experiments}
 
+\begin{table*}[tbp]
+\centering
+\caption{LAMMPS Evaluation Configuration Settings}
+\label{tab:eval-strong-lammps}
+\begin{tabular}{|l|l|l|l|l|}
+\hline
+Component Test & LAMMPS Procs & Select Procs & Magnitude Procs & Histogram Procs \\
+\hline
+Select & 256 & $x$ & 16 & 8\\
+\hline
+Magnitude & 256 & 60 & $x$ & 8\\
+\hline
+Histogram & 256 & 32 & 16 & $x$\\
+\hline
+\end{tabular}
+\end{table*}
+
+%LAMMPS setups:
+%Select is 256:x:16:8
+%Magnitude is 256:60:x:8
+%Histogram is 256:32:16:x
+
+\begin{table*}[tbp]
+\centering
+\caption{GTCP Evaluation Configuration Settings}
+\label{tab:eval-strong-gtcp}
+\begin{tabular}{|l|l|l|l|l|l|}
+\hline
+Component Test & GTCP Procs & Select Procs & Dim-Reduce 1 & Dim-Reduce 2 & Histogram Procs \\
+\hline
+Select & 64 & $x$ & 4 & 4 & 4\\
+\hline
+Dim-Reduce 1 & 128 & 32 & $x$ & 16 & 16\\
+\hline
+Dim-Reduce 2 & 128 & 32 & 16 & $x$ & 16\\
+\hline
+Histogram & 128 & 34 & 24 & 24 & $x$\\
+\hline
+\end{tabular}
+\end{table*}
+
+%GTCP setups:
+%Select is 64:x:4:4:4
+%Dim-Reduce1 is 128:32:x:16:16
+%Dim-Reduce2 is 128:32:16:x:16
+%Histogram is 128:34:24:24:x
+
 To obtain the results illustrated in
 Figure~\ref{fig:lammps-strong},~\ref{fig:gtcp-strong-select},
 and~\ref{fig:gtcp-strong}, we varied the process size of a single component at
@@ -656,55 +937,15 @@ our distributed components.
 For Figure~\ref{fig:lammps-strong}, LAMMPS is run using 256 processes.  For
 Figures~\ref{fig:gtcp-strong-select} and~\ref{fig:gtcp-strong}, GTCP is run
 using either 64 or 128 processes. The actual process counts and the variable
-factor is listed in Table~\ref{tab:eval}. The different factors are used to
-better illustrate the overheads involved.
+factor for the LAMMPS workflow is listed in Table~\ref{tab:eval-strong-lammps}.
+The GTCP workflow configurations are listed in
+Table~\ref{tab:eval-strong-gtcp}.  The different factors are used to better
+illustrate the overheads involved.
 
-\begin{table*}[tbp]
-\centering
-\caption{LAMMPS Evaluation Configuration Settings}
-\label{tab:eval}
-\begin{tabular}{|l|l|l|l|l|}
-\hline
-Component Test & LAMMPS Procs & Select Procs & Magnitude Procs & Histogram Procs \\
-\hline
-Select & 256 & $x$ & 16 & 8\\
-\hline
-Magnitude & 256 & 60 & $x$ & 8\\
-\hline
-Histogram & 256 & 32 & 16 & $x$\\
-\hline
-\end{tabular}
-\end{table*}
-
-%LAMMPS setups:
-%Select is 256:x:16:8
-%Magnitude is 256:60:x:8
-%Histogram is 256:32:16:x
-
-\begin{table*}[tbp]
-\centering
-\caption{GTCP Evaluation Configuration Settings}
-\label{tab:eval}
-\begin{tabular}{|l|l|l|l|l|l|}
-\hline
-Component Test & GTCP Procs & Select Procs & Dim-Reduce 1 & Dim-Reduce 2 & Histogram Procs \\
-\hline
-Select & 64 & $x$ & 4 & 4 & 4\\
-\hline
-Dim-Reduce 1 & 128 & 32 & $x$ & 16 & 16\\
-\hline
-Dim-Reduce 2 & 128 & 32 & 16 & $x$ & 16\\
-\hline
-Histogram & 128 & 34 & 24 & 24 & $x$\\
-\hline
-\end{tabular}
-\end{table*}
-
-%GTCP setups:
-%Select is 64:x:4:4:4
-%Dim-Reduce1 is 128:32:x:16:16
-%Dim-Reduce2 is 128:32:16:x:16
-%Histogram is 128:34:24:24:x
+For the LAMMPS workflow, we present two different performance measurements to
+better reveal the overheads involved. In these cases, we show both the amount
+of time spent performing the data reads as well as the total time, including
+the reading, for the component to operate.
 
 \begin{figure*}[t!]
 \center
@@ -752,6 +993,57 @@ Histogram & 128 & 34 & 24 & 24 & $x$\\
 \label{fig:gtcp-strong}
 \end{figure*}
 
+\subsection{Weak Scaling Experiments}
+
+Additional experiments are performed for the GTCP workflow to determine the
+weak scaling performance for the components. Additional experiments for the
+LAMMPS workflow are not performed since the components are identical and the
+data sizes are the only difference. The configurations for these experiments
+are presented in Table~\ref{tab:eval-weak-gtcp-1}. The performance results are
+presented in Table~\ref{tab:eval-weak-gtcp-2}. To read the tables, match the
+rows. For example, the first row in Table~\ref{tab:eval-weak-gtcp-1} corresponds
+to the preformance results in row 1 in Table~\ref{tab:eval-weak-gtcp-2}.
+
+Of particular note...
+
+\begin{table*}[tbp]
+\centering
+\caption{GTCP Weak Scaling Evaluation Configuration Settings}
+\label{tab:eval-weak-gtcp-1}
+\begin{tabular}{|l|l|l|l|l|l|l|}
+\hline
+GTCP Procs & Select Procs & Dim-Reduce 1 & Dim-Reduce 2 & Histogram Procs & Total Data Size & End-to-End Time\\
+\hline
+64 & 10 & 6 & 6 & 2 & 918,303,680 & 92.724\\
+\hline
+84 & 16 & 10 & 10 & 2 & 1,434,599,936 & 115.232\\
+\hline
+156 & 18 & 14 & 14 & 4 & 2,065,583,520 & 97.266\\
+\hline
+234 & 25 & 19 & 19 & 5 & 2,811,256,000 & 96.359\\
+\hline
+\end{tabular}
+\end{table*}
+
+\begin{table}[tbp]
+\centering
+\caption{GTCP Weak Scaling Component Performance}
+\label{tab:eval-weak-gtcp-2}
+\begin{tabular}{|p{0.67 in}|p{0.67 in}|p{0.67 in}|p{0.65 in}|}
+\hline
+Select Average Time & Dim-Reduce 1 Average Time & Dim-Reduce 2 Average Time & Histogram Average Time\\
+\hline
+1.55 & 1.58 & 1.34 & 0.6\\
+\hline
+2.34 & 1.58 & 1.72 & 0.78\\
+\hline
+2.31 & 1.73 & 1.54 & 0.713\\
+\hline
+2.19 & 1.76 & 1.68 & 0.89\\
+\hline
+\end{tabular}
+\end{table}
+
 \section{Conclusions and Future Work}
 \label{s:conclusion}
 
@@ -777,6 +1069,55 @@ workflows to determine what boundaries for this approach may be. While
 universal reusable components are unlikely possible due to edge cases with
 irregular data organizations or formats, the bulk show promise for being
 addressed using SuperGlue-style components.
+
+\subsection{old stuff}
+
+There exists today a wide variety of scientific workflows in the HPC space.
+These complex scientific codes often make use of the same types of analytical
+procedures, but they are too often designed from scratch for each application
+that they work with. This leads to tighlty coupled workflows, which are
+difficult to maintain and modify. Instead, building workflows from existing
+components is easier and more flexible. Stream-based, generic workflow
+components should be designed so as to allow for the greatest variety in their
+arrangement and for a maximum number of downstream subscribers. Designing
+components with the ability to handle data having any number of dimensions
+provides a very useful way to link them together. Maintaining a high level of
+semantics upstream, for example by labeling dimensions and certain quantities
+inside of these dimensions, gives a good understanding of the data to
+downstream components. There is a need for components that organize the data in
+a format that downstream components can understand. And, designing specific
+disk writer components removes the need to temporarily modify analytics
+components to let them also act as disk writers.
+
+There are a number of improvements we can make to our current implementation to
+have at our disposal more robust and flexible workflow components. As mentioned
+earlier, reading and writing dimension labels at each step in the workflow
+provides more information to downstream components and presents a clear
+advantage. The ADIOS interface includes the ability to send output to multiple
+destinations, by having several ``write groups.'' We wish to explore the
+possibility of a {\em Fork Component} that would use this functionality of
+ADIOS to allow the creation of branched workflows.
+
+The components we have developed in this research cover only a small portion of
+the procedures that computational scientists need in the development of their
+workflows. Eventually, we wish to allow for the development of a large
+collection of generic workflow components. We can take steps in this direction
+by building on our existing components. For example, {\em Magnitude} performs a
+relatively simple operation on multi-dimensional data, where one dimension
+spans a number of quantities involved in each instance of the operation. This
+model can fit any number of operations involving a repeating, fixed number of
+quantities, and it can even be made to work with a formula specified by the
+user at runtime. This opens the door to a large family of generic components.
+
+Finally, while we have kept performance in mind in the development of these
+components, performance optimization is not yet the focus of this research. In
+the design of any generic tool however, the question of performance inevitably
+arises. Indeed, designing tools that are not meant to operate on a specific
+format of input data can easily impact performance. For example, {\em
+Dim-Reduce} performs the same amount of computation whether it re-arranges data
+or not. In the long run, optimizing these components will involve detecting
+such situations where they can avoid performing unnecessary iterations and data
+manipulation.
 
 \section*{Acknowledgments}
 
