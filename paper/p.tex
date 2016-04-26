@@ -62,7 +62,9 @@ these components together. Typically, an application scientist will write
 ``glue'' scripts that convert the output of one workflow phase to the input of
 the next.  In nearly all cases, the output is written to disk after each
 phase, read and written for the ``glue'' conversion, and then read for the next
-phase. This heavy lifting is one of the major stumbling blocks preventing
+phase. Even in online workflows, in which different components execute concurrently,
+custom glue code usually has to be written.
+This heavy lifting is one of the major stumbling blocks preventing
 standardized workflow frameworks from broad, general adoption. Attempts to
 streamline this process have not gained traction because of the necessity to
 still build these glue components. In essence, the workflow engine offered only
