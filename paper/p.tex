@@ -309,9 +309,12 @@ quantities of interest must be extracted and then a histogram generated.
 \subsection{GTCP Workflow}
 
 \begin{figure}
+\vspace{-0.10in}
   \includegraphics[width=\columnwidth]{fig/Simple_Torus_mod}
+\vspace{-0.20in}
   \caption{Representation of GTCP Toroid, modification of \cite{WikimediaCommons:torus}}
   \label{fig:lammps-workflow}
+\vspace{-0.20in}
 \end{figure}
 
 The second workflow is driven by GTCP, a code that simulates a toroidally
@@ -347,13 +350,13 @@ calculation and the histogram generation, the glue code may be reusable--but
 for this pairing only.
 
 \begin{figure}[htbp]
-%\vspace{-0.10in}
+\vspace{-0.10in}
 \centering
 \includegraphics[width=\columnwidth]{fig/gwflow}
-%\vspace{-0.15in}
+\vspace{-0.20in}
 \caption{Generic Workflow Illustration}
 \label{fig:generic-workflow}
-%\vspace{-0.15in}
+\vspace{-0.25in}
 \end{figure}
 
 In typical scientific workflows today, custom glue code is written for
@@ -810,15 +813,21 @@ impact on the data is far smaller than other integrations.
 
 
 \begin{figure*}
+\vspace{-0.10in}
   \includegraphics[width=\linewidth]{fig/wflow3}
+\vspace{-0.35in}
   \caption{LAMMPS Workflow}
   \label{fig:lammps-workflow}
+\vspace{-0.10in}
 \end{figure*}
 
 \begin{figure*}
+%\vspace{-0.10in}
   \includegraphics[width=\linewidth]{fig/wflow4}
+\vspace{-0.25in}
   \caption{GTCP Workflow}
   \label{fig:gtcp-workflow}
+\vspace{-0.30in}
 \end{figure*}
 
 
@@ -876,9 +885,11 @@ node.
 \subsection{Strong Scaling Experiments}
 
 \begin{table*}[tbp]
+\vspace{-0.15in}
 \centering
 \caption{LAMMPS Evaluation Configuration Settings}
 \label{tab:eval-strong-lammps}
+\vspace{-0.15in}
 \begin{tabular}{|l|l|l|l|l|}
 \hline
 Component Test & LAMMPS Procs & Select Procs & Magnitude Procs & Histogram Procs \\
@@ -890,6 +901,7 @@ Magnitude & 256 & 60 & $x$ & 8\\
 Histogram & 256 & 32 & 16 & $x$\\
 \hline
 \end{tabular}
+\vspace{-0.15in}
 \end{table*}
 
 %LAMMPS setups:
@@ -901,6 +913,7 @@ Histogram & 256 & 32 & 16 & $x$\\
 \centering
 \caption{GTCP Evaluation Configuration Settings}
 \label{tab:eval-strong-gtcp}
+\vspace{-0.15in}
 \begin{tabular}{|l|l|l|l|l|l|}
 \hline
 Component Test & GTCP Procs & Select Procs & Dim-Reduce 1 & Dim-Reduce 2 & Histogram Procs \\
@@ -914,6 +927,7 @@ Dim-Reduce 2 & 128 & 32 & 16 & $x$ & 16\\
 Histogram & 128 & 34 & 24 & 24 & $x$\\
 \hline
 \end{tabular}
+\vspace{-0.15in}
 \end{table*}
 
 %GTCP setups:
@@ -963,6 +977,7 @@ of time spent performing the data reads as well as the total time, including
 the reading, for the component to operate.
 
 \begin{figure*}[t!]
+\vspace{-0.10in}
 \center
 \subfigure[Select]{
 \includegraphics[width=0.3\textwidth]{fig/Titan-LAMMPS-Strong-Select}
@@ -976,11 +991,14 @@ the reading, for the component to operate.
 \includegraphics[width=0.3\textwidth]{fig/Titan-LAMMPS-Strong-Histogram}
 \label{fig:lammps-strong-histogram}
 }
+\vspace{-0.10in}
 \caption{SuperGlue Components Strong Scaling For LAMMPS}
 \label{fig:lammps-strong}
+\vspace{-0.10in}
 \end{figure*}
 
 \begin{figure*}[t!]
+\vspace{-0.10in}
 \center
 \subfigure[Select-1]{
 \includegraphics[width=0.3\textwidth]{fig/Titan-GTCP-Strong-Select-1}
@@ -990,11 +1008,14 @@ the reading, for the component to operate.
 \includegraphics[width=0.3\textwidth]{fig/Titan-GTCP-Strong-Select-2}
 \label{fig:gtcp-strong-select-2}
 }
+\vspace{-0.10in}
 \caption{SuperGlue Components Strong Scaling Select For GTCP}
 \label{fig:gtcp-strong-select}
+\vspace{-0.10in}
 \end{figure*}
 
 \begin{figure*}[t!]
+\vspace{-0.10in}
 \center
 \subfigure[Dim-Reduce]{
 \includegraphics[width=0.3\textwidth]{fig/Titan-GTCP-Strong-Dim-Reduce}
@@ -1004,8 +1025,10 @@ the reading, for the component to operate.
 \includegraphics[width=0.3\textwidth]{fig/Titan-GTCP-Strong-Histogram}
 \label{fig:gtcp-strong-histogram}
 }
+\vspace{-0.10in}
 \caption{SuperGlue Components Strong Scaling For GTCP}
 \label{fig:gtcp-strong}
+\vspace{-0.10in}
 \end{figure*}
 
 \subsection{Weak Scaling Experiments}
@@ -1022,9 +1045,11 @@ to the preformance results in row 1 in Table~\ref{tab:eval-weak-gtcp-2}.
 Of particular note...
 
 \begin{table*}[tbp]
+%\vspace{-0.15in}
 \centering
 \caption{GTCP Weak Scaling Evaluation Configuration Settings}
 \label{tab:eval-weak-gtcp-1}
+\vspace{-0.15in}
 \begin{tabular}{|l|l|l|l|l|l|l|}
 \hline
 GTCP Procs & Select Procs & Dim-Reduce 1 & Dim-Reduce 2 & Histogram Procs & Total Data Size & End-to-End Time\\
@@ -1038,12 +1063,15 @@ GTCP Procs & Select Procs & Dim-Reduce 1 & Dim-Reduce 2 & Histogram Procs & Tota
 234 & 25 & 19 & 19 & 5 & 2,811,256,000 & 96.359\\
 \hline
 \end{tabular}
+\vspace{-0.15in}
 \end{table*}
 
 \begin{table}[tbp]
+\vspace{-0.10in}
 \centering
 \caption{GTCP Weak Scaling Component Performance}
 \label{tab:eval-weak-gtcp-2}
+\vspace{-0.15in}
 \begin{tabular}{|p{0.67 in}|p{0.67 in}|p{0.67 in}|p{0.65 in}|}
 \hline
 Select Average Time & Dim-Reduce 1 Average Time & Dim-Reduce 2 Average Time & Histogram Average Time\\
@@ -1057,6 +1085,7 @@ Select Average Time & Dim-Reduce 1 Average Time & Dim-Reduce 2 Average Time & Hi
 2.19 & 1.76 & 1.68 & 0.89\\
 \hline
 \end{tabular}
+\vspace{-0.25in}
 \end{table}
 
 \section{Conclusions and Future Work}
@@ -1136,9 +1165,9 @@ manipulation.
 
 \section*{Acknowledgments}
 
-\includegraphics[scale=0.07]{logos/doe_logo}
-\includegraphics[scale=0.30]{logos/snl_logo}
-\includegraphics[scale=0.35]{logos/nnsa_logo}
+%\includegraphics[scale=0.07]{logos/doe_logo}
+%\includegraphics[scale=0.30]{logos/snl_logo}
+%\includegraphics[scale=0.35]{logos/nnsa_logo}
 Sandia National Laboratories is a multi-program laboratory managed and operated
 by Sandia Corporation, a wholly owned subsidiary of Lockheed Martin
 Corporation, for the U.S. Department of Energy's National Nuclear Security
