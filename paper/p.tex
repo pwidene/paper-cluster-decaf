@@ -382,13 +382,14 @@ potentially additional custom glue code will fix the histogram calculation into
 something that can be rendered or saved as desired.  In this work, we
 demonstrate general, reusable components capable of handling the operation
 represented by all three intermediate operations.
-\todo[inline]{revise below}
-As we describe below, the
-granularity of these glue components is a bit different to aid re-usability, but
-achieve the same workflow with no custom glue code required. At most, the user
-will specify a few parameters and organize the components into a proper
-pipeline. Both of these operations are easy enough that a non-expert application
-scientist can create workflows through GUIs or other guided assembly techniques.
+
+As we describe below, the granularity of these glue components is a bit
+different than the coarse grained description made above. This is done to aid
+re-usability, but achieve the same workflow with no custom glue code required.
+At most, the user will specify a few parameters and organize the components
+into a proper pipeline. Both of these operations are easy enough that a
+non-expert application scientist can create workflows through GUIs or other
+guided assembly techniques.
 
 \section{Design}
 \label{s:design}
@@ -842,7 +843,7 @@ impact on the data is far smaller than other integrations.
 \vspace{-0.25in}
   \caption{GTCP Workflow}
   \label{fig:gtcp-workflow}
-\vspace{-0.30in}
+%\vspace{-0.30in}
 \end{figure*}
 
 
@@ -900,7 +901,7 @@ node.
 \subsection{Strong Scaling Experiments}
 
 \begin{table*}[tbp]
-\vspace{-0.15in}
+%\vspace{-0.15in}
 \centering
 \caption{LAMMPS Evaluation Configuration Settings}
 \label{tab:eval-strong-lammps}
@@ -942,7 +943,7 @@ Dim-Reduce 2 & 128 & 32 & 16 & $x$ & 16\\
 Histogram & 128 & 34 & 24 & 24 & $x$\\
 \hline
 \end{tabular}
-\vspace{-0.15in}
+%\vspace{-0.15in}
 \end{table*}
 
 %GTCP setups:
@@ -1057,7 +1058,23 @@ presented in Table~\ref{tab:eval-weak-gtcp-2}. To read the tables, match the
 rows. For example, the first row in Table~\ref{tab:eval-weak-gtcp-1} corresponds
 to the preformance results in row 1 in Table~\ref{tab:eval-weak-gtcp-2}.
 
-Of particular note...
+{\em Select} gets the full brunt of the total data size. Dividing the process
+count into the total data size shows that on average, it is roughly the same
+for weak scaling. The other components exhibit similar performance consistency.
+Also note that these are not exactly identical ratios or counts.  The data size
+per GTCP process is maintained as it is scaled. The amount of data each
+SuperGlue component process varies a bit. Also note that there is not a fixed
+n-1 ratio required for any of the components. Instead, an m-n mapping works
+correctly.
+
+%Process count ratios
+%GTCP	GTCP		GTCP
+%vs	vs		vs
+%Select	Dim-Reduce	Histogram
+%6.4	10.67		32
+%5.25	8.4		41
+%8.67	11.14		34
+%9.36	12.31		46.8
 
 \begin{table*}[tbp]
 %\vspace{-0.15in}
@@ -1109,7 +1126,18 @@ Select Average Time & Dim-Reduce 1 Average Time & Dim-Reduce 2 Average Time & Hi
 This paper presents SuperGlue, a demonstration of making generic, reusable
 components for scientific simulations. By decomposing the operations into small
 chunks, we can achieve components that can be reused, without modification, for
-a variety of different workflows.
+a variety of different workflows. In this work we investigate using a
+stream-based structure with generic components to achieve easier to build and
+use workflows.  Stream-based, generic workflow components should be designed so
+as to allow for the greatest variety in their arrangement and for a maximum
+number of downstream subscribers. Designing components with the ability to
+handle data having any number of dimensions provides a very useful way to link
+them together. Maintaining a high level of semantics upstream, for example by
+labeling dimensions and certain quantities inside of these dimensions, gives a
+good understanding of the data to downstream components. There is a need for
+components that organize the data in a format that downstream components can
+understand. And, designing specific disk writer components removes the need to
+temporarily modify analytics components to let them also act as disk writers.
 
 Through the demonstration of generating a velocity histogram for LAMMPS, the
 molecular dynamics simulation, and a pressure histogram for GTC, the particle
@@ -1121,32 +1149,6 @@ only approach for addressing reusable components. Other, similar approaches can
 also work well. However, in this case, the data annotation provided by this
 connection infrastructure help enable reusable components by offering the
 necessary metadata to perform the general operations.
-
-Future work must investigate both additional kinds of simulations to expand the
-exposure to different data types and organizations as well as use more complex
-workflows to determine what boundaries for this approach may be. While
-universal reusable components are unlikely possible due to edge cases with
-irregular data organizations or formats, the bulk show promise for being
-addressed using SuperGlue-style components.
-
-\subsection{old stuff}
-
-There exists today a wide variety of scientific workflows in the HPC space.
-These complex scientific codes often make use of the same types of analytical
-procedures, but they are too often designed from scratch for each application
-that they work with. This leads to tighlty coupled workflows, which are
-difficult to maintain and modify. Instead, building workflows from existing
-components is easier and more flexible. Stream-based, generic workflow
-components should be designed so as to allow for the greatest variety in their
-arrangement and for a maximum number of downstream subscribers. Designing
-components with the ability to handle data having any number of dimensions
-provides a very useful way to link them together. Maintaining a high level of
-semantics upstream, for example by labeling dimensions and certain quantities
-inside of these dimensions, gives a good understanding of the data to
-downstream components. There is a need for components that organize the data in
-a format that downstream components can understand. And, designing specific
-disk writer components removes the need to temporarily modify analytics
-components to let them also act as disk writers.
 
 There are a number of improvements we can make to our current implementation to
 have at our disposal more robust and flexible workflow components. As mentioned
