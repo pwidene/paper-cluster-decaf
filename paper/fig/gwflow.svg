@@ -48,13 +48,13 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.4655523"
-     inkscape:cx="123.47813"
+     inkscape:cx="250.98955"
      inkscape:cy="853.15427"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
-     inkscape:window-width="1916"
-     inkscape:window-height="1035"
+     inkscape:window-width="1276"
+     inkscape:window-height="755"
      inkscape:window-x="4"
      inkscape:window-y="1"
      inkscape:window-maximized="1" />
@@ -145,12 +145,12 @@
        x="69.285713"
        y="204.50507" />
     <rect
-       style="opacity:1;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.84299999;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       style="opacity:1;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.82498455;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        id="rect5825"
-       width="126.42857"
-       height="80"
-       x="198.57143"
-       y="219.50507" />
+       width="126.44659"
+       height="76.606323"
+       x="198.56242"
+       y="223.59007" />
     <rect
        style="opacity:1;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.84299999;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        id="rect5827"
@@ -173,19 +173,16 @@
          id="tspan5841">subset</tspan></text>
     <text
        xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:21.25px;line-height:125%;font-family:Arial;-inkscape-font-specification:'Arial, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
-       x="206.06566"
-       y="255.05188"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16.01638222px;line-height:125%;font-family:Arial;-inkscape-font-specification:'Arial, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="267.27798"
+       y="170.12141"
        id="text5843"
-       sodipodi:linespacing="125%"><tspan
+       sodipodi:linespacing="125%"
+       transform="scale(0.75371207,1.3267666)"><tspan
          sodipodi:role="line"
-         id="tspan5845"
-         x="206.06566"
-         y="255.05188">Calculate</tspan><tspan
-         sodipodi:role="line"
-         x="206.06566"
-         y="281.61438"
-         id="tspan5847">magnitudes</tspan></text>
+         x="267.27798"
+         y="170.12141"
+         id="tspan3484" /></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:25px;line-height:125%;font-family:Arial;-inkscape-font-specification:'Arial, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
@@ -223,5 +220,22 @@
          id="tspan5861"
          x="365.05008"
          y="129.16077">Histogram</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="205.38333"
+       y="254.71069"
+       id="text3488"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3500"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:23.75px;line-height:125%;font-family:Arial;-inkscape-font-specification:'Arial, Normal';text-align:start;writing-mode:lr-tb;text-anchor:start"
+         x="205.38333"
+         y="254.71069">Format for</tspan><tspan
+         sodipodi:role="line"
+         id="tspan3502"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:23.75px;line-height:125%;font-family:Arial;-inkscape-font-specification:'Arial, Normal';text-align:start;writing-mode:lr-tb;text-anchor:start"
+         x="205.38333"
+         y="284.39819">Histogram</tspan></text>
   </g>
 </svg>
