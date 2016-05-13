@@ -24,6 +24,8 @@
 %can't figure this one out for particles bandwidth
 %\usepackage[caption,label]{subfig}
 
+\newcommand{\XX}[1]{\textcolor{red}{XX: #1}}
+
 \newcommand{\DDT}{D\textsuperscript{2}T~}
 \newcommand{\DDTns}{D\textsuperscript{2}T}
 \newcommand{\subsubsubsection}{\noindent\textbf}
@@ -330,7 +332,7 @@ flux. This division of the toroid is illustrated in Figure~\ref{fig:toroid}.
 The output of the simulation is therefore a three-dimensional array in which
 the dimensions span: (a) toroidal ranks (toroidal slice number), (b) grid point
 numbers, and (c) property indices. In this workflow, the per-timestep histogram
-generated will show the parallel pressure distributions across
+generated shows the distribution of per-gridpoint parallel pressure across
 the entire simulation. From GTCP's output, the particular quantities of
 interest must be extracted and then a histogram generated.
 
@@ -420,21 +422,23 @@ that do not necessarily require all of these labels allows for the most
 functionality downstream.
 
 \item Because programming languages understand multi-dimensional data as being
-in a specific order in memory, there is a need for components that re-arrange
+in a specific order in memory, there is a need for glue components that re-arrange
 data and re-label its dimensions without necessarily changing its size. Indeed,
 when data is contained in a database on disk, it is simple to gain a desired
 view of the data, for example by using SQL. However, in the middle of a
 real-time workflow, data must be presented to the components in a format that
-they expect and understand. By allowing workflow components to support any
-number of dimensions, by labeling these dimensions consistently, and by
-developing components that re-arrange and re-label data, we can do this in a
-generalizable fashion.
+they expect and understand. We show the need for such glue components through
+the {\em Dim-Reduce} component used in the GTCP workflow. \XX{ref here}
 
 \end{enumerate}
 
-These insights guide the design for the reusable components presented in this
-paper. In particular, step decomposition for a workflow to enable more general
-processing is preferred over more numerous, richer functionality components.
+These insights guide the design for the reusable glue and analysis
+components presented in this
+paper. In particular, designing a smaller number of
+components to assemble workflows with finer step decomposition
+allows for more general processing and more accurate performance
+expectations than desiging more numerous components each having more
+complex functionality.
 
 \subsubsection{Multi-Dimensional Data Support}
 
