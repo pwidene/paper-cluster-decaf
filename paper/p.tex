@@ -480,33 +480,33 @@ we can simply use filter and selector glue to extract and format the data for
 \subsubsection{Semantics}
 
 When data is organized under clearly defined dimensions, labeling these
-dimensions as the data goes through each component lets downstream subscribers
+dimensions and the indices they hold
+as the data goes through each component lets downstream subscribers
 refer to dimensions using their names. Because the data is potentially re-sized
 and re-arranged in the course of a workflow, it is useful to maintain such
 semantics as much as possible. However, the absence of labels should not block
-the workflow execution. We did not label dimensions in the components and
-workflows we implemented, rather refering to them by number, but this optional
-functionality can be easily added and the advantage of doing so in the
-development of more complex workflows is clear.
+the workflow execution.
 
-In both workflows, we do however label the \textbf{\em quantities} in one of
-the dimensions so that the {\em Select} component can extract some of these
-quantities using their names. These names are concatenated into a ``header
-string'' using a well-known character as a separator. Because {\em Select} is
-used as the first analytical component in both workflows, we are only concerned
-with the existence of this header in the simulations and in the {\em Select}
-components. We write this header in the output of the simulations and read it
-when the data arrives at {\em Select}.  Using {\em Select} further downstream
-poses a problem, however. In our current implementation, knowning which
-quantities to select requires such a header, and ensuring the existence of this
-header at any point downstream would require labeling all quantities at every
-component, which would be highly impractical.  As a solution, we suggest
-providing a choice to the user between using a header and using index numbers
-to select quantities. Then, if the header exists, the quantities' names can be
-used, and if {\em Select} needs to be used downstream and there is no header
-describing the quantities, the user can provide the indices of the quantities
-to select. We see here that labels should be used as much as possible, but that
-they should also be kept {\em optional}.
+For example, in both workflows, we modified the simulations so that
+they label the quantities that they output in the dimension that holds
+these quantities. This lets the {\em Select} component extract the quantities
+of interest by referring to them by name. However, we did not label the dimensions
+themselves, rather refering to them by number. 
+
+When they exist, these labels are concatenated into a header string
+passed along to the next component in the workflow as another variable
+through the ADIOS interface, which
+allows for the arbitrary output of any number of variables of any type
+alongside the main simulation data.
+While in our current implementation, {\em Select} is hard-coded to
+always looks for such a header describing the quantities
+in the dimension of interest, 
+we can easily extend this functionality to let the user either refer
+to dimensions and indices by name, when headers exist, or by number,
+when they do not.
+
+In general, labels should be used as much as possible, but they
+should also be kept {\em optional}.
 
 \subsubsection{Dimension Recution (\em Dim-Reduce)}
 
