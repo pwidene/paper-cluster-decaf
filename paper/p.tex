@@ -297,14 +297,15 @@ simulation data into histograms of certain quantities of interest, how they
 arrive at their final result varies significantly. Creating similar types of
 results, and this using some of the same components but in significantly
 different ways, has allowed us to gain important insight into how best to
-design glue components that can be used in a wide variety of workflows. We
-first describe the workflows from a general point of view and then the
-individual components in greater detail.
+design glue components that can be used in a wide variety of workflows.
+We first describe the workflows from a general point of view
+and then the components in greater detail, illustrated in
+Figures~\ref{fig:lammps-workflow} and~\ref{fig:gtcp-workflow}.
 
 \subsection{LAMMPS Workflow}
 
 We configure LAMMPS to simulate a disruption (a ``crack'') in a thin layer of
-particles and outputs 5 numerical properties describing each particle in the
+particles and output 5 numerical properties describing each particle in the
 simulation at regular timestep intervals. This corresponds to two-dimensional
 data (particles as one dimension and properties of interest as another) and
 among these properties are the three-dimensional components of the particles'
@@ -338,7 +339,7 @@ interest must be extracted and then a histogram generated.
 
 \subsection{Discussion}
 
-In both cases, some particular quantity of interest is extracted from the
+In both cases, a particular subset of interest is extracted from the
 output data set, a calculation is performed, and a histogram is
 generated. This is illustrated in Figure~\ref{fig:generic-workflow}. In many
 cases, the histogram component may be some standard, reusable operator.
@@ -399,7 +400,7 @@ workflows are driven by two different scientific codes, yet they share some of
 the same components. First, we present our insights and then discuss our
 implementation choices and how they affect the project.
 
-\subsection{Key Insights}
+\subsection{Insights: Overview}
 
 By evaluating the presented workflows and considering other workflows with
 which the authors are familiar, four particular insights are revealed.
@@ -424,11 +425,12 @@ functionality downstream.
 \item Because programming languages understand multi-dimensional data as being
 in a specific order in memory, there is a need for glue components that re-arrange
 data and re-label its dimensions without necessarily changing its size. Indeed,
-when data is contained in a database on disk, it is simple to gain a desired
+when data is stored in a database on disk, it is simple to gain a desired
 view of the data, for example by using SQL. However, in the middle of a
 real-time workflow, data must be presented to the components in a format that
-they expect and understand. We show the need for such glue components through
-the {\em Dim-Reduce} component used in the GTCP workflow. \XX{ref here}
+they expect and understand. This requires a specific ordering of
+data in memory. We expand on this topic
+in Section~\ref{subsec:dimreduce}.
 
 \end{enumerate}
 
@@ -440,7 +442,7 @@ allows for more general processing and more accurate performance
 expectations than desiging more numerous components each having more
 complex functionality.
 
-\subsubsection{Multi-Dimensional Data Support}
+\subsection{Multi-Dimensional Data Support}
 
 Many scientific codes serialize their output, effectively packing
 multi-dimensional data into a single dimension. However, this technique offers
@@ -477,7 +479,7 @@ we can simply use filter and selector glue to extract and format the data for
 {\em Histogram} to operate on.
 
 
-\subsubsection{Semantics}
+\subsection{Semantics}
 
 When data is organized under clearly defined dimensions, labeling these
 dimensions and the indices they hold
@@ -508,159 +510,85 @@ when they do not.
 In general, labels should be used as much as possible, but they
 should also be kept {\em optional}.
 
-\subsubsection{Dimension Recution (\em Dim-Reduce)}
+\subsection{Dimension Reduction ({\em Dim-Reduce})}
+\label{subsec:dimreduce}
+As discussed earlier, there is a need in scientific workflows with fine
+step granularity for glue components that re-arrange and re-label data
+without necessarily changing its size.
+This is illustrated by the need for the {\em Dim-Reduce}
+operation in the GTCP workflow.
 
-In the context of scientific workflows, there are some situations where it is
-desirable to eliminate one of the dimensions of a multi-dimensional array
-without losing any of the values stored in the data set, and without changing
-the meaning of some of the other dimensions. For example, in its output, GTCP
+In its raw output, GTCP
 keeps track of the toroidal slice that produces the data of interest by using a
 dimension that spans the ``Toroidal rank'' of grid points. In our workflow, we
 wish to create histograms encompassing all grid points in the toroid, thereby
-eliminating the concept of ``Toroidal rank'' and instead growing the dimension
+eliminating the concept of ``Toroidal rank''
+along the way
+and instead growing the dimension
 that spans the number of grid points.
 
 Programming languages represent multi-dimensional arrays in a specific order in
 memory, so we cannot simply keep the data ordered as it is, change the number
 of dimensions and their sizes, and assume that the new dimensions correctly
-reference the data. In fact, here we demonstrate that even though {\em
-Dim-Reduce} does not modify the size of the data, it potentially requires a
-rearrangement of the data in memory, so that the data is correctly represented
-by the new dimensions. We also show that a simple calculation can be used to
-obtain new indices in the dimension that grows.
+reference the data.
 
-\subsubsubsection{Dim-Reduce: Description}
-
-Because the motivation for this operation is based on how people understand
-data, rather than how it is represented internally, it is best explained
-through an example. Say that we have a solid divided into 6 sections. In each
-section, there are 3 particles for each of 4 charge types and 2 colors. We have
-a 4-dimensional array holding the speeds of all particles, for each value of
-these attributes (section, particle number, charge type, color). The dimensions
-of the array are $N_0{\times}N_1{\times}N_2{\times}N_3$, where:
+The dimensions of GTCP's raw output are 
+$N_0{\times}N_1{\times}N_2$, where:
 
 \begin{itemize}
 
-\item $N_0 = 6$ is the size of the {\em section} dimension $D_0$
+\item $N_0$ is the size of the {\em toroidal rank} dimension $D_0$
 
-\item $N_1 = 3$ is the size of the {\em particle number} dimension $D_1$
+\item $N_1$ is the size of the {\em gridpoint} dimension $D_1$
 
-\item $N_2 = 4$ is the size of the {\em charge type} dimension $D_2$
-
-\item $N_3 = 2$ is the size of the {\em color} dimension $D_3$
+\item $N_2$ is the size of the {\em property} dimension $D_2$
 
 \end{itemize}
 
-Now, say that for the purpose of performing some type of analysis on the
-dataset, we wish to eliminate the concept of {\em color} of a particle and
-compensate by changing the concept of {\em particle number}, so that $D_1$
-spans all particles in a particular section and of a particular charge type,
-regardless of color. We still wish, however, to keep track of the original
-section where the particle is located and of its original charge type. The
-desired result of this operation is that:
+At one stage of the GTCP workflow, we wish to eliminate the concept of
+{\em toroidal rank} of the data. This is to bring the data one step
+closer to a format that {\em Histogram} understands: one-dimensional data.
+For the data to be one-dimensional, two instances of the {\em Dim-Reduce}
+glue operation are required. We focus here on the first of the two.
+
+The desired result of this operation is that:
 
 \begin{itemize}
 
-\item The concept of {\em color} of a particle disappears
+\item The concept of {\em toroidal rank} of a particle disappears
 
-\item The concept of {\em particle number} loses its original meaning and takes
-on a new one. Its dimension now spans all particles in a particular section and
-of a particular charge type, regardless of color.
-
-\item The concepts of {\em section} and {\em charge} keep their original
-meanings, and the sizes of their dimensions are unchanged.
+\item The concept of {\em gridpoint number} loses its original meaning and takes
+  on a new one; the indices in this dimension now cover all gridpoints in the toroid,
+  rather than only those in a particular toroidal slice
+  
+\item The concept of {\em property} keeps its original
+meaning, and the size of its dimension is unchanged
 
 \end{itemize}
 
-We can say that $D_1$, the {\em particle number} dimension, \textbf{\em
-absorbs} $D_3$, the {\em color} dimension. The array resulting from this
-operation has dimensions $N_0'{\times}N_1'{\times}N_2'$ , where:
+We can say that $D_1$, the {\em gridpoint} dimension, \textbf{\em absorbs}
+$D_0$, the {\em toroidal rank} dimension. The array resulting from this
+operation has dimensions $N_1'{\times}N_2$ , where:
 
 \begin{itemize}
 
-\item $N_0' = 6$ is the size of the {\em section} dimenson $D_0'$
+\item $N_1' = N_0{\times}N_1$ is the new size of the {\em gridpoint} dimension $D_1'$
 
-\item $N_1' = N_1{\times}N_3 = 6$ is the new size of the {\em particle number} dimension $D_1'$
-
-\item $N_2' = 4$ is the size of the {\em charge} dimension $D_2'$
+\item $N_2' = N_2$ is the size of the {\em property} dimension $D_2'$
 
 \end{itemize}
 
 We call this operation {\em dimension reduction}. Even though it does not
-change the size of the data set, we can show that it potentially changes the
-ordering of data in memory.
+change the size of the data set, we have seen in our implementation of it
+that it often changes the
+ordering of data in memory, and so it is still potentially a
+compute-intensive operation with sizable communication overhead
+when the dataset is large and many
+processes are involved in it.
 
-\subsubsubsection{Dim-Reduce: Data Re-Ordering}
-
-In the original array, say we are interested in the speeds of the particles in
-section number 3, and having charge type 1. This corresponds to all of the
-particles with indices $(3, p, 1, c)$, where $p$ is any particle number and $c$
-is any charge type. Assuming row-major order, the one-dimensional indices of
-these quantities of interest are:
-
-\begin{itemize}
-
-\item 1-D indices of $(3, p, 1, c)$: 74, 75, 82, 83, 90 ,91.
-
-\end{itemize}
-
-After the dim-reduce operation described above, even though the concepts of
-particle number and color have changed, we would like the indices in the
-dimensions $D_0'$ and $D_2'$ to keep their original meanings. The operation
-leaves us with a $6{\times}6{\times}4$ array, in which the 1-D indices of the
-quantities of interest, that is, the speeds of the particles of charge type 1
-in section number 3, are:
-
-\begin{itemize}
-
-\item 1-D indices of $(3, p' , 1)$: 73, 77, 81, 85, 89, 93.
-
-\end{itemize}
-
-In this case, we see that the one-dimensional indices of the same values before
-and after the dim-reduce operation all differ. Therefore, in order to satisfy
-the desired qualities of the dim-reduce operation, we potentially have to
-re-order the data in its one-dimensional representation.
-
-\subsubsubsection{Dim-Reduce: Calculation}
-
-Using the same example, say $(s, p, ch, cl)$ are the indices of a value in the
-original array, and $(s', p', ch')$ are the indices of the same value in the
-new array (after the {\em dim-reduce} operation).
-
-Because the new dimension $D_1'$ holds the new meaning for the particles, we
-have some freedom in hat its indices represent, as long as they range from 0 to
-$N_1{\times}N_3$ in increments of 1.
-
-If we define the dim-reduce operation as:
-
-\begin{itemize}
-
-\item $s' = s$
-
-\item $p' = p + (cl{\times}N_1)$
-
-\item $ch' = ch$,
-
-\end{itemize}
-
-then the above requirements are met. This is simple to generalize to any number
-of dimensions.
-
-\subsubsubsection{Dim-Reduce: Conclusions}
-
-\begin{itemize}
-
-\item One dimension is eliminated, another dimension takes on a new meaning, and all other dimensions keep their original meanings.
-
-\item This is useful in scientific workflows.
-
-\item It potentially requires a re-ordering of data in its 1-D representation.
-
-\item We can use a simple arithmetic operation to create new indices in the
-dimension that grows.
-
-\end{itemize}
+This operation fits well into a
+SuperGlue component, and it is precisely the role of the {\em Dim-Reduce}
+component, which can operate on a dataset having any number of dimensions.
 
 \subsection{Implementation Artifacts}
 
