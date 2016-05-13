@@ -510,7 +510,7 @@ when they do not.
 In general, labels should be used as much as possible, but they
 should also be kept {\em optional}.
 
-\subsection{Dimension Reduction ({\em Dim-Reduce})}
+\subsection{Dimension Reduction}
 \label{subsec:dimreduce}
 As discussed earlier, there is a need in scientific workflows with fine
 step granularity for glue components that re-arrange and re-label data
@@ -592,18 +592,25 @@ component, which can operate on a dataset having any number of dimensions.
 
 \subsection{Implementation Artifacts}
 
-While particular decisions are made to investigate the potential for reusable
-components, the choices made are by no means the only tools and techniques for
+While particular implementation decisions are made to investigate the
+potential for reusable glue and analysis
+components, the choices made in the tools used to build the components and
+workflows presented in this work are by no means the only tools and techniques for
 achieving success. Rather, the selected technologies offer many features that
-ease the creation of reusable components. The reasoning for these selections is
+facilitate the creation of reusable components. The reasoning for these selections is
 explored below.
 
-Even though we refer to the components as single entities, they are distributed
-codes that know how to split computation among the processes of which they are
-composed. Since we need some analogy to the Linux shell pipe operator for
+Though we refer to the Sugerglue components as single entities,
+they are distributed
+codes able to split computation on large dataset
+among the processes of which they are
+composed. More precisely, they are MPI executables written in C,
+where all processes in a component belong to the same MPI communicator.
+
+Since we need some analogy to the Linux shell pipe operator for
 connecting components, we choose to use ADIOS for the flexibility in writing
 destinations, reading sources, and offering a typed data stream. In particular,
-we use the Flexpath transport. It implements a stream-based data exchange
+we use the Flexpath transport. It implements a {\em stream-based} data exchange
 abstracted to the components through the ADIOS interface, is asynchronous, and
 allows for data exchange between any number of writers and readers. Therefore:
 
@@ -622,22 +629,26 @@ however, that due to the current implementation of Flexpath there is overhead
 data exchanged when different numbers of writers and readers are used. Even if
 reader R requests only a portion of writer W’s data, the current implementation
 is such that W sends all of its data to R. This is in the process of being
-corrected and is orthogonal to the work done for this project.
+improved, and this effort is orthogonal to the work done for this project.
 
 In addition, ADIOS and its transports, such as Flexpath, keep track of the
 data dimensions and their sizes. Therefore, when a component receives a
 multi-dimensional array, it can discover the dimensions of the data and their
 sizes as defined by the previous component in the workflow. Note that the
-data type as input to one component may be changed for the output. This is
+data type of the input to one component may be changed for the output. This is
 crucial for operators that select a data subset or generate a derived product.
 
-When using a component, one must specify the names of the input stream from
-which to read, the array in the input stream, the output stream to which to
+There is no need to re-compile SuperGlue components when using them
+in different workflows. Any configuration of a component for a particular workflow
+can be provided through run-time arguments.
+For all components, the user must specify the names the input and output streams
+of the input stream from
+which to read, the array in the input stream containing the data on which to operate,
+the output stream to which to
 write, and the name of the array to use in the output stream. Referring to
 streams and arrays using names allows users to easily chain together these
-components into potentially complex workflows. Certain components require more
-information from the user. For example, Select must know from which dimension
-to select the quantities of interest.
+components into potentially complex workflows, providing a similar advantage
+to that of labeling dimensions and indices, as previously discussed.
 
 \section{Reusable Components}
 \label{s:reusable-components}
@@ -660,25 +671,27 @@ to select the quantities of interest.
 \vspace{-0.30in}
 \end{figure*}
 
-After evaluating the example workflows selected the following components are
-created to demonstrate the potential for reusable components.
+
+%After evaluating the example workflows selected the following components are
+%created to demonstrate the potential for reusable components.
 
 \subsection{Select}
 
 Given an input stream that includes an array with any number of dimensions,
-Select extracts certain indices from one of the dimensions and outputs an array
+Select extracts certain indices from one of the dimensions. Thus, it outputs an array
 with the same number of dimensions, but with the dimension of interest having a
-smaller size. The output data of this operator therefore has a smaller overall
-size than its input data. In order to select the quantities of interest, the
+smaller size. In order to select the quantities of interest, the
 component uses a header which must be passed by the previous component in the
 workflow. The header is a list of strings that name the quantities in the
-dimension of interest. This allows easy selection of quantities at runtime when
+dimension of interest. This allows for easy selection of quantities at runtime when
 Select is launched. For example, in the LAMMPS workflow, the simulation outputs
 the ID, Type, Vx, Vy, and Vz of each particle, where Vx, Vy, and Vz are the
-components of the velocity of the particle. Select discards the ID and Type of
+components of the three-dimensional velocity of the particle.
+Select discards the ID and Type of
 the particle, building a new array consisting only of the velocity components
 of each particle. The user, or a higher-level dataflow assembler, must pass to
-this component the index of the dimension from which to select.
+this component the index of the dimension from which to select, as well as the
+indices of the quantities of interest within that dimension.
 
 \subsection{Dim-Reduce}
 

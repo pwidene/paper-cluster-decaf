@@ -81,15 +81,15 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.979899"
-     inkscape:cx="247.05288"
+     inkscape:cx="443.05673"
      inkscape:cy="629.77912"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
-     inkscape:window-width="2333"
-     inkscape:window-height="1315"
-     inkscape:window-x="242"
-     inkscape:window-y="57"
+     inkscape:window-width="1920"
+     inkscape:window-height="1036"
+     inkscape:window-x="12"
+     inkscape:window-y="0"
      inkscape:window-maximized="0" />
   <metadata
      id="metadata7">
@@ -250,7 +250,7 @@
          y="467.23196"
          x="139.52856"
          id="tspan4245"
-         sodipodi:role="line">  F : {perpendicular pressure}</tspan></text>
+         sodipodi:role="line">  F' : {perpendicular pressure}</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10px;line-height:136.00000143%;font-family:'.Helvetica Neue DeskInterface';-inkscape-font-specification:'.Helvetica Neue DeskInterface, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -267,17 +267,17 @@
          id="tspan4251"
          x="287.71829"
          y="441.03067"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10px;line-height:136.00000143%;font-family:'.Helvetica Neue DeskInterface';-inkscape-font-specification:'.Helvetica Neue DeskInterface, Normal';text-align:start;writing-mode:lr-tb;text-anchor:start">  D : toroidal rank</tspan><tspan
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10px;line-height:136.00000143%;font-family:'.Helvetica Neue DeskInterface';-inkscape-font-specification:'.Helvetica Neue DeskInterface, Normal';text-align:start;writing-mode:lr-tb;text-anchor:start">  E' : gridpoint number</tspan><tspan
          sodipodi:role="line"
          id="tspan4255"
          x="287.71829"
          y="454.63068"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10px;line-height:136.00000143%;font-family:'.Helvetica Neue DeskInterface';-inkscape-font-specification:'.Helvetica Neue DeskInterface, Normal';text-align:start;writing-mode:lr-tb;text-anchor:start">  E' : perpendicular </tspan><tspan
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10px;line-height:136.00000143%;font-family:'.Helvetica Neue DeskInterface';-inkscape-font-specification:'.Helvetica Neue DeskInterface, Normal';text-align:start;writing-mode:lr-tb;text-anchor:start">  F' : perpendicular </tspan><tspan
          sodipodi:role="line"
          x="287.71829"
          y="468.23065"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10px;line-height:136.00000143%;font-family:'.Helvetica Neue DeskInterface';-inkscape-font-specification:'.Helvetica Neue DeskInterface, Normal';text-align:start;writing-mode:lr-tb;text-anchor:start"
-         id="tspan4259"> pressures in each rank</tspan></text>
+         id="tspan4259"> pressures in each point</tspan></text>
     <text
        sodipodi:linespacing="136%"
        id="text4206"
@@ -294,7 +294,7 @@
          y="447.38571"
          x="430.33612"
          id="tspan4212"
-         sodipodi:role="line">  E'' : all perpendicular </tspan><tspan
+         sodipodi:role="line">  F'' : all perpendicular </tspan><tspan
          id="tspan4214"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10.625px;line-height:136.00000143%;font-family:'.Helvetica Neue DeskInterface';-inkscape-font-specification:'.Helvetica Neue DeskInterface, Normal';text-align:start;writing-mode:lr-tb;text-anchor:start"
          y="461.83569"
