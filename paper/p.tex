@@ -44,11 +44,9 @@
 \title{SuperGlue: Standardizing Glue Components for HPC Workflows}
 
 \author{
-\IEEEauthorblockN{Jay Lofstead}
-\IEEEauthorblockA{Sandia National Laboratories}
-
-\IEEEauthorblockN{Alexis Champsaur, Jai Dayal, Matthew Wolf, Greg Eisenhauer}
-\IEEEauthorblockA{School of Computer Science, Georgia Institute of Technology}
+\IEEEauthorblockN{Jay Lofstead\IEEEauthorrefmark{1}, Alexis Champsaur\IEEEauthorrefmark{2}, Jai Dayal\IEEEauthorrefmark{2}, Matthew Wolf\IEEEauthorrefmark{2}, Greg Eisenhauer\IEEEauthorrefmark{2}}
+\IEEEauthorblockA{\IEEEauthorrefmark{1}Sandia National Laboratories
+\IEEEauthorrefmark{2}School of Computer Science, Georgia Institute of Technology}
 }
 
 \maketitle
@@ -88,46 +86,47 @@ construction environment.
 \section{Introduction}
 \label{s:intro}
 
-As extreme computing architectures have continued to evolve, it is increasingly
-clear that the transition towards exascale-capable computing hardware will make
-I/O an increasingly significant problem.  Projections suggest no significant
-I/O bandwidth growth through the next 100x increase in compute capabilities.
-The traditional HPC approach of writing complete checkpoints or analysis
-dumps for later processing to gain scientific insights will become costly to
-infeasible.  As such, in situ and in transit analysis and visualization
-toolkits with the capability to reduce, process, and otherwise mitigate the raw
-increase in throughput are increasingly important.
+As extreme computing architectures continue to evolve, it is increasingly
+clear that I/O is an increasingly significant problem.  Projections suggest no
+significant parallel file system I/O bandwidth growth through the next 100x
+increase in compute capabilities.  The traditional HPC approach of writing
+complete checkpoints or analysis dumps for later processing to gain scientific
+insights is becoming infeasible.  Even with technologies like Burst Buffers,
+limited capacity reduces the usefulness. As such, in situ and in transit
+analysis and visualization toolkits with the capability to reduce, process, and
+otherwise mitigate the raw increase in data volume and throughput requirements
+are increasingly important.
 
 Existing workflow engines, such as Kepler~\cite{bertram:2006:kepler} and
 DAGMan~\cite{Malewicz:2006:dagman}, offer flexible ways to assemble components
 with rich functionality to manage the control flow. What they both lack is a
 way to easily deploy and manage the glue code required to connect the various
-components. One example illustrating the complexities comes from the OLCF.
-Kepler was used for several workflows for the fusion simulation community at
-the OLCF.  While the initial goal was that an internal, expert resource would
-create the workflow, including glue components, it should be able to be
-maintained easily by the application scientists. Unfortunately, the
-complexities of making and maintaining the glue components as the output
+components. One example illustrating the complexities comes from the Oak Ridge
+Leadership Computing Facility (OLCF).  Kepler was used for several workflows
+for the fusion simulation users.  While the initial goal was that an internal,
+expert resource would create the workflow, including glue components, it should
+be able to be maintained easily by the application scientists. Unfortunately,
+the complexities of making and maintaining the glue components as the output
 shifted and managing the deployment required the expert to be involved
 regularly as the configuration evolved and scaled.  Falling back to Python
-scripts managed by the application scientist proved easier and faster to make
-changes to. While this approach using the parallel file system to stage
-intermediate data was sufficient, it quickly becoming infeasible. The IO
+scripts managed by the application scientist proved easier and faster to
+maintain. While this approach using the parallel file system to stage
+intermediate data was sufficient, it is quickly becoming infeasible. The IO
 overhead for using the parallel file system is exceeding acceptable runtime
 percentages forcing a reduction in output and making scientific insights more
 difficult to discover.
 
 To address the performance mismatch, Integrated Application Workflows (IAWs)
 are being developed. The easiest way to think of these IAWs is the Unix/Linux
-shell pipe operator to connect commands from the shell. In the case of the
-pipe, the shell connects stdout of one program to stdin of the next with the
-assumption that each component in the chain can operate in this mode. For tasks
-at this scale, this approach works well. For the scientific workflows we are
-targeting, we have processes spread across potentially 10,000s of nodes
-connected to other components also running on multiple nodes. Unlike the
-command-line tools, none of these components generally have the ability to
-shift their input or output from how it is written to connect to a new online
-component. The challenge with these workflows is dealing with the lack of a
+shell pipe operator to connect commands. The shell connects stdout of one
+program to stdin of the next with the assumption that each component in the
+chain can operate in this mode. For tasks at this scale, this approach works
+well. For the scientific workflows we are targeting, we have processes spread
+across potentially 10,000s of nodes connected to other components also running
+on multiple nodes. Unlike the command-line tools, none of these components
+generally have the ability to shift their input or output from how it is
+written to connect to a new online component without potentially significant
+code changes. The challenge with these workflows is dealing with the lack of a
 persistent store to stage intermediate data, interfaces for communicating data
 state and availability, and data organization changes required before a
 component can process data.  Each of these has been investigated by different
@@ -147,42 +146,34 @@ functionality.
 Several efforts to work through some of the issues related to IAWs have been
 investigated~\cite{karimabadi:2013:catalyst,whitlock:2011:libsim,Glean,Flexpath,dreher:2016:bredala,zheng:2010:predata},
 and much on-going research in the space promises to expand on some of the
-techniques for management and placement that are needed.  Indeed, some
-scientific codes have been addressing similar constraints for years, by
+needed techniques for management and placement.  Some
+scientific codes have been addressing similar constraints for years by
 in-lining analytics functions and performing complicated MPI communicator
-subdivisions in order to allow simulation and analytics to co-exist.  One key
+subdivisions to allow simulation and analytics to co-exist.  One key
 observation, however, is that there is a lack of portability to the resulting
 implementations; they require a great deal of tuning and/or runtime placement
-control in order to make them function as would be desired.
+control to make them function as desired.
 
 This paper describes our work on SuperGlue, a set of generic, reusable
-components for composing scientific workflows. These are distributed, data
+components for composing scientific workflows. These are distributed data
 analysis and manipulation tools that can be chained together to form a variety
-of real-time workflows, so as to provide analytical results during the
-execution of the primary scientific code.
+of real-time workflows providing analytical results during the execution of the
+primary scientific code.  Unlike existing components used in IAWs, SuperGlue
+components do not have a fixed data type.  This one change enables using these
+components on completely different kinds of simulations that share nothing in
+their output format. Key to making this work is using a typed transport
+mechanism between different components. Many options exist for these transports
+and the particular mechanism selected is not critical. 
 
-Unlike existing components used in IAWs, SuperGlue components do not have a fixed data type.
-This one change
-enables using these components on completely different kinds of simulations
-that share nothing in their output format. Key to making this work is using a
-typed transport mechanism between different components. Many options exist for
-these transports and the particular mechanism selected is not critical. 
-
-In this work, we present a number of SuperGlue components that may be
-chained together to create workflows. We discuss how they work and why the particular
-approach was taken.  We also present guidelines for the design of additional
-components so as to allow them to fit in as wide a variety of workflows as
-possible. 
-
-While the main contribution of this work is the design of generic \textit{glue code},
-the \textit{analytical} components we use in the workflows we present here are designed
-using the same approach. For example, an index selection tool would be considered
-to be more of a glue component, while a histogram component would be considered more
-analytical, yet we design both types of components as single MPI executables with
-similar input and output interfaces, launched using similar configuration options.
-By blurring the line between generic glue components and
-generic analytical components, we present a flexible way to assemble scientific
-workflows without having to write any additional code. 
+While the main contribution of this work is the design of generic \textit{glue
+code}, the \textit{analytical} components we use in the workflows we present
+here are designed using the same approach. For example, an index selection tool
+is more of a glue component while a histogram component is more analytical.
+Yet, we design both types of components as single MPI executables with similar
+input and output interfaces launched using similar configuration options.  By
+blurring the line between generic glue components and generic analytical
+components, we present a flexible way to assemble scientific workflows without
+having to write any additional code. 
 
 The rest of the paper is organized as follows. First is a survey or related
 work in Section~\ref{s:related}. Second, in Section~\ref{s:workflow}, is a
@@ -282,11 +273,12 @@ which supports FlexPath as one of its underlying
 transport mechanisms, we use FlexPath and ADIOS in the workflows described
 in this work.
 
-Companion work on the same project is Bredala~\cite{dreher:2016:bredala}. This
-work presents an attempt to build a data model for in situ workflows. It has
-some similarity to FFS~\cite{eisenhauer:2011:ffs}. Unlike FFS, which is part
-of a much more complex infrastructure for typed messaging between distributed
-processes, Bredala is strictly focusing on the data model.
+Companion work to SuperGlue within this same project is
+Bredala~\cite{dreher:2016:bredala}. This work presents an attempt to build a
+data model for in situ workflows. It has some similarity to
+FFS~\cite{eisenhauer:2011:ffs}. Unlike FFS, which is part of a much more
+complex infrastructure for typed messaging between distributed processes,
+Bredala is strictly focusing on the data model.
 
 Overall, while all of these efforts are addressing different portions of the
 online workflows puzzle, none of them are addressing the idea of general,
@@ -297,95 +289,94 @@ reusable glue and analytical components for scientific workflows.
 
 We designed and implemented two realistic real-time workflows based on
 scientific codes having large user bases: the LAMMPS Newtonian particle
-simulator~\cite{plimpton:1997:lammps}, and GTCP, a particle-in-cell
-Tokamak simulator~\cite{lin:gtc}. While both of these
-workflows eventually turn the simulation data into histograms of certain
-quantities of interest, how they arrive at their final result varies
-significantly. Creating similar types of results, and this using some of the
-same components but in significantly different ways, has allowed us to gain
-important insight into how best to design glue components that can be used in a wide
-variety of workflows. We first describe the workflows from a general point of
-view, and we then describe the individual components in greater detail.
+simulator~\cite{plimpton:1997:lammps} and GTCP, a particle-in-cell Tokamak
+simulator~\cite{lin:gtc}. While both of these workflows eventually turn the
+simulation data into histograms of certain quantities of interest, how they
+arrive at their final result varies significantly. Creating similar types of
+results, and this using some of the same components but in significantly
+different ways, has allowed us to gain important insight into how best to
+design glue components that can be used in a wide variety of workflows. We
+first describe the workflows from a general point of view and then the
+individual components in greater detail.
 
 \subsection{LAMMPS Workflow}
 
-In the first workflow we implemented, LAMMPS simulates a disruption (a ``crack'')
-in a thin layer of particles and then outputs 5 numerical properties describing
-each particle in the simulation at regular timestep intervals. This
-corresponds to two-dimensional data (particles as one dimension, and properties
-of interest as another), and among these properties are the
-three-dimensional components of the particles' velocities. In this case, the
-workflow outputs one histogram per timestep, which shows the distribution of the
-velocities of all particles in the simulation at that point in time.
-From the LAMMPS output, the particular
-quantities of interest must be extracted and then a histogram generated.
+We configure LAMMPS to simulate a disruption (a ``crack'') in a thin layer of
+particles and outputs 5 numerical properties describing each particle in the
+simulation at regular timestep intervals. This corresponds to two-dimensional
+data (particles as one dimension and properties of interest as another) and
+among these properties are the three-dimensional components of the particles'
+velocities. In this case, the workflow outputs one histogram per timestep
+showing the velocity distribution for all simulation particles at that point in
+time.  From the LAMMPS output, the particular quantities of interest must be
+extracted and then a histogram generated.
 
 \subsection{GTCP Workflow}
 
 \begin{figure}
+\centering
 \vspace{-0.10in}
-  \includegraphics[width=\columnwidth]{fig/Simple_Torus_mod}
-\vspace{-0.20in}
+  \includegraphics[width=0.7\columnwidth]{fig/Simple_Torus_mod}
+\vspace{-0.15in}
   \caption{Representation of GTCP Toroid, modification of \cite{WikimediaCommons:torus}}
   \label{fig:toroid}
 \vspace{-0.20in}
 \end{figure}
 
-The second workflow is driven by GTCP, a code that simulates a toroidally
-confined plasma. The simulation splits the solid into toroidal slices, each
-made up of a number of grid points, and for each of these grid points it outputs 7
-properties of the plasma such as pressure and energy flux. This division of the toroid
-is illustrated in Figure~\ref{fig:toroid}. The output of the
-simulation is therefore a three-dimensional array in which the dimensions
-span: (a) toroidal ranks (toroidal slice number), (b) grid point numbers,
-and (c) property indices. In this case, the per-timestep histogram
-generated by the workflow will show the parallel pressure distributions across the entire
-simulation. From GTCP's output, the particular quantities of interest must be
-extracted and then a histogram generated.
+GTCP, a code that simulates a toroidally confined plasma, splits the solid into
+toroidal slices, each made up of a number of grid points. For each of these
+grid points, it outputs 7 properties of the plasma such as pressure and energy
+flux. This division of the toroid is illustrated in Figure~\ref{fig:toroid}.
+The output of the simulation is therefore a three-dimensional array in which
+the dimensions span: (a) toroidal ranks (toroidal slice number), (b) grid point
+numbers, and (c) property indices. In this case, the per-timestep histogram
+generated by the workflow will show the parallel pressure distributions across
+the entire simulation. From GTCP's output, the particular quantities of
+interest must be extracted and then a histogram generated.
 
 \subsection{Discussion}
 
 In both cases, some particular quantity of interest is extracted from the
-output data set, a calculation is performed, and then the histogram is
+output data set, a calculation is performed, and a histogram is
 generated. This is illustrated in Figure~\ref{fig:generic-workflow}. In many
-cases, the ``Generate histogram'' component may be some standard operation that
-can be reused. The challenge is the data selection and mathematical
-manipulation to obtain the quantities of interest in a way that (a) presents
-an intuitive interface to the scientist constructing the workflow and (b) is useful in different
-types of workflows, in which data have different sizes and dimensions.
-This difficulty arises because (a) the data at each stage of the workflow
-is distributed over the collection of processes
-involved in each component, even if it forms a coherent whole, (b)
-the extraction and re-arrangement of multi-dimensional, distributed data,
-in a way that is configurable by the user at runtime, is challenging.
-In both workflows, the calculation is essentially the same operation except
-that the source data is different. The biggest difference is actually selecting out the relevant data
+cases, the histogram component may be some standard, reusable operator.
+The challenge is the data selection and mathematical
+manipulation to obtain the quantities of interest in a way that (a) presents an
+intuitive interface to the scientist constructing the workflow and (b) is
+useful in different types of workflows in which data have different sizes and
+dimensions.  This difficulty arises because (a) the data at each stage of the
+workflow is distributed over the collection of processes involved in each
+component even if it forms a coherent whole and (b) the extraction and
+re-arrangement of multi-dimensional, distributed data, in a way that is
+configurable by the user at runtime is challenging.  In both workflows, the
+calculation is essentially the same operation except that the source data is
+different. The biggest difference is actually selecting out the relevant data
 subset for the workflow. In some cases, such as between the magnitude
-calculation and the histogram generation, the glue code may be reusable--but
-for this pairing only.
+calculation and the histogram generation, traditional glue code may be
+reusable--but only for the pairing of these particular components.
 
 \begin{figure}[htbp]
 \vspace{-0.10in}
 \centering
-\includegraphics[width=\columnwidth]{fig/gwflow}
-\vspace{-0.20in}
+\includegraphics[width=0.7\columnwidth]{fig/gwflow}
+\vspace{-0.15in}
 \caption{Generic Workflow Illustration}
 \label{fig:generic-workflow}
 \vspace{-0.25in}
 \end{figure}
 
-In typical scientific workflows today, custom glue code is written for
-selecting relevant data and writing it so the magnitude calculator can work.
-Then another piece of custom glue code will adjust the data from the magnitude
-calculation process to something the histogram generator can process.  Finally,
-potentially additional custom glue code will fix the histogram calculation into
-something that can be rendered or saved as desired.  In this work, we
-demonstrate general, reusable components capable of handling the operation
-represented by all three intermediate operations.
+In typical scientific simulation workflows today, custom glue code is written
+for selecting relevant data and writing it for the magnitude calculator.
+Another piece of custom glue code will adjust the data from the magnitude
+calculation process for the histogram generator.  Potentially additional custom
+glue code will fix the histogram output into something that can be rendered or
+saved as desired.  In this work, we demonstrate general, reusable components
+capable of handling the operation represented by all three intermediate
+operations.
 
 As we describe below, the granularity of these glue components is a bit
-different than the coarse grained description made above. This is done to aid
-re-usability, but achieve the same workflow with no custom glue code required.
+different than the coarse grained description above. This is done to aid
+re-usability but achieve the same workflow with no custom glue code required.
 At most, the user will specify a few parameters and organize the components
 into a proper pipeline. Both of these operations are easy enough that a
 non-expert application scientist can create workflows through GUIs or other
