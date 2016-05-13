@@ -434,7 +434,7 @@ the {\em Dim-Reduce} component used in the GTCP workflow. \XX{ref here}
 
 These insights guide the design for the reusable glue and analysis
 components presented in this
-paper. In particular, designing a smaller number of
+paper. From a general perspective, designing a smaller number of
 components to assemble workflows with finer step decomposition
 allows for more general processing and more accurate performance
 expectations than desiging more numerous components each having more
@@ -444,44 +444,38 @@ complex functionality.
 
 Many scientific codes serialize their output, effectively packing
 multi-dimensional data into a single dimension. However, this technique offers
-little information on the data to downstream components in a workflow. In the
-case of our LAMMPS workflow, for example, if we kept the simulation output
-one-dimensional, downstream components would have to be specifically designed
-to read data in this format, and such components could not be easily made to
-work with serialized data having other formats. In our example, a separate
-component would have to be designed to work with the output of GTCP.
+little information on the data to downstream components in a workflow.
 
-In order to use the same {\em Select} component downstream from both LAMMPS and
-GTCP, we had to (a) modify the output of LAMMPS to let it output data in a
-format where the dimensions are clearly defined, and (b) we had to design {\em
-Select} in such a way that it understand input data having any number of
-dimensions.  Indeed, even with the modification to LAMMPS, the simulation’s
-output is two-dimensional, whereas the output of GTCP is three-dimensional.
+For example, both of the simulations used in the workflows presented in this work
+pack their output into one-dimensional arrays, even
+though the output LAMMPS is logically two-dimensional, and that
+of GTCP three-dimensional.
+In order to use the same glue code to extract desired data from both outputs,
+this code must be able to operate two-dimensional data
+as well as three-dimensional data. In fact, if the glue code is able to operate
+on any number of dimensions, all that must be provided to it
+at runtime is the
+dimensions and indices to extract. This is precisely the role of our
+{\em Select} component.
 
 In general, it is advantageous to (1) design components that can operate on
 multi-dimensional data as much as possible, and (2) format the ouput data of
 scientific applications as having well-defined dimensions. Emphasizing the
 support for multi-dimensional data in the design of workflow components allows
 for maximum compatibility between the interfaces of components by providing a
-consistent way to refer to the data. With {\em Select} supporting any number of
-dimensions, the user can simply indicate at runtime which dimension to select
-from. Similarly, in {\em Dim-Reduce}, any dimension can ``absorb'' any other
-dimension, as long as these dimensions are correctly specified by the user.
-Such functionality increases the generic quality of these components and
-simplifies their use. In our implementation, {\em Magnitude} expects
-two-dimensional data, but allowing this component to support any number of
-dimensions would be both feasible and advantageous.
+consistent way to refer to the data.
 
 Still, while multi-dimensional data support provides a consistent way to refer
 to the data, not all components should be designed so as to work with
 \textbf{\em any number} of dimensions. For example, we found it advantageous to
-design {\em Histogram} to work with only one dimension. Creating a histogram is
-a calculation that makes sense for one-dimensional data, and supporting a
-higher number of dimensions would add unnecessary complexity this component. If
-the data has more dimensions than are expected, or if only certain indices in
-one dimension hold values of interest, we can use the {\em Dim-Reduce} and {\em
-Select} components to properly format the data for {\em Histogram}, as we do in
-the GTCP workflow.
+design our {\em Histogram} component to work with only one dimension.
+Indeed, creating a histogram from one-dimensional data is intuitive, and
+supporting a higher number of dimensions would add unnecessary complexity
+to this component. If the data has more dimensions than are expected,
+and only particular indices in a particular dimension hold the data of interest,
+we can simply use filter and selector glue to extract and format the data for
+{\em Histogram} to operate on.
+
 
 \subsubsection{Semantics}
 
