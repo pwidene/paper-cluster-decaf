@@ -671,7 +671,9 @@ to that of labeling dimensions and indices, as previously discussed.
 \vspace{-0.30in}
 \end{figure*}
 
-
+We describe here the SuperGlue components in greater detail. They
+operate on a per-timestep basis, where these timesteps correspond to those
+of the original scientific code driving the workflow.
 %After evaluating the example workflows selected the following components are
 %created to demonstrate the potential for reusable components.
 
@@ -702,21 +704,24 @@ input array, ``absorbing'' it into another dimension without modifying the
 total size of the data. The other dimensions are left unchanged. This component
 can work with an input array having any number of dimensions. The output is an
 array with one dimension removed and with another dimension that has been
-re-defined. We discuss this operator and the need for it in more detail in
-Section~\ref{s:abc}. When using this component, the user must specify which
+re-defined. When using this component, the user must specify which
 dimension to eliminate and which to grow.
 
 \subsection{Magnitude}
 
-In our current implementation, magnitude expects a two-dimensional array as
+In our current implementation, Magnitude expects a two-dimensional array as
 input, where one dimension spans the data points at each time step (particles
 in the case of LAMMPS and grid points in the case of GTC), and the other
-dimension spans any number of components of the same quantity, for example the
+dimension spans any number of components of the same vector, for example the
 three-dimensional components of velocity in the LAMMPS workflow. Magnitude
-calculates the magnitudes of these quantities from their components and outputs
-a one-dimensional array of new values. Which dimension is which in the input
+calculates the magnitudes of the vectors from the values of their
+individual components and outputs
+a one-dimensional array of the new values. Which dimension is which in the input
 array is specified by the user at runtime. A small number of changes and a few
-start-up parameters could generalize this code to work for many more cases.
+start-up parameters could generalize this code to perform any number of
+common operations that calculate a quantity from many,
+applying a known formula over a two-dimensional dataset, thus
+allowing this component to fit into a variety of scientific workflows.
 
 \subsection{Histogram}
 
@@ -730,34 +735,33 @@ must be passed to the component when it is launched.
 In our current implementation, one of the processes of Histogram writes the
 output to a file on disk. We chose this approach because this component is
 generally used as an endpoint in the workflow and because the output of this
-component is generally small and can be easily written by a single process.
-However, as we discuss later, letting this component output its data in the
-same way as the other components, as an ADIOS stream, and instead writing to
+component is generally very small compared to its input and can be easily
+written by a single process.
+However, as we see now, letting this component output its data in the
+same way as the other components, that is as an ADIOS stream, and instead writing to
 disk when needed using a component specifically designed for this purpose would
 provide greater flexibility.
 
 \subsection{Dumper}
 
-While this component was not created in time for this paper, the value
-proposition is clear. As mentioned in the Histogram description above, this is
-the component determined to be of value once the experiments were completed.
-The key goal for this component is to offer a way to write a stream into an
-output file using some particular format. Having a way to write HDF5, ADIOS-BP,
-or a simple text file would all be simple variations.
+While this component was not created in time for this paper, the value of
+a component specifically designed to be the endpoint of a workflow
+is clear. The key goal for this component is to offer a way to write an ADIOS stream into an
+output file using some particular format. Whether to write the workflow output as
+HDF5, ADIOS-BP, or a simple text file could simply be selected by the user as an option,
+requiring no modifications to existing components, and no re-compilation.
 
-Related to the realization of the value of separating out this functionality is
-a desire to offer a graph plotting capability. Something like GNU
-Plot~\cite{racine:2006:gnuplot} take a simple text input description and
-generates a graph.  Incorporating such functionality into a component would
-also be valuable.  Further, rather than having the graphing component write to
+Another component that would be of value would be one with a graph plotting capability.
+For example, GNU
+Plot~\cite{racine:2006:gnuplot} takes a simple text input description and
+generates a graph.  Rather than having the graphing component write to
 disk, it should also push out an ADIOS stream to some other consumer. An
 additional Dumper that writes an image file in a particular format, such as
 JPEG, PNG, or SVG, would be a valuable addition.
 
+
 \section{Integrating Reusable Components}
 \label{s:integrating-reusable-components}
-
-
 
 In order to use some of the same components in both workflows, we had to
 slightly modify the output stages of the scientific codes driving them. Because
@@ -768,29 +772,25 @@ output into a single array. We modified this so as to let it write a
 two-dimensional array, which better describes the output data and allows
 downstream components to better understand it. Both simulations had to be
 modified to enable the use of ADIOS for output. While the ADIOS integration was
-not difficult, it was the hardest, most significant changes made to the
-simulations. If the simulations already had ADIOS integrated, the changes would
-be very minor ``de-optimizing'' output. In many cases, output loses most, if
-not all, of its structure for either performance or ease of integrating with
-analysis or visualization components. Since SuperGlue components can maintain
-that additional structure and metadata to the benefit of downstream consumers,
-removing the structure elimination code is more removing customizations for
-particular data consumers rather than introducing code particular to these
-components. It is arguable that it is also customization, but the modification
-impact on the data is far smaller than other integrations.
+not difficult, because the ADIOS interface is simple, it was the most
+significant change made to the
+simulations.
+
+In general, in order to work with SuperGlue components, 
+simulations have to specify through ADIOS the logical dimensions of their data
+and optionally create corresponding headers to label them and their indices.
 
 \subsection{Demonstrating in the Workflows}
 
-We reconstructed the LAMMPS to velocity histogram generation workflow using the
-SuperGlue components and generated a workflow illustrated in
-Figure~\ref{fig:lammps-workflow}. We annotate the figure with details about how
+We built the LAMMPS workflow, illustrated in
+Figure~\ref{fig:lammps-workflow}, using only LAMMPS and SuperGlue components.
+We annotate the figure with details about how
 the data is manipulated at each step.
 
-
-Data arrives from LAMMPS at the first component we designed, Select, which
-extracts these velocity components from the data output by the simulation. From
-Select, data is sent to Magnitude, another of our components, which computes
-the magnitudes of the velocities. In our current implementation, Magnitude
+Data arrives from LAMMPS at the first SuperGlue component, Select, which
+extracts the velocity components from the data output by the simulation. From
+Select, data is sent to Magnitude, which computes
+the magnitudes of the velocities. Magnitude
 outputs one-dimensional data, an array of the magnitudes it calculates, to the
 final component, Histogram, which expects one-dimensional data as input. The
 end result of this workflow is a series of histograms of the total velocities
@@ -798,13 +798,15 @@ of the particles. There is one histogram created at each timestep at which the
 simulation would normally dump its data to disk.
 
 
-The GTC workflow after reconstruction is illustrated in
-Figure~\ref{fig:gtcp-workflow}. As with the LAMMPS workflow, this is annotated
-with details about data for each step. Also note that while there are shared
-components, the workflow is a little different.
+The GTCP workflow is illustrated in
+Figure~\ref{fig:gtcp-workflow}, and it too was assembled only from
+the simulation and SuperGlue components. Note that while there are shared
+components, the workflows are little different, mainly due to the different
+data formats output by the simulations.
 
-In our workflow, data first arrives at an instance of Select, which extracts
-one quantity of interest out of the 7. This quantity is the ``perpendicular
+From GTCP, data first arrives at an instance of Select, which extracts
+one quantity of interest out of the 7 properties that describe each gridpoint.
+This quantity was arbitrarily chosen as the ``perpendicular
 pressure,'' or pressure of the plasma perpendicular to the flow in the grid
 point of interest. Even if it contains only perpendicular pressures, the output
 of Select is still three-dimensional since this component maintains the
