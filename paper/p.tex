@@ -1002,10 +1002,19 @@ are presented in Table~\ref{tab:eval-weak-gtcp-1}. The performance results are
 presented in Table~\ref{tab:eval-weak-gtcp-2}. To read the tables, match the
 rows. For example, the first row in Table~\ref{tab:eval-weak-gtcp-1} corresponds
 to the preformance results in row 1 in Table~\ref{tab:eval-weak-gtcp-2}.
+We used SuperGlue process sizes for which the per-process
+workloads resided near the turning points in the
+strong scaling results presented above.
 
 Overall, the components and the overall workflow
-exhibit very good weak scaling behavior.
-
+exhibit very promising weak scaling behavior.
+While there is a slightly different per-process
+data size in each row of the table, both
+per-simulation process and per-SuperGlue process,
+there is little variation in the the timestep completion
+times of the SuperGlue components and in the end-to-end
+completion times of the entire workflow for different
+workload sizes.
 
 {\em Select} gets the full brunt of the total data size. Dividing the process
 count into the total data size shows that on average, it is roughly the same
