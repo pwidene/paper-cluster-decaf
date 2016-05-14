@@ -411,24 +411,22 @@ implementation choices and how they affect the project.
 By evaluating the presented workflows and considering other workflows with
 which the authors are familiar, four particular insights are revealed.
 
-\begin{enumerate}
-
-\item To allow for the greatest variety of workflows, data manipulation
+1) To allow for the greatest variety of workflows, data manipulation
   primitives and data analysis components should be packaged in similar ways —-
   that is, regardless of their individual complexity, the pieces that make up
   these workflows should export compatible interfaces as much as possible.
 
-\item The ability to handle multi-dimensional data, along with the consistent
+2) The ability to handle multi-dimensional data, along with the consistent
   labeling of dimensions and quantities as meta-data, allows for components that
   are highly adaptable and simple to use.
 
-\item While different types of components understand varying levels of
+3) While different types of components understand varying levels of
   semantics, maintaining a high level of semantics (i.e., labeling quantities and
   dimensions as much as possible) early on and when passing through components
   that do not necessarily require all of these labels allows for the most
   functionality downstream.
 
-\item Because programming languages understand multi-dimensional data as being
+4) Because programming languages understand multi-dimensional data as being
   in a specific order in memory, there is a need for glue components that re-arrange
   data and re-label its dimensions without necessarily changing its size. Indeed,
   when data is stored in a database on disk, it is simple to gain a desired
@@ -437,8 +435,6 @@ which the authors are familiar, four particular insights are revealed.
   they expect and understand. This requires a specific ordering of
   data in memory. We expand on this topic
   in Section~\ref{subsec:dimreduce}.
-
-\end{enumerate}
 
 These insights guide the design for the reusable glue and analysis
 components presented in this
@@ -662,7 +658,7 @@ to that of labeling dimensions and indices, as previously discussed.
 \begin{figure*}
   \vspace{-0.10in}
   \includegraphics[width=\linewidth]{fig/wflow3}
-  \vspace{-0.35in}
+  \vspace{-0.45in}
   \caption{LAMMPS Workflow}
   \label{fig:lammps-workflow}
   \vspace{-0.10in}
@@ -671,7 +667,7 @@ to that of labeling dimensions and indices, as previously discussed.
 \begin{figure*}
   %\vspace{-0.10in}
   \includegraphics[width=\linewidth]{fig/wflow4}
-  \vspace{-0.25in}
+  \vspace{-0.45in}
   \caption{GTCP Workflow}
   \label{fig:gtcp-workflow}
   \vspace{-0.30in}
@@ -840,11 +836,11 @@ node.
 
 \begin{figure}
   \centering
-  \vspace{-0.12in}
+  \vspace{-0.27in}
   \input{data/lmp-sel-strong}
-  \vspace{-0.12in}
+  \vspace{-0.25in}
   \input{data/lmp-mag-strong}
-  \vspace{-0.12in}
+  \vspace{-0.17in}
   \input{data/lmp-hist-strong}
   %  }
   %
@@ -853,21 +849,21 @@ node.
     Completion time of a full timestep and of the data transfer
     portion of the same timestep are plotted against process size.}
   \label{fig:lammps-strong}
-  % \vspace{-0.10in}
+  \vspace{-0.20in}
 \end{figure}
 
 \begin{figure}
   \centering
-  \vspace{-0.12in}
+  \vspace{-0.17in}
   \input{data/gtcp-sel1-strong}
-  \vspace{-0.12in}
+  \vspace{-0.17in}
   \input{data/gtcp-dimr-strong}
   \vspace{-0.06in}
   \caption{SuperGlue strong scaling in the GTCP workflow. Whole timestep
     completion time for Select and both instances of Dim-Reduce used in the
     workflow are plotted against process size}
   \label{fig:gtcp-strong}
-  \vspace{-0.19in}
+  \vspace{-0.25in}
 \end{figure}
 
   
@@ -915,7 +911,7 @@ Dim-Reduce 2 & 128 & 32 & 16 & $x$ & 16\\
 %Histogram & 128 & 34 & 24 & 24 & $x$\\
 %\hline
 \end{tabular}
-%\vspace{-0.15in}
+\vspace{-0.15in}
 \end{table*}
 
 %GTCP setups:
