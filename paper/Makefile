@@ -1,5 +1,7 @@
+PLOT := $(patsubst %.gp,%.tex,$(wildcard data/*.gp))
 PAPER=p
-all: ${PAPER}.tex
+
+all: clean $(PLOT) ${PAPER}.tex
 	rm -f ${PAPER}.pdf
 	rm -f ${PAPER}.dvi
 	rm -f ${PAPER}.aux
@@ -13,6 +15,13 @@ all: ${PAPER}.tex
 	pdflatex ${PAPER}.tex
 	pdflatex ${PAPER}.tex
 
+plot: $(PLOT)
+
+data/%.tex: data/%.gp
+	OUT=$@ gnuplot $<
+
+.PHONY: clean
+
 clean:
 	rm -f ${PAPER}.pdf
 	rm -f ${PAPER}.dvi
@@ -20,3 +29,6 @@ clean:
 	rm -f ${PAPER}.bbl
 	rm -f ${PAPER}.log
 	rm -f ${PAPER}.blg
+	rm -f data/*.tex
+	rm -f data/*.eps
+	rm -f data/*.pdf

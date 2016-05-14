@@ -3,6 +3,8 @@
 \pdfpageheight=11in
 %\usepackage{subfig}
 \usepackage{subfigure}
+%\usepackage{extsizes}
+%\usepackage{subcaption}
 \usepackage[pdftex]{}
 \usepackage{graphicx}
 %\usepackage{todonotes}
@@ -10,22 +12,22 @@
 \usepackage{hyperref}
 \usepackage{url}
 \usepackage{todonotes}
+\usepackage{amssymb}
 \lstset {% general command to set parameter(s)
-         language=C,
-     basicstyle=\footnotesize,               % print whole listing small
-%     keywordstyle=\color{black}\bfseries, % underlined bold black keywords
-%     identifierstyle =\color{black},  % nothing happens
-%     commentstyle=\color{black}\emph, % white comments
-     %stringstyle=\ttfamily,          % typewriter type for strings
-%     stringstyle=\color{black},       % typewriter type for strings
-         tabsize=4,
-         showtabs=false,
-     showstringspaces=false}
+  language=C,
+  basicstyle=\footnotesize,               % print whole listing small
+  %     keywordstyle=\color{black}\bfseries, % underlined bold black keywords
+  %     identifierstyle =\color{black},  % nothing happens
+  %     commentstyle=\color{black}\emph, % white comments
+  %stringstyle=\ttfamily,          % typewriter type for strings
+  %     stringstyle=\color{black},       % typewriter type for strings
+  tabsize=4,
+  showtabs=false,
+  showstringspaces=false}
 %can't figure this one out for particles bandwidth
 %\usepackage[caption,label]{subfig}
 
 \newcommand{\XX}[1]{\textcolor{red}{XX: #1}}
-
 \newcommand{\DDT}{D\textsuperscript{2}T~}
 \newcommand{\DDTns}{D\textsuperscript{2}T}
 \newcommand{\subsubsubsection}{\noindent\textbf}
@@ -46,37 +48,37 @@
 \title{SuperGlue: Standardizing Glue Components for HPC Workflows}
 
 \author{
-\IEEEauthorblockN{Jay Lofstead\IEEEauthorrefmark{1}, Alexis Champsaur\IEEEauthorrefmark{2}, Jai Dayal\IEEEauthorrefmark{2}, Matthew Wolf\IEEEauthorrefmark{2}, Greg Eisenhauer\IEEEauthorrefmark{2}}
-\IEEEauthorblockA{\IEEEauthorrefmark{1}Sandia National Laboratories
-\IEEEauthorrefmark{2}School of Computer Science, Georgia Institute of Technology}
+  \IEEEauthorblockN{Jay Lofstead\IEEEauthorrefmark{1}, Alexis Champsaur\IEEEauthorrefmark{2}, Jai Dayal\IEEEauthorrefmark{2}, Matthew Wolf\IEEEauthorrefmark{2}, Greg Eisenhauer\IEEEauthorrefmark{2}}
+  \IEEEauthorblockA{\IEEEauthorrefmark{1}Sandia National Laboratories
+    \IEEEauthorrefmark{2}School of Computer Science, Georgia Institute of Technology}
 }
 
 \maketitle
 
 \begin{abstract}
 
-The challenge for constructing HPC workflows is not the simulation, the
-analysis components, or the visualization tools. Usable, off the shelf tools to
-suit most needs are available. Instead, the labor and complexity is connecting
-these components together. Typically, an application scientist will write
-``glue'' scripts that convert the output of one workflow phase to the input of
-the next.  In nearly all cases, the output is written to disk after each
-phase, read and written for the ``glue'' conversion, and then read for the next
-phase. Even in online workflows, in which different components execute concurrently,
-custom glue code usually has to be written.
-This heavy lifting is one of the major stumbling blocks preventing
-standardized workflow frameworks from broad, general adoption. Attempts to
-streamline this process have not gained traction because of the necessity to
-still build these glue components. In essence, the workflow engine offered only
-a few, relatively small advantages over hand-coding the entire workflow.
+  The challenge for constructing HPC workflows is not the simulation, the
+  analysis components, or the visualization tools. Usable, off the shelf tools to
+  suit most needs are available. Instead, the labor and complexity is connecting
+  these components together. Typically, an application scientist will write
+  ``glue'' scripts that convert the output of one workflow phase to the input of
+  the next.  In nearly all cases, the output is written to disk after each
+  phase, read and written for the ``glue'' conversion, and then read for the next
+  phase. Even in online workflows, in which different components execute concurrently,
+  custom glue code usually has to be written.
+  This heavy lifting is one of the major stumbling blocks preventing
+  standardized workflow frameworks from broad, general adoption. Attempts to
+  streamline this process have not gained traction because of the necessity to
+  still build these glue components. In essence, the workflow engine offered only
+  a few, relatively small advantages over hand-coding the entire workflow.
 
-SuperGlue rethinks the custom glue components in the context of online
-workflows to offer reusable glue components that can bridge the type mismatches
-between the output of one workflow component and the input of the next. By
-performing a series of generic filter and selector operations in a typed environment, the
-same glue is usable, without modification, to connect components of different
-workflows with very different data types to achieve a plug-and-play workflow
-construction environment with know performance characteristics.
+  SuperGlue rethinks the custom glue components in the context of online
+  workflows to offer reusable glue components that can bridge the type mismatches
+  between the output of one workflow component and the input of the next. By
+  performing a series of generic filter and selector operations in a typed environment, the
+  same glue is usable, without modification, to connect components of different
+  workflows with very different data types to achieve a plug-and-play workflow
+  construction environment with know performance characteristics.
 
 \end{abstract}
 
@@ -168,7 +170,7 @@ mechanism between different components. Many options exist for these transports
 and the particular mechanism selected is not critical. 
 
 While the main contribution of this work is the design of generic \textit{glue
-code}, the \textit{analytical} components we use in the workflows we present
+  code}, the \textit{analytical} components we use in the workflows we present
 here are designed using the same approach. For example, an index selection tool
 is more of a glue component while a histogram component is more analytical.
 Yet, we design both types of components as single MPI executables with similar
@@ -317,13 +319,13 @@ extracted and then a histogram generated.
 \subsection{GTCP Workflow}
 
 \begin{figure}
-\centering
-\vspace{-0.10in}
+  \centering
+  \vspace{-0.10in}
   \includegraphics[width=0.7\columnwidth]{fig/Simple_Torus_mod}
-\vspace{-0.15in}
+  \vspace{-0.09in}
   \caption{Representation of GTCP Toroid, modification of \cite{WikimediaCommons:torus}}
   \label{fig:toroid}
-\vspace{-0.20in}
+  \vspace{-0.20in}
 \end{figure}
 
 GTCP, a code that simulates a toroidally confined plasma, splits the solid into
@@ -360,13 +362,13 @@ final Histogram component can operate on it is done very differently in each
 workflow.
 
 \begin{figure}[htbp]
-\vspace{-0.10in}
-\centering
-\includegraphics[width=0.7\columnwidth]{fig/gwflow}
-\vspace{-0.15in}
-\caption{Generic Workflow Illustration}
-\label{fig:generic-workflow}
-\vspace{-0.25in}
+  \vspace{-0.1in}
+  \centering
+  \includegraphics[width=0.7\columnwidth]{fig/gwflow}
+  \vspace{-0.12in}
+  \caption{Generic Workflow Illustration}
+  \label{fig:generic-workflow}
+  \vspace{-0.20in}
 \end{figure}
 
 In typical scientific workflows today, custom glue code is written for
@@ -408,29 +410,29 @@ which the authors are familiar, four particular insights are revealed.
 \begin{enumerate}
 
 \item To allow for the greatest variety of workflows, data manipulation
-primitives and data analysis components should be packaged in similar ways —-
-that is, regardless of their individual complexity, the pieces that make up
-these workflows should export compatible interfaces as much as possible.
+  primitives and data analysis components should be packaged in similar ways —-
+  that is, regardless of their individual complexity, the pieces that make up
+  these workflows should export compatible interfaces as much as possible.
 
 \item The ability to handle multi-dimensional data, along with the consistent
-labeling of dimensions and quantities as meta-data, allows for components that
-are highly adaptable and simple to use.
+  labeling of dimensions and quantities as meta-data, allows for components that
+  are highly adaptable and simple to use.
 
 \item While different types of components understand varying levels of
-semantics, maintaining a high level of semantics (i.e., labeling quantities and
-dimensions as much as possible) early on and when passing through components
-that do not necessarily require all of these labels allows for the most
-functionality downstream.
+  semantics, maintaining a high level of semantics (i.e., labeling quantities and
+  dimensions as much as possible) early on and when passing through components
+  that do not necessarily require all of these labels allows for the most
+  functionality downstream.
 
 \item Because programming languages understand multi-dimensional data as being
-in a specific order in memory, there is a need for glue components that re-arrange
-data and re-label its dimensions without necessarily changing its size. Indeed,
-when data is stored in a database on disk, it is simple to gain a desired
-view of the data, for example by using SQL. However, in the middle of a
-real-time workflow, data must be presented to the components in a format that
-they expect and understand. This requires a specific ordering of
-data in memory. We expand on this topic
-in Section~\ref{subsec:dimreduce}.
+  in a specific order in memory, there is a need for glue components that re-arrange
+  data and re-label its dimensions without necessarily changing its size. Indeed,
+  when data is stored in a database on disk, it is simple to gain a desired
+  view of the data, for example by using SQL. However, in the middle of a
+  real-time workflow, data must be presented to the components in a format that
+  they expect and understand. This requires a specific ordering of
+  data in memory. We expand on this topic
+  in Section~\ref{subsec:dimreduce}.
 
 \end{enumerate}
 
@@ -562,7 +564,7 @@ The desired result of this operation is that:
   rather than only those in a particular toroidal slice
   
 \item The concept of {\em property} keeps its original
-meaning, and the size of its dimension is unchanged
+  meaning, and the size of its dimension is unchanged
 
 \end{itemize}
 
@@ -654,21 +656,21 @@ to that of labeling dimensions and indices, as previously discussed.
 \label{s:reusable-components}
 
 \begin{figure*}
-\vspace{-0.10in}
+  \vspace{-0.10in}
   \includegraphics[width=\linewidth]{fig/wflow3}
-\vspace{-0.35in}
+  \vspace{-0.35in}
   \caption{LAMMPS Workflow}
   \label{fig:lammps-workflow}
-\vspace{-0.10in}
+  \vspace{-0.10in}
 \end{figure*}
 
 \begin{figure*}
-%\vspace{-0.10in}
+  %\vspace{-0.10in}
   \includegraphics[width=\linewidth]{fig/wflow4}
-\vspace{-0.25in}
+  \vspace{-0.25in}
   \caption{GTCP Workflow}
   \label{fig:gtcp-workflow}
-\vspace{-0.30in}
+  \vspace{-0.30in}
 \end{figure*}
 
 We describe here the SuperGlue components in greater detail. They
@@ -834,6 +836,41 @@ node.
 
 \subsection{Strong Scaling Experiments}
 
+
+\begin{figure}
+  \centering
+  \vspace{-0.12in}
+  \input{data/lmp-sel-strong}
+  \vspace{-0.12in}
+  \input{data/lmp-mag-strong}
+  \vspace{-0.12in}
+  \input{data/lmp-hist-strong}
+  %  }
+  %
+  \vspace{-0.05in}
+  \caption{SuperGlue strong scaling in the LAMMPS workflow.
+    Completion time of a full timestep and of the data transfer
+    portion of the same timestep are plotted against process size.}
+  \label{fig:lammps-strong}
+  % \vspace{-0.10in}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \vspace{-0.12in}
+  \input{data/gtcp-sel1-strong}
+  \vspace{-0.12in}
+  \input{data/gtcp-dimr-strong}
+  \vspace{-0.06in}
+  \caption{SuperGlue strong scaling in the GTCP workflow. Whole timestep
+    completion time for Select and both instances of Dim-Reduce used in the
+    workflow are plotted against process size}
+  \label{fig:gtcp-strong}
+  \vspace{-0.19in}
+\end{figure}
+
+  
+
 \begin{table*}[tbp]
 %\vspace{-0.15in}
 \centering
@@ -887,8 +924,8 @@ Histogram & 128 & 34 & 24 & 24 & $x$\\
 %Histogram is 128:34:24:24:x
 
 To obtain the results illustrated in
-Figure~\ref{fig:lammps-strong},~\ref{fig:gtcp-strong-select},
-and~\ref{fig:gtcp-strong}, we varied the process size of a single component at
+Figures~\ref{fig:lammps-strong} and~\ref{fig:gtcp-strong},
+we varied the process size of a single component at
 a time while fixing that of the other components involved in the workflow.  We
 determined reasonable process sizes for the fixed-size components using
 preliminary testing. For all of these measurements, we set up the scientific
@@ -925,61 +962,6 @@ For the LAMMPS workflow, we present two different performance measurements to
 better reveal the overheads involved. In these cases, we show both the amount
 of time spent performing the data reads as well as the total time, including
 the reading, for the component to operate.
-
-\begin{figure*}[t!]
-\vspace{-0.10in}
-\center
-\subfigure[Select]{
-\includegraphics[width=0.3\textwidth]{fig/Titan-LAMMPS-Strong-Select}
-\label{fig:lammps-strong-select}
-}
-\subfigure[Magnitude]{
-\includegraphics[width=0.3\textwidth]{fig/Titan-LAMMPS-Strong-Magnitude}
-\label{fig:lammps-strong-magnitude}
-}
-\subfigure[Histogram]{
-\includegraphics[width=0.3\textwidth]{fig/Titan-LAMMPS-Strong-Histogram}
-\label{fig:lammps-strong-histogram}
-}
-\vspace{-0.10in}
-\caption{SuperGlue Components Strong Scaling For LAMMPS}
-\label{fig:lammps-strong}
-\vspace{-0.10in}
-\end{figure*}
-
-\begin{figure*}[t!]
-\vspace{-0.10in}
-\center
-\subfigure[Select-1]{
-\includegraphics[width=0.3\textwidth]{fig/Titan-GTCP-Strong-Select-1}
-\label{fig:gtcp-strong-select-1}
-}
-\subfigure[Select-2]{
-\includegraphics[width=0.3\textwidth]{fig/Titan-GTCP-Strong-Select-2}
-\label{fig:gtcp-strong-select-2}
-}
-\vspace{-0.10in}
-\caption{SuperGlue Components Strong Scaling Select For GTCP}
-\label{fig:gtcp-strong-select}
-\vspace{-0.10in}
-\end{figure*}
-
-\begin{figure*}[t!]
-\vspace{-0.10in}
-\center
-\subfigure[Dim-Reduce]{
-\includegraphics[width=0.3\textwidth]{fig/Titan-GTCP-Strong-Dim-Reduce}
-\label{fig:gtcp-strong-dim-reduce}
-}
-\subfigure[Histogram]{
-\includegraphics[width=0.3\textwidth]{fig/Titan-GTCP-Strong-Histogram}
-\label{fig:gtcp-strong-histogram}
-}
-\vspace{-0.10in}
-\caption{SuperGlue Components Strong Scaling For GTCP}
-\label{fig:gtcp-strong}
-\vspace{-0.10in}
-\end{figure*}
 
 \subsection{Weak Scaling Experiments}
 
