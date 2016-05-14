@@ -13,6 +13,9 @@
 \usepackage{url}
 \usepackage{todonotes}
 \usepackage{amssymb}
+\usepackage{xspace}
+\usepackage[binary-units=true]{siunitx}
+
 \lstset {% general command to set parameter(s)
   language=C,
   basicstyle=\footnotesize,               % print whole listing small
@@ -26,7 +29,8 @@
   showstringspaces=false}
 %can't figure this one out for particles bandwidth
 %\usepackage[caption,label]{subfig}
-
+\newcommand{\MB}{\,\text{MB}\xspace}
+\newcommand{\GB}{\,\text{GB}\xspace}
 \newcommand{\XX}[1]{\textcolor{red}{XX: #1}}
 \newcommand{\DDT}{D\textsuperscript{2}T~}
 \newcommand{\DDTns}{D\textsuperscript{2}T}
@@ -759,7 +763,6 @@ disk, it should also push out an ADIOS stream to some other consumer. An
 additional Dumper that writes an image file in a particular format, such as
 JPEG, PNG, or SVG, would be a valuable addition.
 
-
 \section{Integrating Reusable Components}
 \label{s:integrating-reusable-components}
 
@@ -909,8 +912,8 @@ Dim-Reduce 1 & 128 & 32 & $x$ & 16 & 16\\
 \hline
 Dim-Reduce 2 & 128 & 32 & 16 & $x$ & 16\\
 \hline
-Histogram & 128 & 34 & 24 & 24 & $x$\\
-\hline
+%Histogram & 128 & 34 & 24 & 24 & $x$\\
+%\hline
 \end{tabular}
 %\vspace{-0.15in}
 \end{table*}
@@ -921,56 +924,88 @@ Histogram & 128 & 34 & 24 & 24 & $x$\\
 %Dim-Reduce2 is 128:32:16:x:16
 %Histogram is 128:34:24:24:x
 
-To obtain the results illustrated in
-Figures~\ref{fig:lammps-strong} and~\ref{fig:gtcp-strong},
-we varied the process size of a single component at
-a time while fixing that of the other components involved in the workflow.  We
-determined reasonable process sizes for the fixed-size components using
-preliminary testing. For all of these measurements, we set up the scientific
-code driving the workflow to output a fixed total data size. Each point shows
-the completion time for a single time step arbitrarily chosen in the middle of
-the execution of the workflow. Depicted below the strong scaling curves are the
-data transfer times. That is, these points show the portion of the timestep
-completion time spent by the components waiting to receive requested data.
-
 To understand the strong scaling behavior exhibited by the components in
 different scenarios, we carried out strong scaling measurements of the
-components in both the LAMMPS and GTCP workflows. The results for the LAMMPS
-workflow are shown in Figure~\ref{fig:lammps-strong}, and those for the GTCP
-workflow are shown in Figures~\ref{fig:gtcp-strong-select}
-and~\ref{fig:gtcp-strong}. In all of the resulting curves, an informative point
-is that at which the linear domain of scalability clearly ends. With process
-sizes greater than those at these points, the benefit of adding more processes
-for a fixed overall input size dwindles, and in most cases eventually reverses
-due to communication overhead. Of course, no point on these lines is ideal for
-all situations. For example, a scientist having few resources but significant
-time at her disposal may wish to stay in the linear domain. However, these
-turning points are a good single indicators of the strong scaling behavior of
-our distributed components.
+components in both the LAMMPS and GTCP workflows.
+To do this, we varied the process size of a single component at
+a time while fixing that of the other components involved in the workflow,
+and using a fixed output size from the driving simulation.  We
+determined reasonable process sizes for the fixed-size components using
+preliminary testing. 
 
-For Figure~\ref{fig:lammps-strong}, LAMMPS is run using 256 processes.  For
-Figures~\ref{fig:gtcp-strong-select} and~\ref{fig:gtcp-strong}, GTCP is run
-using either 64 or 128 processes. The actual process counts and the variable
-factor for the LAMMPS workflow is listed in Table~\ref{tab:eval-strong-lammps}.
-The GTCP workflow configurations are listed in
-Table~\ref{tab:eval-strong-gtcp}.  The different factors are used to better
-illustrate the overheads involved.
+The results are illustrated in
+Figures~\ref{fig:lammps-strong} and~\ref{fig:gtcp-strong}.
+Each point shows
+the completion time for a single time step arbitrarily chosen in the middle of
+the execution of the workflow. Depicted below the strong scaling curves
+in Figure~\ref{fig:lammps-strong}
+are the data transfer times. That is, these points
+show the portion of the timestep
+completion time spent by the components waiting to receive requested data.
+The workflow configurations (process counts) used to obtain these measurements are shown
+in~\ref{tab:eval-strong-lammps} and~\ref{tab:eval-strong-gtcp}.
+The global output of the simulation in the LAMMPS workflow
+is \SI{1.28}{\giga\byte}. In the GTCP workflow, the Select
+measurements are taken using a \SI{900}{\mega\byte} output
+from the simulation, and those of Dim-Reduce using a
+\SI{3.8}{\giga\byte} output.
+The scale used for these results is small compared to the
+scale at which these simulations can be run, due to
+the limited time and resources available to us
+for the numerous complete workflows executions required
+to obtain meaningful strong scaling results.
+%strong scaling info: 
 
-For the LAMMPS workflow, we present two different performance measurements to
-better reveal the overheads involved. In these cases, we show both the amount
-of time spent performing the data reads as well as the total time, including
-the reading, for the component to operate.
+These results provide valuable information about the components.
+First, they show that the components exhibit regular strong
+scaling behavior. That is, 
+a linear domain of scalability is followed by a turning point and an
+eventual flattening out of the performance, where the benefit
+of adding more processes dwindles.
+That there exists a linear domain means that given
+a particular workload, users can select SuperGlue process sizes
+that match their resources and performance requirements.
+The flat domain is long and does not show any drastic reversal
+of performance, so without knowing the full strong
+scaling characteristics of the SuperGlue components used in a particular workflow,
+a user can safely guess a process size to use for a particular component,
+using the strong scaling results from the same component with a similar
+workload size, without incurring unreasonable overhead.
+
+The turning point of scalability of a component
+is not necessarily determined by
+its per-process workload size.
+In Figure~\ref{fig:lammps-strong}, the turning point of Select
+occurs at a per-process workload of around \SI{32}{\mega\byte}.
+Here, the global data size sent to Select
+is \SI{1.28}{\giga\byte}.
+In a separate set of measurements using the GTCP workflow,
+the turning point of Select occurs at a per-process workload
+of \SI{113}{\mega\byte}, where the global dataset size from
+was \SI{3.8}\SI{\giga\byte}. Therefore, global workload size
+is a factor in determining the turning point of scalability
+of the SuperGlue components.
+
+While there is communication overhead in the computation itself,
+Figure~\ref{fig:lammps-strong} shows that majority of the communication
+overhead, ie the time spent on data transfer between components,
+is small compared to the total per-timestep execution time of
+the SuperGlue components. This supports the idea
+of assembling workflows using numerous, simple,
+generic components.
 
 \subsection{Weak Scaling Experiments}
 
 Additional experiments are performed for the GTCP workflow to determine the
-weak scaling performance for the components. Additional experiments for the
-LAMMPS workflow are not performed since the components are identical and the
-data sizes are the only difference. The configurations for these experiments
+weak scaling performance for the components. The configurations for these experiments
 are presented in Table~\ref{tab:eval-weak-gtcp-1}. The performance results are
 presented in Table~\ref{tab:eval-weak-gtcp-2}. To read the tables, match the
 rows. For example, the first row in Table~\ref{tab:eval-weak-gtcp-1} corresponds
 to the preformance results in row 1 in Table~\ref{tab:eval-weak-gtcp-2}.
+
+Overall, the components and the overall workflow
+exhibit very good weak scaling behavior.
+
 
 {\em Select} gets the full brunt of the total data size. Dividing the process
 count into the total data size shows that on average, it is roughly the same
