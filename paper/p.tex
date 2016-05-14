@@ -673,11 +673,12 @@ to that of labeling dimensions and indices, as previously discussed.
   \vspace{-0.30in}
 \end{figure*}
 
-We describe here the SuperGlue components in greater detail. They
-operate on a per-timestep basis, where these timesteps correspond to those
-of the original scientific code driving the workflow.
-%After evaluating the example workflows selected the following components are
-%created to demonstrate the potential for reusable components.
+Here, we describe in greater detail the individual SuperGlue components
+themselves and how user-specified
+parameters allow the them to operate (a) on a variety
+of different input data formats, and (b) in
+a way that is specified by the user to fit a
+particular workflow.
 
 \subsection{Select}
 
@@ -699,9 +700,7 @@ indices of the quantities of interest within that dimension.
 
 \subsection{Dim-Reduce}
 
-As discussed previously, workflow components must receive data in a format
-that they expect. For example, Histogram expects one-dimensional data.
-Dim-Reduce is a data manipulation component that removes one dimension from its
+Dim-Reduce is a glue component that removes one dimension from its
 input array, ``absorbing'' it into another dimension without modifying the
 total size of the data. The other dimensions are left unchanged. This component
 can work with an input array having any number of dimensions. The output is an
@@ -790,7 +789,7 @@ We annotate the figure with details about how
 the data is manipulated at each step.
 
 Data arrives from LAMMPS at the first SuperGlue component, Select, which
-extracts the velocity components from the data output by the simulation. From
+extracts the velocity components from the raw output of the simulation. From
 Select, data is sent to Magnitude, which computes
 the magnitudes of the velocities. Magnitude
 outputs one-dimensional data, an array of the magnitudes it calculates, to the

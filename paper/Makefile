@@ -1,4 +1,5 @@
 PLOT := $(patsubst %.gp,%.tex,$(wildcard data/*.gp))
+FIGS := $(patsubst %.svg,%.pdf,$(wildcard fig/*.svg))
 PAPER=p
 
 all: clean $(PLOT) ${PAPER}.tex
@@ -16,6 +17,11 @@ all: clean $(PLOT) ${PAPER}.tex
 	pdflatex ${PAPER}.tex
 
 plot: $(PLOT)
+
+img: $(FIGS)
+
+fig/%.pdf: fig/%.svg
+	inkscape --without-gui -f $^ -D -A $@
 
 data/%.tex: data/%.gp
 	OUT=$@ gnuplot $<
