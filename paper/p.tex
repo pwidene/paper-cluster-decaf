@@ -173,8 +173,8 @@ their output format. Key to making this work is using a typed transport
 mechanism between different components. Many options exist for these transports
 and the particular mechanism selected is not critical. 
 
-While the main contribution of this work is the design of generic \textit{glue
-  code}, the \textit{analytical} components we use in the workflows we present
+While the main contribution of this work is the design of generic {\em glue
+  code}, the {\em analytical} components we use in the workflows we present
 here are designed using the same approach. For example, an index selection tool
 is more of a glue component while a histogram component is more analytical.
 Yet, we design both types of components as single MPI executables with similar
@@ -188,7 +188,7 @@ work in Section~\ref{s:related}. Second, in Section~\ref{s:workflow}, is a
 discussion of the two workflows we use to drive our insights. Next is an
 overview of the concepts behind SuperGlue in~\ref{s:design}.  In
 Section~\ref{s:reusable-components}, we provide an overview of the reusable
-compoents created. In Section~\ref{s:integrating-reusable-components}, we
+components created. In Section~\ref{s:integrating-reusable-components}, we
 discuss the challenges of integrating reusable components.  An evaluation is
 presented next in Section~\ref{s:eval}. Finally is a discussion of Conclusions
 and Future Work in Section~\ref{s:conclusion}.
@@ -278,7 +278,7 @@ unrecoverable failure. We use ADIOS and FlexPath in this work.
 
 % the below is covered in Design->Implementation Artifacts.
 %ADIOS offers a
-%simple I/O interface~\cite{lofstead:2009:adaptable}, which suppports FlexPath
+%simple I/O interface~\cite{lofstead:2009:adaptable}, which supports FlexPath
 %as one of its underlying transport mechanisms. FlexPath supports data transport
 %between distributed executables regardless of their placement.
 
@@ -413,7 +413,7 @@ By evaluating the presented workflows and considering other workflows with
 which the authors are familiar, four particular insights are revealed.
 
 1) To allow for the greatest variety of workflows, data manipulation
-  primitives and data analysis components should be packaged in similar ways —-
+  primitives and data analysis components should be packaged in similar ways --
   that is, regardless of their individual complexity, the pieces that make up
   these workflows should export compatible interfaces as much as possible.
 
@@ -442,7 +442,7 @@ components presented in this
 paper. From a general perspective, designing a smaller number of
 components to assemble workflows with finer step decomposition
 allows for more general processing and more accurate performance
-expectations than desiging more numerous components each having more
+expectations than designing more numerous components each having more
 complex functionality.
 
 \subsection{Multi-Dimensional Data Support}
@@ -496,7 +496,7 @@ For example, in both workflows, we modified the simulations so that
 they label the quantities that they output in the dimension that holds
 these quantities. This lets the {\em Select} component extract the quantities
 of interest by referring to them by name. However, we did not label the dimensions
-themselves, rather refering to them by number. 
+themselves, rather referring to them by number. 
 
 When they exist, these labels are concatenated into a header string
 passed along to the next component in the workflow as another variable
@@ -603,7 +603,7 @@ achieving success. Rather, the selected technologies offer many features that
 facilitate the creation of reusable components. The reasoning for these selections is
 explored below.
 
-Though we refer to the SugerGlue components as single entities,
+Though we refer to the SuperGlue components as single entities,
 they are distributed
 codes able to split computation on large dataset
 among the processes of which they are
@@ -613,7 +613,7 @@ where all processes in a component belong to the same MPI communicator.
 Since we need some analogy to the Linux shell pipe operator for
 connecting components, we choose to use ADIOS~\cite{lofstead:2009:adaptable}
 for the flexibility in writing destinations, reading sources, and offering a
-typed data stream. In particular, we use the Flexpath transport. It implements
+typed data stream. In particular, we use the FlexPath transport. It implements
 a {\em stream-based} data exchange abstracted to the components through the
 ADIOS interface, is asynchronous, and allows for data exchange between any
 number of writers and readers. Therefore:
@@ -629,13 +629,13 @@ obtained upstream.
 2. Even if the number of processes used for one component is different from that
 used for the previous one in the workflow, each component can split the data
 (and therefore the computation) evenly among its processes. We should mention,
-however, due to the current implementation of Flexpath, there is overhead
+however, due to the current implementation of FlexPath, there is overhead
 data exchanged when different numbers of writers and readers are used. Even if
 reader $R$ requests only a portion of writer $W$'s data, the current implementation
 is such that $W$ sends all of its data to $R$. This is in the process of being
 improved, and this effort is orthogonal to the work done for this project.
 
-In addition, ADIOS and its transports, such as Flexpath, keep track of the
+In addition, ADIOS and its transports, such as FlexPath, keep track of the
 data dimensions and their sizes. Therefore, when a component receives a
 multi-dimensional array, it can discover the dimensions of the data and their
 sizes as defined by the previous component in the workflow. Note that the
@@ -1006,7 +1006,7 @@ exhibit very promising weak scaling behavior.
 While there are slightly different per-process
 data sizes in each row of the table for both
 per-simulation process and per-SuperGlue process,
-there is little variation in the the timestep completion
+there is little variation in the timestep completion
 times of the SuperGlue components and in the end-to-end
 completion times of the entire workflow for different
 workload sizes.
