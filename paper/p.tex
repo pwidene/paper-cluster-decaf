@@ -373,7 +373,7 @@ workflow.
   \vspace{-0.12in}
   \caption{Generic Workflow Illustration}
   \label{fig:generic-workflow}
-  \vspace{-0.20in}
+  \vspace{-0.10in}
 \end{figure}
 
 In typical scientific workflows today, custom glue code is written for
@@ -575,9 +575,9 @@ operation has dimensions $N_1'{\times}N_2$ , where:
 
 \begin{itemize}
 
-\item $N_1' = N_0{\times}N_1$ is the new size of the {\em gridpoint} dimension $D_1'$
+\item $N_1' = N_0{\times}N_1$ is the new {\em gridpoint} dimension $D_1'$ size
 
-\item $N_2' = N_2$ is the size of the {\em property} dimension $D_2'$
+\item $N_2' = N_2$ is the {\em property} dimension $D_2'$ size
 
 \end{itemize}
 
@@ -668,10 +668,10 @@ to that of labeling dimensions and indices, as previously discussed.
 \begin{figure*}
   %\vspace{-0.10in}
   \includegraphics[width=\linewidth]{fig/wflow4}
-  \vspace{-0.45in}
+  \vspace{-0.40in}
   \caption{GTCP Workflow}
   \label{fig:gtcp-workflow}
-  \vspace{-0.30in}
+  \vspace{-0.15in}
 \end{figure*}
 
 This section provides greater details about the individual SuperGlue components
@@ -836,9 +836,9 @@ node.
 
 \begin{figure}
   \centering
-  \vspace{-0.27in}
-  \input{data/lmp-sel-strong}
   \vspace{-0.25in}
+  \input{data/lmp-sel-strong}
+  \vspace{-0.15in}
   \input{data/lmp-mag-strong}
   \vspace{-0.17in}
   \input{data/lmp-hist-strong}
@@ -846,7 +846,7 @@ node.
   %
   \vspace{-0.05in}
   \caption{SuperGlue strong scaling in the LAMMPS workflow.
-    Completion time of a full timestep and of the data transfer
+    Completion time (secs) of a full timestep and of the data transfer
     portion of the same timestep are plotted against process size.}
   \label{fig:lammps-strong}
   \vspace{-0.18in}
@@ -860,8 +860,8 @@ node.
   \input{data/gtcp-dimr-strong}
   \vspace{-0.06in}
   \caption{SuperGlue strong scaling in the GTCP workflow. Whole timestep
-    completion time for Select and both instances of Dim-Reduce used in the
-    workflow are plotted against process size}
+    completion time (secs) for Select and both instances of Dim-Reduce used in
+    the workflow are plotted against process size}
   \label{fig:gtcp-strong}
   \vspace{-0.25in}
 \end{figure}
@@ -885,7 +885,7 @@ Magnitude & 256 & 60 & $x$ & 8\\
 Histogram & 256 & 32 & 16 & $x$\\
 \hline
 \end{tabular}
-\vspace{-0.15in}
+%\vspace{-0.15in}
 \end{table*}
 
 %LAMMPS setups:
@@ -911,7 +911,7 @@ Dim-Reduce 2 & 128 & 32 & 16 & $x$ & 16\\
 %Histogram & 128 & 34 & 24 & 24 & $x$\\
 %\hline
 \end{tabular}
-\vspace{-0.15in}
+\vspace{-0.07in}
 \end{table*}
 
 %GTCP setups:
@@ -1052,7 +1052,7 @@ GTCP Procs & Select Procs & Dim-Reduce 1 & Dim-Reduce 2 & Histogram Procs & Tota
 \end{table*}
 
 \begin{table}[tbp]
-\vspace{-0.10in}
+%\vspace{-0.10in}
 \centering
 \caption{GTCP Weak Scaling Component Performance}
 \label{tab:eval-weak-gtcp-2}
