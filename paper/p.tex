@@ -9,7 +9,8 @@
 \usepackage{graphicx}
 %\usepackage{todonotes}
 \usepackage{listings}
-\usepackage{hyperref}
+%\usepackage{hyperref}
+\usepackage[breaklinks,colorlinks]{hyperref}
 \usepackage{url}
 \usepackage{todonotes}
 \usepackage{amssymb}
@@ -29,6 +30,11 @@
   showstringspaces=false}
 %can't figure this one out for particles bandwidth
 %\usepackage[caption,label]{subfig}
+\def\Snospace~{\S{}}
+\renewcommand*\sectionautorefname{\Snospace}
+\def\sectionautorefname{\Snospace}
+\def\subsectionautorefname{\Snospace}
+\def\subsubsectionautorefname{\Snospace}
 \newcommand{\MB}{\,\text{MB}\xspace}
 \newcommand{\GB}{\,\text{GB}\xspace}
 \newcommand{\XX}[1]{\textcolor{red}{XX: #1}}
@@ -184,14 +190,13 @@ components, we present a flexible way to assemble scientific workflows without
 having to write any additional code. 
 
 The rest of the paper is organized as follows. First is a survey or related
-work in Section~\ref{s:related}. Second, in Section~\ref{s:workflow}, is a
+work in~\autoref{s:related}. Second, in~\autoref{s:workflow}, is a
 discussion of the two workflows we use to drive our insights. Next is an
-overview of the concepts behind SuperGlue in~\ref{s:design}.  In
-Section~\ref{s:reusable-components}, we provide an overview of the reusable
-components created. In Section~\ref{s:integrating-reusable-components}, we
+overview of the concepts behind SuperGlue in~\autoref{s:design}.  In~\autoref{s:reusable-components}, we provide an overview of the reusable
+components created. In~\autoref{s:integrating-reusable-components}, we
 discuss the challenges of integrating reusable components.  An evaluation is
-presented next in Section~\ref{s:eval}. Finally is a discussion of Conclusions
-and Future Work in Section~\ref{s:conclusion}.
+presented next in~\autoref{s:eval}. Finally is a discussion of Conclusions
+and Future Work in~\autoref{s:conclusion}.
 
 \section{Related Work}
 \label{s:related}
@@ -306,8 +311,8 @@ results, and this using some of the same components but in significantly
 different ways, has allowed us to gain important insight into how best to
 design glue components that can be used in a wide variety of workflows.
 We first describe the workflows from a general point of view
-and then the components in greater detail, illustrated in
-Figures~\ref{fig:lammps-workflow} and~\ref{fig:gtcp-workflow}.
+and then the components in greater detail, illustrated
+in~\autoref{fig:lammps-workflow} and~\autoref{fig:gtcp-workflow}.
 
 \subsection{LAMMPS Workflow}
 
@@ -336,7 +341,7 @@ extracted and then a histogram generated.
 GTCP, a code that simulates a toroidally confined plasma, splits the solid into
 toroidal slices, each made up of a number of grid points. For each of these
 grid points, it outputs 7 properties of the plasma such as pressure and energy
-flux. This division of the toroid is illustrated in Figure~\ref{fig:toroid}.
+flux. This division of the toroid is illustrated in~\autoref{fig:toroid}.
 The output of the simulation is therefore a three-dimensional array in which
 the dimensions span: (a) toroidal ranks (toroidal slice number), (b) grid point
 numbers, and (c) property indices. In this workflow, the per-timestep histogram
@@ -348,7 +353,7 @@ interest must be extracted and then a histogram generated.
 
 In both cases, a particular subset of interest is extracted from the
 output data set, a calculation is performed, and a histogram is
-generated. This is illustrated in Figure~\ref{fig:generic-workflow}. In many
+generated. This is illustrated in~\autoref{fig:generic-workflow}. In many
 cases, the histogram component may be some standard, reusable operator.
 The challenge is the data selection and mathematical
 manipulation to obtain the quantities of interest in a way that (a) presents an
@@ -377,8 +382,7 @@ workflow.
 \end{figure}
 
 In typical scientific workflows today, custom glue code is written for
-selecting relevant data and writing it so the ``formatter'' illustrated in
-Figure~\ref{fig:generic-workflow} can work.  Then, potentially additional
+selecting relevant data and writing it so the ``formatter'' illustrated in~\autoref{fig:generic-workflow} can work.  Then, potentially additional
 custom glue code will fix the histogram calculation into something that can be
 rendered or saved as desired.  In this work, we demonstrate general, reusable
 components capable of handling all three intermediate operations.
@@ -435,7 +439,7 @@ which the authors are familiar, four particular insights are revealed.
   real-time workflow, data must be presented to the components in a format that
   they expect and understand. This requires a specific ordering of
   data in memory. We expand on this topic
-  in Section~\ref{subsec:dimreduce}.
+  in~\autoref{subsec:dimreduce}.
 
 These insights guide the design for the reusable glue and analysis
 components presented in this
@@ -464,7 +468,7 @@ dimensions and indices to extract. This is precisely the role of our
 {\em Select} component.
 
 In general, it is advantageous to (1) design components that can operate on
-multi-dimensional data as much as possible, and (2) format the ouput data of
+multi-dimensional data as much as possible, and (2) format the output data of
 scientific applications as having well-defined dimensions. Emphasizing the
 support for multi-dimensional data in the design of workflow components allows
 for maximum compatibility between the interfaces of components by providing a
@@ -659,16 +663,16 @@ to that of labeling dimensions and indices, as previously discussed.
 \begin{figure*}
   \vspace{-0.10in}
   \includegraphics[width=\linewidth]{fig/wflow3}
-  \vspace{-0.45in}
+  \vspace{-0.35in}
   \caption{LAMMPS Workflow}
   \label{fig:lammps-workflow}
-  \vspace{-0.10in}
+  \vspace{-0.05in}
 \end{figure*}
 
 \begin{figure*}
   %\vspace{-0.10in}
   \includegraphics[width=\linewidth]{fig/wflow4}
-  \vspace{-0.40in}
+  \vspace{-0.35in}
   \caption{GTCP Workflow}
   \label{fig:gtcp-workflow}
   \vspace{-0.15in}
@@ -782,8 +786,8 @@ and optionally create corresponding headers to label them and their indices.
 
 \subsection{Demonstrating in the Workflows}
 
-We built the LAMMPS workflow, illustrated in
-Figure~\ref{fig:lammps-workflow}, using only LAMMPS and SuperGlue components.
+We built the LAMMPS workflow, illustrated in~\autoref{fig:lammps-workflow},
+using only LAMMPS and SuperGlue components.
 We annotate the figure with details about how
 the data is manipulated at each step.
 
@@ -798,8 +802,7 @@ of the particles. There is one histogram created at each timestep at which the
 simulation would normally dump its data to disk.
 
 
-The GTCP workflow is illustrated in
-Figure~\ref{fig:gtcp-workflow}, and it too was assembled only from the
+The GTCP workflow is illustrated in~\autoref{fig:gtcp-workflow}, and it too was assembled only from the
 simulation and SuperGlue components. Note that the workflows primarily differ
 in the data formats output by the simulations.
 
@@ -929,17 +932,16 @@ and using a fixed output size from the driving simulation.  We
 determined reasonable process sizes for the fixed-size components using
 preliminary testing. 
 
-The results are illustrated in
-Figures~\ref{fig:lammps-strong} and~\ref{fig:gtcp-strong}.
+The results are illustrated in~\autoref{fig:lammps-strong} and~\autoref{fig:gtcp-strong}.
 Each point shows
 the completion time for a single time step arbitrarily chosen in the middle of
 the execution of the workflow. Depicted below the strong scaling curves
-in Figure~\ref{fig:lammps-strong}
+in~\autoref{fig:lammps-strong}
 are the data transfer times. That is, these points
 show the portion of the timestep
 completion time spent by the components waiting to receive requested data.
 The workflow configurations (process counts) used to obtain these measurements are shown
-in Tables~\ref{tab:eval-strong-lammps} and~\ref{tab:eval-strong-gtcp}.
+in~\autoref{tab:eval-strong-lammps} and~\autoref{tab:eval-strong-gtcp}.
 The global output of the simulation in the LAMMPS workflow
 is \SI{1.28}{\giga\byte}. In the GTCP workflow, the Select
 measurements are taken using a \SI{900}{\mega\byte} output
@@ -970,7 +972,7 @@ workload size, without incurring unreasonable overhead.
 The turning point of scalability of a component
 is not necessarily determined by
 its per-process workload size.
-In Figure~\ref{fig:lammps-strong}, the turning point of Select
+In~\autoref{fig:lammps-strong}, the turning point of Select
 occurs at a per-process workload of around \SI{32}{\mega\byte}.
 Here, the global data size sent to Select
 is \SI{1.28}{\giga\byte}.
@@ -981,8 +983,7 @@ was \SI{3.8}{\giga\byte}. Therefore, global workload size
 is a factor in determining the turning point of scalability
 of the SuperGlue components.
 
-While there is communication overhead in the computation itself,
-Figure~\ref{fig:lammps-strong} shows the majority of the communication
+While there is communication overhead in the computation itself,~\autoref{fig:lammps-strong} shows the majority of the communication
 overhead, i.e., the time spent on data transfer between components,
 is small compared to the total per-timestep execution time of
 the SuperGlue components. This supports the idea
@@ -993,10 +994,10 @@ generic components.
 
 Additional experiments are performed for the GTCP workflow to determine the
 weak scaling performance for the components. The configurations for these experiments
-are presented in Table~\ref{tab:eval-weak-gtcp-1}. The performance results are
-presented in Table~\ref{tab:eval-weak-gtcp-2}. To read the tables, match the
-rows. For example, the first row in Table~\ref{tab:eval-weak-gtcp-1} corresponds
-to the performance results in row 1 in Table~\ref{tab:eval-weak-gtcp-2}.
+are presented in~\autoref{tab:eval-weak-gtcp-1}. The performance results are
+presented in~\autoref{tab:eval-weak-gtcp-2}. To read the tables, match the
+rows. For example, the first row in~\autoref{tab:eval-weak-gtcp-1} corresponds
+to the performance results in row 1 in~\autoref{tab:eval-weak-gtcp-2}.
 These runs use SuperGlue process sizes for which the per-process
 workloads reside near the turning points in the
 strong scaling results presented above.
