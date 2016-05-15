@@ -77,7 +77,7 @@
   a few, relatively small advantages over hand-coding the entire workflow.
 
   SuperGlue rethinks the custom glue components in the context of online
-  workflows to offer reusable glue components that can bridge the type mismatches
+  workflows to offer {\em reusable glue components} that can bridge the type mismatches
   between the output of one workflow component and the input of the next. By
   performing a series of generic filter and selector operations in a typed environment, the
   same glue is usable, without modification, to connect components of different
@@ -114,9 +114,9 @@ Leadership Computing Facility (OLCF).  Kepler was used for several workflows
 for the fusion simulation users.  While the initial goal was that an internal,
 expert resource would create the workflow, including glue components, it should
 be able to be maintained easily by the application scientists. Unfortunately,
-the complexities of making and maintaining the glue components as the output
-shifted and managing the deployment required the expert to be involved
-regularly as the configuration evolved and scaled.  Falling back to Python
+the expert was required regularly as the configuration evolved and scaled. The
+complexities of making and maintaining the glue components as the output
+shifted and managing the deployment was too high.  Falling back to Python
 scripts managed by the application scientist proved easier and faster to
 maintain. While this approach using the parallel file system to stage
 intermediate data was sufficient, it is quickly becoming infeasible. The IO
@@ -271,15 +271,16 @@ workflows.
 
 A more active approach to managing workflow throughput was attempted in
 FlexPath~\cite{Dayal:2014:flexpath}. Rather than focusing on the components
-themselves, Flexpath offers mechanisms to monitor input queues for workflow
+themselves, FlexPath offers mechanisms to monitor input queues for workflow
 components and to redeploy components to reduce bottlenecks. It also has the
 ability to redirect output from an online workflow to disk in the case of an
-unrecoverable failure. Due to its ability to support data transport between
-distributed executables regardless of their placement, and due to the simple I/O
-interface provided by ADIOS~\cite{lofstead:2009:adaptable},
-which supports FlexPath as one of its underlying
-transport mechanisms, we use FlexPath and ADIOS in the workflows described
-in this work.
+unrecoverable failure. We use ADIOS and FlexPath in this work.
+
+% the below is covered in Design->Implementation Artifacts.
+%ADIOS offers a
+%simple I/O interface~\cite{lofstead:2009:adaptable}, which suppports FlexPath
+%as one of its underlying transport mechanisms. FlexPath supports data transport
+%between distributed executables regardless of their placement.
 
 Companion work to SuperGlue within this same project is
 Bredala~\cite{dreher:2016:bredala}. This work presents an attempt to build a
@@ -610,11 +611,12 @@ composed. More precisely, they are MPI executables written in C
 where all processes in a component belong to the same MPI communicator.
 
 Since we need some analogy to the Linux shell pipe operator for
-connecting components, we choose to use ADIOS for the flexibility in writing
-destinations, reading sources, and offering a typed data stream. In particular,
-we use the Flexpath transport. It implements a {\em stream-based} data exchange
-abstracted to the components through the ADIOS interface, is asynchronous, and
-allows for data exchange between any number of writers and readers. Therefore:
+connecting components, we choose to use ADIOS~\cite{lofstead:2009:adaptable}
+for the flexibility in writing destinations, reading sources, and offering a
+typed data stream. In particular, we use the Flexpath transport. It implements
+a {\em stream-based} data exchange abstracted to the components through the
+ADIOS interface, is asynchronous, and allows for data exchange between any
+number of writers and readers. Therefore:
 
 1. We can launch components of the workflow in any order: downstream components
 will wait for the availability of data from upstream components and upstream
