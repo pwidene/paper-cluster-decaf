@@ -1,0 +1,31 @@
+\begin{thebibliography}{1}
+
+\bibitem{lin:gtc}
+Z.~Lin, T.~S. Hahm, W.~W. Lee, W.~M. Tang, and R.~B. White.
+\newblock Turbulent transport reduction by zonal flows: Massively parallel
+  simulations.
+\newblock {\em Science}, 281(5384):1835--1837, September 1998.
+
+\bibitem{bertram:2006:kepler}
+B.~Lud\"{a}scher, I.~Altintas, C.~Berkley, D.~Higgins, E.~Jaeger, M.~Jones,
+  E.~A. Lee, J.~Tao, and Y.~Zhao.
+\newblock Scientific workflow management and the kepler system: Research
+  articles.
+\newblock {\em Concurr. Comput. : Pract. Exper.}, 18(10):1039--1065, 2006.
+
+\bibitem{Malewicz:2006:dagman}
+G.~Malewicz, I.~Foster, A.~Rosenberg, and M.~Wilde.
+\newblock A tool for prioritizing {DAGMan} jobs and its evaluation.
+\newblock {\em High Performance Distributed Computing, 2006 15th IEEE
+  International Symposium on}, pages 156--168, 0-0 2006.
+
+\bibitem{plimpton:1997:lammps}
+S.~Plimpton, R.~Pollock, and M.~Stevens.
+\newblock Particle-mesh ewald and rrespa for parallel molecular dynamics
+  simulations.
+\newblock In {\em Proceedings of the Eighth {SIAM} Conference on Parallel
+  Processing for Scientific Computing, {PPSC} 1997, March 14-17, 1997, Hyatt
+  Regency Minneapolis on Nicollel Mall Hotel, Minneapolis, Minnesota, {USA}}.
+  {SIAM}, 1997.
+
+\end{thebibliography}
