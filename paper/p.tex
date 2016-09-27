@@ -55,40 +55,34 @@
 
 \begin{document}
 
-\title{SuperGlue: Standardizing Glue Components for HPC Workflows}
+\title{Turning Workflows Online: Tradeoffs and Tipping Points for Extreme Scale Workflows}
 
 \author{
-  \IEEEauthorblockN{Jay Lofstead\IEEEauthorrefmark{1}, Alexis Champsaur\IEEEauthorrefmark{2}, Jai Dayal\IEEEauthorrefmark{2}, Matthew Wolf\IEEEauthorrefmark{2}, Greg Eisenhauer\IEEEauthorrefmark{2}}
-  \IEEEauthorblockA{\IEEEauthorrefmark{1}Sandia National Laboratories
-    \IEEEauthorrefmark{2}School of Computer Science, Georgia Institute of Technology}
+  \IEEEauthorblockN{Alexis Champsaur\IEEEauthorrefmark{1}, Jay Lofstead\IEEEauthorrefmark{2}, Jai Dayal\IEEEauthorrefmark{1}, Matthew Wolf\IEEEauthorrefmark{1}, Greg Eisenhauer\IEEEauthorrefmark{1}, Ada Gavrilovska\IEEEauthorrefmark{1}}
+    \IEEEauthorrefmark{1}School of Computer Science, Georgia Institute of Technology}
+  \IEEEauthorblockA{\IEEEauthorrefmark{2}Sandia National Laboratories
 }
 
 \maketitle
 
 \begin{abstract}
 
-  The challenge for constructing HPC workflows is not the simulation, the
-  analysis components, or the visualization tools. Usable, off the shelf tools to
-  suit most needs are available. Instead, the labor and complexity is connecting
-  these components together. Typically, an application scientist will write
-  ``glue'' scripts that convert the output of one workflow phase to the input of
-  the next.  In nearly all cases, the output is written to disk after each
-  phase, read and written for the ``glue'' conversion, and then read for the next
-  phase. Even in online workflows, in which different components execute concurrently,
-  custom glue code usually has to be written.
-  This heavy lifting is one of the major stumbling blocks preventing
-  standardized workflow frameworks from broad, general adoption. Attempts to
-  streamline this process have not gained traction because of the necessity to
-  still build these glue components. In essence, the workflow engine offered only
-  a few, relatively small advantages over hand-coding the entire workflow.
+Scientific simulation workflows have traditionally focused on using the storage
+array as a staging place between components and employ a high level task
+manaager to trigger components. Recent work has been investigating moving these
+workflows to purely online models avoiding the storage array bottlenecks. This
+transition is not cost free, but there are also potentially enormous advantages.
+For example, by moving online, more the data movement is limited by bisection
+bandwidth rather than storage bandwidth. However, making existing tools work
+online may take some modification and adding in the ``glue'' components required
+to translate the output from one component to the input for the next are no
+longer simple scripts.
 
-  SuperGlue rethinks the custom glue components in the context of online
-  workflows to offer {\em reusable glue components} that can bridge the type mismatches
-  between the output of one workflow component and the input of the next. By
-  performing a series of generic filter and selector operations in a typed environment, the
-  same glue is usable, without modification, to connect components of different
-  workflows with very different data types to achieve a plug-and-play workflow
-  construction environment with known performance characteristics.
+This paper examines these tradeoffs and lays out when the advantages may make
+moving purely online worthwhile even though not being forced by platform
+limitations. Support tools necessary to support both models are also discussed
+including offering standardized ``glue'' components for online workflows making
+the transition easier.
 
 \end{abstract}
 
@@ -100,7 +94,7 @@
 \section{Introduction}
 \label{s:intro}
 
-As extreme computing architectures continue to evolve, it is increasingly
+As extreme computing architectures continue to evolve, it is 
 clear that I/O is an increasingly significant problem.  Projections suggest no
 significant parallel file system I/O bandwidth growth through the next 100x
 increase in compute capabilities.  The traditional HPC approach of writing
@@ -113,9 +107,8 @@ are increasingly important.
 
 Existing workflow engines, such as Kepler~\cite{bertram:2006:kepler} and
 DAGMan~\cite{Malewicz:2006:dagman}, offer flexible ways to assemble components
-with rich functionality to manage the control flow. What they both lack is a
-way to easily deploy and manage the glue code required to connect the various
-components. One example illustrating the complexities comes from the Oak Ridge
+with rich functionality to manage the control flow. While these are quite functional, they have not been universally adopted due to complexity and limitations.
+One example illustrating the complexities comes from the Oak Ridge
 Leadership Computing Facility (OLCF).  Kepler was used for several workflows
 for the fusion simulation users.  While the initial goal was that an internal,
 expert resource would create the workflow, including glue components, it should
@@ -129,6 +122,24 @@ intermediate data was sufficient, it is quickly becoming infeasible. The IO
 overhead for using the parallel file system is exceeding acceptable runtime
 percentages forcing a reduction in output and making scientific insights more
 difficult to discover.
+
+Proposed infrastructure for online workflows are more immature, but can offer
+necessary
+functionality~\cite{zheng:2010:predata,docan:2008:dataspaces,2007:wolf:smartpointer,2008:abbasi:datastager}.
+None of these are fully sufficient for a robust infrastructure, but are being
+extended to incorporate necessary management
+functionality~\cite{2012:dayal:flexpath,2014:dayal:escience,2012:lofstead:txn,2012:lofstead:txn-pdsw,2013:lofstead:txn,2014:lofstead:txn,2016:lofstead:superglue}.
+
+While the online shows a lot of potential to improve the scientific discovery
+process, it requires reworking existing workflows. Since this is a non-trivial
+task, it is best to plan when to make the transition to ensure both sufficient
+time and when the benefits outweigh the transition costs. New workflows can
+be made from scratch online lowering the barrier, but there are still costs
+associated with using existing components that may or may not integrate well
+into the online structure.
+
+
+========================
 
 To address the performance mismatch, Integrated Application Workflows (IAWs)
 are being developed. The easiest way to think of these IAWs is the Unix/Linux
