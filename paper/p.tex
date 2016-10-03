@@ -55,7 +55,7 @@
 
 \begin{document}
 
-\title{Turning Workflows Online: Tradeoffs and Tipping Points for Extreme Scale Workflows}
+\title{SuperGlue: Tradeoffs and Tipping Points for Extreme Scale Workflows}
 
 \author{
   \IEEEauthorblockN{Alexis Champsaur\IEEEauthorrefmark{1}, Jay Lofstead\IEEEauthorrefmark{2}, Jai Dayal\IEEEauthorrefmark{1}, Matthew Wolf\IEEEauthorrefmark{1}, Greg Eisenhauer\IEEEauthorrefmark{1}, Ada Gavrilovska\IEEEauthorrefmark{1}}
@@ -138,6 +138,13 @@ be made from scratch online lowering the barrier, but there are still costs
 associated with using existing components that may or may not integrate well
 into the online structure.
 
+The ``killer app'' for workflows, both offline and online, is being able to
+submit a single job that is capable of running the entire workflow. Existing
+techniques to make this work requires machine reservations or special
+permission for automated connections between the management machine and the
+large scale platform.  SuperGlue's approach bridges the connectivity problems
+and addresses the data type mismatches common when data flows from one
+component to the next.
 
 ========================
 
