@@ -138,15 +138,15 @@ be made from scratch online lowering the barrier, but there are still costs
 associated with using existing components that may or may not integrate well
 into the online structure.
 
-The ``killer app'' for workflows, both offline and online, is being able to
-submit a single job that is capable of running the entire workflow. Existing
-techniques to make this work requires machine reservations or special
-permission for automated connections between the management machine and the
-large scale platform.  SuperGlue's approach bridges the connectivity problems
-and addresses the data type mismatches common when data flows from one
-component to the next.
+%The ``killer app'' for workflows, both offline and online, is being able to
+%submit a single job that is capable of running the entire workflow. Existing
+%techniques to make this work requires machine reservations or special
+%permission for automated connections between the management machine and the
+%large scale platform.  SuperGlue's approach bridges the connectivity problems
+%and addresses the data type mismatches common when data flows from one
+%component to the next.
 
-========================
+%========================
 
 To address the performance mismatch, Integrated Application Workflows (IAWs)
 are being developed. The easiest way to think of these IAWs is the Unix/Linux
@@ -186,26 +186,35 @@ observation, however, is that there is a lack of portability to the resulting
 implementations; they require a great deal of tuning and/or runtime placement
 control to make them function as desired.
 
-This paper describes our work on SuperGlue, a set of generic, reusable
-components for composing scientific workflows. These are distributed data
-analysis and manipulation tools that can be chained together to form a variety
-of real-time workflows providing analytical results during the execution of the
-primary scientific code.  Unlike existing components used in IAWs, SuperGlue
+Unlike existing components used in IAWs, SuperGlue
 components do not have a fixed data type.  This one change enables using these
 components on completely different kinds of simulations that share nothing in
 their output format. Key to making this work is using a typed transport
 mechanism between different components. Many options exist for these transports
 and the particular mechanism selected is not critical. 
 
-While the main contribution of this work is the design of generic {\em glue
-  code}, the {\em analytical} components we use in the workflows we present
-here are designed using the same approach. For example, an index selection tool
-is more of a glue component while a histogram component is more analytical.
-Still, we design both types of components as single MPI executables with similar
-input and output interfaces launched using similar configuration options.  By
-blurring the line between generic glue components and generic analytical
-components, we present a flexible way to assemble scientific workflows without
-having to write any additional code. 
+In an effort to better understand when choosing one approach for constructing a
+workflow is perferable to another, we have developed a collection of ``filters''
+we call SuperGlue that allow us to experiment with the tradeoffs. This paper
+describes our components and examines some different workflows constructed using
+different techniques to compare when the costs and benefits for one approach are
+a better tradeoff than for others. Our main contribution is the evaluation of
+these workflows constructed using different engines and techniques to understand
+when different approaches become viable, such as IAWs, or if cobbling something
+together is sufficient or even superior for certain metrics.
+%analysis and manipulation tools that can be chained together to form a variety
+%of real-time workflows providing analytical results during the execution of the
+%primary scientific code.
+
+While the main technical development contribution of this work is the design of
+generic {\em glue code}, the {\em analytical} components we use in the
+workflows we present here are designed using the same approach. For example, an
+index selection tool is more of a glue component while a histogram component is
+more analytical.  Still, we design both types of components as single MPI
+executables with similar input and output interfaces launched using similar
+configuration options.  By blurring the line between generic glue components
+and generic analytical components, we present a flexible way to assemble
+scientific workflows without having to write any additional code. 
 
 The rest of the paper is organized as follows. First is a survey or related
 work in~\autoref{s:related}. Second, in~\autoref{s:workflow}, is a
