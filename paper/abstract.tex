@@ -1,0 +1,59 @@
+Scientific simulation workflows have traditionally used
+the storage array as a staging place between the components
+that make up the workflows
+and employed a high-level task manager to trigger these components.
+Recent work has been investigating moving these
+workflows to purely online models, thus avoiding the 
+well-known performance bottleneck of storage arrays.
+While existing workflow management systems
+can successfully organize and schedule such online workflows, the components
+are generally either written from
+scratch, or they at least require significant
+changes for them to fit
+into different workflows
+in which the components
+operate on different
+data formats.
+
+In this work, we present Superglue,
+a set of generic workflow components
+that can be used to assemble a variety of static, online
+workflows without the need for re-compilation.
+We leverage the self-describing and multidimensional properties
+of data exchanged by the Adaptable
+I/O System to assemble and run three workflows
+based on three different and widely-used simulation codes
+exporting different types of data.
+In this way, we present the building blocks of a library
+of generic workflow components, which we hope can
+eventually facilitate the assembly of
+workflows meeting a variety of analytical needs
+in the scientific computing community.
+
+\if{0}
+The workflows are assembled using
+some of the same components, but leading to very different analytical results.
+In this way, we present the building blocks of a library of generic components
+
+
+Scientific simulation workflows are becoming a 
+Considering the well-known bottleneck that is the persistent storage array,
+
+
+Scientific simulation workflows have traditionally focused on using the storage
+array as a staging place between components and employ a high level task
+manaager to trigger components. Recent work has been investigating moving these
+workflows to purely online models avoiding the storage array bottlenecks. This
+transition is not cost free, but there are also potentially enormous advantages.
+For example, by moving online, more the data movement is limited by bisection
+bandwidth rather than storage bandwidth. However, making existing tools work
+online may take some modification and adding in the ``glue'' components required
+to translate the output from one component to the input for the next are no
+longer simple scripts.
+
+This paper examines these tradeoffs and lays out when the advantages may make
+moving purely online worthwhile even though not being forced by platform
+limitations. Support tools necessary to support both models are also discussed
+including offering standardized ``glue'' components for online workflows making
+the transition easier.
+\endif
