@@ -1,34 +1,30 @@
 Scientific simulation workflows have traditionally used
 the storage array as a staging place between the components
-that make up the workflows
-and employed a high-level task manager to trigger these components.
+that make up the workflows and employed a high-level
+task manager to trigger these components.
 Recent work has been investigating moving these
-workflows to purely online models, thus avoiding the 
+workflows to purely online models, thus avoiding the
 well-known performance bottleneck of storage arrays.
 While existing workflow management systems
-can successfully organize and schedule such online workflows, the components
-are generally either written from
-scratch, or they at least require significant
-changes for them to fit
-into different workflows
-in which the components
-operate on different
+can successfully organize and schedule such
+online workflows, the components are generally
+either written from scratch, or they at least require
+significant changes in order to fit into different workflows
+in which the components operate on different
 data formats.
 
-In this work, we present Superglue,
-a set of generic workflow components
-that can be used to assemble a variety of static, online
-workflows without the need for re-compilation.
-We leverage the self-describing and multidimensional properties
-of data exchanged by the Adaptable
-I/O System to assemble and run three workflows
-based on three different and widely-used simulation codes
-exporting different types of data.
-In this way, we present the building blocks of a library
-of generic workflow components, which we hope can
-eventually facilitate the assembly of
-workflows meeting a variety of analytical needs
+In this work, we present Superglue, a set of generic workflow
+Components that can be used to assemble a variety of static,
+online workflows from start to finish without the need for re-compilation.
+We leverage the self-describing, process size- and placement-independent
+properties of data exchanged by the Adaptable I/O System (ADIOS) to
+assemble and run three Superglue workflows based on three
+different and widely-used simulation codes exporting different data formats.
+While keeping in mind performance considerations, we present the
+building blocks of a library of generic workflow components, which
+we hope can eventually meet a wide variety of analytical needs
 in the scientific computing community.
+
 
 \if{0}
 The workflows are assembled using
