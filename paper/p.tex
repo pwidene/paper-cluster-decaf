@@ -66,28 +66,7 @@
 }
 
 \maketitle
-
-\begin{abstract}
-
-Scientific simulation workflows have traditionally focused on using the storage
-array as a staging place between components and employ a high level task
-manaager to trigger components. Recent work has been investigating moving these
-workflows to purely online models avoiding the storage array bottlenecks. This
-transition is not cost free, but there are also potentially enormous advantages.
-For example, by moving online, more the data movement is limited by bisection
-bandwidth rather than storage bandwidth. However, making existing tools work
-online may take some modification and adding in the ``glue'' components required
-to translate the output from one component to the input for the next are no
-longer simple scripts.
-
-This paper examines these tradeoffs and lays out when the advantages may make
-moving purely online worthwhile even though not being forced by platform
-limitations. Support tools necessary to support both models are also discussed
-including offering standardized ``glue'' components for online workflows making
-the transition easier.
-
-\end{abstract}
-
+\input{abstract}
 %\category{D.4}{Software}{Operating Systems}
 %\category{D.4.7}{Operating Systems}{Organization and Design}[hierarchical design]
 

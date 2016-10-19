@@ -1,3 +1,4 @@
+\begin{abstract}
 Scientific simulation workflows have traditionally used
 the storage array as a staging place between the components
 that make up the workflows and employed a high-level
@@ -18,9 +19,9 @@ components that can be used to assemble a variety of online,
 static (ie. submitted as single jobs) workflows from start to finish without
 the need for re-compilation. We leverage the self-describing,
 process size- and placement-independent properties of data exchanged
-by the Adaptable I/O System (ADIOS) to assemble and run three
-Superglue workflows based on three different and widely-used simulation
-codes exporting different data formats.
+by the Adaptable I/O System (ADIOS) as well as the MxN publish-subscribe
+model of Flexpath to assemble and run three Superglue workflows based
+on three different and widely-used simulation codes exporting different data formats.
 We show that the performance cost of a componentized
 approach to assembling workflows is small, especially when considering
 the advantage that is the ability to assemble complete workflows
@@ -30,9 +31,9 @@ building blocks as well as an approach to expand a library of such components,
 which we hope can eventually meet a wide variety of analytical needs
 in the scientific computing community, in the common scenario of
 submitting a workflow as a single job to a supercomputer scheduler.
+\end{abstract}
 
-
-\if{0}
+\if 0
 The workflows are assembled using
 some of the same components, but leading to very different analytical results.
 In this way, we present the building blocks of a library of generic components
@@ -58,4 +59,4 @@ moving purely online worthwhile even though not being forced by platform
 limitations. Support tools necessary to support both models are also discussed
 including offering standardized ``glue'' components for online workflows making
 the transition easier.
-\endif
+\fi
