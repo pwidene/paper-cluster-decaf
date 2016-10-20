@@ -37,7 +37,7 @@
 \def\subsubsectionautorefname{\Snospace}
 \newcommand{\MB}{\,\text{MB}\xspace}
 \newcommand{\GB}{\,\text{GB}\xspace}
-\newcommand{\XX}[1]{\textcolor{red}{XX: #1}}
+\newcommand{\ada}[1]{\textcolor{red}{Ada: #1}}
 \newcommand{\DDT}{D\textsuperscript{2}T~}
 \newcommand{\DDTns}{D\textsuperscript{2}T}
 \newcommand{\subsubsubsection}{\noindent\textbf}
@@ -86,6 +86,7 @@ analysis and visualization toolkits with the capability to reduce, process, and
 otherwise mitigate the raw increase in data volume and throughput requirements
 are increasingly important.
 
+
 Existing workflow engines, such as Kepler~\cite{bertram:2006:kepler} and
 DAGMan~\cite{Malewicz:2006:dagman}, offer flexible ways to assemble components
 with rich functionality to manage the control flow. While these are quite functional, they have not been universally adopted due to complexity and limitations.
@@ -102,19 +103,24 @@ maintain. While this approach using the parallel file system to stage
 intermediate data was sufficient, it is quickly becoming infeasible. The IO
 overhead for using the parallel file system is exceeding acceptable runtime
 percentages forcing a reduction in output and making scientific insights more
-difficult to discover.
+difficult to discover. 
 
 Proposed infrastructure for online workflows are more immature, but can offer
 necessary
 functionality~\cite{zheng:2010:predata,docan:2008:dataspaces,2007:wolf:smartpointer,2008:abbasi:datastager}.
+\ada{this is a very vague claim, doesn't help explain the key
+  problem. the previous paragraph above is, is there more evidence?}
 None of these are fully sufficient for a robust infrastructure, but are being
 extended to incorporate necessary management
 functionality~\cite{2012:dayal:flexpath,2014:dayal:escience,2012:lofstead:txn,2012:lofstead:txn-pdsw,2013:lofstead:txn,2014:lofstead:txn,2016:lofstead:superglue}.
 
+
 While the online shows a lot of potential to improve the scientific discovery
 process, it requires reworking existing workflows. Since this is a non-trivial
 task, it is best to plan when to make the transition to ensure both sufficient
-time and when the benefits outweigh the transition costs. New workflows can
+time and when the benefits outweigh the transition costs. 
+\ada{text before not clear}
+New workflows can
 be made from scratch online lowering the barrier, but there are still costs
 associated with using existing components that may or may not integrate well
 into the online structure.
@@ -129,6 +135,8 @@ into the online structure.
 
 %========================
 
+\ada{these next three paragraphs need to be super shortened and to
+  support the statement One key problem... }
 To address the performance mismatch, Integrated Application Workflows (IAWs)
 are being developed. The easiest way to think of these IAWs is the Unix/Linux
 shell pipe operator to connect commands. The shell connects stdout of one
@@ -168,18 +176,33 @@ implementations; they require a great deal of tuning and/or runtime placement
 control to make them function as desired.
 
 Unlike existing components used in IAWs, SuperGlue
-components do not have a fixed data type.  This one change enables using these
+components do not have a fixed data type. \ada{if this is the key
+  difference, then somewhere mention the fixed type limitation. }
+ This one change enables using these
 components on completely different kinds of simulations that share nothing in
 their output format. Key to making this work is using a typed transport
 mechanism between different components. Many options exist for these transports
 and the particular mechanism selected is not critical. 
 
+\ada{summarize some insight here: what do you leverage/need in order
+  to be able to templetize the glue components, and then to permit the
+same approach to work for instantiating analytics... typed transport
+is one, anything else?}
 In an effort to better understand when choosing one approach for constructing a
 workflow is perferable to another, we have developed a collection of ``filters''
 we call SuperGlue that allow us to experiment with the tradeoffs. This paper
 describes our components and examines some different workflows constructed using
 different techniques to compare when the costs and benefits for one approach are
-a better tradeoff than for others. Our main contribution is the evaluation of
+a better tradeoff than for others. 
+\ada{sell the work. highlight something that says: your contributions are the design (you thought
+  about what's the right lower level functionality you can leverage to
+  make this work), collection of generic SG filters, and demonstration
+through large-scale deployment of three different workloads that the
+approach is 
+expressiveness, can impact productivity since components can be reused
+with minimal intervention, and doesn't impeed performance and
+experimentation at scale. }
+Our main contribution is the evaluation of
 these workflows constructed using different engines and techniques to understand
 when different approaches become viable, such as IAWs, or if cobbling something
 together is sufficient or even superior for certain metrics.
