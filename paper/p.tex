@@ -110,25 +110,36 @@ operating on large quantities of data,
 have also followed this trend of moving the analytical components
 online (ie. executing simultaneously with the driving scientific code).
 A number of scientific workflow engines exist.
-However, while existing workflow engines such as
+However, while workflow engines such as
 Kepler~\cite{bertram:2006:kepler} and
 DAGMan~\cite{Malewicz:2006:dagman}
 offer flexible ways to assemble components
-with rich functionality to manage the control flow, they have not been universally adopted due to complexity and limitations.
+with rich functionality to manage the control flow, they have not been
+universally adopted due to some of their limitations and complexity.
+
 One example illustrating the complexities comes from the Oak Ridge
 Leadership Computing Facility (OLCF).  Kepler was used for several workflows
 for the fusion simulation users.  While the initial goal was that an internal,
-expert resource would create the workflow, including glue components, it should
+expert resource would create the workflow,
+including the data transformation code required
+for that particular scenario (ie. the ``glue code''),
+the workflow should
 be able to be maintained easily by the application scientists. Unfortunately,
-the expert was required regularly as the configuration evolved and scaled. The
-complexities of making and maintaining the glue components as the output
-shifted and managing the deployment was too high.  Falling back to Python
+the expert was required regularly as the configuration evolved and scaled.
+The complexities of maintaining the components and the glue code as the output
+shifted and managing the deployment was too high.
+Even then, the workflow operated offline.
+
+% we already talked about the trend of moving workflows online
+\if 0
+Falling back to Python
 scripts managed by the application scientist proved easier and faster to
 maintain. While this approach using the parallel file system to stage
 intermediate data was sufficient, it is quickly becoming infeasible. The IO
 overhead for using the parallel file system is exceeding acceptable runtime
 percentages forcing a reduction in output and making scientific insights more
 difficult to discover. 
+\fi
 
 Proposed infrastructure for online workflows are more immature, but can offer
 necessary
