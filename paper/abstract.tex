@@ -2,14 +2,15 @@
 
 Scientific simulation workflows have traditionally used the storage array as a
 staging place between the components that make up the workflows and employed a
-high-level task manager to trigger these components. Existing workflow engines
-face challenges launching components on HPC platforms. While the workflow
-manager can trigger workflow components, in the HPC environment, launching
-applications must be done as part of the job script.  Recent work has been
-investigating moving these workflows to purely online models, thus avoiding the
-well-known performance bottleneck of storage arrays.  One key advantage of
-moving to a purely online model is the ability to launch the entire workflow as
-part of a single submission.
+high-level task manager to trigger these components. These workflow engines
+face challenges launching components on HPC platforms because of the batch
+scheduling interface for the machines. While the workflow manager can trigger
+workflow components, in the HPC environment, launching applications must be
+done as part of the job script.  Recent work has been investigating moving
+these workflows to purely online models, thus avoiding the well-known
+performance bottleneck of storage arrays.  One key advantage of moving to a
+purely online model is the ability to launch the entire workflow as part of a
+single submission.
 
 In this work, we present Superglue, an approach for launching an entire
 workflow and connecting the disparate components for HPC simulation workflow.
