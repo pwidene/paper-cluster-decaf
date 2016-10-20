@@ -1,36 +1,31 @@
 \begin{abstract}
-Scientific simulation workflows have traditionally used
-the storage array as a staging place between the components
-that make up the workflows and employed a high-level
-task manager to trigger these components.
-Recent work has been investigating moving these
-workflows to purely online models, thus avoiding the
-well-known performance bottleneck of storage arrays.
-While existing workflow management systems
-can successfully organize and schedule such
-online workflows, the components are generally
-either written from scratch, or they at least require
-significant changes in order to fit into different workflows
-in which the components operate on different
-data formats.
 
-In this work, we present Superglue, a set of generic workflow
-components that can be used to assemble a variety of online,
-static (ie. submitted as single jobs) workflows from start to finish without
-the need for re-compilation. We leverage the self-describing,
-process size- and placement-independent properties of data exchanged
-by the Adaptable I/O System (ADIOS) as well as the MxN publish-subscribe
-model of Flexpath to assemble and run three Superglue workflows based
-on three different and widely-used simulation codes exporting different data formats.
-We show that the performance cost of a componentized
-approach to assembling workflows is small, especially when considering
-the advantage that is the ability to assemble complete workflows
-``out of the box.''
-While keeping in mind performance considerations, we present the
-building blocks as well as an approach to expand a library of such components,
-which we hope can eventually meet a wide variety of analytical needs
-in the scientific computing community, in the common scenario of
-submitting a workflow as a single job to a supercomputer scheduler.
+Scientific simulation workflows have traditionally used the storage array as a
+staging place between the components that make up the workflows and employed a
+high-level task manager to trigger these components. Existing workflow engines
+face challenges launching components on HPC platforms. While the workflow
+manager can trigger workflow components, in the HPC environment, launching
+applications must be done as part of the job script.  Recent work has been
+investigating moving these workflows to purely online models, thus avoiding the
+well-known performance bottleneck of storage arrays.  One key advantage of
+moving to a purely online model is the ability to launch the entire workflow as
+part of a single submission.
+
+In this work, we present Superglue, an approach for launching an entire
+workflow and connecting the disparate components for HPC simulation workflow.
+We leverage the self-describing, process size- and placement-independent
+properties of data exchanged by the Adaptable I/O System (ADIOS) as well as the
+MxN publish-subscribe model of Flexpath to assemble and run three Superglue
+workflows based on three different and widely-used simulation codes exporting
+different data formats.  We show that the performance cost of a componentized
+approach to assembling workflows is small, especially when considering the
+ability to assemble complete workflows ``out of the box.'' While keeping in
+mind performance considerations, we present the building blocks as well as an
+approach to expand a library of such components, which we hope can eventually
+meet a wide variety of analytical needs in the scientific computing community,
+in the common scenario of submitting a workflow as a single job to a
+supercomputer scheduler.
+
 \end{abstract}
 
 \if 0

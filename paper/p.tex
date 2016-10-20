@@ -58,10 +58,20 @@
 \title{SuperGlue: Tradeoffs and Tipping Points for Extreme Scale Workflows}
 
 \author{
-  \IEEEauthorblockN{Alexis Champsaur\IEEEauthorrefmark{1}, Jay Lofstead\IEEEauthorrefmark{2}, Jai Dayal\IEEEauthorrefmark{1}, Matthew Wolf\IEEEauthorrefmark{1}, Greg Eisenhauer\IEEEauthorrefmark{1}, Ada Gavrilovska\IEEEauthorrefmark{1}}
+  \IEEEauthorblockN{
+Alexis Champsaur\IEEEauthorrefmark{1},
+Jay Lofstead\IEEEauthorrefmark{2},
+Jai Dayal\IEEEauthorrefmark{1},
+Matthew Wolf\IEEEauthorrefmark{1},\\
+Greg Eisenhauer\IEEEauthorrefmark{1},
+Ada Gavrilovska\IEEEauthorrefmark{1},
+Matthieu Dreher\IEEEauthorrefmark{3},
+Tom Peterka\IEEEauthorrefmark{3}
+}
   \IEEEauthorblockA{
-    \IEEEauthorrefmark{1}School of Computer Science, Georgia Institute of Technology
-\IEEEauthorrefmark{2}Sandia National Laboratories
+\IEEEauthorrefmark{1}School of Computer Science, Georgia Tech,
+\IEEEauthorrefmark{2}Sandia National Laboratories,
+\IEEEauthorrefmark{3}Argonne National Laboratory
 }
 }
 
@@ -107,12 +117,12 @@ difficult to discover.
 
 Proposed infrastructure for online workflows are more immature, but can offer
 necessary
-functionality~\cite{zheng:2010:predata,docan:2008:dataspaces,2007:wolf:smartpointer,2008:abbasi:datastager}.
+functionality~\cite{zheng:2010:predata,docan:2010:dataspaces,wolf:2002:smartpointer,abbasi:2009:datastager}.
 \ada{this is a very vague claim, doesn't help explain the key
   problem. the previous paragraph above is, is there more evidence?}
 None of these are fully sufficient for a robust infrastructure, but are being
 extended to incorporate necessary management
-functionality~\cite{2012:dayal:flexpath,2014:dayal:escience,2012:lofstead:txn,2012:lofstead:txn-pdsw,2013:lofstead:txn,2014:lofstead:txn,2016:lofstead:superglue}.
+functionality~\cite{dayal:2014:flexpath,dayal:2015:escience,lofstead:2012:txn,lofstead:2013:txn-pdsw,lofstead:2012:txn-metadata,lofstead:2014:txn,lofstead:2016:superglue}.
 
 
 While the online shows a lot of potential to improve the scientific discovery
@@ -158,14 +168,14 @@ supporting online workflows. The more advanced examples incorporate some data
 processing components, sometimes of limited scope, for performing in situ or in
 transit processing. Data Staging~\cite{nisar:2008:staging} and in particular
 data staging with processing
-capabilities~\cite{abbasi:2009:datastaging,ober:seismic}, are a solid step
+capabilities~\cite{abbasi:2009:datastager,ober:seismic}, are a solid step
 forward. The ADIOS IO library~\cite{lofstead:2009:adaptable} was designed with
 this use case in mind. The HDF5 Virtual Object Layer
 (VOL)~\cite{chaarawi:2013:hdf5-vol} was developed to support similar
 functionality.
 
 Several efforts to work through some of the issues related to IAWs have been
-investigated~\cite{karimabadi:2013:catalyst,whitlock:2011:libsim,Glean,Flexpath,dreher:2016:bredala,zheng:2010:predata},
+investigated~\cite{karimabadi:2013:catalyst,whitlock:2011:libsim,Glean,dayal:2014:flexpath,dreher:2016:bredala,zheng:2010:predata},
 and much on-going research in the space promises to expand on some of the
 needed techniques for management and placement.  Some
 scientific codes have been addressing similar constraints for years by
@@ -306,7 +316,7 @@ managing data types, these tools simply offer a portable way to construct
 workflows.
 
 A more active approach to managing workflow throughput was attempted in
-FlexPath~\cite{Dayal:2014:flexpath}. Rather than focusing on the components
+FlexPath~\cite{dayal:2014:flexpath}. Rather than focusing on the components
 themselves, FlexPath offers mechanisms to monitor input queues for workflow
 components and to redeploy components to reduce bottlenecks. It also has the
 ability to redirect output from an online workflow to disk in the case of an
