@@ -98,10 +98,23 @@ analysis and visualization toolkits with the capability to reduce, process, and
 otherwise mitigate the raw increase in data volume and throughput requirements
 are increasingly important.
 
+% here we go directly from in situ argument
+% to examples of workflows. needs transition. ok.
+% also, confusing to go into detail about the existing
+% WMSs here and then have a related work section.
+% reduce.
 
-Existing workflow engines, such as Kepler~\cite{bertram:2006:kepler} and
-DAGMan~\cite{Malewicz:2006:dagman}, offer flexible ways to assemble components
-with rich functionality to manage the control flow. While these are quite functional, they have not been universally adopted due to complexity and limitations.
+Scientific workflows, which 
+capture a series of such analytical steps, usually
+operating on large quantities of data,
+have also followed this trend of moving the analytical components
+online (ie. executing simultaneously with the driving scientific code).
+A number of scientific workflow engines exist.
+However, while existing workflow engines such as
+Kepler~\cite{bertram:2006:kepler} and
+DAGMan~\cite{Malewicz:2006:dagman}
+offer flexible ways to assemble components
+with rich functionality to manage the control flow, they have not been universally adopted due to complexity and limitations.
 One example illustrating the complexities comes from the Oak Ridge
 Leadership Computing Facility (OLCF).  Kepler was used for several workflows
 for the fusion simulation users.  While the initial goal was that an internal,
