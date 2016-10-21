@@ -1,0 +1,124 @@
+LAMMPS + AIO (all in one) Analysis, Titan
+------------------------------------------
+(note T1, T2 etc are per-timestep:
+  [LMP output] + [transport] + [full AIO analysis]
+)
+
+LAMMPS squared units  : 250000
+LMP Atoms             : 501001
+Proc (LAMMPS - AIO)   : 4 - 1
+AIO per-rank size     : 20040040
+Workflow start-to-end : 115.261
+T1                    : 0.760
+T2                    : 0.491
+T3                    : 1.084
+T4                    : 0.808
+T5                    : 0.248
+
+LAMMPS squared units  : 1000000
+LMP Atoms             : 2002001
+Proc (LAMMPS - AIO)   : 16 - 4
+AIO per-rank size     : 20020040
+Workflow start-to-end : 148.693
+T1                    : 0.875
+T2                    : 0.541
+T3                    : 1.148
+T4                    : 0.560
+T5                    : 1.000
+
+LAMMPS squared units  : 4000000
+LMP Atoms             : 8004001
+Proc (LAMMPS - AIO)   : 64 - 16
+AIO per-rank size     : 20010040
+Workflow start-to-end : 154.649
+T1                    : 0.760
+T2                    : 0.920
+T3                    : 1.206
+T4                    : 1.348
+T5                    : 0.468
+
+LAMMPS squared units  : 16000000
+LMP Atoms             : 32008001
+Proc (LAMMPS - AIO)   : 256 - 64
+AIO per-rank size     : 20005040
+Workflow start-to-end : 155.317
+T1                    : 0.958
+T2                    : 1.044
+T3                    : 0.793
+T4                    : 0.707
+T5                    : 1.600
+
+LAMMPS squared units  : 64000000
+LMP Atoms             : 128048005
+Proc (LAMMPS - AIO)   : 1024 - 256
+AIO per-rank size     : 20007520
+Workflow start-to-end : 167.390
+T1                    : 1.163
+T2                    : 1.268
+T3                    : 1.207
+T4                    : 1.829
+T5                    : 1.107
+
+
+LAMMPS full workflow  Titan
+------------------------------------------
+
+LAMMPS squared units  : 250000
+LMP Atoms             : 501001
+lmp-sel-mag-hist      : 4 - 1 - 1 - 1 
+select per-rank size  : 20040040
+Workflow start-to-end : 116.513
+T1                    : 1.589
+T2                    : 2.149
+T3                    : 1.594
+T4                    : 2.205
+T5                    : 1.549
+
+LAMMPS squared units  : 1000000
+LMP Atoms             : 2002001
+lmp-sel-mag-hist      : 16 - 4 - 4 - 2
+select per-rank size  : 20020040
+Workflow start-to-end : 149.802
+T1                    : 2.491
+T2                    : 2.982
+T3                    : 2.533
+T4                    : 2.907
+T5                    : 2.238
+
+LAMMPS squared units  : 4000000
+LMP Atoms             : 8004001
+lmp-sel-mag-hist      : 64 - 16 - 16 - 8
+select per-rank size  : 20020040
+Workflow start-to-end : 157.654
+T1                    : 2.648
+T2                    : 2.723
+T3                    : 1.731
+T4                    : 3.581
+T5                    : 3.462
+
+LAMMPS squared units  : 16000000
+LMP Atoms             : 32008001
+lmp-sel-mag-hist      : 256 - 64 - 64 - 16
+select per-rank size  : 20005040
+Workflow start-to-end : 157.979
+T1                    : 4.231
+T2                    : 3.978
+T3                    : 2.645
+T4                    : 4.363
+T5                    : 3.960
+
+LAMMPS squared units  : 64000000
+LMP Atoms             : 128048005
+lmp-sel-mag-hist      : 1024 - 256 - 256 - 64
+select per-rank size  : 20007520
+Workflow start-to-end : 168.785
+T1                    : 12.124
+T2                    : 5.368
+T3                    : 4.846
+T4                    : 5.077
+T5                    : 3.470
+
+
+
+
+
