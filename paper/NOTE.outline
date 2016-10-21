@@ -65,9 +65,13 @@ Elements of the evaluation:
    Configuration: ie, process sizes.
    Launch script snippets to show specifically
    how the compiled elements fit into different workflows.
+ - LMP, GTCP: use some of the existing measurements.
+ - GROMACS needs some perf measurements: weak scaling, 5 points.
  - Performance evaluation of componentized LAMMPS workflow
    vs. LAMMPS workflow using a custom, monolithic analytics
-   component.
+   component (all-in-one analysis or LAMMPS-AIO).
+   Use ~5 weak scaling points, timed start-to-end for each timestep
+   and for whole workflow.   
    Expectation: performance loss, but not too much.
  - 1 strong scaling chart, and 1 weak scaling table. Maybe?
 
