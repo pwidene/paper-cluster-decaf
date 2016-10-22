@@ -1097,6 +1097,13 @@ at which the simulation would normally output its data to disk.
 \section{Evaluation}
 \label{s:eval}
 
+The goals of the evaluation are to demonstrate the \ada{state goals
+  clearly to set correct expectations, see if this is correct or needs
+  to be expanded:} the feasibility of reusing
+  SuperGlue components across workloads, and the ability of the
+  SuperGlue components to maintain similar performance and scaling
+levels as ``hand-tuned'' workflow compositions. 
+
 The evaluation is performed on Titan, the Cray XK7 machine at Oak Ridge
 National Laboratory. It consists of 18,688 nodes each with 1 16-core AMD
 Opteron CPU and 32 GB of RAM. The interconnect is a Gemini network. There is an
@@ -1144,6 +1151,7 @@ node.
   \vspace{-0.25in}
 \end{figure}
 
+\ada{add axis labels and units to plots. }
   
 
 \begin{table*}[tbp]
@@ -1311,17 +1319,17 @@ correctly.
 \caption{GTCP Weak Scaling Evaluation Configuration Settings}
 \label{tab:eval-weak-gtcp-1}
 \vspace{-0.15in}
-\begin{tabular}{|l|l|l|l|l|l|l|}
+\begin{tabular}{|l|l|l|l|l|l|l|l|}
 \hline
-GTCP Procs & Select Procs & Dim-Reduce 1 & Dim-Reduce 2 & Histogram Procs & Total Data Size & End-to-End Time\\
+Configuration & GTCP Procs & Select Procs & Dim-Reduce 1 & Dim-Reduce 2 & Histogram Procs & Total Data Size & End-to-End Time\\
 \hline
-64 & 10 & 6 & 6 & 2 & 918,303,680 & 92.724\\
+C1 & 64 & 10 & 6 & 6 & 2 & 918,303,680 & 92.724\\
 \hline
-84 & 16 & 10 & 10 & 2 & 1,434,599,936 & 115.232\\
+C2 & 84 & 16 & 10 & 10 & 2 & 1,434,599,936 & 115.232\\
 \hline
-156 & 18 & 14 & 14 & 4 & 2,065,583,520 & 97.266\\
+C3 & 156 & 18 & 14 & 14 & 4 & 2,065,583,520 & 97.266\\
 \hline
-234 & 25 & 19 & 19 & 5 & 2,811,256,000 & 96.359\\
+C4 & 234 & 25 & 19 & 19 & 5 & 2,811,256,000 & 96.359\\
 \hline
 \end{tabular}
 \vspace{-0.15in}
@@ -1333,17 +1341,17 @@ GTCP Procs & Select Procs & Dim-Reduce 1 & Dim-Reduce 2 & Histogram Procs & Tota
 \caption{GTCP Weak Scaling Component Performance}
 \label{tab:eval-weak-gtcp-2}
 \vspace{-0.15in}
-\begin{tabular}{|p{0.67 in}|p{0.67 in}|p{0.67 in}|p{0.65 in}|}
+\begin{tabular}{|p{0.1 in}|p{0.67 in}|p{0.65 in}|p{0.65 in}|p{0.65 in}|}
 \hline
-Select Average Time & Dim-Reduce 1 Average Time & Dim-Reduce 2 Average Time & Histogram Average Time\\
+ & Select Average Time & Dim-Reduce 1 Average Time & Dim-Reduce 2 Average Time & Histogram Average Time\\
 \hline
-1.55 & 1.58 & 1.34 & 0.6\\
+C1 & 1.55 & 1.58 & 1.34 & 0.6\\
 \hline
-2.34 & 1.58 & 1.72 & 0.78\\
+C2 & 2.34 & 1.58 & 1.72 & 0.78\\
 \hline
-2.31 & 1.73 & 1.54 & 0.713\\
+C3 & 2.31 & 1.73 & 1.54 & 0.713\\
 \hline
-2.19 & 1.76 & 1.68 & 0.89\\
+C4 & 2.19 & 1.76 & 1.68 & 0.89\\
 \hline
 \end{tabular}
 \vspace{-0.25in}
