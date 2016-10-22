@@ -42,7 +42,7 @@ ISSN={1082-8907}, }
  address = {Piscataway, NJ, USA},
  }
 
-@inproceedings{abbasi:2009:datastaging,
+@inproceedings{abbasi:2009:datastager,
   author    = {Hasan Abbasi and
                Matthew Wolf and
                Greg Eisenhauer and
@@ -244,7 +244,7 @@ ISSN={},}
   year = 2013
 }
 
-@inproceedings{Dayal:2014:flexpath,
+@inproceedings{dayal:2014:flexpath,
  author = {Jai Dayal and Drew Bratcher and Hasan Abbasi and Greg Eisenhauer and Scott Klasky and Norbert Podhorszki and Karsten Schwan and Matthew Wolf},
  title = {{Flexpath: Type-Based Publish/Subscribe System for Large-scale Science Analytics}},
  booktitle = {Cluster, Cloud, and Grid},
@@ -308,4 +308,164 @@ ISSN={},}
   pages={133--141},
   year={2006},
   publisher={Wiley Online Library}
+}
+
+@INPROCEEDINGS{wolf:2002:smartpointer,
+author={M. Wolf and Zhongtang Cai and Weiyun Huang and K. Schwan},
+booktitle={Supercomputing, ACM/IEEE 2002 Conference},
+title={SmartPointers: Personalized Scientific Data Portals In Your Hand},
+year={2002},
+pages={20-20},
+abstract={The SmartPointer system provides a paradigm for utilizing multiple light-weight client endpoints in a real-time scientific visualization infrastructure. Together, the client and server infrastructure form a new type of data portal for scientific computing. The clients can be used to personalize data for the needs of the individual scientist. This personalization of a shared dataset is designed to allow multiple scientists, each with their laptops or iPaqs to explore the dataset from different angles and with different personalized filters. As an example, iPaq clients can display 2D derived data functions which can be used to dynamically update and annotate the shared data space, which might be visualized separately on a large immersive display such as a CAVE. Measurements are presented for such a system, built upon the ECho middleware system developed at Georgia Tech.},
+keywords={Collaboration;Collaborative software;Collaborative work;Computational modeling;Data visualization;Filters;Instruments;Portable computers;Portals;Two dimensional displays},
+doi={10.1109/SC.2002.10003},
+ISSN={1063-9535},
+month={Nov},}
+
+@article{docan:2010:dataspaces,
+author = {C. Docan and M. Parashar and S. Klasky},
+title = {{DataSpaces}: An Interaction and Coordination Framework for Coupled Simulation Workflows},
+abstract = {Emerging high-performance distributed computing environ-
+ments are enabling new end-to-end formulations in science
+and engineering that involve multiple interacting processes
+and data-intensive application workflows. For example, cur-
+rent fusion simulation efforts are exploring coupled models
+and codes that simultaneously simulate separate application
+processes, such as the core and the edge turbulence, and run
+on different high performance computing resources. These
+components need to interact, at runtime, with each other
+and with services for data monitoring, data analysis and vi-
+sualization, and data archiving. As a result, they require effi-
+cient support for dynamic and flexible couplings and interac-
+tions, which remains a challenge. This paper presents Data-
+Spaces, a flexible interaction and coordination substrate that
+addresses this challenge. DataSpaces essentially implements
+a semantically specialized virtual shared space abstraction
+that can be associatively accessed by all components and
+services in the application workflow. It enables live data
+to be extracted from running simulation components, in-
+dexes this data online, and then allows it to be monitored,
+queried and accessed by other components and services via
+the space using semantically meaningful operators. The un-
+derlying data transport is asynchronous, low-overhead and
+largely memory-to-memory. The design, implementation,
+and experimental evaluation of DataSpaces using a coupled
+fusion simulation workflow is presented.},
+journal = {HPDC '10: Proceedings of the 18th international symposium on High performance distributed computing},
+year = {2010},
+address = {Chicago, IL, USA},
+}
+
+@INPROCEEDINGS{dayal:2015:escience,
+author={J. Dayal and J. Lofstead and G. Eisenhauer and K. Schwan and M. Wolf and H. Abbasi and S. Klasky},
+booktitle={e-Science (e-Science), 2015 IEEE 11th International Conference on},
+title={SODA: Science-Driven Orchestration of Data Analytics},
+year={2015},
+pages={475-484},
+abstract={As scientific simulation applications evolve on the path towards exascale, a new model of scientific inquiry is required where concurrently with the running simulation, online analytics operate on the data it produces. By avoiding offline data storage except when absoluately necessary, it enables speeding up the scientific discovery process by providing rapid insights into the simulated science phenomena and affording more frequent, detailed data analytics than is possible with the traditional purely offline approach of using disk for intermediate data storage. However, a challenge for online analytics is to respond to behavior dynamics caused by changing simulation outputs and by unforeseen events on the underlying hardware/software platforms. This paper presents SODA, a set of run-time abstractions for online orchestration of data analytics, realized by embedding analytics tasks into workstations that monitor component behavior and enable responses to run-time changes in their resource demands and in the platform's resource availability. For high end simulations running on a leadership class machine, experimental evaluations show SODA can invoke efficient orchestration operations responding to a diverse set of run-time dynamics at different granularities to meet end-user and analysis specific requirements.},
+keywords={Internet;data analysis;hardware-software codesign;object-oriented programming;scientific information systems;storage management;SODA;behavior dynamics;component behavior;data analytics;hardware/software platform;intermediate data storage;offline data storage;online analytics;online orchestration;run-time abstraction;science-driven orchestration;scientific discovery process;scientific inquiry;scientific simulation application;simulated science phenomena;simulation output;Analytical models;Data analysis;Data models;Monitoring;Pipelines;Runtime;Workstations;Data Analytics;Data Staging;Runtime Management;Scalable I/O;Visualization;in-Situ;resource sharing},
+doi={10.1109/eScience.2015.59},
+month={Aug},}
+
+@INPROCEEDINGS{lofstead:2012:txn,
+author={J. Lofstead and J. Dayal and K. Schwan and R. Oldfield},
+booktitle={2012 IEEE International Conference on Cluster Computing},
+title={D2T: Doubly Distributed Transactions for High Performance and Distributed Computing},
+year={2012},
+pages={90-98},
+abstract={Current exascale computing projections suggest rather than a monolithic simulation running for the majority of the machine, a collection of components comprising the scientific discovery process will be employed in an online workflow. This move to an online workflow scenario requires knowledge that inter-step operations are completed and correct before the next phase begins. Further, dynamic load balancing or fault tolerance techniques may dynamically deploy or redeploy resources for optimal use of computing resources. These newly configured resources should only be used if they are successfully deployed. Our D2T system offers a mechanism to support these kinds of operations by providing database-like transactions with distributed servers and clients. Ultimately, with adequate hardware support, full ACID compliance is possible for the transactions. To prove the viability of this approach, we show that the D2T protocol has less than 1.2 seconds of overhead using 4096 clients and 32 servers with good scaling characteristics using this initial prototype implementation.},
+keywords={distributed processing;fault tolerant computing;natural sciences computing;protocols;resource allocation;ACID compliance;D2T protocol;database-like transactions;distributed computing;distributed servers;doubly distributed transactions;dynamic load balancing;exascale computing projections;fault tolerance techniques;high performance computing;inter-step operations;monolithic simulation;online workflow;scientific discovery process;Computational modeling;Couplings;Fault tolerance;Fault tolerant systems;Protocols;Scalability;Servers;HPC;IO;IO tuning;data staging;exascale;transaction},
+doi={10.1109/CLUSTER.2012.79},
+ISSN={1552-5244},
+month={Sept},}
+
+@inproceedings{lofstead:2013:txn-pdsw,
+ author = {Lofstead, Jay and Dayal, Jai and Jimenez, Ivo and Maltzahn, Carlos},
+ title = {Efficient Transactions for Parallel Data Movement},
+ booktitle = {Proceedings of the 8th Parallel Data Storage Workshop},
+ series = {PDSW '13},
+ year = {2013},
+ isbn = {978-1-4503-2505-9},
+ location = {Denver, Colorado},
+ pages = {1--6},
+ numpages = {6},
+ url = {http://doi.acm.org/10.1145/2538542.2538567},
+ doi = {10.1145/2538542.2538567},
+ acmid = {2538567},
+ publisher = {ACM},
+ address = {New York, NY, USA},
+}
+
+@inproceedings{lofstead:2014:txn,
+ author = {Lofstead, Jay and Dayal, Jai and Jimenez, Ivo and Maltzahn, Carlos},
+ title = {Efficient, Failure Resilient Transactions for Parallel and Distributed Computing},
+ booktitle = {Proceedings of the 2014 International Workshop on Data Intensive Scalable Computing Systems},
+ series = {DISCS '14},
+ year = {2014},
+ isbn = {978-1-4799-7038-4},
+ location = {New Orleans, Louisiana},
+ pages = {17--24},
+ numpages = {8},
+ url = {http://dx.doi.org/10.1109/DISCS.2014.13},
+ doi = {10.1109/DISCS.2014.13},
+ acmid = {2689688},
+ publisher = {IEEE Press},
+ address = {Piscataway, NJ, USA},
+}
+
+@INPROCEEDINGS{lofstead:2012:txn-metadata,
+    author = {Jay Lofstead and Jai Dayal},
+    title = {Transactional Parallel Metadata Services for Application Workdflows},
+    abstract = {Scientific simulations have a different relationship with all of the data generated than many data analysis systems that support applications like the Large Hadron Collider and the SLOAN Sky Survey. In many cases, simulations need to generate large number of intermediate data sets that ultimately are thrown away once some analysis routines are applied to the data. This generates some summarized, derived result that inspires some scientific insight. Traditionally, these routines use the storage array to persist the intermediate results between each step of the data analysis process. The volume and frequency of this data can be overwhelming compared with the available IO bandwidth on the machine. To handle this volume and frequency, current research efforts are determining how to move the storage of intermediate data from the storage array into the memory of the compute area. Then, the analysis routines are incorporated to create Integrated Application Workflows (IAWs). Data staging techniques require some mechanism to replace the semantics offered by the file system to control data movement and access. As part of an HPC-focused transaction services project, a first pass at a transactional metadata service for in compute area data storage is being developed.},
+    booktitle = {In Proceedings of High Performance Computing Meets Databases at Supercomputing},
+    year = {2012}
+}
+
+@misc{lofstead:2016:superglue,
+title={SuperGlue: Standardizing Glue Components for HPC Workflows},
+author={Lofstead, Jay and Champsaur, Alexis and Dayal, Jai and Wolf, Matthew and Eisenhauer, Greg},
+booktitle={IEEE Cluster 2016},
+Address={Taipei, Taiwan},
+Month={September},
+Year={2016},
+}
+
+@techreport{deelman:2015:workflows-report,
+   author = "Ewa Deelman and Tom Peterka and Ilkay Altintas and Christopher Carothers and Kerstin Kleese van Dam and Kenneth Moreland and Manish Parashar and Lavanya Ramakrishnan and Michela Taufer and Jeffrey Vetter",
+   title = "{The Future of Scientific Workflows Report of the DOE NGNS/CS Scientific Workflows Workshop}",
+   month = "April",
+   year = "2015",
+   location = "Rockville, MD",
+   url = "http://science.energy.gov/~/media/ascr/pdf/programdocuments/docs/workflows_final_report.pdf"
+}
+
+@article{deelman:2015:pegasus,
+author={Ewa Deelman and Karan Vahi and Gideon Juve and Mats Rynge and Scott Callaghan and Philip J Maechling and Rajiv Mayani and Weiwei Chen and Ferreira da Silva, Rafael and Miron Livny and Kent Wenger},
+url={http://pegasus.isi.edu/publications/2014/2014-fgcs-deelman.pdf},
+title={Pegasus: a Workflow Management System for Science Automation},
+journal={Future Generation Computer Systems},
+volume={46},
+pages={17--35},
+year={2015},
+note={Funding Acknowledgements: NSF ACI SDCI 0722019, NSF ACI SI2-SSI 1148515 and NSF OCI-1053575},
+doi={10.1016/j.future.2014.10.008}
+}
+
+@article{tejedor:2015:pycompss,
+author = {Tejedor, Enric and Becerra, Yolanda and Alomar, Guillem and Queralt, Anna and Badia, Rosa M and Torres, Jordi and Cortes, Toni and Labarta, Jesús},
+title = {PyCOMPSs: Parallel computational workflows in Python},
+year = {2015},
+doi = {10.1177/1094342015594678},
+URL = {http://hpc.sagepub.com/content/early/2015/08/19/1094342015594678.abstract},
+eprint = {http://hpc.sagepub.com/content/early/2015/08/19/1094342015594678.full.pdf+html},
+journal = {International Journal of High Performance Computing Applications}
+}
+
+@inproceedings{dorier:2015:in-situ-lessons,
+  title={Lessons learned from building in situ coupling frameworks},
+  author={Dorier, Matthieu and Dreher, Matthieu and Peterka, Tom and Wozniak, Justin M and Antoniu, Gabriel and Raffin, Bruno},
+  booktitle={Proceedings of the First Workshop on In Situ Infrastructures for Enabling Extreme-Scale Analysis and Visualization},
+  pages={19--24},
+  year={2015},
+  organization={ACM}
 }

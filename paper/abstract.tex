@@ -1,0 +1,58 @@
+\begin{abstract}
+
+Scientific simulation workflows have traditionally used the storage array as a
+staging place between the components that make up the workflows and employed a
+high-level task manager to trigger these components. These workflow engines
+face challenges launching components on HPC platforms because of the batch
+scheduling interface for the machines. While the workflow manager can trigger
+workflow components, in the HPC environment, launching applications must be
+done as part of the job script.  Recent work has been investigating moving
+these workflows to purely online models, thus avoiding the well-known
+performance bottleneck of storage arrays.  One key advantage of moving to a
+purely online model is the ability to launch the entire workflow as part of a
+single submission.
+
+In this work, we present Superglue, an approach for launching an entire
+workflow and connecting the disparate components for HPC simulation workflow.
+We leverage the self-describing, process size- and placement-independent
+properties of data exchanged by the Adaptable I/O System (ADIOS) as well as the
+MxN publish-subscribe model of Flexpath to assemble and run three Superglue
+workflows based on three different and widely-used simulation codes exporting
+different data formats.  We show that the performance cost of a componentized
+approach to assembling workflows is small, especially when considering the
+ability to assemble complete workflows ``out of the box.'' While keeping in
+mind performance considerations, we present the building blocks as well as an
+approach to expand a library of such components, which we hope can eventually
+meet a wide variety of analytical needs in the scientific computing community,
+in the common scenario of submitting a workflow as a single job to a
+supercomputer scheduler.
+
+\end{abstract}
+
+\if 0
+The workflows are assembled using
+some of the same components, but leading to very different analytical results.
+In this way, we present the building blocks of a library of generic components
+
+
+Scientific simulation workflows are becoming a 
+Considering the well-known bottleneck that is the persistent storage array,
+
+
+Scientific simulation workflows have traditionally focused on using the storage
+array as a staging place between components and employ a high level task
+manaager to trigger components. Recent work has been investigating moving these
+workflows to purely online models avoiding the storage array bottlenecks. This
+transition is not cost free, but there are also potentially enormous advantages.
+For example, by moving online, more the data movement is limited by bisection
+bandwidth rather than storage bandwidth. However, making existing tools work
+online may take some modification and adding in the ``glue'' components required
+to translate the output from one component to the input for the next are no
+longer simple scripts.
+
+This paper examines these tradeoffs and lays out when the advantages may make
+moving purely online worthwhile even though not being forced by platform
+limitations. Support tools necessary to support both models are also discussed
+including offering standardized ``glue'' components for online workflows making
+the transition easier.
+\fi

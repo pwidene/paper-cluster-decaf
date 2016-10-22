@@ -37,7 +37,7 @@
 \def\subsubsectionautorefname{\Snospace}
 \newcommand{\MB}{\,\text{MB}\xspace}
 \newcommand{\GB}{\,\text{GB}\xspace}
-\newcommand{\XX}[1]{\textcolor{red}{XX: #1}}
+\newcommand{\ada}[1]{\textcolor{red}{Ada: #1}}
 \newcommand{\DDT}{D\textsuperscript{2}T~}
 \newcommand{\DDTns}{D\textsuperscript{2}T}
 \newcommand{\subsubsubsection}{\noindent\textbf}
@@ -55,36 +55,29 @@
 
 \begin{document}
 
-\title{Turning Workflows Online: Tradeoffs and Tipping Points for Extreme Scale Workflows}
+\title{SuperGlue: Tradeoffs and Tipping Points for Extreme Scale Workflows}
 
 \author{
-  \IEEEauthorblockN{Alexis Champsaur\IEEEauthorrefmark{1}, Jay Lofstead\IEEEauthorrefmark{2}, Jai Dayal\IEEEauthorrefmark{1}, Matthew Wolf\IEEEauthorrefmark{1}, Greg Eisenhauer\IEEEauthorrefmark{1}, Ada Gavrilovska\IEEEauthorrefmark{1}}
-    \IEEEauthorrefmark{1}School of Computer Science, Georgia Institute of Technology}
-  \IEEEauthorblockA{\IEEEauthorrefmark{2}Sandia National Laboratories
+  \IEEEauthorblockN{
+Alexis Champsaur\IEEEauthorrefmark{1},
+Jay Lofstead\IEEEauthorrefmark{2},
+Jai Dayal\IEEEauthorrefmark{1},
+Matthew Wolf\IEEEauthorrefmark{1},\\
+Greg Eisenhauer\IEEEauthorrefmark{1},
+Ada Gavrilovska\IEEEauthorrefmark{1},
+Matthieu Dreher\IEEEauthorrefmark{3},
+Tom Peterka\IEEEauthorrefmark{3}
+}
+  \IEEEauthorblockA{
+\IEEEauthorrefmark{1}School of Computer Science, Georgia Tech,
+\IEEEauthorrefmark{2}Sandia National Laboratories,
+\IEEEauthorrefmark{3}Argonne National Laboratory
+}
 }
 
 \maketitle
 
-\begin{abstract}
-
-Scientific simulation workflows have traditionally focused on using the storage
-array as a staging place between components and employ a high level task
-manaager to trigger components. Recent work has been investigating moving these
-workflows to purely online models avoiding the storage array bottlenecks. This
-transition is not cost free, but there are also potentially enormous advantages.
-For example, by moving online, more the data movement is limited by bisection
-bandwidth rather than storage bandwidth. However, making existing tools work
-online may take some modification and adding in the ``glue'' components required
-to translate the output from one component to the input for the next are no
-longer simple scripts.
-
-This paper examines these tradeoffs and lays out when the advantages may make
-moving purely online worthwhile even though not being forced by platform
-limitations. Support tools necessary to support both models are also discussed
-including offering standardized ``glue'' components for online workflows making
-the transition easier.
-
-\end{abstract}
+\input{abstract}
 
 %\category{D.4}{Software}{Operating Systems}
 %\category{D.4.7}{Operating Systems}{Organization and Design}[hierarchical design]
@@ -105,42 +98,106 @@ analysis and visualization toolkits with the capability to reduce, process, and
 otherwise mitigate the raw increase in data volume and throughput requirements
 are increasingly important.
 
-Existing workflow engines, such as Kepler~\cite{bertram:2006:kepler} and
-DAGMan~\cite{Malewicz:2006:dagman}, offer flexible ways to assemble components
-with rich functionality to manage the control flow. While these are quite functional, they have not been universally adopted due to complexity and limitations.
-One example illustrating the complexities comes from the Oak Ridge
-Leadership Computing Facility (OLCF).  Kepler was used for several workflows
-for the fusion simulation users.  While the initial goal was that an internal,
-expert resource would create the workflow, including glue components, it should
-be able to be maintained easily by the application scientists. Unfortunately,
-the expert was required regularly as the configuration evolved and scaled. The
-complexities of making and maintaining the glue components as the output
-shifted and managing the deployment was too high.  Falling back to Python
+% here we go directly from in situ argument
+% to examples of workflows. needs transition. ok.
+% also, confusing to go into detail about the existing
+% WMSs here and then have a related work section.
+% reduce.
+
+Scientific workflows, which capture a series of such analytical steps, usually
+operating on large quantities of data, have also followed this trend of moving
+the analytical components online (i.e., executing simultaneously with the driving
+scientific code). While workflow engines such as
+Kepler~\cite{bertram:2006:kepler} and DAGMan~\cite{Malewicz:2006:dagman} offer
+flexible ways to assemble components with rich functionality to manage the
+control flow, they have not been universally adopted due to some of their
+limitations and complexity in the HPC environment.  Distributed-Area Computing
+(DAC) workflow management
+systems~\cite{tejedor:2015:pycompss,deelman:2015:pegasus} and HPC workflow
+management systems~\cite{dorier:2015:in-situ-lessons} may need to interoperate
+for some scenarios~\cite{deelman:2015:workflows-report}. While both exist, to
+date they have been developed separately in different communities. We have only
+just recently begun to develop a plan and a prototype for integrating such
+heterogeneous workflow systems. This paper focuses on managing the HPC portion of
+these heterogeneous workflows.
+
+%Figure 1 is an example of such an integration.  It shows a top level
+%DAC workflow with one of the nodes in the DAC workflow graph being an HPC
+%workflow graph running on a supercomputing center. The interfaces between the
+%two WMSs occur from DAC to HPC and from HPC to DAC. The former interface
+%requires the exchange of the HPC subworkflow graph, which presumably was
+%defined by the user through the interaction with the top-level DAC WMS, and the
+%exchange of data products produced by the DAC that need to be further processed
+%by the HPC subworkflow. The latter interface, from HPC to DAC, involves the
+%transfer of data products only.
+
+One example illustrating the complexities comes from the Oak Ridge Leadership
+Computing Facility (OLCF).  Kepler was used for several workflows for the
+fusion simulation users.  While the initial goal was that an internal, expert
+resource would create the workflow, including the data transformation code
+required for that particular scenario (i.e., the ``glue code''), the workflow
+should be able to be maintained easily by the application scientists.
+Unfortunately, the expert was required regularly as the configuration evolved
+and scaled.  The complexities of maintaining the components and the glue code
+as the output shifted and managing the deployment was too high.  Even then, the
+workflow operated offline.
+
+% we already talked about the trend of moving workflows online
+\if 0
+Falling back to Python
 scripts managed by the application scientist proved easier and faster to
 maintain. While this approach using the parallel file system to stage
 intermediate data was sufficient, it is quickly becoming infeasible. The IO
 overhead for using the parallel file system is exceeding acceptable runtime
 percentages forcing a reduction in output and making scientific insights more
-difficult to discover.
+difficult to discover. 
+\fi
 
 Proposed infrastructure for online workflows are more immature, but can offer
 necessary
-functionality~\cite{zheng:2010:predata,docan:2008:dataspaces,2007:wolf:smartpointer,2008:abbasi:datastager}.
-None of these are fully sufficient for a robust infrastructure, but are being
-extended to incorporate necessary management
-functionality~\cite{2012:dayal:flexpath,2014:dayal:escience,2012:lofstead:txn,2012:lofstead:txn-pdsw,2013:lofstead:txn,2014:lofstead:txn,2016:lofstead:superglue}.
+functionality~\cite{zheng:2010:predata,docan:2010:dataspaces,wolf:2002:smartpointer,abbasi:2009:datastager}.
+For example, in PreDatA~\cite{zheng:2010:predata}, separate applications are
+run to offer different resilience domains, but the actual placement of
+operators may be different depending on the performance characteristics requiring
+coding changes for each placement decision.
+DataSpaces~\cite{docan:2010:dataspaces} offers a way to map data from one
+application to another, but it has no mechanisms to manage what is a complete
+data set, when it begins in an output stream, and when it ends. The user has to
+determine if what is being requested is complete and correct or not.
+SmartPointer~\cite{wolf:2002:smartpointer} and
+DataStager~\cite{abbasi:2009:datastager} both offer examples of integrated
+workflows, but the construction is completely custom and not portable to other
+workflows.
+%\ada{this is a very vague claim, doesn't help explain the key
+  problem. the previous paragraph above is, is there more evidence?}
+This lack of a robust infrastructure and the difficulty in constructing a
+single workflow job submission limit adoption. Newer work is extending these
+systems incorporate necessary management
+functionality~\cite{dayal:2014:flexpath,dayal:2015:escience,lofstead:2012:txn,lofstead:2013:txn-pdsw,lofstead:2012:txn-metadata,lofstead:2014:txn,lofstead:2016:superglue}
+to aid in general workflow construction.
 
 While the online shows a lot of potential to improve the scientific discovery
 process, it requires reworking existing workflows. Since this is a non-trivial
-task, it is best to plan when to make the transition to ensure both sufficient
-time and when the benefits outweigh the transition costs. New workflows can
+task, tools that can simplify creating an efficient workflow within a single job
+submission is crucial to adoption.
+%\ada{text before not clear}
+New workflows can
 be made from scratch online lowering the barrier, but there are still costs
 associated with using existing components that may or may not integrate well
 into the online structure.
 
+%The ``killer app'' for workflows, both offline and online, is being able to
+%submit a single job that is capable of running the entire workflow. Existing
+%techniques to make this work requires machine reservations or special
+%permission for automated connections between the management machine and the
+%large scale platform.  SuperGlue's approach bridges the connectivity problems
+%and addresses the data type mismatches common when data flows from one
+%component to the next.
 
-========================
+%========================
 
+\ada{these next three paragraphs need to be super shortened and to
+  support the statement One key problem... }
 To address the performance mismatch, Integrated Application Workflows (IAWs)
 are being developed. The easiest way to think of these IAWs is the Unix/Linux
 shell pipe operator to connect commands. The shell connects stdout of one
@@ -162,14 +219,14 @@ supporting online workflows. The more advanced examples incorporate some data
 processing components, sometimes of limited scope, for performing in situ or in
 transit processing. Data Staging~\cite{nisar:2008:staging} and in particular
 data staging with processing
-capabilities~\cite{abbasi:2009:datastaging,ober:seismic}, are a solid step
+capabilities~\cite{abbasi:2009:datastager,ober:seismic}, are a solid step
 forward. The ADIOS IO library~\cite{lofstead:2009:adaptable} was designed with
 this use case in mind. The HDF5 Virtual Object Layer
 (VOL)~\cite{chaarawi:2013:hdf5-vol} was developed to support similar
 functionality.
 
 Several efforts to work through some of the issues related to IAWs have been
-investigated~\cite{karimabadi:2013:catalyst,whitlock:2011:libsim,Glean,Flexpath,dreher:2016:bredala,zheng:2010:predata},
+investigated~\cite{karimabadi:2013:catalyst,whitlock:2011:libsim,Glean,dayal:2014:flexpath,dreher:2016:bredala,zheng:2010:predata},
 and much on-going research in the space promises to expand on some of the
 needed techniques for management and placement.  Some
 scientific codes have been addressing similar constraints for years by
@@ -179,26 +236,50 @@ observation, however, is that there is a lack of portability to the resulting
 implementations; they require a great deal of tuning and/or runtime placement
 control to make them function as desired.
 
-This paper describes our work on SuperGlue, a set of generic, reusable
-components for composing scientific workflows. These are distributed data
-analysis and manipulation tools that can be chained together to form a variety
-of real-time workflows providing analytical results during the execution of the
-primary scientific code.  Unlike existing components used in IAWs, SuperGlue
-components do not have a fixed data type.  This one change enables using these
+Unlike existing components used in IAWs, SuperGlue
+components do not have a fixed data type. \ada{if this is the key
+  difference, then somewhere mention the fixed type limitation. }
+ This one change enables using these
 components on completely different kinds of simulations that share nothing in
 their output format. Key to making this work is using a typed transport
 mechanism between different components. Many options exist for these transports
 and the particular mechanism selected is not critical. 
 
-While the main contribution of this work is the design of generic {\em glue
-  code}, the {\em analytical} components we use in the workflows we present
-here are designed using the same approach. For example, an index selection tool
-is more of a glue component while a histogram component is more analytical.
-Still, we design both types of components as single MPI executables with similar
-input and output interfaces launched using similar configuration options.  By
-blurring the line between generic glue components and generic analytical
-components, we present a flexible way to assemble scientific workflows without
-having to write any additional code. 
+\ada{summarize some insight here: what do you leverage/need in order
+  to be able to templetize the glue components, and then to permit the
+same approach to work for instantiating analytics... typed transport
+is one, anything else?}
+In an effort to better understand when choosing one approach for constructing a
+workflow is perferable to another, we have developed a collection of ``filters''
+we call SuperGlue that allow us to experiment with the tradeoffs. This paper
+describes our components and examines some different workflows constructed using
+different techniques to compare when the costs and benefits for one approach are
+a better tradeoff than for others. 
+\ada{sell the work. highlight something that says: your contributions are the design (you thought
+  about what's the right lower level functionality you can leverage to
+  make this work), collection of generic SG filters, and demonstration
+through large-scale deployment of three different workloads that the
+approach is 
+expressiveness, can impact productivity since components can be reused
+with minimal intervention, and doesn't impeed performance and
+experimentation at scale. }
+Our main contribution is the evaluation of
+these workflows constructed using different engines and techniques to understand
+when different approaches become viable, such as IAWs, or if cobbling something
+together is sufficient or even superior for certain metrics.
+%analysis and manipulation tools that can be chained together to form a variety
+%of real-time workflows providing analytical results during the execution of the
+%primary scientific code.
+
+While the main technical development contribution of this work is the design of
+generic {\em glue code}, the {\em analytical} components we use in the
+workflows we present here are designed using the same approach. For example, an
+index selection tool is more of a glue component while a histogram component is
+more analytical.  Still, we design both types of components as single MPI
+executables with similar input and output interfaces launched using similar
+configuration options.  By blurring the line between generic glue components
+and generic analytical components, we present a flexible way to assemble
+scientific workflows without having to write any additional code. 
 
 The rest of the paper is organized as follows. First is a survey or related
 work in~\autoref{s:related}. Second, in~\autoref{s:workflow}, is a
@@ -286,7 +367,7 @@ managing data types, these tools simply offer a portable way to construct
 workflows.
 
 A more active approach to managing workflow throughput was attempted in
-FlexPath~\cite{Dayal:2014:flexpath}. Rather than focusing on the components
+FlexPath~\cite{dayal:2014:flexpath}. Rather than focusing on the components
 themselves, FlexPath offers mechanisms to monitor input queues for workflow
 components and to redeploy components to reduce bottlenecks. It also has the
 ability to redirect output from an online workflow to disk in the case of an
