@@ -104,31 +104,43 @@ are increasingly important.
 % WMSs here and then have a related work section.
 % reduce.
 
-Scientific workflows, which 
-capture a series of such analytical steps, usually
-operating on large quantities of data,
-have also followed this trend of moving the analytical components
-online (ie. executing simultaneously with the driving scientific code).
-A number of scientific workflow engines exist.
-However, while workflow engines such as
-Kepler~\cite{bertram:2006:kepler} and
-DAGMan~\cite{Malewicz:2006:dagman}
-offer flexible ways to assemble components
-with rich functionality to manage the control flow, they have not been
-universally adopted due to some of their limitations and complexity.
+Scientific workflows, which capture a series of such analytical steps, usually
+operating on large quantities of data, have also followed this trend of moving
+the analytical components online (i.e., executing simultaneously with the driving
+scientific code). While workflow engines such as
+Kepler~\cite{bertram:2006:kepler} and DAGMan~\cite{Malewicz:2006:dagman} offer
+flexible ways to assemble components with rich functionality to manage the
+control flow, they have not been universally adopted due to some of their
+limitations and complexity in the HPC environment.  Distributed-Area Computing
+(DAC) workflow management
+systems~\cite{tejedor:2015:pycompss,deelman:2015:pegasus} and HPC workflow
+management systems~\cite{dorier:2015:in-situ-lessons} may need to interoperate
+for some scenarios~\cite{deelman:2015:workflows-report}. While both exist, to
+date they have been developed separately in different communities. We have only
+just recently begun to develop a plan and a prototype for integrating such
+heterogeneous workflow systems. This paper focuses on managing the HPC portion of
+these heterogeneous workflows.
 
-One example illustrating the complexities comes from the Oak Ridge
-Leadership Computing Facility (OLCF).  Kepler was used for several workflows
-for the fusion simulation users.  While the initial goal was that an internal,
-expert resource would create the workflow,
-including the data transformation code required
-for that particular scenario (ie. the ``glue code''),
-the workflow should
-be able to be maintained easily by the application scientists. Unfortunately,
-the expert was required regularly as the configuration evolved and scaled.
-The complexities of maintaining the components and the glue code as the output
-shifted and managing the deployment was too high.
-Even then, the workflow operated offline.
+%Figure 1 is an example of such an integration.  It shows a top level
+%DAC workflow with one of the nodes in the DAC workflow graph being an HPC
+%workflow graph running on a supercomputing center. The interfaces between the
+%two WMSs occur from DAC to HPC and from HPC to DAC. The former interface
+%requires the exchange of the HPC subworkflow graph, which presumably was
+%defined by the user through the interaction with the top-level DAC WMS, and the
+%exchange of data products produced by the DAC that need to be further processed
+%by the HPC subworkflow. The latter interface, from HPC to DAC, involves the
+%transfer of data products only.
+
+One example illustrating the complexities comes from the Oak Ridge Leadership
+Computing Facility (OLCF).  Kepler was used for several workflows for the
+fusion simulation users.  While the initial goal was that an internal, expert
+resource would create the workflow, including the data transformation code
+required for that particular scenario (i.e., the ``glue code''), the workflow
+should be able to be maintained easily by the application scientists.
+Unfortunately, the expert was required regularly as the configuration evolved
+and scaled.  The complexities of maintaining the components and the glue code
+as the output shifted and managing the deployment was too high.  Even then, the
+workflow operated offline.
 
 % we already talked about the trend of moving workflows online
 \if 0
@@ -144,18 +156,31 @@ difficult to discover.
 Proposed infrastructure for online workflows are more immature, but can offer
 necessary
 functionality~\cite{zheng:2010:predata,docan:2010:dataspaces,wolf:2002:smartpointer,abbasi:2009:datastager}.
-\ada{this is a very vague claim, doesn't help explain the key
+For example, in PreDatA~\cite{zheng:2010:predata}, separate applications are
+run to offer different resilience domains, but the actual placement of
+operators may be different depending on the performance characteristics requiring
+coding changes for each placement decision.
+DataSpaces~\cite{docan:2010:dataspaces} offers a way to map data from one
+application to another, but it has no mechanisms to manage what is a complete
+data set, when it begins in an output stream, and when it ends. The user has to
+determine if what is being requested is complete and correct or not.
+SmartPointer~\cite{wolf:2002:smartpointer} and
+DataStager~\cite{abbasi:2009:datastager} both offer examples of integrated
+workflows, but the construction is completely custom and not portable to other
+workflows.
+%\ada{this is a very vague claim, doesn't help explain the key
   problem. the previous paragraph above is, is there more evidence?}
-None of these are fully sufficient for a robust infrastructure, but are being
-extended to incorporate necessary management
-functionality~\cite{dayal:2014:flexpath,dayal:2015:escience,lofstead:2012:txn,lofstead:2013:txn-pdsw,lofstead:2012:txn-metadata,lofstead:2014:txn,lofstead:2016:superglue}.
-
+This lack of a robust infrastructure and the difficulty in constructing a
+single workflow job submission limit adoption. Newer work is extending these
+systems incorporate necessary management
+functionality~\cite{dayal:2014:flexpath,dayal:2015:escience,lofstead:2012:txn,lofstead:2013:txn-pdsw,lofstead:2012:txn-metadata,lofstead:2014:txn,lofstead:2016:superglue}
+to aid in general workflow construction.
 
 While the online shows a lot of potential to improve the scientific discovery
 process, it requires reworking existing workflows. Since this is a non-trivial
-task, it is best to plan when to make the transition to ensure both sufficient
-time and when the benefits outweigh the transition costs. 
-\ada{text before not clear}
+task, tools that can simplify creating an efficient workflow within a single job
+submission is crucial to adoption.
+%\ada{text before not clear}
 New workflows can
 be made from scratch online lowering the barrier, but there are still costs
 associated with using existing components that may or may not integrate well
