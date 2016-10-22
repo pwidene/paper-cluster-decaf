@@ -119,7 +119,7 @@ with rich functionality to manage the control flow, they have not been
 universally adopted due to some of their limitations and complexity in the
 HPC environment.
 
-A specific example illustrating the complexities comes from the Oak Ridge
+An example illustrating the complexities comes from the Oak Ridge
 Leadership Computing Facility (OLCF).  Kepler was used for several workflows
 for the fusion simulation users.  While the initial goal was that an internal,
 expert resource would create the workflow,
@@ -137,15 +137,20 @@ One major limitation to existing workflow engines is that
 given only a simluation code, a scientist cannot easily
 assemble a workflow ``out of the box.''
 Indeed, even with the re-use of code that performs
-common analytical procedures, for a scientist to assemble
+common analytical procedures and with the automation of control flow
+allowed by existing engines,
+for a scientist to assemble
 and launch a workflow using existing tools,
-significant effort is required to (a) allow this code
+significant effort is required to (a) allow the existing
+analytics code
 to operate on the specific data formats used in this
-particular workflow, (b) map the workflow components
+particular workflow,
+(b) reconcile the discrepancy between the potentially
+differing levels of parallelism
+of the various components,
+and (c) map the workflow components
 to the available resources, which in the HPC space
-is usually a supercomputer,
-and (c) reconcile the discrepancy between the parallelism
-in one component and that of its downstream components.
+is usually a supercomputer.
 
 % I see a, b, and c as the main problems we are solving with SG
 % -> (a) with the any-dimension genericity of tools like select and dim-reduce
@@ -189,7 +194,7 @@ percentages forcing a reduction in output and making scientific insights more
 difficult to discover. 
 \fi
 
-Proposed infrastructure for online workflows are less mature, but can offer
+Proposed infrastructure for online workflows is less mature but can offer
 the necessary functionality for assembling workflows
 ad-hoc~\cite{zheng:2010:predata,docan:2010:dataspaces,wolf:2002:smartpointer,abbasi:2009:datastager}.
 For example, in PreDatA~\cite{zheng:2010:predata}, separate applications are
@@ -200,27 +205,137 @@ DataSpaces~\cite{docan:2010:dataspaces} offers a way to map data from one
 application to another, but it has no mechanisms to manage what is a complete
 data set, when it begins in an output stream, and when it ends. The user has to
 determine if what is being requested is complete and correct or not.
+Data Staging~\cite{nisar:2008:staging} and in particular
+data staging with processing
+capabilities~\cite{abbasi:2009:datastager,ober:seismic}, are a solid step
+forward in providing online functionality for workflows, but do not 
+offer a generic approach for their assembly.
 SmartPointer~\cite{wolf:2002:smartpointer} and
 DataStager~\cite{abbasi:2009:datastager} both offer examples of integrated
 workflows, but the construction is completely custom and not portable to other
 workflows.
+
 %\ada{this is a very vague claim, doesn't help explain the key
 %  problem. the previous paragraph above is, is there more evidence?}
-This lack of a robust infrastructure and the difficulty in constructing a
-single workflow job submission limit adoption. Newer work is extending these
-systems incorporate necessary management
-functionality~\cite{dayal:2014:flexpath,dayal:2015:escience,lofstead:2012:txn,lofstead:2013:txn-pdsw,lofstead:2012:txn-metadata,lofstead:2014:txn,lofstead:2016:superglue}
-to aid in general workflow construction.
 
-While the online shows a lot of potential to improve the scientific discovery
-process, it requires reworking existing workflows. Since this is a non-trivial
-task, tools that can simplify creating an efficient workflow within a single job
-submission is crucial to adoption.
+This lack of a robust infrastructure and the difficulty in
+using these tools direcly to assemble an
+HPC workflow out of the box
+based on an existing scientific code,
+simulation or other,
+and launching it in a way that is
+as simple as a single job submission
+have limited their adoption.
+
+Newer work is extending these
+systems to provide more generic functionality
+in workflow assembly and
+management~\cite{dayal:2014:flexpath,dayal:2015:escience,lofstead:2012:txn,lofstead:2013:txn-pdsw,lofstead:2012:txn-metadata,lofstead:2014:txn,lofstead:2016:superglue}
+In particular, FlexPath~\cite{dayal:2014:flexpath}
+is a publish/subscribe system that allows
+two concurrently running MPI executables to
+exchange data that is globally partitioned among
+their ranks, even when the number of writers and readers differ.
+It is implemented as a transport method for the
+Adaptable I/O System (ADIOS)~\cite{lofstead:2009:adaptable},
+which provides a unified interface to parallel I/O over a rich
+variety of underlying data encoding, transport, and placement technologies.
+With ADIOS, FlexPath provides a simple interface for MxN communication
+between simulation and/or analytical components.
+Through ADIOS and FlexPath, data exchange makes use
+of the abstraction of a stream, which allows
+for asynchronous, MxN I/O between workflow components.
+
+In this work, we leverage the stream-based, MxN
+I/O interface offered by ADIOS and FlexPath
+to present SuperGlue, a collection of generic workflow components
+that allow for the easy assembly and deployment
+of a variety of scientific workflows.
+
+SuperGlue allows workflows to be assembled
+by using existing, generic
+data transformation and 
+analysis components
+which to not require any code changes
+for specific workflows;
+the only code changes required when
+using SuperGlue are 
+for redirecting of the output of interest
+in the driving simulation code through ADIOS.
+
+SuperGlue components solves a number of the aforementioned problems in
+current online workflow-oriented technologies.
+First, they leverage the self-describing
+property of data exchanged through ADIOS to
+allow for operation on data having very different formats.
+In scientific workflows, the data of interest
+is generally composed of large, multi-dimensional
+arrays; in SuperGlue, this translates to
+the ability to operate, as much as possible,
+on data having any number of dimensions.
+To address the difficulty and complexity
+in mapping workflows to supercomputers using
+existing workflow technology, which is targeted
+at a variety of resources outside of HPC, such as Grid and Web
+resources,
+SuperGlue reduces the
+launch of an entire workflow to the submission of a single job script.
+Finally, it uses the MxN publish/subscribe
+ability of FlexPath,
+as well as consistent semantics describing
+the data that are passed through the components,
+to exchange data while preserving semantic integrity
+even in the presence of varying levels of parallelism 
+at different stages of the workflow.
+
+Rather than providing a complete collection of such components,
+we provide here the basic building
+blocks of a library of components that we hope can
+eventually be used to assemble
+a rich variety of workflows, driven by simulation codes
+exporting a variety of different data formats.
+
+
+\ada{sell the work. highlight something that says: your contributions are the design (you thought
+  about what's the right lower level functionality you can leverage to
+  make this work), collection of generic SG filters, and demonstration
+through large-scale deployment of three different workloads that the
+approach is 
+expressiveness, can impact productivity since components can be reused
+with minimal intervention, and doesn't impeed performance and
+experimentation at scale. }
+
+To demonstrate the functionality of the SuperGlue approach,
+we deployed three SuperGlue workflows based on three different
+scientific simulations having large user bases,
+namely the LAMMPS molecular dynamics simulator,
+GTCP, a particle-in-cell plasma code, and GROMACS,
+a biochemical molecular code. We show
+that these workflows scale well and that
+simple experiments allow for the selection of
+appropriate levels of parallelism at different
+stages of the workflow.
+
+One preceived disadvantage the fine-grain componentization
+of a workflow that comes with the use of SuperGlue
+is the potential loss in performance.
+However, we show through a performance evaluation that
+compares a 
+a componentized, generic workflow with a corresponding
+ad-hoc workflow that uses a monolithic analytical routine
+instead that the componentization of analytical routines
+does not lead to a noticeable change in performance
+from the start of the workflow to its completion.
+
+%While the online shows a lot of potential to improve the scientific discovery
+%process, it requires reworking existing workflows. Since this is a non-trivial
+%task, tools that can simplify creating an efficient workflow within a single job
+%submission is crucial to adoption.
 %\ada{text before not clear}
-New workflows can
-be made from scratch online lowering the barrier, but there are still costs
-associated with using existing components that may or may not integrate well
-into the online structure.
+%New workflows can
+%be made from scratch online lowering the barrier, but there are still costs
+%associated with using existing components that may or may not integrate well
+%into the online structure.
 
 %The ``killer app'' for workflows, both offline and online, is being able to
 %submit a single job that is capable of running the entire workflow. Existing
@@ -234,6 +349,7 @@ into the online structure.
 
 \ada{these next three paragraphs need to be super shortened and to
   support the statement One key problem... }
+\if 0
 To address the performance mismatch, Integrated Application Workflows (IAWs)
 are being developed. The easiest way to think of these IAWs is the Unix/Linux
 shell pipe operator to connect commands. The shell connects stdout of one
@@ -253,10 +369,7 @@ projects over the last several years.
 Several frameworks have been developed that offer some functionality for
 supporting online workflows. The more advanced examples incorporate some data
 processing components, sometimes of limited scope, for performing in situ or in
-transit processing. Data Staging~\cite{nisar:2008:staging} and in particular
-data staging with processing
-capabilities~\cite{abbasi:2009:datastager,ober:seismic}, are a solid step
-forward. The ADIOS IO library~\cite{lofstead:2009:adaptable} was designed with
+transit processing. The ADIOS IO library~\cite{lofstead:2009:adaptable} was designed with
 this use case in mind. The HDF5 Virtual Object Layer
 (VOL)~\cite{chaarawi:2013:hdf5-vol} was developed to support similar
 functionality.
@@ -271,7 +384,10 @@ subdivisions to allow simulation and analytics to co-exist.  One key
 observation, however, is that there is a lack of portability to the resulting
 implementations; they require a great deal of tuning and/or runtime placement
 control to make them function as desired.
+\fi
 
+
+\if 0
 Unlike existing components used in IAWs, SuperGlue
 components do not have a fixed data type. \ada{if this is the key
   difference, then somewhere mention the fixed type limitation. }
@@ -316,11 +432,13 @@ executables with similar input and output interfaces launched using similar
 configuration options.  By blurring the line between generic glue components
 and generic analytical components, we present a flexible way to assemble
 scientific workflows without having to write any additional code. 
+\fi
 
 The rest of the paper is organized as follows. First is a survey or related
 work in~\autoref{s:related}. Second, in~\autoref{s:workflow}, is a
 discussion of the two workflows we use to drive our insights. Next is an
-overview of the concepts behind SuperGlue in~\autoref{s:design}.  In~\autoref{s:reusable-components}, we provide an overview of the reusable
+overview of the concepts behind SuperGlue in~\autoref{s:design}.
+In~\autoref{s:reusable-components}, we provide an overview of the reusable
 components created. In~\autoref{s:integrating-reusable-components}, we
 discuss the challenges of integrating reusable components.  An evaluation is
 presented next in~\autoref{s:eval}. Finally is a discussion of Conclusions
