@@ -307,10 +307,10 @@ experimentation at scale. }
 \fi
 To demonstrate the functionality of the SuperGlue approach,
 we deploy three SuperGlue workflows based on three different
-scientific simulations,
-namely the LAMMPS molecular dynamics simulator~\cite{plimpton:1997:lammps},
-GTCP, a particle-in-cell toroidal plasma code~\cite{lin:gtc},
-and GROMACS, a biochemical molecular dynamics code\cite{hess2008gromacs}.
+scientific simulations, namely
+LAMMPS~\cite{plimpton:1997:lammps},
+GTCP~\cite{lin:gtc},
+and GROMACS~\cite{hess2008gromacs}.
 We show that SuperGlue allows workflows to scale well and that
 simple experiments allow for the selection of
 appropriate levels of parallelism at different
@@ -531,6 +531,8 @@ affect the performance of workflows, and that this placement can be determined
 in part by the communication characteristics of the analytics components.
 
 % need re-work.
+% removing for now since long already.
+\if 0
 Glean~\cite{vishwanath:2011:glean}, Nessie~\cite{oldfield:lwfs-data-movement},
 and Mercury~\cite{Soumagne:2013:mercury} are intended to facilitate offering
 portable workflows across different interconnect technologies. While their
@@ -538,6 +540,7 @@ origins may not have been directly for addressing workflows, they have been
 re-purposed to address this field. Rather than offering anything related to
 managing data types, these tools simply offer a portable way to construct
 workflows.
+\fi
 
 Companion work to SuperGlue within this same project is
 Bredala~\cite{dreher:2016:bredala}. This work presents an attempt to build a
@@ -557,15 +560,16 @@ of entire workflows out of the box.
 
 We designed and implemented three realistic real-time workflows based on
 scientific codes having large user bases: the LAMMPS Newtonian particle
-simulator~\cite{plimpton:1997:lammps} GTCP, a particle-in-cell Tokamak
+simulator~\cite{plimpton:1997:lammps}, GTCP, a particle-in-cell Tokamak
 simulator~\cite{lin:gtc}, and GROMACS,
-
-While both of these workflows eventually turn the
+a biomolecular dynamics code~\cite{hess2008gromacs}.
+While all these workflows eventually turn part of the
 simulation data into histograms of certain quantities of interest, how they
-arrive at their final result varies significantly. Creating similar types of
-results, and this using some of the same components but in significantly
+arrive at their final result varies significantly.
+Creating similar types of results, and this using some
+of the same components but in significantly
 different ways, has allowed us to gain important insight into how best to
-design glue components that can be used in a wide variety of workflows.
+design components that can be used to build wide variety of workflows.
 We first describe the workflows from a general point of view
 and then the components in greater detail, illustrated
 in~\autoref{fig:lammps-workflow} and~\autoref{fig:gtcp-workflow}.
