@@ -230,8 +230,7 @@ have limited their adoption.
 Newer work is extending these
 systems to provide more generic functionality
 in workflow assembly and
-management~\cite{dayal:2014:flexpath,dayal:2015:escience,lofstead:2012:txn,lofstead:2013:txn-pdsw,lofstead:2012:txn-metadata,lofstead:2014:txn,lofstead:2016:superglue}
-In particular, FlexPath~\cite{dayal:2014:flexpath}
+management~\cite{dayal:2014:flexpath,dayal:2015:escience,lofstead:2012:txn,lofstead:2013:txn-pdsw,lofstead:2012:txn-metadata,lofstead:2014:txn,lofstead:2016:superglue}In particular, FlexPath~\cite{dayal:2014:flexpath}
 is a publish/subscribe system that allows
 two concurrently running MPI executables to
 exchange data that is globally partitioned among
@@ -290,11 +289,10 @@ at different stages of the workflow.
 
 Rather than providing a complete collection of such components,
 we provide here the basic building
-blocks of a library of components that we hope can
+blocks of what we hope will be a library of components that can
 eventually be used to assemble
 a rich variety of workflows, driven by simulation codes
 exporting a variety of different data formats.
-
 
 \ada{sell the work. highlight something that says: your contributions are the design (you thought
   about what's the right lower level functionality you can leverage to
@@ -304,28 +302,26 @@ approach is
 expressiveness, can impact productivity since components can be reused
 with minimal intervention, and doesn't impeed performance and
 experimentation at scale. }
-
 To demonstrate the functionality of the SuperGlue approach,
-we deployed three SuperGlue workflows based on three different
+deploy three SuperGlue workflows based on three different
 scientific simulations having large user bases,
-namely the LAMMPS molecular dynamics simulator,
-GTCP, a particle-in-cell plasma code, and GROMACS,
-a biochemical molecular code. We show
-that these workflows scale well and that
+namely the LAMMPS molecular dynamics simulator~\cite{plimpton:1997:lammps},
+GTCP, a particle-in-cell toroidal plasma code~\cite{lin:gtc},
+and GROMACS, a biochemical molecular dynamics code\cite{hess2008gromacs}.
+We show that SuperGlue allows workflows to scale well and that
 simple experiments allow for the selection of
 appropriate levels of parallelism at different
 stages of the workflow.
 
-One preceived disadvantage the fine-grain componentization
-of a workflow that comes with the use of SuperGlue
+One disadvantage that might be perceived in the fine-grain componentization
+of a workflow that naturally comes with the use of SuperGlue
 is the potential loss in performance.
-However, we show through a performance evaluation that
-compares a 
+However, we show through a performance comparison of
 a componentized, generic workflow with a corresponding
-ad-hoc workflow that uses a monolithic analytical routine
-instead that the componentization of analytical routines
-does not lead to a noticeable change in performance
-from the start of the workflow to its completion.
+ad-hoc workflow which uses a monolithic analytical component
+that the componentization of analytical routines
+does not lead to a noticeable change in the
+overall performance of the workflow.
 
 %While the online shows a lot of potential to improve the scientific discovery
 %process, it requires reworking existing workflows. Since this is a non-trivial
@@ -347,8 +343,6 @@ from the start of the workflow to its completion.
 
 %========================
 
-\ada{these next three paragraphs need to be super shortened and to
-  support the statement One key problem... }
 \if 0
 To address the performance mismatch, Integrated Application Workflows (IAWs)
 are being developed. The easiest way to think of these IAWs is the Unix/Linux
@@ -436,7 +430,7 @@ scientific workflows without having to write any additional code.
 
 The rest of the paper is organized as follows. First is a survey or related
 work in~\autoref{s:related}. Second, in~\autoref{s:workflow}, is a
-discussion of the two workflows we use to drive our insights. Next is an
+discussion of the three workflows we use to drive our insights. Next is an
 overview of the concepts behind SuperGlue in~\autoref{s:design}.
 In~\autoref{s:reusable-components}, we provide an overview of the reusable
 components created. In~\autoref{s:integrating-reusable-components}, we
