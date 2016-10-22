@@ -459,31 +459,51 @@ More directly related to this work and the scientific community are workflow
 engines and frameworks custom-made for the parallel computing environment.
 Pegasus~\cite{mullender:pegasus} and DAGMan~\cite{Malewicz:2006:dagman} work
 together to offer an engine to execute a workflow and a front-end system to
-construct the workflow process itself. This pair does nothing to address the
-actual connection between components. Instead, it is purely focused on
-providing a usable system for assembling components into a scientific workflow.
-This increment over a hand-crafted system should not be underestimated. It is a
-significant amount of work to make this work well.
+construct the workflow process itself.
+However, the focus in DAGMan is on specifying dependencies between
+the jobs involved in the workflow, so as to execute
+components only when required and provide resilience.
+In contrast, in SuperGlue, the entire workflow is executed at once, with
+FlexPath allowing readers and writers to block until
+the corresponding writer or reader is available for data exchange.
+Furthermore, the Pegasus/DAGMan engine does not provide
+a library of generic, reusable components.
+
+As an alternative to DAGMan, Swift~\cite{wilde2011swift}
+is a scripting language that allows ordinary applications
+to be composed into parallel scripts, and eventually into
+workflows, with dependencies specified in the script.
+However, these applications themselves
+must be written outside of the Swift script.
 
 Kepler~\cite{bertram:2006:kepler} offers a nice GUI for assembling different
 kinds of scientific workflows. It offers different directors to manage how the
 workflow will be executed. Each component is an actor with channels connecting
-actors. Some simple decision channels are available to offer different
-execution paths given different output or return values from actors. As
-mentioned in the Introduction, complex workflows using Kepler have been
-assembled for many communities, including fusion science. Much like the Pegasus
-and DAGman pair, Kepler focuses on offering starting components and managing
-the control flow rather than offering standard interfaces and generic, reusable
-components.
+actors. As mentioned in the Introduction, complex workflows using Kepler have been
+assembled for many communities, including fusion science.
+However, the variety of components
+that come with Kepler are designed
+to work in a single Java Virtual Machine instance;
+using HPC-scale components requires significant effort
+both in coding the custom components and in
+allowing the I/O methods used to be understood by the Kepler engine.
 
 To address much of the complexity of communicating between separate parallel
 components, in situ approaches are being investigated.
+We use ``in situ'' in the sense of ``linked into the same process.''
 Catalyst~\cite{karimabadi:2013:catalyst} offers a way to integrate the
 ParaView~\cite{Moreland:2008:paraview} analysis and visualization system
 directly into the simulation executable. Catalyst strips out many features to
 reduce the memory footprint and then requires explicit calls from the host
 application into Catalyst routines with predictable data types on in-memory
-data structures. While this can work for limited kinds of data processing, two
+data structures. While this can work for limited kinds of data processing,
+it clearly cannot take advantage of additional resources
+available for off-site analysis, instead taking cycles
+away from the main scientific code.
+
+%above is obvious enough I think
+\if 0
+two
 limitations can cause problems. First, in an internal Sandia project in 2012,
 the CTH shock physics code used ParaView both in situ and also in transit. The
 in situ integration saw the executable grow from 30 MB to 300 MB and the
@@ -492,6 +512,7 @@ use. While this project prompted the creation of Catalyst, this stripped down
 version of ParaView does not address all concerns. There is still a memory
 footprint overhead and a runtime pause in the simulation progress for the
 analysis and visualization to run.
+\fi
 
 Libsim~\cite{whitlock:2011:libsim} has a similar relationship to
 VisIt~\cite{Riedel:2007:visit} as Catalyst has to ParaView. Both Libsim and
@@ -514,19 +535,6 @@ origins may not have been directly for addressing workflows, they have been
 re-purposed to address this field. Rather than offering anything related to
 managing data types, these tools simply offer a portable way to construct
 workflows.
-
-A more active approach to managing workflow throughput was attempted in
-FlexPath~\cite{dayal:2014:flexpath}. Rather than focusing on the components
-themselves, FlexPath offers mechanisms to monitor input queues for workflow
-components and to redeploy components to reduce bottlenecks. It also has the
-ability to redirect output from an online workflow to disk in the case of an
-unrecoverable failure. We use ADIOS and FlexPath in this work.
-
-% the below is covered in Design->Implementation Artifacts.
-%ADIOS offers a
-%simple I/O interface~\cite{lofstead:2009:adaptable}, which supports FlexPath
-%as one of its underlying transport mechanisms. FlexPath supports data transport
-%between distributed executables regardless of their placement.
 
 Companion work to SuperGlue within this same project is
 Bredala~\cite{dreher:2016:bredala}. This work presents an attempt to build a
