@@ -306,8 +306,8 @@ with minimal intervention, and doesn't impeed performance and
 experimentation at scale. }
 \fi
 To demonstrate the functionality of the SuperGlue approach,
-deploy three SuperGlue workflows based on three different
-scientific simulations having large user bases,
+we deploy three SuperGlue workflows based on three different
+scientific simulations,
 namely the LAMMPS molecular dynamics simulator~\cite{plimpton:1997:lammps},
 GTCP, a particle-in-cell toroidal plasma code~\cite{lin:gtc},
 and GROMACS, a biochemical molecular dynamics code\cite{hess2008gromacs}.
@@ -530,7 +530,7 @@ This work demonstrates that the placement of the analytics can significantly
 affect the performance of workflows, and that this placement can be determined
 in part by the communication characteristics of the analytics components.
 
-
+% need re-work.
 Glean~\cite{vishwanath:2011:glean}, Nessie~\cite{oldfield:lwfs-data-movement},
 and Mercury~\cite{Soumagne:2013:mercury} are intended to facilitate offering
 portable workflows across different interconnect technologies. While their
@@ -544,20 +544,23 @@ Bredala~\cite{dreher:2016:bredala}. This work presents an attempt to build a
 data model for in situ workflows. It has some similarity to
 FFS~\cite{eisenhauer:2011:ffs}. Unlike FFS, which is part of a much more
 complex infrastructure for typed messaging between distributed processes,
-Bredala is strictly focusing on a data model that can preserve
+Bredala strictly focuses on a data model that can preserve
 semantic integrity across redistributions.
 
 Overall, while all of these efforts are addressing different portions of the
 online workflows puzzle, none of them are addressing the idea of general,
-reusable glue and analytical components for scientific workflows.
+reusable data transformation and analysis components for the assembly
+of entire workflows out of the box.
 
 \section{Workflows}
 \label{s:workflow}
 
-We designed and implemented two realistic real-time workflows based on
+We designed and implemented three realistic real-time workflows based on
 scientific codes having large user bases: the LAMMPS Newtonian particle
-simulator~\cite{plimpton:1997:lammps} and GTCP, a particle-in-cell Tokamak
-simulator~\cite{lin:gtc}. While both of these workflows eventually turn the
+simulator~\cite{plimpton:1997:lammps} GTCP, a particle-in-cell Tokamak
+simulator~\cite{lin:gtc}, and GROMACS,
+
+While both of these workflows eventually turn the
 simulation data into histograms of certain quantities of interest, how they
 arrive at their final result varies significantly. Creating similar types of
 results, and this using some of the same components but in significantly
