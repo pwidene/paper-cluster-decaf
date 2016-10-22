@@ -1,0 +1,60 @@
+\section{Conclusions and Future Work}
+\label{s:conclusion}
+
+This paper presents SuperGlue, a demonstration of making generic, reusable
+components for scientific simulations. By decomposing the operations into small
+chunks, we can achieve components that can be reused, without modification, for
+a variety of different workflows. In this work we investigate using a
+stream-based structure with generic components to achieve easier to build and
+use workflows.  Stream-based, generic workflow components should be designed so
+as to allow for the greatest variety in their arrangement and for a maximum
+number of downstream subscribers. Designing components with the ability to
+handle data having any number of dimensions provides a very useful way to link
+them together. Maintaining a high level of semantics upstream, for example by
+labeling dimensions and certain quantities inside of these dimensions, gives a
+good understanding of the data to downstream components. There is a need for
+components that organize the data in a format that downstream components can
+understand. And, designing specific disk writer components removes the need to
+temporarily modify analytics components to let them also act as disk writers.
+
+Through the demonstration of generating a velocity histogram for LAMMPS, the
+molecular dynamics simulation, and a pressure histogram for GTC, the particle
+in cell fusion reactor simulator, we achieved reusing the same components in
+very different data formats and application types.
+
+While this work leverages ADIOS and the FlexPath transport, this is not the
+only approach for addressing reusable components. Other, similar approaches can
+also work well. However, in this case, the data annotation provided by this
+connection infrastructure helps enable reusable components by offering the
+necessary metadata to perform the general operations.
+
+There are a number of improvements we can make to our current implementation to
+have at our disposal more robust and flexible workflow components. As mentioned
+earlier, reading and writing dimension labels at each step in the workflow
+provides more information to downstream components and presents a clear
+advantage. The ADIOS interface includes the ability to send output to multiple
+destinations by having several ``write groups.'' We wish to explore the
+possibility of a {\em Fork Component} that would use this functionality of
+ADIOS to allow the creation of branched workflows.
+
+The components we have developed in this research cover only a small portion of
+the procedures that computational scientists need for their
+workflows. Eventually, we wish to allow for the development of a large
+collection of generic workflow components. We can take steps in this direction
+by building on our existing components. For example, {\em Magnitude} performs a
+relatively simple operation on multi-dimensional data, where one dimension
+spans a number of quantities involved in each instance of the operation. This
+model can fit any number of operations involving a repeating, fixed number of
+quantities, and it can even be made to work with a formula specified by the
+user at runtime. This opens the door to a large family of generic components.
+
+Finally, while we have kept performance in mind in the development of these
+components, performance optimization is not yet the focus of this research. In
+the design of any generic tool however, the question of performance inevitably
+arises. Indeed, designing tools that are not meant to operate on a specific
+format of input data can easily impact performance. For example, {\em
+Dim-Reduce} performs the same amount of computation whether it re-arranges data
+or not. In the long run, optimizing these components will involve detecting
+such situations where they can avoid performing unnecessary iterations and data
+manipulation.
+

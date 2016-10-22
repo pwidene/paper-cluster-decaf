@@ -1,0 +1,56 @@
+\section{Integrating Reusable Components}
+\label{s:integrating-reusable-components}
+
+In order to use some of the same components in both workflows, we had to
+slightly modify the output stages of the scientific codes driving them. Because
+in both workflows, the first component to receive the simulation data is
+Select, each simulation has to write a header of its quantities in the
+dimension to be selected from. Also, normally LAMMPS packs its two-dimensional
+output into a single array. We eliminated this packing to reduce the downstream
+decoding complexity by leaving the actual data structure rather than an encoded
+form.
+Both simulations had to be
+modified to use ADIOS for output. While the ADIOS integration was
+not difficult because the ADIOS interface is simple, it was the most
+significant change made to the
+simulations.
+
+In general, in order to work with SuperGlue components, 
+simulations have to specify through ADIOS the logical dimensions of their data
+and optionally create corresponding headers to label them and their indices.
+
+\subsection{Demonstrating in the Workflows}
+
+We built the LAMMPS workflow, illustrated in~\autoref{fig:lammps-workflow},
+using only LAMMPS and SuperGlue components.
+We annotate the figure with details about how
+the data is manipulated at each step.
+
+Data arrives from LAMMPS at the first SuperGlue component, Select, which
+extracts the velocity components from the raw output of the simulation. From
+Select, data is sent to Magnitude, which computes
+the magnitudes of the velocities. Magnitude
+outputs one-dimensional data, an array of the magnitudes it calculates, to the
+final component, Histogram, which expects one-dimensional data as input. The
+end result of this workflow is a series of histograms of the total velocities
+of the particles. There is one histogram created at each timestep at which the
+simulation would normally dump its data to disk.
+
+
+The GTCP workflow is illustrated in~\autoref{fig:gtcp-workflow}, and it too was assembled only from the
+simulation and SuperGlue components. Note that the workflows primarily differ
+in the data formats output by the simulations.
+
+From GTCP, data first arrives at an instance of Select, which extracts
+one quantity of interest out of the 7 properties that describe each gridpoint.
+This quantity was arbitrarily chosen as the ``perpendicular
+pressure,'' or pressure of the plasma perpendicular to the flow in the grid
+point of interest. Even if it contains only perpendicular pressures, the output
+of Select is still three-dimensional since this component maintains the
+original dimensions of its input. Because the Histogram component expects
+one-dimensional input, we first send the output of Select through two instances
+of our Dim-Reduce component, each of which eliminates a single dimension of the
+array without changing its total size. The final component, Histogram, outputs
+a histogram of the perpendicular pressures of all grid points at each timestep
+at which the simulation would normally output its data to disk.
+
