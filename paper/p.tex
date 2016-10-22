@@ -55,7 +55,7 @@
 
 \begin{document}
 
-\title{SuperGlue: Tradeoffs and Tipping Points for Extreme Scale Workflows}
+\title{SuperGlue: Standardizing Workflow Components}
 
 \author{
   \IEEEauthorblockN{
@@ -558,7 +558,7 @@ of entire workflows out of the box.
 \section{Workflows}
 \label{s:workflow}
 
-We designed and implemented three realistic real-time workflows based on
+We designed and implemented three realistic online workflows based on
 scientific codes having large user bases: the LAMMPS Newtonian particle
 simulator~\cite{plimpton:1997:lammps}, GTCP, a particle-in-cell Tokamak
 simulator~\cite{lin:gtc}, and GROMACS,
@@ -572,7 +572,8 @@ different ways, has allowed us to gain important insight into how best to
 design components that can be used to build wide variety of workflows.
 We first describe the workflows from a general point of view
 and then the components in greater detail, illustrated
-in~\autoref{fig:lammps-workflow} and~\autoref{fig:gtcp-workflow}.
+in~\autoref{fig:lammps-workflow} ~\autoref{fig:gtcp-workflow}
+and~\autoref{fig:gromacs-workflow}.
 
 \subsection{LAMMPS Workflow}
 
@@ -609,6 +610,7 @@ generated shows the distribution of per-gridpoint parallel pressure across
 the entire simulation. From GTCP's output, the particular quantities of
 interest must be extracted and then a histogram generated.
 
+\if 0
 \subsection{Discussion}
 
 In both cases, a particular subset of interest is extracted from the
@@ -661,6 +663,7 @@ datasets in real time is possible and useful for assembling very different
 workflows.  In addition, we later show that generic components, both glue and
 analytical, have the advantage of possessing known performance characteristics,
 which greatly facilitates the configuration of workflows that use them.
+\fi
 
 \section{Design}
 \label{s:design}
@@ -937,6 +940,18 @@ to that of labeling dimensions and indices, as previously discussed.
   \label{fig:gtcp-workflow}
   \vspace{-0.15in}
 \end{figure*}
+
+\begin{figure}
+  \center
+  %\vspace{-0.10in}
+  \includegraphics[width=\columnwidth]{fig/wflow_gromacs}
+  %\vspace{-0.35in}
+  \caption{GROMACS Workflow}
+  \label{fig:gromacs-workflow}
+  %\vspace{-0.15in}
+\end{figure}
+
+
 
 This section provides greater details about the individual SuperGlue components
 and how a small number of
