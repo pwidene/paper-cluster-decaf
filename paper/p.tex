@@ -295,6 +295,7 @@ eventually be used to assemble
 a rich variety of workflows, driven by simulation codes
 exporting a variety of different data formats.
 
+\if 0
 \ada{sell the work. highlight something that says: your contributions are the design (you thought
   about what's the right lower level functionality you can leverage to
   make this work), collection of generic SG filters, and demonstration
@@ -303,12 +304,13 @@ approach is
 expressiveness, can impact productivity since components can be reused
 with minimal intervention, and doesn't impeed performance and
 experimentation at scale. }
+\fi
 To demonstrate the functionality of the SuperGlue approach,
-deploy three SuperGlue workflows based on three different
-scientific simulations having large user bases,
-namely the LAMMPS molecular dynamics simulator~\cite{plimpton:1997:lammps},
-GTCP, a particle-in-cell toroidal plasma code~\cite{lin:gtc},
-and GROMACS, a biochemical molecular dynamics code\cite{hess2008gromacs}.
+we deploy three SuperGlue workflows based on three different
+scientific simulations, namely
+LAMMPS~\cite{plimpton:1997:lammps},
+GTCP~\cite{lin:gtc},
+and GROMACS~\cite{hess2008gromacs}.
 We show that SuperGlue allows workflows to scale well and that
 simple experiments allow for the selection of
 appropriate levels of parallelism at different
@@ -459,31 +461,51 @@ More directly related to this work and the scientific community are workflow
 engines and frameworks custom-made for the parallel computing environment.
 Pegasus~\cite{mullender:pegasus} and DAGMan~\cite{Malewicz:2006:dagman} work
 together to offer an engine to execute a workflow and a front-end system to
-construct the workflow process itself. This pair does nothing to address the
-actual connection between components. Instead, it is purely focused on
-providing a usable system for assembling components into a scientific workflow.
-This increment over a hand-crafted system should not be underestimated. It is a
-significant amount of work to make this work well.
+construct the workflow process itself.
+However, the focus in DAGMan is on specifying dependencies between
+the jobs involved in the workflow, so as to execute
+components only when required and provide resilience.
+In contrast, in SuperGlue, the entire workflow is executed at once, with
+FlexPath allowing readers and writers to block until
+the corresponding writer or reader is available for data exchange.
+Furthermore, the Pegasus/DAGMan engine does not provide
+a library of generic, reusable components.
+
+As an alternative to DAGMan, Swift~\cite{wilde2011swift}
+is a scripting language that allows ordinary applications
+to be composed into parallel scripts, and eventually into
+workflows, with dependencies specified in the script.
+However, these applications themselves
+must be written outside of the Swift script.
 
 Kepler~\cite{bertram:2006:kepler} offers a nice GUI for assembling different
 kinds of scientific workflows. It offers different directors to manage how the
 workflow will be executed. Each component is an actor with channels connecting
-actors. Some simple decision channels are available to offer different
-execution paths given different output or return values from actors. As
-mentioned in the Introduction, complex workflows using Kepler have been
-assembled for many communities, including fusion science. Much like the Pegasus
-and DAGman pair, Kepler focuses on offering starting components and managing
-the control flow rather than offering standard interfaces and generic, reusable
-components.
+actors. As mentioned in the Introduction, complex workflows using Kepler have been
+assembled for many communities, including fusion science.
+However, the variety of components
+that come with Kepler are designed
+to work in a single Java Virtual Machine instance;
+using HPC-scale components requires significant effort
+both in coding the custom components and in
+allowing the I/O methods used to be understood by the Kepler engine.
 
 To address much of the complexity of communicating between separate parallel
 components, in situ approaches are being investigated.
+We use ``in situ'' in the sense of ``linked into the same process.''
 Catalyst~\cite{karimabadi:2013:catalyst} offers a way to integrate the
 ParaView~\cite{Moreland:2008:paraview} analysis and visualization system
 directly into the simulation executable. Catalyst strips out many features to
 reduce the memory footprint and then requires explicit calls from the host
 application into Catalyst routines with predictable data types on in-memory
-data structures. While this can work for limited kinds of data processing, two
+data structures. While this can work for limited kinds of data processing,
+it clearly cannot take advantage of additional resources
+available for off-site analysis, instead taking cycles
+away from the main scientific code.
+
+%above is obvious enough I think
+\if 0
+two
 limitations can cause problems. First, in an internal Sandia project in 2012,
 the CTH shock physics code used ParaView both in situ and also in transit. The
 in situ integration saw the executable grow from 30 MB to 300 MB and the
@@ -492,6 +514,7 @@ use. While this project prompted the creation of Catalyst, this stripped down
 version of ParaView does not address all concerns. There is still a memory
 footprint overhead and a runtime pause in the simulation progress for the
 analysis and visualization to run.
+\fi
 
 Libsim~\cite{whitlock:2011:libsim} has a similar relationship to
 VisIt~\cite{Riedel:2007:visit} as Catalyst has to ParaView. Both Libsim and
@@ -507,6 +530,9 @@ This work demonstrates that the placement of the analytics can significantly
 affect the performance of workflows, and that this placement can be determined
 in part by the communication characteristics of the analytics components.
 
+% need re-work.
+% removing for now since long already.
+\if 0
 Glean~\cite{vishwanath:2011:glean}, Nessie~\cite{oldfield:lwfs-data-movement},
 and Mercury~\cite{Soumagne:2013:mercury} are intended to facilitate offering
 portable workflows across different interconnect technologies. While their
@@ -514,43 +540,36 @@ origins may not have been directly for addressing workflows, they have been
 re-purposed to address this field. Rather than offering anything related to
 managing data types, these tools simply offer a portable way to construct
 workflows.
-
-A more active approach to managing workflow throughput was attempted in
-FlexPath~\cite{dayal:2014:flexpath}. Rather than focusing on the components
-themselves, FlexPath offers mechanisms to monitor input queues for workflow
-components and to redeploy components to reduce bottlenecks. It also has the
-ability to redirect output from an online workflow to disk in the case of an
-unrecoverable failure. We use ADIOS and FlexPath in this work.
-
-% the below is covered in Design->Implementation Artifacts.
-%ADIOS offers a
-%simple I/O interface~\cite{lofstead:2009:adaptable}, which supports FlexPath
-%as one of its underlying transport mechanisms. FlexPath supports data transport
-%between distributed executables regardless of their placement.
+\fi
 
 Companion work to SuperGlue within this same project is
 Bredala~\cite{dreher:2016:bredala}. This work presents an attempt to build a
 data model for in situ workflows. It has some similarity to
 FFS~\cite{eisenhauer:2011:ffs}. Unlike FFS, which is part of a much more
 complex infrastructure for typed messaging between distributed processes,
-Bredala is strictly focusing on the data model.
+Bredala strictly focuses on a data model that can preserve
+semantic integrity across redistributions.
 
 Overall, while all of these efforts are addressing different portions of the
 online workflows puzzle, none of them are addressing the idea of general,
-reusable glue and analytical components for scientific workflows.
+reusable data transformation and analysis components for the assembly
+of entire workflows out of the box.
 
 \section{Workflows}
 \label{s:workflow}
 
-We designed and implemented two realistic real-time workflows based on
+We designed and implemented three realistic real-time workflows based on
 scientific codes having large user bases: the LAMMPS Newtonian particle
-simulator~\cite{plimpton:1997:lammps} and GTCP, a particle-in-cell Tokamak
-simulator~\cite{lin:gtc}. While both of these workflows eventually turn the
+simulator~\cite{plimpton:1997:lammps}, GTCP, a particle-in-cell Tokamak
+simulator~\cite{lin:gtc}, and GROMACS,
+a biomolecular dynamics code~\cite{hess2008gromacs}.
+While all these workflows eventually turn part of the
 simulation data into histograms of certain quantities of interest, how they
-arrive at their final result varies significantly. Creating similar types of
-results, and this using some of the same components but in significantly
+arrive at their final result varies significantly.
+Creating similar types of results, and this using some
+of the same components but in significantly
 different ways, has allowed us to gain important insight into how best to
-design glue components that can be used in a wide variety of workflows.
+design components that can be used to build wide variety of workflows.
 We first describe the workflows from a general point of view
 and then the components in greater detail, illustrated
 in~\autoref{fig:lammps-workflow} and~\autoref{fig:gtcp-workflow}.
