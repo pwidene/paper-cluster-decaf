@@ -116,19 +116,32 @@ Kepler~\cite{bertram:2006:kepler} and
 DAGMan~\cite{Malewicz:2006:dagman}
 offer flexible ways to assemble components
 with rich functionality to manage the control flow, they have not been
-universally adopted due to some of their limitations and complexity.
+universally adopted due to some of their limitations and complexity in the
+HPC environment.
 
-% will make this flow better
-<<<<<<<<<<MERGE needed
-Many workflows use similar analytical routines, such as data
-filtering, FFTs, magnitude calculations of multi-dimensional data, etc.
-However, 
-one major limitation to existing workflow engines is that
+Many workflows make use of similar analytical routines, such as data
+filtering, FFT analysis, magnitude calculations of multi-dimensional data, etc.
+However, one major limitation to existing workflow engines is that
 given only a simluation code, a scientist cannot easily
 assemble a workflow ``out of the box.''
+Indeed, even with the re-use of code that performs
+common analytical procedures, for a scientist to assemble
+and launch a workflow using existing tools,
+significant effort is required to (a) allow this code
+to operate on the specific data formats used in this
+particular workflow, (b) map the workflow components
+to the available resources, which in the HPC space
+is usually a supercomputer,
+and (c) reconcile the discrepancy between the parallelism
+in one component and that of its downstream components.
+% I see a, b, and c as the main problems we are solving with SG
+% -> (a) with the any-dimension genericity of tools like select and dim-reduce
+% -> (b) with the use of a simple bash script to launch a full workflow, which is
+% a common scenario
+% -> (c) by the automatic partitioning of data that the components do,
+%        without special knowledge required from the scientist.
 
-
-A more specific example illustrating the complexities comes from the Oak Ridge
+A specific example illustrating the complexities comes from the Oak Ridge
 Leadership Computing Facility (OLCF).  Kepler was used for several workflows
 for the fusion simulation users.  While the initial goal was that an internal,
 expert resource would create the workflow,
@@ -140,15 +153,9 @@ the expert was required regularly as the configuration evolved and scaled.
 The complexities of maintaining the components and the glue code as the output
 shifted and managing the deployment was too high.
 Even then, the workflow operated offline.
-=======
-Scientific workflows, which capture a series of such analytical steps, usually
-operating on large quantities of data, have also followed this trend of moving
-the analytical components online (i.e., executing simultaneously with the driving
-scientific code). While workflow engines such as
-Kepler~\cite{bertram:2006:kepler} and DAGMan~\cite{Malewicz:2006:dagman} offer
-flexible ways to assemble components with rich functionality to manage the
-control flow, they have not been universally adopted due to some of their
-limitations and complexity in the HPC environment.  Distributed-Area Computing
+
+%below may fit better in related work section.
+Distributed-Area Computing
 (DAC) workflow management
 systems~\cite{tejedor:2015:pycompss,deelman:2015:pegasus} and HPC workflow
 management systems~\cite{dorier:2015:in-situ-lessons} may need to interoperate
@@ -167,18 +174,6 @@ these heterogeneous workflows.
 %exchange of data products produced by the DAC that need to be further processed
 %by the HPC subworkflow. The latter interface, from HPC to DAC, involves the
 %transfer of data products only.
-
-One example illustrating the complexities comes from the Oak Ridge Leadership
-Computing Facility (OLCF).  Kepler was used for several workflows for the
-fusion simulation users.  While the initial goal was that an internal, expert
-resource would create the workflow, including the data transformation code
-required for that particular scenario (i.e., the ``glue code''), the workflow
-should be able to be maintained easily by the application scientists.
-Unfortunately, the expert was required regularly as the configuration evolved
-and scaled.  The complexities of maintaining the components and the glue code
-as the output shifted and managing the deployment was too high.  Even then, the
-workflow operated offline.
->>>>>>> e30685ed2a3f2b902645832833e3abd5da08f2d3
 
 % we already talked about the trend of moving workflows online
 \if 0
