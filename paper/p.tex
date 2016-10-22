@@ -582,10 +582,10 @@ particles and output 5 numerical properties describing each particle in the
 simulation at regular timestep intervals. This corresponds to two-dimensional
 data (particles as one dimension and properties of interest as another) and
 among these properties are the three-dimensional components of the particles'
-velocities. In this case, the workflow outputs one histogram per timestep
-showing the velocity distribution for all simulation particles at that point in
-time.  From the LAMMPS output, the particular quantities of interest must be
-extracted and then a histogram generated.
+velocities. The workflow outputs one histogram per timestep
+showing the distribution of the magnitudes of the particles' velocities
+for all particles involved in simulation at that point in
+time.
 
 \subsection{GTCP Workflow}
 
@@ -605,10 +605,22 @@ grid points, it outputs 7 properties of the plasma such as pressure and energy
 flux. This division of the toroid is illustrated in~\autoref{fig:toroid}.
 The output of the simulation is therefore a three-dimensional array in which
 the dimensions span: (a) toroidal ranks (toroidal slice number), (b) grid point
-numbers, and (c) property indices. In this workflow, the per-timestep histogram
-generated shows the distribution of per-gridpoint parallel pressure across
-the entire simulation. From GTCP's output, the particular quantities of
-interest must be extracted and then a histogram generated.
+numbers, and (c) various properties that describe each grid point.
+In this workflow, the per-timestep histogram
+generated shows the distribution of per-gridpoint parallel pressures across
+the entire simulation.
+
+\subsection{GROMACS Workflow}
+
+One of the main data quantities that GROMACS outputs
+at regular intervals is the three-dimensional positions
+of the atoms involved in the simulation.
+From these, we obtain a histogram of the distances
+of the atoms from the origin for each timestep, showing
+an evolution of the spread of the particles.
+
+\subsection{Discussion}
+
 
 \if 0
 \subsection{Discussion}
