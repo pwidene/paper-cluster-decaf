@@ -105,7 +105,8 @@ are increasingly important.
 % reduce.
 
 Scientific workflows, which 
-capture a series of such analytical steps, usually
+capture a series of such analytical steps for a
+particular scientific discovery goal, usually
 operating on large quantities of data,
 have also followed this trend of moving the analytical components
 online (ie. executing simultaneously with the driving scientific code).
@@ -117,7 +118,16 @@ offer flexible ways to assemble components
 with rich functionality to manage the control flow, they have not been
 universally adopted due to some of their limitations and complexity.
 
-One example illustrating the complexities comes from the Oak Ridge
+% will make this flow better
+Many workflows use similar analytical routines, such as data
+filtering, FFTs, magnitude calculations of multi-dimensional data, etc.
+However, 
+one major limitation to existing workflow engines is that
+given only a simluation code, a scientist cannot easily
+assemble a workflow ``out of the box.''
+
+
+A more specific example illustrating the complexities comes from the Oak Ridge
 Leadership Computing Facility (OLCF).  Kepler was used for several workflows
 for the fusion simulation users.  While the initial goal was that an internal,
 expert resource would create the workflow,
