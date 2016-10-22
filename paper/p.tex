@@ -295,6 +295,7 @@ eventually be used to assemble
 a rich variety of workflows, driven by simulation codes
 exporting a variety of different data formats.
 
+\if 0
 \ada{sell the work. highlight something that says: your contributions are the design (you thought
   about what's the right lower level functionality you can leverage to
   make this work), collection of generic SG filters, and demonstration
@@ -303,6 +304,7 @@ approach is
 expressiveness, can impact productivity since components can be reused
 with minimal intervention, and doesn't impeed performance and
 experimentation at scale. }
+\fi
 To demonstrate the functionality of the SuperGlue approach,
 deploy three SuperGlue workflows based on three different
 scientific simulations having large user bases,
@@ -528,6 +530,7 @@ This work demonstrates that the placement of the analytics can significantly
 affect the performance of workflows, and that this placement can be determined
 in part by the communication characteristics of the analytics components.
 
+
 Glean~\cite{vishwanath:2011:glean}, Nessie~\cite{oldfield:lwfs-data-movement},
 and Mercury~\cite{Soumagne:2013:mercury} are intended to facilitate offering
 portable workflows across different interconnect technologies. While their
@@ -541,7 +544,8 @@ Bredala~\cite{dreher:2016:bredala}. This work presents an attempt to build a
 data model for in situ workflows. It has some similarity to
 FFS~\cite{eisenhauer:2011:ffs}. Unlike FFS, which is part of a much more
 complex infrastructure for typed messaging between distributed processes,
-Bredala is strictly focusing on the data model.
+Bredala is strictly focusing on a data model that can preserve
+semantic integrity across redistributions.
 
 Overall, while all of these efforts are addressing different portions of the
 online workflows puzzle, none of them are addressing the idea of general,
