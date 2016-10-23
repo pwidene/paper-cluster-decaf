@@ -9,15 +9,21 @@ to be packed as a linear array.
 LAMMPS and GTCP do this packing natively,
 but we had to add it to GROMACS.
 Roughly 70 lines of code are required
-to allow each simulation to work with SuperGlue.
-The code changes made to GROMACS version 4.6.7
+to allow each simulation to work with SuperGlue,
+along with an approximately 25-line
+XML file that describes the data to ADIOS
+at run time.
+The code changes made to GROMACS version 4.6.7,
+as well as the workflow launch files,
+including the XML configuration file,
 can be seen in the public SuperGlue
 repository~\cite{champsaur:superglue-repo}.
 
 In general, in order to work with SuperGlue components, 
 simulations have to specify through ADIOS the logical
 dimensions of their data and optionally create
-corresponding headers to label them and their indices.
+corresponding headers to label them and their indices,
+before writing the data itself.
 
 \subsection{Demonstrating in the Workflows}
 
@@ -37,12 +43,12 @@ end result of this workflow is a series of histograms of the total velocities
 of the particles. There is one histogram created at each timestep at which the
 simulation would normally dump its data to disk.
 
-
 The GTCP workflow is illustrated in~\autoref{fig:gtcp-workflow}, and it too was assembled only from the
 simulation and SuperGlue components. Note that the workflows primarily differ
 in the data formats output by the simulations.
 
-From GTCP, data first arrives at an instance of Select, which extracts
+From GTCP, three-dimensional data first
+arrives at an instance of Select, which extracts
 one quantity of interest out of the 7 properties that describe each gridpoint.
 This quantity was arbitrarily chosen as the ``perpendicular
 pressure,'' or pressure of the plasma perpendicular to the flow in the grid
@@ -55,3 +61,12 @@ array without changing its total size. The final component, Histogram, outputs
 a histogram of the perpendicular pressures of all grid points at each timestep
 at which the simulation would normally output its data to disk.
 
+The GROMACS output
+contains only the three-dimensional
+position quantities.
+Therefore, it can be sent directly to
+Magnitude, which calculates
+the magnitudes of the distances of the atoms from
+the origin, and Histogram then shows a distribution
+of these distances, giving an idea of the spread
+of the particles at each timestep of interest.
