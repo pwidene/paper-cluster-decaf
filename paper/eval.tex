@@ -5,10 +5,10 @@ We demonstrated in the previous section the feasibility of
 reusing SuperGlue components across workflows.
 In this section we use
 performance measurements on two of these workflows
-to show that a componentized approach
-to building workflows, which is inherent in the SuperGlue approach,
+to show (a) that a componentized method in
+building workflows, which is inherent in the SuperGlue approach,
 is valid from a performance point of view,
-as well as to show some of the scaling characteristics
+and (b) to show some of the scaling characteristics
 of the components.
 % implicit here is that presenting
 % performance measurements on the workflows
@@ -31,12 +31,58 @@ Opteron CPU and 32 GB of RAM. The interconnect is a Gemini network. There is an
 attached Nvidia Kepler K20X GPU with an additional 6 GB of memory on every
 node.
 
-%The evaluation is performed on Rhea, a capacity cluster at Oak Ridge National
-%Laboratory. It consists of 512 nodes each with two 8-core 2.0 GHz Intel Xeon
-%processors with Hyper-Threading and 128 GB of RAM. The interconnect is FDR
-%Infiniband. For storage, Rhea uses OLCF's 32 PB Atlas Lustre parallel file
-%system.
+\subsection{Evaluation of Componentization}
 
+\begin{table}[tbp]
+  %\vspace{-0.15in}
+  \centering
+  \caption{LAMMPS SuperGlue vs. All-In-One Comparison}
+  \label{tab:aio}
+  %\vspace{-0.15in}
+  \begin{tabular}{|l|l|l|l|l|}
+    \hline
+    LAMMPS output size & AIO time (sec) & Superglue time (sec) \\
+    \hline
+    20 MB & 115.26 & 116.513\\
+    \hline
+    80 MB & 148.70 & 149.80\\
+    \hline
+    320 MB & 154.65 & 157.65\\
+    \hline
+    1280 MB & 155.32 & 157.98\\
+    \hline
+    5120 MB & 167.39 & 168.785\\
+    \hline
+  \end{tabular}
+  %\vspace{-0.15in}
+\end{table}
+
+
+It is expected that assembling a workflow
+using generic components involves the use
+of finer-grain components
+than when using ad-hoc analytical routines
+specifically coded
+for a workflow of interest.
+One problem that might be anticipated
+in more componentized workflows
+is a decrease in overall performance caused by
+(a) more stages that require the coordination
+of readers and writers
+and (b) more points of actual data transfer.
+
+To investigate this potential problem,
+we wrote a custom, all-in-one (AIO) component
+that performs the same analytical procedure
+as all the components involved in the LAMMPS workflow
+(outside of the simulation itself, however).
+We measured the per-timestep throughput as well as
+the start-to-end times of the two workflows 
+at different scales.
+
+~\autoref{tab:aio} shows the results.
+
+\if 0
 \subsection{Strong Scaling Experiments}
 
 
@@ -278,3 +324,4 @@ C4 & 2.19 & 1.76 & 1.68 & 0.89\\
 \vspace{-0.25in}
 \end{table}
 
+\fi
