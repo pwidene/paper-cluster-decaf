@@ -76,8 +76,8 @@ For example, two of the simulations used in the
 workflows presented in this work inherently
 pack their output into one-dimensional arrays
 for native output, even
-though the output LAMMPS is logically
-two-dimensional, and that
+though LAMMPS' output is logically
+two-dimensional and that
 of GTCP three-dimensional.
 In order to use the same glue code to
 extract desired data from both outputs,
@@ -91,7 +91,7 @@ This is precisely the role of our
 
 In general, it is advantageous to (1) design
 components that can operate on
-multi-dimensional data as much as possible,
+multi-dimensional data as much as possible
 and (2) format the output data of
 scientific applications as having well-defined
 dimensions. Emphasizing the support for multi-dimensional
@@ -107,7 +107,7 @@ designed so as to work with
 \textbf{\em any number} of dimensions.
 For example, we found it advantageous to
 design our {\em Histogram} component to work with
-only one dimension, since this is
+only one dimension since this is
 a natural input for a histogram operation.
 
 \if 0
