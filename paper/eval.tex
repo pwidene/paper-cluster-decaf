@@ -57,7 +57,6 @@ node.
   %\vspace{-0.15in}
 \end{table}
 
-
 It is expected that assembling a workflow
 using generic components involves the use
 of finer-grain components
@@ -80,7 +79,64 @@ We measured the per-timestep throughput as well as
 the start-to-end times of the two workflows 
 at different scales.
 
-~\autoref{tab:aio} shows the results.
+~\autoref{tab:aio} shows the end-to-end
+completion times of the entire workflow
+at increasing scales. A weak scaling approach
+is used, with approximately the same
+per-process data size through the scaling.
+The time is taken from the start of the simulation
+to the point when the last histogram of
+the last timestep is written.
+For each SuperGlue workflow run, the corresponding
+AIO workflow run allocates the same
+number of processes to the AIO component
+as the SuperGlue workflow allocates to the Select component.
+In the SuperGlue workflow, additional processes
+are allocated to the other two components
+(Magnitude and Histogram).
+
+The results show only a small increase in
+workflow completion time for the SuperGlue
+workflows (with a maximum increase of $1.9 \%$).
+As mentioned previously, the componentized
+approach involves more numerous data exchange points
+in the workflow, thus leading to
+overhead from increased $MxN$ coordination and data exchange.
+However, FlexPath allows
+for asynchronous data transfer.
+More specifically, when a writer writes to
+a ``stream,'' it places
+the data in an internal buffer
+until the readers are ready to receive it;
+at this point, a separate thread in the writer
+will handle the transfer.
+This overlapping
+of computation and I/O
+amortizes the aforementioned negative effect.
+
+Also, in the SuperGlue workflow,
+the componentization of the analysis
+allows for a higher level of parallelism in the overall
+analysis. As an example, in the AIO component,
+the Select stage of one timestep
+only begins once the Magnitude
+stage of the previous timestep
+completes, since they exist in the same processes.
+In the SuperGlue workflow, these
+computational stages can run simultaneously.
+
+Granted, more resources are allocated to the
+SuperGlue workflows to allow the additional
+components to run.
+Still, all-in-all, this is
+an illustrative comparison that shows the validity
+of the componentized approach
+from a performance angle.
+
+% I don't even mention the per-timestep
+% throughput measurements, because
+% they are difficult to talk about
+% considering all the factors involved.
 
 \if 0
 \subsection{Strong Scaling Experiments}
