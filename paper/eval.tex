@@ -97,7 +97,7 @@ computation only.
 A weak scaling approach
 is used, with approximately the same
 per-process data size throughout the scaling.
-The time is taken from the start of the simulation
+The time is measured from the start of the simulation
 to the point when the last histogram of
 the last timestep is written.
 For each SuperGlue workflow run, the corresponding
@@ -195,7 +195,7 @@ to building workflows.
 
 We carried out a number of experiments
 to determine some of the strong and weak scaling
-properties of the components.
+characteristics of the components.
 
 Strong scaling measurements are useful for
 determining appropriate process sizes
@@ -227,11 +227,27 @@ that given
 a particular workload, users can select SuperGlue process sizes
 that match their resources and performance requirements.
 
-Similar curves exist for the LAMMPS and GROMACS workflows.
+Similar measurements exist for the LAMMPS and GROMACS workflows.
 These are available in the repository~\cite{champsaur:superglue-repo}.
 
-\autoref{tab:aio} already shows some promising
-weak scaling.
+The third column of~\autoref{tab:aio} already
+shows some promising
+weak scaling characteristics of SuperGlue
+in the LAMMPS workflow. That is, there is little
+difference in the end-to-end
+completion time of the workflow
+for simluation output sizes varying
+from 80 MB to 5120 MB (a factor of 64
+increase in simulation output size).
+The the 5120 MB run, the configuration used
+was 1024 LAMMPS processes, 256 Select processes,
+256 Magnitude processes, and 64 Histogram processes.
+
+Per-component, per-timestep results
+showing good weak scaling characteristics of
+SuperGlue
+also exist for the GTCP workflow and are also
+available in~\cite{champsaur:superglue-repo}.
 
 \if 0
 \subsection{Strong Scaling Experiments}

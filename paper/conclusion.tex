@@ -14,13 +14,14 @@ them together. Maintaining a high level of semantics upstream, for example by
 labeling dimensions and certain quantities inside of these dimensions, gives a
 good understanding of the data to downstream components. There is a need for
 components that organize the data in a format that downstream components can
-understand. And, designing specific disk writer components removes the need to
-temporarily modify analytics components to let them also act as disk writers.
+understand.
 
-Through the demonstration of generating a velocity histogram for LAMMPS, the
-molecular dynamics simulation, and a pressure histogram for GTC, the particle
-in cell fusion reactor simulator, we achieved reusing the same components in
-very different data formats and application types.
+Through the demonstration of generating a velocity histogram for LAMMPS,
+a pressure histogram for GTCP,
+and a distribution of the spread of the atoms for a GROMACS
+experiment,
+we demonstrate reusing the same components
+over different data formats and application types.
 
 While this work leverages ADIOS and the FlexPath transport, this is not the
 only approach for addressing reusable components. Other, similar approaches can
@@ -28,14 +29,44 @@ also work well. However, in this case, the data annotation provided by this
 connection infrastructure helps enable reusable components by offering the
 necessary metadata to perform the general operations.
 
-There are a number of improvements we can make to our current implementation to
-have at our disposal more robust and flexible workflow components. As mentioned
-earlier, reading and writing dimension labels at each step in the workflow
-provides more information to downstream components and presents a clear
-advantage. The ADIOS interface includes the ability to send output to multiple
-destinations by having several ``write groups.'' We wish to explore the
-possibility of a {\em Fork Component} that would use this functionality of
-ADIOS to allow the creation of branched workflows.
+Future work on this project involves
+expanding the library of generic components
+to include a variety of other analytical operations.
+In particular, the SuperGlue components presented
+in this paper
+result in an output dataset having either the same
+size or a smaller size as the input.
+Analytical procedures that lead
+to an increase in data size, such as
+all-pairs calculations, are common and
+can be implemented using the SuperGlue approach.
+
+Also common are operations that require the in-memory
+buffering of a dataset throughout a series
+of timesteps. An example of this is the
+calculation of root-mean-square
+deviations of atomic positions from a fixed,
+starting set of positions.
+
+Two key limitations of SuperGlue are
+that at the moment,
+all components are launched at once, and
+that workflows are not able to branch.
+
+To turn SuperGlue into a true Workflow Management
+System, we hope to leverage
+ADIOS' ability to have several ``write groups''
+so as to allow for the development
+of a {em Fork} component
+that would permit
+the creation of workflows
+described by directed acyclic graphs.
+And, to manage the execution of workflows
+over longer periods of time,
+we plan on investigating
+the incorporation of SuperGlue into
+higher-level workflow management systems
+such as Kepler and DAGMan.
 
 The components we have developed in this research cover only a small portion of
 the procedures that computational scientists need for their
@@ -48,6 +79,7 @@ model can fit any number of operations involving a repeating, fixed number of
 quantities, and it can even be made to work with a formula specified by the
 user at runtime. This opens the door to a large family of generic components.
 
+\if 0
 Finally, while we have kept performance in mind in the development of these
 components, performance optimization is not yet the focus of this research. In
 the design of any generic tool however, the question of performance inevitably
@@ -57,4 +89,4 @@ Dim-Reduce} performs the same amount of computation whether it re-arranges data
 or not. In the long run, optimizing these components will involve detecting
 such situations where they can avoid performing unnecessary iterations and data
 manipulation.
-
+\fi
