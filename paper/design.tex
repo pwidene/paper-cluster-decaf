@@ -67,61 +67,91 @@ in overall worfklow performance.
 \subsection{Multi-Dimensional Data Support}
 
 Many scientific codes serialize their output, effectively packing
-multi-dimensional data into a single dimension. However, this technique offers
-little information on the data to downstream components in a workflow.
+multi-dimensional data into a single dimension.
+However, this technique offers
+little information on the data to downstream
+components in a workflow.
 
-For example, both of the simulations used in the workflows presented in this work
-pack their output into one-dimensional arrays, even
-though the output LAMMPS is logically two-dimensional, and that
+For example, two of the simulations used in the
+workflows presented in this work inherently
+pack their output into one-dimensional arrays
+for native output, even
+though the output LAMMPS is logically
+two-dimensional, and that
 of GTCP three-dimensional.
-In order to use the same glue code to extract desired data from both outputs,
+In order to use the same glue code to
+extract desired data from both outputs,
 this code must be able to operate on two-dimensional data
-as well as three-dimensional data. In fact, if the glue code is able to operate
+as well as three-dimensional data.
+In fact, if the glue code is able to operate
 on any number of dimensions, all that must be provided to it
-at runtime is the
-dimensions and indices to extract. This is precisely the role of our
+at runtime is the dimensions and indices to extract.
+This is precisely the role of our
 {\em Select} component.
 
-In general, it is advantageous to (1) design components that can operate on
-multi-dimensional data as much as possible, and (2) format the output data of
-scientific applications as having well-defined dimensions. Emphasizing the
-support for multi-dimensional data in the design of workflow components allows
-for maximum compatibility between the interfaces of components by providing a
+In general, it is advantageous to (1) design
+components that can operate on
+multi-dimensional data as much as possible,
+and (2) format the output data of
+scientific applications as having well-defined
+dimensions. Emphasizing the support for multi-dimensional
+data in the design of workflow components allows
+for maximum compatibility between the interfaces
+of components by providing a
 consistent way to refer to the data.
 
-Still, while multi-dimensional data support provides a consistent way to refer
-to the data, not all components should be designed so as to work with
-\textbf{\em any number} of dimensions. For example, we found it advantageous to
-design our {\em Histogram} component to work with only one dimension.
-Indeed, creating a histogram from one-dimensional data is intuitive.
-Supporting a higher number of dimensions would add unnecessary complexity
-to this component. If the data has more dimensions than are expected,
-and only particular indices in a particular dimension hold the data of interest,
-we can simply use filter and selector glue to extract and format the data for
-{\em Histogram} to operate on.
+Still, while multi-dimensional data support
+provides a consistent way to refer
+to the data, not all components should be
+designed so as to work with
+\textbf{\em any number} of dimensions.
+For example, we found it advantageous to
+design our {\em Histogram} component to work with
+only one dimension, since this is
+a natural input for a histogram operation.
 
+\if 0
+Indeed, creating a histogram from one-dimensional data is intuitive.
+Supporting a higher number of dimensions
+would add unnecessary complexity
+to this component. If the data has more
+dimensions than are expected,
+and only particular indices in a particular
+dimension hold the data of interest,
+we can simply use filter and selector
+glue to extract and format the data for
+{\em Histogram} to operate on.
+\fi
 
 \subsection{Semantics}
 
-When data is organized under clearly defined dimensions, labeling these
+When data is organized under clearly defined
+dimensions, labeling these
 dimensions and the indices they hold
-as the data goes through each component lets downstream subscribers
-refer to dimensions using their names. Because the data is potentially re-sized
-and re-arranged in the course of a workflow, it is useful to maintain such
-semantics as much as possible. However, the absence of labels should not block
+as the data goes through each component
+lets downstream subscribers
+refer to dimensions using their names.
+Because the data is potentially re-sized
+and re-arranged in the course of a workflow,
+it is useful to maintain such
+semantics as much as possible. However,
+the absence of labels should not block
 the workflow execution.
 
-For example, in both workflows, we modified the simulations so that
-they label the quantities that they output in the dimension that holds
-these quantities. This lets the {\em Select} component extract the quantities
-of interest by referring to them by name. However, we did not label the dimensions
+For example, in both the LAMMPS and the GTCP workflows, we modified
+the simulations so that they label the
+quantities that they output in the
+dimension that holds
+these quantities. This lets the {\em Select} component
+extract the quantities of interest by referring
+to them by name. However, we did not label the dimensions
 themselves, rather referring to them by number. 
 
-When they exist, these labels are concatenated into a header string
-passed along to the next component in the workflow as another variable
-through the ADIOS interface, which
-allows for the arbitrary output of any number of variables of any type
-alongside the main simulation data.
+When they exist, these labels are concatenated
+into a header string passed along to the
+next component in the workflow as another variable
+through the ADIOS interface, alongside the main
+simulation data.
 While in our current implementation, {\em Select} is hard-coded to
 always looks for such a header describing the quantities
 in the dimension of interest, 
@@ -134,24 +164,31 @@ should also be kept {\em optional}.
 
 \subsection{Dimension Reduction}
 \label{subsec:dimreduce}
-As discussed earlier, there is a need in scientific workflows with fine
-step granularity for glue components that re-arrange and re-label data
+As discussed earlier, there is a need in
+scientific workflows with fine
+step granularity for glue components
+that re-arrange and re-label data
 without necessarily changing its size.
 This is illustrated by the need for the {\em Dim-Reduce}
 operation in the GTCP workflow.
 
-In its raw output, GTCP
-keeps track of the toroidal slice that produces the data of interest by using a
-dimension that spans the ``Toroidal rank'' of grid points. In our workflow, we
-wish to create histograms encompassing all grid points in the toroid, thereby
+In its raw output, GTCP keeps track of the
+toroidal slice that produces the data of interest by using a
+dimension that spans the ``Toroidal rank'' of grid points.
+In our workflow, we
+wish to create histograms encompassing all grid
+points in the toroid, thereby
 eliminating the concept of ``Toroidal rank''
 along the way
 and instead growing the dimension
 that spans the number of grid points.
 
-Programming languages represent multi-dimensional arrays in a specific order in
-memory, so we cannot simply keep the data ordered as it is, change the number
-of dimensions and their sizes, and assume that the new dimensions correctly
+Programming languages represent multi-dimensional
+arrays in a specific order in
+memory, so we cannot simply keep the data
+ordered as it is, change the number
+of dimensions and their sizes, and assume
+that the new dimensions correctly
 reference the data.
 
 The dimensions of GTCP's raw output are 
@@ -167,10 +204,13 @@ $N_0{\times}N_1{\times}N_2$, where:
 
 \end{itemize}
 
-At one stage of the GTCP workflow, we wish to eliminate the concept of
+At one stage of the GTCP workflow, we wish
+to eliminate the concept of
 {\em toroidal rank} of the data. This is to bring the data one step
-closer to a format that {\em Histogram} understands: one-dimensional data.
-For the data to be one-dimensional, two instances of the {\em Dim-Reduce}
+closer to a format that {\em Histogram} understands:
+one-dimensional data.
+For the data to be one-dimensional, two instances of the
+{\em Dim-Reduce}
 glue operation are required. We focus here on the first of the two.
 
 The desired result of this operation is that:
@@ -200,74 +240,90 @@ operation has dimensions $N_1'{\times}N_2$ , where:
 
 \end{itemize}
 
-We call this operation {\em dimension reduction}. Even though it does not
+We call this operation {\em dimension reduction}.
+Even though it does not
 change the size of the data set, we have seen in our implementation 
-that it often changes the in memory
-data ordering. Consequently, it is still potentially a
+that it often changes the in-memory
+ordering of data. Consequently, it is still potentially a
 compute-intensive operation with sizable communication overhead
 when the dataset is large and many
 processes are involved in it.
 
 This operation fits well into a
-SuperGlue component, and it is precisely the role of the {\em Dim-Reduce}
+SuperGlue component, and it is precisely
+the role of the {\em Dim-Reduce}
 component, which can operate on a dataset having any number of dimensions.
 
 \subsection{Implementation Artifacts}
-
-While particular implementation decisions are made to investigate the
-potential for reusable glue and analysis
-components, the choices made in the tools used to build the components and
-workflows presented in this work are by no means the only tools and techniques for
-achieving success. Rather, the selected technologies offer many features that
-facilitate the creation of reusable components. The reasoning for these selections is
-explored below.
 
 Though we refer to the SuperGlue components as single entities,
 they are distributed
 codes able to split computation on large dataset
 among the processes of which they are
 composed. More precisely, they are MPI executables written in C
-where all processes in a component belong to the same MPI communicator.
+where all processes in a component belong to the
+same MPI communicator.
 
 Since we need some analogy to the Linux shell pipe operator for
-connecting components, we choose to use ADIOS~\cite{lofstead:2009:adaptable}
-for the flexibility in writing destinations, reading sources, and offering a
-typed data stream. In particular, we use the FlexPath transport. It implements
-a {\em stream-based} data exchange abstracted to the components through the
-ADIOS interface, is asynchronous, and allows for data exchange between any
+connecting components, we choose to use
+ADIOS~\cite{lofstead:2009:adaptable}
+for the flexibility in writing destinations,
+reading sources, and offering a
+typed data stream. In particular, we use
+the FlexPath transport. It implements
+a {\em stream-based} data exchange abstracted to
+the components through the
+ADIOS interface, is asynchronous, and allows for
+data exchange between any
 number of writers and readers. Therefore:
 
-1. We can launch components of the workflow in any order: downstream components
-will wait for the availability of data from upstream components and upstream
-components will buffer data up to a certain size until they are able to send it
-downstream. This also means that the decision as to which downstream
-components to use can be made after the upstream components have started
-running allowing for real-time adjustments to the workflow based on results
-obtained upstream.
+1. We can launch components of the workflow
+in any order: downstream components
+will wait for the availability of data from
+upstream components and upstream
+components will buffer data up to a certain
+size until they are able to send it
+downstream. This also means that the decision as to
+which downstream components to use can be made after
+the upstream components have started
+running allowing for real-time adjustments to the
+workflow based on results obtained upstream.
 
-2. Even if the number of processes used for one component is different from that
-used for the previous one in the workflow, each component can split the data
-(and therefore the computation) evenly among its processes. We should mention,
-however, due to the current implementation of FlexPath, there is overhead
+2. Even if the number of processes used for one
+component is different from that used for the previous
+one in the workflow, each component can split the data
+(and therefore the computation) evenly among its processes.
+
+\if 0
+We should mention, however, due to the current implementation of FlexPath, there is overhead
 data exchanged when different numbers of writers and readers are used. Even if
 reader $R$ requests only a portion of writer $W$'s data, the current implementation
 is such that $W$ sends all of its data to $R$. This is in the process of being
 improved, and this effort is orthogonal to the work done for this project.
+\fi
 
-In addition, ADIOS and its transports, such as FlexPath, keep track of the
-data dimensions and their sizes. Therefore, when a component receives a
-multi-dimensional array, it can discover the dimensions of the data and their
-sizes as defined by the previous component in the workflow. Note that the
-data type of the input to one component may be changed for the output. This is
-crucial for operators that select a data subset or generate a derived product.
+In addition, ADIOS and its transports, such as FlexPath,
+keep track of the
+data dimensions and their sizes. Therefore, when a
+component receives a
+multi-dimensional array, it can discover the dimensions
+of the data and their
+sizes as defined by the previous component in the workflow.
 
 There is no need to re-compile SuperGlue components when using them
 in different workflows. Any configuration of a component for a particular workflow
 can be provided through run-time arguments.
+We will show more clearly how this is done in the next section.
+
 For all components, the user must specify the input stream name from
 which to read, the input stream array name containing the data on which to operate,
 the output stream name to which to
 write, and the array name to use in the output stream. Referring to
 streams and arrays using names allows users to easily chain together these
-components into potentially complex workflows, providing a similar advantage
-to that of labeling dimensions and indices, as previously discussed.
+components into potentially complex workflows,
+providing a similar advantage
+to that of labeling dimensions and indices,
+as previously discussed.
+
+We show more clearly in the next section how command-line
+parameters allow for the genericity of SuperGlue components.
