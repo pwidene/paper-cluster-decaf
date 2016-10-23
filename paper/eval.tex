@@ -1,8 +1,6 @@
 \section{Evaluation}
 \label{s:eval}
 
-We demonstrated in the previous section the feasibility of
-reusing SuperGlue components across workflows.
 In this section we use
 performance measurements on two of these workflows
 to show (a) that a componentized method in
@@ -10,6 +8,10 @@ building workflows, which is inherent in the SuperGlue approach,
 is valid from a performance point of view,
 and (b) to show some of the scaling characteristics
 of the components.
+These results also serve to show that
+SuperGlue workflows were successfully
+deployed at various
+scales.
 % implicit here is that presenting
 % performance measurements on the workflows
 % shows more concretely that they actually *run*,
@@ -177,7 +179,6 @@ to building workflows.
   \vspace{-0.07in}
 \end{table*}
 
-
 \begin{figure}
   \centering
   %\vspace{-0.17in}
@@ -226,7 +227,11 @@ that given
 a particular workload, users can select SuperGlue process sizes
 that match their resources and performance requirements.
 
+Similar curves exist for the LAMMPS and GROMACS workflows.
+These are available in the repository~\cite{champsaur:superglue-repo}.
 
+\autoref{tab:aio} already shows some promising
+weak scaling.
 
 \if 0
 \subsection{Strong Scaling Experiments}
