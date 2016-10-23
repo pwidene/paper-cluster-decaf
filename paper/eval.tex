@@ -1,12 +1,29 @@
 \section{Evaluation}
 \label{s:eval}
 
+We demonstrated in the previous section the feasibility of
+reusing SuperGlue components across workflows.
+In this section we use
+performance measurements on two of these workflows
+to show that a componentized approach
+to building workflows, which is inherent in the SuperGlue approach,
+is valid from a performance point of view,
+as well as to show some of the scaling characteristics
+of the components.
+% implicit here is that presenting
+% performance measurements on the workflows
+% shows more concretely that they actually *run*,
+% which reinforces the statements in the
+% previous section.
+
+\if 0
 The goals of the evaluation are to demonstrate the \ada{state goals
   clearly to set correct expectations, see if this is correct or needs
   to be expanded:} the feasibility of reusing
   SuperGlue components across workloads, and the ability of the
   SuperGlue components to maintain similar performance and scaling
 levels as ``hand-tuned'' workflow compositions. 
+\fi
 
 The evaluation is performed on Titan, the Cray XK7 machine at Oak Ridge
 National Laboratory. It consists of 18,688 nodes each with 1 16-core AMD
