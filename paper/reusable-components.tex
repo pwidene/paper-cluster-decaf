@@ -1,6 +1,22 @@
 \section{Reusable Components}
 \label{s:reusable-components}
 
+\begin{figure}
+  \begin{lstlisting}
+  aprun -n 64 histogram velos.fp 16 velocities &
+  aprun -n 256 magnitude lmpselect.fp \
+    lmpsel velos.fp velocities &
+  aprun -n 256 select dump.custom.fp \
+    atoms 1 lmpselect.fp lmpsel vx vy vz &
+  aprun -n 1024 lmp_titan < in.cracksm &
+  wait
+  \end{lstlisting}
+  \vspace{-0.15in}
+  \caption{SuperGlue example launch script}
+  \label{fig:launch-script}
+  \vspace{-0.10in}
+\end{figure}
+
 \begin{figure*}
   \vspace{-0.10in}
   \includegraphics[width=\linewidth]{fig/wflow3}
@@ -23,10 +39,10 @@
   \center
   %\vspace{-0.10in}
   \includegraphics[width=\columnwidth]{fig/wflow_gromacs}
-  %\vspace{-0.35in}
+  \vspace{-0.25in}
   \caption{GROMACS Workflow}
   \label{fig:gromacs-workflow}
-  %\vspace{-0.15in}
+  \vspace{-0.15in}
 \end{figure}
 
 
@@ -39,20 +55,41 @@ a user-specified way.
 
 \subsection{Select}
 
-Given an input stream that includes an array with any number of dimensions,
-Select extracts certain indices from one of the dimensions. Thus, it outputs an array
-with the same number of dimensions, but with the dimension of interest having a
-smaller size. In order to select the quantities of interest, the
-component uses a header which must be passed by the previous component in the
-workflow. The header is a list of strings that name the quantities in the
-dimension of interest. This allows for easy selection of quantities at runtime when
-Select is launched. For example, in the LAMMPS workflow, the simulation outputs
-the ID, Type, Vx, Vy, and Vz of each particle, where Vx, Vy, and Vz are the
+Given an input stream that includes an array with
+any number of dimensions,
+Select extracts certain indices from one of
+the dimensions. Thus, it outputs an array
+with the same number of dimensions,
+but with the dimension of interest having a
+smaller size. In order to select the quantities of
+interest, the component uses a header which
+must be passed by the previous component in the
+workflow. The header is a list of strings that
+name the quantities in the
+dimension of interest. This allows for easy
+selection of quantities at runtime when
+Select is launched. For example, in the LAMMPS workflow,
+the simulation outputs the ID, Type, $v_{x}$, $v_y$, and $v_z$
+of each particle, where$v_{x}$, $v_y$, and $v_z$ are the
 components of the three-dimensional particle velocity.
-Select discards the ID and Type, building a new array consisting only of the velocity components.
-The user, or a higher-level dataflow assembler, must pass to
-this component the index of the dimension from which to select, as well as the
+Select discards the ID and Type, building a new
+array consisting only of the velocity components.
+The user, must pass to
+this component the index of the dimension
+from which to select, as well as the
 indices of the quantities of interest within that dimension.
+~\autoref{fig:launch-script} shows an example launch
+script for the LAMMPS workflow. Lines 4 and 5
+show how Select is launched. \verb|dump.custom.bp|
+is the FlexPath stream written by LAMMPS; \verb|atoms|
+is the array or atoms written by the simulation; 
+1 is the dimension number that spans the 5 atom attributes;
+\verb|lmpselect.fp| is the stream that Select will write;
+\verb|lmpsel| is the array that Select will write;
+\verb|vx| \verb|vy| and \verb|vz| are the
+names of the quantities
+to be extracted, which will be found in the
+header written by LAMMPS, described previously.
 
 \subsection{Dim-Reduce}
 
@@ -82,23 +119,33 @@ allowing this component to fit into a variety of scientific workflows.
 
 \subsection{Histogram}
 
-The processes that make up the Histogram component partition among themselves
-a one-dimensional array of data. They communicate to discover the global
-minimum and maximum values in the array, create a number of bins between these
-two extremes, and then communicate again to count the number of values in the
-globally partitioned array that fall in each bin. The number of bins to use
-must be passed to the component when it is launched.
+The processes that make up the Histogram component
+partition among themselves a one-dimensional
+array of data. They communicate to discover the global
+minimum and maximum values in the array, create a
+number of bins between these two extremes, and
+then communicate again to count the number of values in the
+globally partitioned array that fall in each bin.
+The number of bins to use must be passed to the
+component when it is launched.
 
-In our current implementation, one of the processes of Histogram writes the
-output to a file on disk. We chose this approach because this component is
-generally used as an endpoint in the workflow and because the output of this
-component is generally very small compared to its input and can be easily
-written by a single process.
-However, as we see now, letting this component output its data in the
-same way as the other components, that is as an ADIOS stream, and instead writing to
-disk when needed using a component specifically designed for this purpose would
+In our current implementation, one of the processes
+of Histogram writes the
+output to a file on disk. We chose this approach
+because this component is generally used as an
+endpoint in the workflow and because the output of this
+component is generally very small compared to its input
+and can be easily written by a single process.
+However, letting this component output
+its data in the same way as the other components,
+that is as an ADIOS stream, and instead writing to
+disk when needed using a component specifically
+designed for this purpose would
 provide greater flexibility.
 
+
+
+% for future work section
 \if 0
 \subsection{Dumper}
 

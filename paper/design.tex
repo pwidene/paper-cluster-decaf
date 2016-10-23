@@ -268,8 +268,7 @@ composed. More precisely, they are MPI executables written in C
 where all processes in a component belong to the
 same MPI communicator.
 
-Since we need some analogy to the Linux shell pipe operator for
-connecting components, we choose to use
+To connect components, we use
 ADIOS~\cite{lofstead:2009:adaptable}
 for the flexibility in writing destinations,
 reading sources, and offering a
@@ -303,6 +302,19 @@ component is different from that used for the previous
 one in the workflow, each component can split the data
 (and therefore the computation) evenly among its processes.
 
+3. A FlexPath stream actually corresponds
+to the internal buffering of data on the writer side
+until readers are ready to request the data,
+at which point the data exchange
+on the writer side is carried out
+by a separate thread.
+This asynchronous communication allows a 
+SuperGlue component to move on to the computation
+of a susequent timestep even when a downstream
+component is not yet ready to accept data,
+effectively overlapping computation and IO
+and offering high performance to a componentized workflow.
+
 \if 0
 We should mention, however, due to the current implementation of FlexPath, there is overhead
 data exchanged when different numbers of writers and readers are used. Even if
@@ -311,7 +323,7 @@ is such that $W$ sends all of its data to $R$. This is in the process of being
 improved, and this effort is orthogonal to the work done for this project.
 \fi
 
-Indeed, ADIOS and its transports, such as FlexPath,
+ADIOS and its transports, such as FlexPath,
 keep track of the
 data dimensions and their sizes. Therefore, when a
 component receives a
