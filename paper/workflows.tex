@@ -64,6 +64,53 @@ an evolution of the spread of the particles.
 
 \subsection{Discussion}
 
+All three workflows are built using only the simulation code,
+modified to allow for ADIOS output, as well as SuperGlue
+components, unchanged when the same component is used
+in different workflows.
+As we will explain in more detail later,
+the components' ability to fit
+into different workflows
+is achieved using command-line
+parameters specified in the batch job
+submission script used for launching
+the whole workflow on the target cluster.
+
+All three workflows create histograms as their final
+result, as histograms are a common final,
+human-readable result of many types of workflow.
+However, the components presented in this paper
+are meant only to illustrate the building blocks
+of a library of such tools, of which histogram is
+only an example.
+
+Also, the driving simulations generate very
+different data, so selecting the
+relevant data from the simulations and
+formatting it in a such a way that the
+final Histogram component can operate on
+it is done differently in each
+workflow.
+
+Much of the challenge is the data selection and mathematical
+manipulation to obtain the quantities of
+interest in a way that (a) presents an
+intuitive interface to the scientist
+constructing the workflow and (b) is
+useful in different types of workflows
+in which data have different sizes and
+dimensions.  This difficulty arises
+because (a) the data at each stage of the
+workflow is distributed over the collection
+of processes, with varying levels
+of parallelism at each stage, and
+(b) the extraction and
+re-arrangement of multi-dimensional,
+distributed data, in a way that is
+configurable by the user at runtime is challenging. 
+
+Addressing these challenges has offered us some insight
+in the design of such generic tools.
 
 \if 0
 \subsection{Discussion}
