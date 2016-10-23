@@ -41,17 +41,17 @@ node.
   %\vspace{-0.15in}
   \begin{tabular}{|l|l|l|l|l|}
     \hline
-    LAMMPS output size & AIO time (sec) & Superglue time (sec) \\
+    SIM output & AIO time (sec) & Superglue time (sec) & LMP only (sec) \\
     \hline
-    20 MB & 115.26 & 116.513\\
+    20 MB & 115.26 & 116.51 & 115.03\\
     \hline
-    80 MB & 148.70 & 149.80\\
+    80 MB & 148.70 & 149.80 & 146.97\\
     \hline
-    320 MB & 154.65 & 157.65\\
+    320 MB & 154.65 & 157.65 & 153.69\\
     \hline
-    1280 MB & 155.32 & 157.98\\
+    1280 MB & 155.32 & 157.98 & 152.48\\
     \hline
-    5120 MB & 167.39 & 168.785\\
+    5120 MB & 167.39 & 168.79 & 165.22\\
     \hline
   \end{tabular}
   %\vspace{-0.15in}
@@ -75,15 +75,26 @@ we wrote a custom, all-in-one (AIO) component
 that performs the same analytical procedure
 as all the components involved in the LAMMPS workflow
 (outside of the simulation itself, however).
-We measured the per-timestep throughput as well as
-the start-to-end times of the two workflows 
+We measured
+the start-to-end completion times of the two workflows 
 at different scales.
 
-~\autoref{tab:aio} shows the end-to-end
-completion times of the entire workflow
-at increasing scales. A weak scaling approach
+~\autoref{tab:aio} shows the start-to-end
+completion times
+at increasing scales, of
+(a) LAMMPS with the AIO component
+in the second column
+(b) LAMMPS with the full SuperGlue workflow in the 3rd column
+and (c) the LAMMPS simulation only with the output routines
+removed from the code in the last column.
+The measurements in the last column
+are meant to give an idea of the portion
+of the workflow completion time taken up by the simulation
+computation only.
+
+A weak scaling approach
 is used, with approximately the same
-per-process data size through the scaling.
+per-process data size throughout the scaling.
 The time is taken from the start of the simulation
 to the point when the last histogram of
 the last timestep is written.
@@ -99,7 +110,7 @@ The results show only a small increase in
 workflow completion time for the SuperGlue
 workflows (with a maximum increase of $1.9 \%$).
 As mentioned previously, the componentized
-approach involves more numerous data exchange points
+approach involves more data exchange points
 in the workflow, thus leading to
 overhead from increased $MxN$ coordination and data exchange.
 However, FlexPath allows
@@ -107,12 +118,12 @@ for asynchronous data transfer.
 More specifically, when a writer writes to
 a ``stream,'' it places
 the data in an internal buffer
-until the readers are ready to receive it;
-at this point, a separate thread in the writer
-will handle the transfer.
-This overlapping
+until the readers are ready to request it,
+at which point a separate thread in the writer
+handles the actual transfer.
+This overlap
 of computation and I/O
-amortizes the aforementioned negative effect.
+amortizes the aforementioned overhead.
 
 Also, in the SuperGlue workflow,
 the componentization of the analysis
@@ -126,17 +137,29 @@ In the SuperGlue workflow, these
 computational stages can run simultaneously.
 
 Granted, more resources are allocated to the
-SuperGlue workflows to allow the additional
+SuperGlue workflow runs to allow the additional
 components to run.
-Still, all-in-all, this is
-an illustrative comparison that shows the validity
+Also, much of the start-to-end time is spent on
+the simulation's computation.
+However, the measurements in the last column
+of ~\autoref{tab:aio}
+only give an idea of the proportion of 
+overall time occupied by the simulation only,
+since when workflows are running, there is much
+overlap in the computation and I/O between the
+simulation and other components.
+All-in-all, this is
+an illustrative comparison that shows the validity,
+from a performance angle,
 of the componentized approach
-from a performance angle.
+to building workflows.
 
 % I don't even mention the per-timestep
 % throughput measurements, because
 % they are difficult to talk about
 % considering all the factors involved.
+% reviewers might complain that the simulation
+% takes up the whole time.
 
 \if 0
 \subsection{Strong Scaling Experiments}
