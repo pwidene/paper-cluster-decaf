@@ -13,6 +13,8 @@ set key spacing 0.8
 set key samplen 1.2
 set key at graph 0.9, graph 0.65
 set xtics nomirror
+set xlabel "Select process size" font ", 10"
+show xlabel
 
 #set key at 0,0 bot center
 #set key above

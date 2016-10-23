@@ -14,6 +14,11 @@ set key spacing 0.8
 set key samplen 1.2
 set key at graph 0.92, graph 0.6
 set xtics nomirror
+set xlabel "Dim-reduce process size"
+show xlabel
+set ylabel "Timestep completion time (sec)" rotate by 90 offset 1,5
+show ylabel
+
 
 #set key at 0,0 bot center
 #set key above

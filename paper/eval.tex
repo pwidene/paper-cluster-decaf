@@ -154,12 +154,79 @@ from a performance angle,
 of the componentized approach
 to building workflows.
 
-% I don't even mention the per-timestep
-% throughput measurements, because
-% they are difficult to talk about
-% considering all the factors involved.
-% reviewers might complain that the simulation
-% takes up the whole time.
+\subsection{Scaling}
+
+\begin{table*}[tbp]
+  \centering
+  \caption{GTCP Evaluation Configuration Settings}
+  \label{tab:eval-strong-gtcp}
+  \vspace{-0.15in}
+  \begin{tabular}{|l|l|l|l|l|l|}
+    \hline
+    Component Test & GTCP Procs & Select Procs & Dim-Reduce 1 & Dim-Reduce 2 & Histogram Procs \\
+    \hline
+    Select & 64 & $x$ & 4 & 4 & 4\\
+    \hline
+    Dim-Reduce 1 & 128 & 32 & $x$ & 16 & 16\\
+    \hline
+    Dim-Reduce 2 & 128 & 32 & 16 & $x$ & 16\\
+    \hline
+    %Histogram & 128 & 34 & 24 & 24 & $x$\\
+    %\hline
+  \end{tabular}
+  \vspace{-0.07in}
+\end{table*}
+
+
+\begin{figure}
+  \centering
+  %\vspace{-0.17in}
+  \input{data/gtcp-sel1-strong}
+  %\vspace{-0.17in}
+  \input{data/gtcp-dimr-strong}
+  %\vspace{-0.06in}
+  \caption{SuperGlue strong scaling in the GTCP workflow. Whole timestep
+    completion time (secs) for Select and both instances of Dim-Reduce used in
+    the workflow are plotted against process size}
+  \label{fig:gtcp-strong}
+  \vspace{-0.25in}
+\end{figure}
+
+We carried out a number of experiments
+to determine some of the strong and weak scaling
+properties of the components.
+
+Strong scaling measurements are useful for
+determining appropriate process sizes
+for the components, based on the size of the
+data set they operate on.
+For these strong scaling measurements,
+we varied the process size of a single component at
+a time while fixing that of the
+other components involved in the workflow,
+all the while using a fixed output size from
+the driving simulation.
+We timed the completion of a whole timestep
+taken arbitrarily in the middle of the workflow
+of one component of interest at a time,
+taking an average over all proceses
+involved in that component's timestep.
+
+In~\autoref{fig:gtcp-strong} we show some results 
+from the GTCP workflow.
+The corresponding configurations (process sizes for all components)
+that were used to obtain these results are listed
+in~\autoref{tab:eval-strong-gtcp}.
+These strong scaling results show a general trend
+seen in the strong scaling experiments for SuperGlue
+components: a linear domain of scalability followed
+by a turning point and eventual flattening
+of the curve. This shows
+that given
+a particular workload, users can select SuperGlue process sizes
+that match their resources and performance requirements.
+
+
 
 \if 0
 \subsection{Strong Scaling Experiments}
