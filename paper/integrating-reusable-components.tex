@@ -1,27 +1,28 @@
 \section{Integrating Reusable Components}
 \label{s:integrating-reusable-components}
 
-In order to use some of the same components in both workflows, we had to
-slightly modify the output stages of the scientific codes driving them. Because
-in both workflows, the first component to receive the simulation data is
-Select, each simulation has to write a header of its quantities in the
-dimension to be selected from. Also, normally LAMMPS packs its two-dimensional
-output into a single array. We eliminated this packing to reduce the downstream
-decoding complexity by leaving the actual data structure rather than an encoded
-form.
-Both simulations had to be
-modified to use ADIOS for output. While the ADIOS integration was
-not difficult because the ADIOS interface is simple, it was the most
-significant change made to the
-simulations.
+To allow the simulation codes used to work
+with SuperGlue, we had to modify their output
+routines to use ADIOS.
+ADIOS expects multi-dimensional data
+to be packed as a linear array.
+LAMMPS and GTCP do this packing natively,
+but we had to add it to GROMACS.
+Roughly 70 lines of code are required
+to allow each simulation to work with SuperGlue.
+The code changes made to GROMACS version 4.6.7
+can be seen in the public SuperGlue
+repository~\cite{champsaur:superglue-repo}.
 
 In general, in order to work with SuperGlue components, 
-simulations have to specify through ADIOS the logical dimensions of their data
-and optionally create corresponding headers to label them and their indices.
+simulations have to specify through ADIOS the logical
+dimensions of their data and optionally create
+corresponding headers to label them and their indices.
 
 \subsection{Demonstrating in the Workflows}
 
-We built the LAMMPS workflow, illustrated in~\autoref{fig:lammps-workflow},
+We built the LAMMPS workflow, illustrated
+in~\autoref{fig:lammps-workflow},
 using only LAMMPS and SuperGlue components.
 We annotate the figure with details about how
 the data is manipulated at each step.
