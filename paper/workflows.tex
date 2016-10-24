@@ -58,9 +58,11 @@ the entire simulation.
 \subsection{GROMACS Workflow}
 
 Among other quantities, GROMACS outputs
-the three-dimensional positions
+the three-dimensional coordinates
 of the atoms involved in the simulation
 at regular intervals.
+The data array itself is two-dimensional:
+3D coordinates over all atoms.
 From these, we obtain a histogram of the distances
 of the atoms from the origin for each timestep, showing
 an evolution of the spread of the particles through
