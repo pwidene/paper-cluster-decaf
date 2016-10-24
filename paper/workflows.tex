@@ -7,12 +7,14 @@ simulator~\cite{plimpton:1997:lammps}, GTCP, a particle-in-cell Tokamak
 simulator~\cite{lin:gtc}, and GROMACS,
 a biomolecular dynamics code~\cite{hess2008gromacs}.
 While all these workflows eventually turn part of the
-simulation data into histograms of certain quantities of interest, how they
-arrive at their final result varies significantly.
+simulation data into histograms of certain quantities of interest,
+there is significant variation in 
+how they
+arrive at their final result.
 Creating similar types of results, and this using some
 of the same components but in significantly
 different ways, has allowed us to gain important insight into how best to
-design components that can be used to build wide variety of workflows.
+design components that can be used to build a wide variety of workflows.
 We first describe the workflows from a general point of view
 and then the components in greater detail, illustrated
 in~\autoref{fig:lammps-workflow} ~\autoref{fig:gtcp-workflow}
@@ -55,12 +57,14 @@ the entire simulation.
 
 \subsection{GROMACS Workflow}
 
-One of the main data quantities that GROMACS outputs
-at regular intervals is the three-dimensional positions
-of the atoms involved in the simulation.
+Among other quantities, GROMACS outputs
+the three-dimensional positions
+of the atoms involved in the simulation
+at regular intervals.
 From these, we obtain a histogram of the distances
 of the atoms from the origin for each timestep, showing
-an evolution of the spread of the particles.
+an evolution of the spread of the particles through
+the simulation in a human-readable way.
 
 \subsection{Discussion}
 
@@ -92,7 +96,8 @@ final Histogram component can operate on
 it is done differently in each
 workflow.
 
-Much of the challenge is the data selection and mathematical
+Much of the challenge is the
+data selection and mathematical
 manipulation to obtain the quantities of
 interest in a way that (a) presents an
 intuitive interface to the scientist
