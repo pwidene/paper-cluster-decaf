@@ -61,7 +61,7 @@ allows for more general processing
 than designing more numerous components each having more
 complex functionality.
 And, as we show in~\autoref{s:eval}, componentizing
-the analysis involves insignificant changes
+the analysis involves only minor changes
 in overall worfklow performance.
 
 \subsection{Multi-Dimensional Data Support}
@@ -104,7 +104,7 @@ Still, while multi-dimensional data support
 provides a consistent way to refer
 to the data, not all components should be
 designed so as to work with
-\textbf{\em any number} of dimensions.
+any number of dimensions.
 For example, we found it advantageous to
 design our {\em Histogram} component to work with
 only one dimension since this is
@@ -340,7 +340,9 @@ can be provided through run-time arguments.
 We will show more clearly how this is done in the next section,
 but in general, the user must specify the
 stream and array names from which to read
-and to which to write.
+and to which to write,
+and usually also dimensions and/or
+indices to operate on.
 Referring to
 streams and arrays using names allows users to
 easily chain together these
