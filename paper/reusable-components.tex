@@ -49,7 +49,7 @@
 
 This section provides greater details about the individual SuperGlue components
 and how a small number of
-parameters allow the them to operate on a variety
+parameters allow them to operate on a variety
 of different input data formats in
 a user-specified way.
 
@@ -70,8 +70,8 @@ dimension of interest. This allows for easy
 selection of quantities at runtime when
 Select is launched. For example, in the LAMMPS workflow,
 the simulation outputs the ID, Type, $v_{x}$, $v_y$, and $v_z$
-of each particle, where$v_{x}$, $v_y$, and $v_z$ are the
-components of the three-dimensional particle velocity.
+of each particle, where $v_{x}$, $v_y$, and $v_z$ are the
+three-dimensional components of the velocity of a particle.
 Select discards the ID and Type, building a new
 array consisting only of the velocity components.
 The user, must pass to
@@ -89,7 +89,7 @@ is the array or atoms written by the simulation;
 \verb|vx| \verb|vy| and \verb|vz| are the
 names of the quantities
 to be extracted, which will be found in the
-header written by LAMMPS, described previously.
+header written by LAMMPS.
 
 \subsection{Dim-Reduce}
 
@@ -115,7 +115,7 @@ array is specified by the user at runtime. A small number of changes and a few
 start-up parameters could generalize this code to perform any number of
 common operations that calculate a quantity from many,
 applying a known formula over a two-dimensional dataset, thus
-allowing this component to fit into a variety of scientific workflows.
+allowing this component to be extended into a variety of others.
 
 \subsection{Histogram}
 
@@ -132,7 +132,7 @@ component when it is launched.
 In our current implementation, one of the processes
 of Histogram writes the
 output to a file on disk. We chose this approach
-because this component is generally used as an
+because this component is often used as an
 endpoint in the workflow and because the output of this
 component is generally very small compared to its input
 and can be easily written by a single process.
