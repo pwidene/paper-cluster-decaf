@@ -3,11 +3,11 @@
 
 This paper presents SuperGlue, a demonstration of making generic, reusable
 components for scientific simulations. By decomposing the operations into small
-chunks, we can achieve components that can be reused, without modification, for
-a variety of different workflows. In this work we investigate using a
+chunks, we achieve components that can be reused, without modification, for
+a variety of different workflows. In this work, we investigate using a
 stream-based structure with generic components to achieve easier to build and
-use workflows.  Stream-based, generic workflow components should be designed so
-as to allow for the greatest variety in their arrangement and for a maximum
+use workflows.  Stream-based, generic workflow components should be designed 
+to allow the greatest variety in their arrangement and for a maximum
 number of downstream subscribers. Designing components with the ability to
 handle data having any number of dimensions provides a very useful way to link
 them together. Maintaining a high level of semantics upstream, for example by
@@ -26,12 +26,12 @@ over different data formats and application types.
 While this work leverages ADIOS and the FlexPath transport, this is not the
 only approach for addressing reusable components. Other, similar approaches can
 also work well. However, in this case, the data annotation provided by this
-connection infrastructure helps enable reusable components by offering the
-necessary metadata to perform the general operations.
+connection infrastructure helps enable reusable components by offering
+necessary metadata to perform general operations.
 
-Future work on this project involves
-expanding the library of generic components
-to include a variety of other analytical operations.
+Future work involves
+expanding the generic components library 
+to include a variety of analytical operations.
 In particular, the SuperGlue components presented
 in this paper
 result in an output dataset having either the same
@@ -48,16 +48,16 @@ calculation of root-mean-square
 deviations of atomic positions from a fixed,
 starting set of positions.
 
-Two key limitations of SuperGlue are
-that at the moment,
-all components are launched at once, and
-that workflows are not able to branch.
+Two current limitations of SuperGlue are
+that 
+all components are launched at once and
+workflows cannot branch.
 
 To turn SuperGlue into a true Workflow Management
 System, we hope to leverage
 ADIOS' ability to have several ``write groups''
 so as to allow for the development
-of a {em Fork} component
+of a {\em Fork} component
 that would permit
 the creation of workflows
 described by directed acyclic graphs.
