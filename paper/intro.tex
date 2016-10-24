@@ -154,11 +154,10 @@ It is implemented as a transport method for the
 Adaptable I/O System (ADIOS)~\cite{lofstead:2009:adaptable},
 which provides a unified interface to parallel I/O over a rich
 variety of underlying data encoding, transport, and placement technologies.
-With ADIOS, FlexPath provides a simple interface for MxN communication
-between simulation and/or analytical components.
-Through ADIOS and FlexPath, data exchange makes use
-of the abstraction of a stream, which allows
-for asynchronous, MxN I/O between workflow components.
+With ADIOS, FlexPath provides a simple interface for
+asynchronous, MxN communication
+between simulation and analytical components
+through the abstraction of a stream.
 
 In this work, we leverage the stream-based, MxN
 I/O interface offered by ADIOS and FlexPath
@@ -170,7 +169,7 @@ SuperGlue allows workflows to be assembled
 by using existing, generic
 data transformation and 
 analysis components
-which to not require any code changes
+which do not require any code changes
 for specific workflows;
 the only code changes required when
 using SuperGlue are 
