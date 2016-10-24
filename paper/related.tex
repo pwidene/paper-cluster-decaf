@@ -40,16 +40,18 @@ kinds of scientific workflows. It offers different directors to manage how the
 workflow will be executed. Each component is an actor with channels connecting
 actors. As mentioned in the Introduction, complex workflows using Kepler have been
 assembled for many communities, including fusion science.
-However, the variety of components
-that come with Kepler are designed
+However, the large collection of components
+that come with Kepler are mainly designed
 to work in a single Java Virtual Machine instance;
 using HPC-scale components requires significant effort
 both in coding the custom components and in
-allowing the I/O methods used to be understood by the Kepler engine.
+allowing the I/O methods used to be understood by the
+higher-level
+Kepler engine.
 
 To address much of the complexity of communicating between separate parallel
-components, in situ approaches are being investigated.
-We use ``in situ'' in the sense of ``linked into the same process.''
+components, inline approaches are being investigated.
+We use ``inline'' in the sense of ``linked into the same process.''
 Catalyst~\cite{karimabadi:2013:catalyst} offers a way to integrate the
 ParaView~\cite{Moreland:2008:paraview} analysis and visualization system
 directly into the simulation executable. Catalyst strips out many features to
@@ -108,7 +110,7 @@ Bredala strictly focuses on a data model that can preserve
 semantic integrity across redistributions.
 
 Overall, while all of these efforts are addressing different portions of the
-online workflows puzzle, none of them are addressing the idea of general,
+online workflows puzzle, none of them address the idea of general,
 reusable data transformation and analysis components for the assembly
-of entire workflows out of the box.
+of entire HPC workflows out of the box.
 
