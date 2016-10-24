@@ -62,8 +62,9 @@ a histogram of the perpendicular pressures of all grid points at each timestep
 at which the simulation would normally output its data to disk.
 
 The GROMACS output
-contains only the three-dimensional
-position quantities.
+contains only the
+position vectors
+of the atoms.
 Therefore, it can be sent directly to
 Magnitude, which calculates
 the magnitudes of the distances of the atoms from
@@ -74,7 +75,8 @@ of the particles at each timestep of interest.
 The four components used to build these workflows
 are only meant to illustrate an approach
 in designing a library of such components
-to allow for the assembly of a variety of workflows.
+to allow for the assembly of a variety of workflows;
+they are not meant to satisfy most analytical needs.
 
 In the repository, we provide a non-compilable
 template component

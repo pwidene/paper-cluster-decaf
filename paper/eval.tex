@@ -140,7 +140,7 @@ computational stages can run simultaneously.
 
 Granted, more resources are allocated to the
 SuperGlue workflow runs to allow the additional
-components to run.
+components to execute.
 Also, much of the start-to-end time is spent on
 the simulation's computation.
 However, the measurements in the last column
@@ -150,7 +150,7 @@ overall time occupied by the simulation only,
 since when workflows are running, there is much
 overlap in the computation and I/O between the
 simulation and other components.
-All-in-all, this is
+All in all, this is
 an illustrative comparison that shows the validity,
 from a performance angle,
 of the componentized approach
@@ -210,7 +210,7 @@ the driving simulation.
 We timed the completion of a whole timestep
 taken arbitrarily in the middle of the workflow
 of one component of interest at a time,
-taking an average over all proceses
+taking an average over all processes
 involved in that component's timestep.
 
 In~\autoref{fig:gtcp-strong} we show some results 
@@ -231,7 +231,7 @@ Similar measurements exist for the LAMMPS and GROMACS workflows.
 These are available in the repository~\cite{champsaur:superglue-repo}.
 
 The third column of~\autoref{tab:aio} already
-shows some promising
+shows promising
 weak scaling characteristics of SuperGlue
 in the LAMMPS workflow. That is, there is little
 difference in the end-to-end
@@ -239,7 +239,7 @@ completion time of the workflow
 for simulation output sizes varying
 from 80 MB to 5120 MB (a factor of 64
 increase in simulation output size).
-The the 5120 MB run, the configuration used
+For the 5120 MB run, the configuration used
 was 1024 LAMMPS processes, 256 Select processes,
 256 Magnitude processes, and 64 Histogram processes.
 
