@@ -1,0 +1,105 @@
+\documentclass[conference]{IEEEtran}
+\pdfpagewidth=8.5in
+\pdfpageheight=11in
+%\usepackage{subfig}
+\usepackage{subfigure}
+%\usepackage{extsizes}
+%\usepackage{subcaption}
+\usepackage[pdftex]{}
+\usepackage{graphicx}
+%\usepackage{todonotes}
+\usepackage{listings}
+\usepackage{color}
+%\usepackage{hyperref}
+\usepackage[breaklinks,colorlinks]{hyperref}
+\usepackage{url}
+\usepackage{todonotes}
+\usepackage{amssymb}
+\usepackage{xspace}
+\usepackage[binary-units=true]{siunitx}
+
+%\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+
+\lstset {% general command to set parameter(s)
+%  language=C,
+   basicstyle=\footnotesize,               % print whole listing small
+  %     keywordstyle=\color{black}\bfseries, % underlined bold black keywords
+  %     identifierstyle =\color{black},  % nothing happens
+  %     commentstyle=\color{black}\emph, % white comments
+  %stringstyle=\ttfamily,          % typewriter type for strings
+  %     stringstyle=\color{black},       % typewriter type for strings
+%  tabsize=4,
+%  showtabs=false,
+%  showstringspaces=false
+   numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
+   numbersep=3pt,                   % how far the line-numbers are from the code
+   numberstyle=\color{gray}
+}
+%can't figure this one out for particles bandwidth
+%\usepackage[caption,label]{subfig}
+\def\Snospace~{\S{}}
+\renewcommand*\sectionautorefname{\Snospace}
+\def\sectionautorefname{\Snospace}
+\def\subsectionautorefname{\Snospace}
+\def\subsubsectionautorefname{\Snospace}
+\newcommand{\MB}{\,\text{MB}\xspace}
+\newcommand{\GB}{\,\text{GB}\xspace}
+\newcommand{\ada}[1]{\textcolor{red}{Ada: #1}}
+\newcommand{\DDT}{D\textsuperscript{2}T~}
+\newcommand{\DDTns}{D\textsuperscript{2}T}
+\newcommand{\subsubsubsection}{\noindent\textbf}
+\newcommand*{\captionsource}[2]{%
+  \caption[{#1}]{%
+    #1%
+    \\\hspace{\linewidth}%
+    \textbf{Source:} #2%
+  }%
+}
+%\addtolength{\parskip}{-0.08in}
+
+% in order for balance columns to work, it has to be before begin document...
+%\balancecolumns
+
+\begin{document}
+\bstctlcite{IEEEexample:BSTcontrol}
+\input{hdr}
+\maketitle
+
+\input{abstract}
+
+%\category{D.4}{Software}{Operating Systems}
+%\category{D.4.7}{Operating Systems}{Organization and Design}[hierarchical design]
+
+%\terms{Design, Performance}
+\input{intro}
+\input{related}
+\input{workflows}
+\input{design}
+\input{reusable-components}
+\input{integrating-reusable-components}
+\input{eval}
+\input{conclusion}
+\section*{Acknowledgments}
+%\vspace{-0.05in}
+%\includegraphics[scale=0.07]{logos/doe_logo}
+%\includegraphics[scale=0.30]{logos/snl_logo}
+%\includegraphics[scale=0.35]{logos/nnsa_logo}
+The authors would like to thank Matthieu Dreher
+and Tom Peterka from Argonne National Lab for their
+valuable assistance with GROMACS and Pegasus.
+
+Sandia National Laboratories is a multi-program laboratory managed and operated
+by Sandia Corporation, a wholly owned subsidiary of Lockheed Martin
+Corporation, for the U.S. Department of Energy's National Nuclear Security
+Administration under contract DE-AC04-94AL85000.
+
+This work was supported by Advanced Scientific Computing Research, Office of
+Science, U.S. Department of Energy, under Contract DE-AC02-06CH11357, program
+manager Lucy Nowell.
+
+\bibliographystyle{IEEEtran}
+\bibliography{gcomps,p,fakeroot,sslab,manycore,conf,whole}
+
+\vfill\eject
+
+\end{document}

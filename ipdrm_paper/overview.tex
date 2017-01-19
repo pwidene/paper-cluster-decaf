@@ -1,0 +1,91 @@
+\section{\fakeroot Scalability Issue}
+\label{s:problem}
+
+Software developpers both in the open source world
+and in private companies tend to
+regularly update their programs. They usually do this
+either to eliminate security vulnerabilities or to
+provide new functionality.
+
+To incorporate such changes, both
+application developers and
+package maintainers have to
+update the contents of software packages
+and rebuild them.
+%
+To do this, they need
+to have root privileges (a \verb|UID| and a \verb|GID| of 0)
+for various security reasons.
+However, developers and maintainers often don't have
+root privileges on the machines that they work on.
+
+It is in this type of situation that \fakeroot
+is particularly useful. With \fakeroot,
+a user can give a program the
+illusion that it is running with root privileges,
+when in fact it is running with user-level privileges only.
+This is accomplished by wrapping the program's system calls
+for file manipulation and
+emulating the behavior of privilged operations,
+while only unprivileged operations are actually being carried out,
+all of this based on the \verb|LD_PRELOAD| mechanism.
+
+Therefore, \fakeroot can give a UID and GID
+of 0 to the programs that require this at the
+time of building, and it lets developers build distribution-ready
+packages on machines where they lack root privileges.
+
+\begin{figure}[t!]
+\centering
+\input{data/80-core}
+\caption{Performance of a Linux kernel compile on an 80-core
+  machine with disabled hyperthreads. The experiment was
+  performed on Linux kernel version v3.19.0.}
+\label{f:80-core}
+\end{figure}
+
+\begin{figure}[t!]
+\centering
+\input{data/120-core}
+\caption{Performance of a Linux kernel compile on an 80-core
+  machine with disabled hyperthreads. The experiment was
+  performed on Linux kernel version v3.19.0.}
+\label{f:120-core}
+\end{figure}
+
+% now introduce the problem
+In this multicore era, where machines are getting
+faster and bulkier, many programs can effectively be
+accelerated by distributing computation to multiple cores.
+Unfortunately, our experiments have discovered that
+\fakeroot fails to scale after 8 cores (refer~\autoref{f:80-core})
+when compiling the Linux kernel. \make, however,
+scales easily with increasing core count.
+%staying on subject: failure of gmake+fakeroot
+Our preliminary results show
+that \fakeroot is $24.57$\x slower
+than a simple \make with 80 cores, 
+and $2.33$\x slower even
+with only 8 cores.
+
+On initial investigation, we have found that \fakeroot does not
+follow the scalability notion, as its design consists of
+a simple server-client model, where the server
+is the single point of contention as well as failure.
+In addition, it maintains a large file descriptor
+hash table for all file manipulation operations at
+runtime and each access is streamlined by the server
+for every operation.
+
+We believe that these are the primary
+causes of failure to scale, and that we can do better.
+Our final goal is twofold:
+\begin{enumerate}
+\item to obtain the same scalability pattern
+  with \fakeroot as a simple
+  \make that does not use \fakeroot
+\item to improve the performance of \fakeroot for the core
+  numbers where its current implementation does
+  somewhat scale already (up to 8 cores).
+\end{enumerate}
+

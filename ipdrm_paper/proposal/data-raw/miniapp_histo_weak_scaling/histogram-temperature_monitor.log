@@ -1,0 +1,200 @@
+
+histogram-temperature step 0
+ave vm = 3469862.000000, ave resident memory = 228178.437500
+my array bytes (rank 0): 268435456
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole timestep      7.143127       7.035760       7.331139       0.096542       
+perform_reads       4.324266       3.466651       5.885100       0.618424       
+
+histogram-temperature step 1
+ave vm = 3478085.875000, ave resident memory = 236538.968750
+my array bytes (rank 0): 268435456
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole timestep      7.031583       6.080593       7.315459       0.456528       
+perform_reads       3.911676       3.132694       5.789111       0.600785       
+
+histogram-temperature step 2
+ave vm = 3478110.625000, ave resident memory = 236633.281250
+my array bytes (rank 0): 268435456
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole timestep      7.077438       5.092331       7.644084       0.833799       
+perform_reads       3.813096       2.217359       6.019037       0.859378       
+
+histogram-temperature step 3
+ave vm = 3478110.625000, ave resident memory = 236704.312500
+my array bytes (rank 0): 268435456
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole timestep      7.467178       7.441280       7.499376       0.013477       
+perform_reads       4.471572       3.334369       6.022449       0.565373       
+
+histogram-temperature step 4
+ave vm = 3478209.000000, ave resident memory = 236750.406250
+my array bytes (rank 0): 268435456
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole timestep      7.351885       7.204241       7.410172       0.061025       
+perform_reads       4.454184       3.145929       5.938419       0.613312       
+
+histogram-temperature step 0
+ave vm = 3469992.062500, ave resident memory = 228218.468750
+my array bytes (rank 0): 268435456
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole timestep      7.556233       7.283781       7.718913       0.091961       
+perform_reads       4.306482       2.547094       6.207313       0.768621       
+
+histogram-temperature step 1
+ave vm = 3478220.062500, ave resident memory = 236597.359375
+my array bytes (rank 0): 268435456
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole timestep      7.574427       6.080338       7.818087       0.485038       
+perform_reads       4.057182       2.035605       6.292545       0.884784       
+
+histogram-temperature step 2
+ave vm = 3478244.812500, ave resident memory = 236686.500000
+my array bytes (rank 0): 268435456
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole timestep      7.290100       7.163005       7.474270       0.092670       
+perform_reads       4.270425       2.680917       5.960098       0.752548       
+
+histogram-temperature step 3
+ave vm = 3478317.968750, ave resident memory = 236750.343750
+my array bytes (rank 0): 268435456
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole timestep      7.435542       7.161601       7.511625       0.038559       
+perform_reads       4.345055       2.739332       5.982204       0.693390       
+
+histogram-temperature step 4
+ave vm = 3478348.656250, ave resident memory = 236796.359375
+my array bytes (rank 0): 268435456
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole timestep      7.646355       7.322437       7.730294       0.074075       
+perform_reads       4.321744       2.579224       6.211863       0.786756       
+
+histogram-temperature step 0
+ave vm = 3470323.593750, ave resident memory = 228291.453125
+my array bytes (rank 0): 268435456
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole timestep      16.574139      16.323417      16.622551      0.054479       
+perform_reads       7.703133       1.969937       15.129655      3.307463       
+
+histogram-temperature step 1
+ave vm = 3478575.593750, ave resident memory = 236702.835938
+my array bytes (rank 0): 268435456
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole timestep      16.549027      16.258503      16.620881      0.051348       
+perform_reads       7.608288       1.823669       15.101404      3.365837       
+
+histogram-temperature step 2
+ave vm = 3478579.718750, ave resident memory = 236775.179688
+my array bytes (rank 0): 268435456
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole timestep      16.448508      16.255068      16.645117      0.091876       
+perform_reads       7.666314       1.863836       15.157494      3.328813       
+
+histogram-temperature step 3
+ave vm = 3478584.781250, ave resident memory = 236836.601562
+my array bytes (rank 0): 268435456
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole timestep      16.621558      16.356774      16.684703      0.045002       
+perform_reads       7.656565       1.862976       15.186786      3.333505       
+
+histogram-temperature step 4
+ave vm = 3478584.781250, ave resident memory = 236888.820312
+my array bytes (rank 0): 268435456
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole timestep      16.698989      16.579375      16.747104      0.037867       
+perform_reads       7.658594       1.879884       15.264561      3.343220       
+
+histogram-temperature step 0
+ave vm = 3470903.097656, ave resident memory = 228503.894531
+my array bytes (rank 0): 268435456
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole timestep      13.957526      13.750440      14.060283      0.038764       
+perform_reads       6.120450       2.187224       12.504209      2.635974       
+
+histogram-temperature step 1
+ave vm = 3479203.484375, ave resident memory = 236967.765625
+my array bytes (rank 0): 268435456
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole timestep      13.813291      13.653154      14.100007      0.094077       
+perform_reads       6.162921       2.500915       12.581901      2.633500       
+
+histogram-temperature step 2
+ave vm = 3479203.484375, ave resident memory = 237047.253906
+my array bytes (rank 0): 268435456
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole timestep      13.805896      13.439843      13.921401      0.052292       
+perform_reads       6.138134       2.299190       12.354397      2.662736       
+
+histogram-temperature step 3
+ave vm = 3479203.859375, ave resident memory = 237073.875000
+my array bytes (rank 0): 268435456
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole timestep      13.865113      13.555899      13.957954      0.104059       
+perform_reads       6.180595       2.089109       12.435321      2.635217       
+
+histogram-temperature step 4
+ave vm = 3479228.000000, ave resident memory = 237100.757812
+my array bytes (rank 0): 268435456
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole timestep      13.737581      13.515721      13.943420      0.099347       
+perform_reads       6.147180       2.037414       12.452229      2.668021       
+
+histogram-temperature step 0
+ave vm = 3472134.148438, ave resident memory = 229059.783203
+my array bytes (rank 0): 268435456
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole timestep      22.109626      18.984003      22.334107      0.509621       
+perform_reads       8.411445       1.369580       20.752283      4.874508       
+
+histogram-temperature step 1
+ave vm = 3480335.171875, ave resident memory = 237335.589844
+my array bytes (rank 0): 268435456
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole timestep      21.623980      21.436610      21.841718      0.084147       
+perform_reads       8.473965       1.802509       20.333097      4.596202       
+
+histogram-temperature step 2
+ave vm = 3480351.748047, ave resident memory = 237407.179688
+my array bytes (rank 0): 268435456
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole timestep      22.810414      22.493360      22.916258      0.043555       
+perform_reads       8.678100       1.796188       21.371169      4.790965       
+
+histogram-temperature step 3
+ave vm = 3480352.945312, ave resident memory = 237453.687500
+my array bytes (rank 0): 268435456
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole timestep      21.823747      21.575681      21.915535      0.078866       
+perform_reads       8.441065       1.735810       20.401556      4.635091       
+
+histogram-temperature step 4
+ave vm = 3480463.695312, ave resident memory = 237494.488281
+my array bytes (rank 0): 268435456
+Routine completion times below...
+routine name        mean           min            max            stdev
+whole timestep      21.839451      21.282624      21.968780      0.100081       
+perform_reads       8.520014       1.820849       20.400617      4.660399       

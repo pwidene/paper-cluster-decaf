@@ -1,0 +1,91 @@
+IPDPS req: 10 pages *including refs*
+ok
+
+Intro
+----------------------
+Keep much as-is.
+However, remove emphasis on "glue" components.
+Our main contribution compared to existing
+Workflow Management Systems (WMS) is the ability
+to build and launch workflows "out of the box" (almost).
+-> only coding effort is the add ADIOS to simulation code.
+
+Introduce how we leverage ADIOS + FlexPath.
+
+Introduce the idea that we also provide a way
+to expand the library. Some details about this in intro.
+"Template component" and documented, public code.
+
+Related Work
+-----------------------
+Add Swift and Apache Taverna.
+Modify to address new approach: existing WMSs either don't provide
+the components, only a way to organize them into a workflow,
+or the components can't work on data having formats
+as varied as allowed by Superglue.
+Kepler and Pegasus offer orchestration, which Superglue does not.
+But the Superglue workflow can be orchestrated by other means (eg. SODA).
+And the scope of Superglue is static workflows only, for the time being at least.
+No web-facing or grid components.
+
+Workflows
+--------------------
+Keep this section that provides a high-level
+approach of the workflows.
+Add GROMACS workflow.
+Remove the "generic workflow" illustration and corresponding
+discussion.
+Instead, discuss why histogram is used as a final component
+in both workflows.
+Look at similarities and differences between the workflows,
+and explain how these motivate the design of generic components.
+
+Design
+----------
+Details into design considerations that allow
+for generic components, but greatly reduce this section.
+
+Implementation
+---------------
+Very short, count lines of code of components,
+and lines of code required to modify simulations.
+Some details about monitoring lib.
+Link to public repo, and description of how the
+code is documented.
+
+Reusable components
+-------------------
+Much of the same, but include code snippets to show
+how the components are parametrized by command line
+args.
+
+Evaluation
+----------
+Elements of the evaluation:
+ - 3 workflows run to completion. Valid in itself.
+   Configuration: ie, process sizes.
+   Launch script snippets to show specifically
+   how the compiled elements fit into different workflows.
+   Below some weak & strong scaling workflows & components,
+   not an emphasis, but important to show more concretely that
+   they run.
+{
+ - LMP, GTCP: use some of the existing measurements.
+ - GROMACS needs some perf measurements: weak scaling, 5 points.
+}
+- Performance evaluation of componentized LAMMPS workflow
+   vs. LAMMPS workflow using a custom, monolithic analytics
+   component (all-in-one analysis or LAMMPS-AIO).
+   Use ~5 weak scaling points, timed start-to-end for each timestep
+   and for whole workflow.   
+   Expectation: performance loss, but not too much.
+
+Future work
+-------------
+Limitations of Superglue.
+ - limited number of components
+ - existing components share a common type of operation:
+   * reduction in data size, or same size component
+     this leaves out fan-out analysis, such as an all-pairs calculation.
+   * no buffering (major limitation in workflows -- give as example RMSD
+     calculation for protein spread, which requires a fixed array through all timesteps)

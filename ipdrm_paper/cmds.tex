@@ -1,0 +1,158 @@
+\renewcommand{\ttdefault}{pxtt}
+
+\newcommand{\URL}{\url}
+\newcommand{\cc}[1]{\mbox{\smaller[0.5]\texttt{#1}}}
+
+%\clubpenalty=10000
+%\widowpenalty=10000
+
+%\linespread{1.2}
+
+\fvset{fontsize=\scriptsize,xleftmargin=8pt,numbers=left,numbersep=5pt}
+
+\input{code/fmt}
+\newcommand{\figrule}{\hrule width \hsize height .33pt}
+\newcommand{\coderule}{\vspace{-0.4em}\figrule}
+
+\setlength{\abovedisplayskip}{0pt}
+\setlength{\abovedisplayshortskip}{0pt}
+\setlength{\belowdisplayskip}{0pt}
+\setlength{\belowdisplayshortskip}{0pt}
+\setlength{\jot}{0pt}
+
+\def\Snospace~{\S{}}
+\renewcommand*\sectionautorefname{\Snospace}
+\def\sectionautorefname{\Snospace}
+\def\subsectionautorefname{\Snospace}
+\def\subsubsectionautorefname{\Snospace}
+\def\chapterautorefname{\Snospace}
+%\renewcommand{\figurename}{Fig.}
+%\def\figureautorefname{\figurename}
+\newcommand{\subfigureautorefname}{\figureautorefname}
+
+%\numberwithin{equation}{section}
+\newcommand{\yes}{Y}
+\newcommand{\no}{}
+
+% sema
+\newcommand{\shl}{\ \cc{<}\cc{<}\ }
+\newcommand{\shr}{\ \cc{>}\cc{>}\ }
+
+\if 0
+\renewcommand{\topfraction}{0.9}
+\renewcommand{\dbltopfraction}{0.9}
+\renewcommand{\bottomfraction}{0.8}
+\renewcommand{\textfraction}{0.05}
+\renewcommand{\floatpagefraction}{0.9}
+\renewcommand{\dblfloatpagefraction}{0.9}
+\setcounter{topnumber}{10}
+\setcounter{bottomnumber}{10}
+\setcounter{totalnumber}{10}
+\setcounter{dbltopnumber}{10}
+\fi
+
+\newif\ifdraft\drafttrue
+\newif\ifnotes\notestrue
+\ifdraft\else\notesfalse\fi
+
+% ref. http://en.wikibooks.org/wiki/LaTeX/Colors
+  \newcommand{\TK}[1]{\textcolor{LimeGreen}{TK: #1}}
+  \newcommand{\SK}[1]{\textcolor{Green}{SK: #1}}
+  \newcommand{\AC}[1]{\textcolor{Brown}{AC: #1}}
+  \newcommand{\CM}[1]{\textcolor{Orange}{CM: #1}}
+  \newcommand{\XXX}[1]{\textcolor{red}{XXX: #1}}
+  \newcommand{\TODO}[1]{\textcolor{Melon}{TODO: #1}}
+  \newcommand{\TODONEXT}[1]{}
+
+%% Ensure ligatures (e.g., ``fine official flag'') can be copy/pasted from PDF.
+\input{glyphtounicode}
+\pdfgentounicode=1
+
+\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}p{#1}}
+
+% include macros
+\newcommand{\includepdf}[1]{
+  \includegraphics[width=\columnwidth]{#1}
+}
+\newcommand{\includeplot}[1]{
+  \resizebox{\columnwidth}{!}{\input{#1}}
+}
+
+% list
+\newcommand{\squishlist}{
+\begin{itemize}[noitemsep,nolistsep]
+  \setlength{\itemsep}{-0pt}
+}
+\newcommand{\squishend}{
+  \end{itemize}
+}
+
+%%
+%% NOTE.
+%%  to use circled number in caption, use
+%%   (e.g., \protect\C{1})
+%%
+\usepackage{tikz}
+\newcommand*\C[1]{%
+\begin{tikzpicture}[baseline=(C.base)]
+\node[draw,circle,inner sep=0.2pt](C) {#1};
+\end{tikzpicture}}
+
+\newcommand*\BC[1]{%
+\begin{tikzpicture}[baseline=(C.base)]
+\node[draw,circle,fill=black,inner sep=0.2pt](C) {\textcolor{white}{#1}};
+\end{tikzpicture}
+}
+
+\usepackage{xstring}
+\newcommand{\PP}[1]{
+\vspace{2px}
+\noindent{\bf \IfEndWith{#1}{.}{#1}{#1.}}
+}
+
+\newcommand{\PS}[1]{
+\vspace{2px}
+\noindent{\bf #1}
+}
+
+%%
+%% Paper specific commands
+%%
+\newcommand{\densetbl}{\addtolength{\tabcolsep}{-3pt}}
+\newcommand{\densetblend}{\addtolength{\tabcolsep}{3pt}}
+
+\newcommand{\fx}[1]{\mbox{\smaller[0]\textsc{#1}}}
+\newcommand{\rot}[1]{\rotatebox[origin=c]{90}{#1}}
+
+\newcommand{\V}{\checkmark}
+\newcommand{\N}{-}
+\newcommand{\x}{$\times$\xspace}
+
+
+\newcommand{\mem}{\mbox{\cc{RAMDISK}}\xspace}
+\newcommand{\fakeroot}{\mbox{\cc{FakeRoot}}\xspace}
+\newcommand{\make}{\mbox{\cc{make}}\xspace}
+\newcommand{\buildbot}{\mbox{\cc{Buildbot}}\xspace}
+\newcommand{\faked}{\mbox{\cc{faked}}\xspace}
+\newcommand{\libfake}{\mbox{\cc{libFakeroot}}\xspace}
+\newcommand{\stat}{\mbox{\cc{stat}}\xspace}
+\newcommand{\chmod}{\mbox{\cc{chmod}}\xspace}
+
+% file system
+\newcommand{\tmpfs}{\mbox{\cc{tmpfs}}\xspace}
+
+% lock types
+\newcommand{\rwsem}{\mbox{\cc{rw\_semaphore}}\xspace}
+\newcommand{\seqlock}{\mbox{\cc{seqlock\_t}}\xspace}
+
+\newcommand{\rename}{\mbox{\cc{rename()}}\xspace}
+\newcommand{\open}{\mbox{\cc{open()}}\xspace}
+\newcommand{\create}{\mbox{\cc{create()}}\xspace}
+\newcommand{\unlink}{\mbox{\cc{unlink()}}\xspace}
+\newcommand{\readdir}{\mbox{\cc{readdir()}}\xspace}
+\newcommand{\iteratedir}{\mbox{\cc{iterate\_dir()}}\xspace}
+
+
+\newcommand{\ra}[1]{\renewcommand{\arraystretch}{#1}}
+
+\newcommand{\MBpS}{MB/s\xspace}

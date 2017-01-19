@@ -1,0 +1,116 @@
+\section{Related Work}
+\label{s:related}
+
+Existing workflow systems have typically only been able to offer generic,
+reusable components when the workflow system is for a particular niche with a
+fixed datatype and standardized interfaces. For example, enterprise document
+processing systems may all work against a single database with each user only
+seeing their current worklist. As documents are processed, they are moved to
+the next work queue, or completed state, according to hand-coded
+rules~\cite{mckesson-workflow}. The Workflow Management Coalition~\cite{wfmc}
+has developed standards to make enterprise process workflows more portable.
+These standards are not intended to make components reusable, but to make
+different workflow engines able to inter-operate or to port a workflow from one
+engine to another.  The actual communication interfaces and data types are left
+to the components themselves.
+
+More directly related to this work and the scientific community are workflow
+engines and frameworks custom-made for the parallel computing environment.
+Pegasus~\cite{mullender:pegasus} and DAGMan~\cite{Malewicz:2006:dagman} work
+together to offer an engine to execute a workflow and a front-end system to
+construct the workflow process itself.
+However, the focus in DAGMan is on specifying dependencies between
+the jobs involved in the workflow, so as to execute
+components only when required and provide resilience.
+In contrast, in SuperGlue, the entire workflow is executed at once, with
+FlexPath allowing readers and writers to block until
+the corresponding writer or reader is available for data exchange.
+Furthermore, the Pegasus/DAGMan engine does not provide
+a library of generic, reusable components.
+
+As an alternative to DAGMan, Swift~\cite{wilde2011swift}
+is a scripting language that allows ordinary applications
+to be composed into parallel scripts, and eventually into
+workflows, with dependencies specified in the script.
+However, these applications themselves
+must be written outside of the Swift script.
+
+Kepler~\cite{bertram:2006:kepler} offers a nice GUI for assembling different
+kinds of scientific workflows. It offers different directors to manage how the
+workflow will be executed. Each component is an actor with channels connecting
+actors. As mentioned in the Introduction, complex workflows using Kepler have been
+assembled for many communities, including fusion science.
+However, the large collection of components
+that come with Kepler are mainly designed
+to work in a single Java Virtual Machine instance;
+using HPC-scale components requires significant effort
+both in coding the custom components and in
+allowing the I/O methods used to be understood by the
+higher-level
+Kepler engine.
+
+To address much of the complexity of communicating between separate parallel
+components, inline approaches are being investigated.
+We use ``inline'' in the sense of ``linked into the same process.''
+Catalyst~\cite{karimabadi:2013:catalyst} offers a way to integrate the
+ParaView~\cite{Moreland:2008:paraview} analysis and visualization system
+directly into the simulation executable. Catalyst strips out many features to
+reduce the memory footprint and then requires explicit calls from the host
+application into Catalyst routines with predictable data types on in-memory
+data structures. While this can work for limited kinds of data processing,
+it clearly cannot take advantage of additional resources
+available for off-site analysis, instead taking cycles
+away from the main scientific code.
+
+%above is obvious enough I think
+\if 0
+two
+limitations can cause problems. First, in an internal Sandia project in 2012,
+the CTH shock physics code used ParaView both in situ and also in transit. The
+in situ integration saw the executable grow from 30 MB to 300 MB and the
+scalability was strictly limited due to design flaws in ParaView for in situ
+use. While this project prompted the creation of Catalyst, this stripped down
+version of ParaView does not address all concerns. There is still a memory
+footprint overhead and a runtime pause in the simulation progress for the
+analysis and visualization to run.
+\fi
+
+Libsim~\cite{whitlock:2011:libsim} has a similar relationship to
+VisIt~\cite{Riedel:2007:visit} as Catalyst has to ParaView. Both Libsim and
+Catalyst have a strict limitation that offline workflows do not. In both cases,
+because they are running on the same nodes as the simulation, time series
+analysis and visualization can be difficult or impossible. The potential
+scaling impact on the simulation because of limitations in Libsim or Catalyst
+can prevent their use for the most important use cases at extreme scale.
+
+A middle path between in situ and offline processing was investigated in
+PreDatA~\cite{zheng:2010:predata}.
+This work demonstrates that the placement of the analytics can significantly
+affect the performance of workflows, and that this placement can be determined
+in part by the communication characteristics of the analytics components.
+
+% need re-work.
+% removing for now since long already.
+\if 0
+Glean~\cite{vishwanath:2011:glean}, Nessie~\cite{oldfield:lwfs-data-movement},
+and Mercury~\cite{Soumagne:2013:mercury} are intended to facilitate offering
+portable workflows across different interconnect technologies. While their
+origins may not have been directly for addressing workflows, they have been
+re-purposed to address this field. Rather than offering anything related to
+managing data types, these tools simply offer a portable way to construct
+workflows.
+\fi
+
+Companion work to SuperGlue within this same project is
+Bredala~\cite{dreher:2016:bredala}. This work presents an attempt to build a
+data model for in situ workflows. It has some similarity to
+FFS~\cite{eisenhauer:2011:ffs}. Unlike FFS, which is part of a much more
+complex infrastructure for typed messaging between distributed processes,
+Bredala strictly focuses on a data model that can preserve
+semantic integrity across redistributions.
+
+Overall, while all of these efforts are addressing different portions of the
+online workflows puzzle, none of them address the idea of general,
+reusable data transformation and analysis components for the assembly
+of entire HPC workflows out of the box.
+
