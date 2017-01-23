@@ -98,15 +98,6 @@ these heterogeneous workflows.
 %transfer of data products only.
 
 % we already talked about the trend of moving workflows online
-\if 0
-Falling back to Python
-scripts managed by the application scientist proved easier and faster to
-maintain. While this approach using the parallel file system to stage
-intermediate data was sufficient, it is quickly becoming infeasible. The IO
-overhead for using the parallel file system is exceeding acceptable runtime
-percentages forcing a reduction in output and making scientific insights more
-difficult to discover. 
-\fi
 
 Proposed infrastructure for online workflows is less mature but can offer
 the necessary functionality for assembling workflows
@@ -208,16 +199,6 @@ eventually be used to assemble
 a rich variety of workflows, driven by simulation codes
 exporting a variety of different data formats.
 
-\if 0
-\ada{sell the work. highlight something that says: your contributions are the design (you thought
-  about what's the right lower level functionality you can leverage to
-  make this work), collection of generic SG filters, and demonstration
-through large-scale deployment of three different workloads that the
-approach is 
-expressiveness, can impact productivity since components can be reused
-with minimal intervention, and doesn't impede performance and
-experimentation at scale. }
-\fi
 To demonstrate the functionality of the SuperGlue approach,
 we deploy three SuperGlue workflows based on three different
 scientific simulations, namely
@@ -239,23 +220,6 @@ that the componentization of analytical routines
 does not lead to a noticeable change in the
 overall performance of the workflow.
 
-%While the online shows a lot of potential to improve the scientific discovery
-%process, it requires reworking existing workflows. Since this is a non-trivial
-%task, tools that can simplify creating an efficient workflow within a single job
-%submission is crucial to adoption.
-%\ada{text before not clear}
-%New workflows can
-%be made from scratch online lowering the barrier, but there are still costs
-%associated with using existing components that may or may not integrate well
-%into the online structure.
-
-%The ``killer app'' for workflows, both offline and online, is being able to
-%submit a single job that is capable of running the entire workflow. Existing
-%techniques to make this work requires machine reservations or special
-%permission for automated connections between the management machine and the
-%large scale platform.  SuperGlue's approach bridges the connectivity problems
-%and addresses the data type mismatches common when data flows from one
-%component to the next.
 
 %========================
 

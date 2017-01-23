@@ -1,0 +1,15 @@
+#+TITLE: ipdrm paper outline
+* main points to emphasize this time
+SuperGlue name added confusion: change.
+reduce in general, especially intro/background
+focus on the key aspects
+much confusion re: role of the components
+in the IPDPS submission: start with a description 
+of components immediately, and their role in forming a workflow
+* intro
+Keep much of the same but reduce.
+Skip fusion example.
+Stay on point.
+Remove ref's to "glue code".
+The (a) (b) (c) of difficulties in existing tools
+should be the focus: it's the problem statement.
