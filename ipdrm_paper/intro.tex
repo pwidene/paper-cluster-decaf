@@ -20,12 +20,22 @@ is becoming increasingly prevalent.
 
 However, while there exist tools to facilitate in situ
 processing between a single writer and a single reader, 
-in situ workflows are still generally constructed ad hoc,
-due to their complexity and to the widely varying demands
-of workflows.
+entire workflows are still generally constructed ad hoc,
+due to their complexity and to the wide variety in data formats,
+levels of parallelism, and arrangement of components that
+they use. Still, many of these workflows use similar analytical
+routines, albeit in different stages.
 
-In this work, we presents \sys...
+In this work, we presents \sys, a small set of
+generic components that allow for the assembly
+and launching of in situ workflows ``out of the box.''
+That is, using the \sys approach, one can assemble entire workflows
+from start to finish using a library of existing components,
+without re-compilation of the components, and requiring only one-time
+code modifications to the output methods of the driving simulation code.
 
+
+\if 0
 In response to the increasingly significant cost of using
 persistent I/O 
 
@@ -102,6 +112,8 @@ is usually a supercomputer.
 %        without special knowledge required from the scientist.
 
 
+\fi
+
 %not sure where this fits, but not here
 \if 0
 Distributed-Area Computing
@@ -126,6 +138,8 @@ these heterogeneous workflows.
 %transfer of data products only.
 
 % we already talked about the trend of moving workflows online
+
+\if 0
 
 Proposed infrastructure for online workflows is less mature but can offer
 the necessary functionality for assembling workflows
@@ -248,6 +262,8 @@ that the componentization of analytical routines
 does not lead to a noticeable change in the
 overall performance of the workflow.
 
+
+\fi
 
 %========================
 
