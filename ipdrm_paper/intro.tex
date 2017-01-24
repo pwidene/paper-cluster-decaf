@@ -21,19 +21,49 @@ is becoming increasingly prevalent.
 However, while there exist tools to facilitate in situ
 processing between a single writer and a single reader, 
 entire workflows are still generally constructed ad hoc,
-due to their complexity and to the wide variety in data formats,
-levels of parallelism, and arrangement of components that
+due to their complexity and to the wide variety of data formats,
+levels of parallelism, and arrangements of components that
 they use. Still, many of these workflows use similar analytical
-routines, albeit in different stages.
+routines, even if at different stages.
 
 In this work, we presents \sys, a small set of
 generic components that allow for the assembly
-and launching of in situ workflows ``out of the box.''
+and launch of in situ workflows ``out of the box.''
 That is, using the \sys approach, one can assemble entire workflows
 from start to finish using a library of existing components,
 without re-compilation of the components, and requiring only one-time
 code modifications to the output methods of the driving simulation code.
 
+\sys leverages the 
+the self-describing
+property of data exchanged through ADIOS to
+allow for operation on data having very different formats.
+In scientific workflows, the data of interest
+is generally composed of large, multi-dimensional
+arrays; in SuperGlue, this translates to
+the ability to operate, as much as possible,
+on data having any number of dimensions.
+To address the difficulty and complexity
+in mapping workflows to supercomputers using
+existing workflow technology, which is targeted
+at a variety of resources outside of HPC, such as Grid and Web
+resources,
+SuperGlue reduces the
+launch of an entire workflow to the submission of a single job script.
+Finally, it uses the MxN publish/subscribe
+ability of FlexPath,
+as well as consistent semantics describing
+the data that are passed through the components,
+to exchange data while preserving semantic integrity
+even in the presence of varying levels of parallelism 
+at different stages of the workflow.
+
+
+Then, limitations (ie. small number of comps, but for expanding etc.)
+
+Last is overview of evaluation.
+
+Finally, sections.
 
 \if 0
 In response to the increasingly significant cost of using
