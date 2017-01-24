@@ -4,6 +4,34 @@
 As extreme computing architectures continue to evolve, it is 
 clear that I/O is an increasingly significant problem.  Projections suggest no
 significant parallel file system I/O bandwidth growth through the next 100x
+increase in compute capabilities.
+
+Scientific workflows, which comprise a series analytical steps for a
+particular scientific discovery goal, generally involve a number of
+I/O stages. In these workflows, the performance cost of disk-based I/O
+is multiplied.
+
+In response to this problem, the technique of \textit{in situ}
+processing, or \textit{runtime data analysis},
+where analysis and visualization components
+operate on the data produced by the main simulation
+or by other components while it is still in memory,
+is becoming increasingly prevalent.
+
+However, while there exist tools to facilitate in situ
+processing between a single writer and a single reader, 
+in situ workflows are still generally constructed ad hoc,
+due to their complexity and to the widely varying demands
+of workflows.
+
+In this work, we presents \sys...
+
+In response to the increasingly significant cost of using
+persistent I/O 
+
+As extreme computing architectures continue to evolve, it is 
+clear that I/O is an increasingly significant problem.  Projections suggest no
+significant parallel file system I/O bandwidth growth through the next 100x
 increase in compute capabilities.  The traditional HPC approach of writing
 complete checkpoints or analysis dumps for later processing to gain scientific
 insights is becoming infeasible.  Even with technologies like Burst Buffers,
