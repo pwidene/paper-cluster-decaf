@@ -84,11 +84,68 @@ to the \sys components by the user who sets up
 the workflow. This approach also allows for an
 arbitrary arrangement of components.
 
-Then, limitations (ie. small number of comps, but for expanding etc.)
+% Then, limitations (ie. small number of comps, but for expanding etc.)
+Currently, \sys consists of four generic components that
+perform commonly used operations in workflows, such
+as multi-dimensional data filtering and histogram
+analysis. Using these components, we assembled
+and ran three runtime analysis workflows that perform
+different overall analyses
+based on three different driving simulations
+having large user bases.
+Using these deployed workflows,
+we show that \sys workflows exhibit
+good strong and weak scaling characteristics.
+In addition, by comparing the performance
+of a full \sys workflow with that of a
+hard-coded, all-in-one analysis workflow,
+we show that that the componentized approach to
+assembling a workflow used by \sys
+incurs negligible overhead compared
+to a traditional \textit{ad hoc} approach.
 
-Last is overview of evaluation.
+The four components we present in this work
+are by no means meant to be an exhaustive set.
+Rather, by deploying three workflows
+based on three different simulations
+and which perform different kinds of
+analyses over differently-formatted data,
+we show that the \sys approach allows for the assembly
+of a rich variety of different workflows.
+We hope to expand the existing set of
+components into a library of such components
+which we hope can eventually meet
+a wide variety of analytical needs in the
+scientific computing community.
+In addition, custom components
+can easily be made to work with
+\sys components by using ADIOS/FlexPath
+for the I/O routines.
 
-Finally, sections.
+\sys workflows are lauched and run all at once,
+with downstream components waiting for
+the data from upstream components to become
+available.
+While this execution model does not encompass
+most workflows used in the HPC space, it
+is becoming an increasingly common and useful model.[cite in situ SC16]
+There exist a number of workflow management systems (WMS)
+which provide rich functionality, but none
+that target in situ workflows specifically,
+or that allow for the assembly of entire
+in situ workflows ``out of the box.''
+
+\TODO{modify below to fit}
+The rest of the paper is organized as follows. First is a survey or related
+work in~\autoref{s:related}. Second, in~\autoref{s:workflows}, is a
+discussion of the three workflows we use to drive our insights. Next is an
+overview of the concepts behind SuperGlue in~\autoref{s:design}.
+In~\autoref{s:reusable-components}, we provide an overview of the reusable
+components created. In~\autoref{s:integrating-reusable-components}, we
+discuss the challenges of integrating reusable components.  An evaluation is
+presented next in~\autoref{s:eval}. Finally, we present a discussion of Conclusions
+and Future Work in~\autoref{s:conclusion}.
+
 
 \if 0
 In response to the increasingly significant cost of using
@@ -406,14 +463,4 @@ configuration options.  By blurring the line between generic glue components
 and generic analytical components, we present a flexible way to assemble
 scientific workflows without having to write any additional code. 
 \fi
-
-The rest of the paper is organized as follows. First is a survey or related
-work in~\autoref{s:related}. Second, in~\autoref{s:workflows}, is a
-discussion of the three workflows we use to drive our insights. Next is an
-overview of the concepts behind SuperGlue in~\autoref{s:design}.
-In~\autoref{s:reusable-components}, we provide an overview of the reusable
-components created. In~\autoref{s:integrating-reusable-components}, we
-discuss the challenges of integrating reusable components.  An evaluation is
-presented next in~\autoref{s:eval}. Finally, we present a discussion of Conclusions
-and Future Work in~\autoref{s:conclusion}.
 
