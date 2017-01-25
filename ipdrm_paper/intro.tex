@@ -18,46 +18,71 @@ operate on the data produced by the main simulation
 or by other components while it is still in memory,
 is becoming increasingly prevalent.
 
+% below are the 3 problems
+% in achieving genericity.
+% there are great differences in:
+% 1) data format
+% 2) level of parallelism
+% 3) arrangement of components
+
 However, while there exist tools to facilitate in situ
-processing between a single writer and a single reader, 
+processing between a writer and a reader, 
 entire workflows are still generally constructed ad hoc,
-due to their complexity and to the wide variety of data formats,
-levels of parallelism, and arrangements of components that
+due to their complexity and to the wide variety of (a) data formats,
+(b) levels of parallelism, and (c) arrangements of components that
 they use. Still, many of these workflows use similar analytical
 routines, even if at different stages.
 
 In this work, we presents \sys, a small set of
 generic components that allow for the assembly
-and launch of in situ workflows ``out of the box.''
-That is, using the \sys approach, one can assemble entire workflows
-from start to finish using a library of existing components,
-without re-compilation of the components, and requiring only one-time
-code modifications to the output methods of the driving simulation code.
+and launch of a variety of in situ workflows
+``out of the box.''
+That is, using the \sys approach, one can assemble
+entire workflows from start to finish using a library
+of existing components, without re-compilation of the
+components, and requiring only one-time code modifications
+to the output methods of the driving simulation code.
 
-\sys leverages the 
-the self-describing
-property of data exchanged through ADIOS to
-allow for operation on data having very different formats.
+% later
+% \sys leverages the self-describing
+% property of data exchanged through ADIOS to
+% allow for operations on data having very different formats.
+
+\sys achieves a measure of genericity in the face of
+the aforementioned differences between
+\textit{in situ} workflows both by
+leveraging the properties of the underlying I/O
+system and transport mechanisms that it uses
+and also through a number of
+innovations presented in this work.
+In a \sys workflow, the driving simulation and the various components
+exchange data through the Adaptable I/O System (ADIOS),
+which presents a generic interface for both
+reading and writing, allowing for any underlying
+mechanism to implement the actual exchange of data.
+In the case of \sys, the underlying transport method
+chosen is FlexPath, which is specifically designed for
+in situ data exchange by implementing a publish-subscribe,
+MxN, memory-to-memory exchange of data between readers
+and writers. This is used to address the issue of
+varying levels of parallelism in workflows.
+
+To allow for the \sys components to operate
+on a variety of different data formats, we
+leverage the self-describing property
+of data exchanged by ADIOS.
 In scientific workflows, the data of interest
 is generally composed of large, multi-dimensional
-arrays; in SuperGlue, this translates to
+arrays; in \sys, this translates to
 the ability to operate, as much as possible,
 on data having any number of dimensions.
-To address the difficulty and complexity
-in mapping workflows to supercomputers using
-existing workflow technology, which is targeted
-at a variety of resources outside of HPC, such as Grid and Web
-resources,
-SuperGlue reduces the
-launch of an entire workflow to the submission of a single job script.
-Finally, it uses the MxN publish/subscribe
-ability of FlexPath,
-as well as consistent semantics describing
-the data that are passed through the components,
-to exchange data while preserving semantic integrity
-even in the presence of varying levels of parallelism 
-at different stages of the workflow.
-
+A downstream components discovers the dimensions
+of the data received from its upstream component,
+and information regarding which dimensions to operate
+on and how is passed as command-line parameters
+to the \sys components by the user who sets up
+the workflow. This approach also allows for an
+arbitrary arrangement of components.
 
 Then, limitations (ie. small number of comps, but for expanding etc.)
 
