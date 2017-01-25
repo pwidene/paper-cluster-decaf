@@ -10,6 +10,7 @@
 %\usepackage{todonotes}
 \usepackage{listings}
 \usepackage{color}
+\usepackage[usenames,dvipsnames]{xcolor}
 %\usepackage{hyperref}
 \usepackage[breaklinks,colorlinks]{hyperref}
 \usepackage{url}
@@ -57,6 +58,10 @@
     \textbf{Source:} #2%
   }%
 }
+\newcommand{\XXX}[1]{\textcolor{red}{XXX: #1}}
+\newcommand{\TODO}[1]{\textcolor{Melon}{TODO: #1}}
+
+
 %\addtolength{\parskip}{-0.08in}
 
 % in order for balance columns to work, it has to be before begin document...
@@ -75,6 +80,7 @@
 %\terms{Design, Performance}
 \input{intro}
 \input{related}
+\input{design}
 \input{workflows}
 \input{design}
 \input{reusable-components}
