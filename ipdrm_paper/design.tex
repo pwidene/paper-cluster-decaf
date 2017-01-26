@@ -1,9 +1,71 @@
 \section{Design}
 \label{s:design}
 
+\subsection{Design Goals}
+
+\sys components were designed with the
+general goal of presenting an approach
+that allows for the assembly
+of a wide variety of in situ workflows.
+Below are some general guidelines
+for the design of such components
+which both guided the design of the \sys
+components and which we also gained in retrospect.
+
+1) To allow for the greatest variety of workflows,
+data manipulation primitives and data analysis components
+should be packaged in similar ways -- that is,
+regardless of their individual complexity,
+the pieces that make up these workflows
+should export compatible interfaces as much as possible.
+
+2) The ability to handle multi-dimensional data,
+along with the consistent labeling of
+dimensions and quantities as meta-data,
+allows for components that are highly
+adaptable and simple to use.
+
+3) While different types of components understand
+varying levels of semantics, maintaining a
+high level of semantics (i.e., labeling
+quantities and dimensions as much
+as possible) early on and when passing
+through components that do not necessarily
+require all of these labels allows for the most
+functionality downstream.
+
+4) Because programming languages understand
+multi-dimensional data as being in a
+specific order in memory, there is a need for
+glue components that re-arrange data and
+re-label its dimensions without necessarily
+changing its size. Indeed, when data is stored
+in a database on disk, it is simple to gain a desired
+view of the data, for example by using SQL.
+However, in the middle of a real-time workflow,
+data must be presented to the components in a
+format that they expect and understand.
+This requires a specific ordering of data in
+memory. We expand on this topic in~\autoref{subsec:dimreduce}.
+
+These insights guide the design for the
+reusable glue and analysis
+components presented in this
+paper. From a general perspective, designing a smaller number of
+components to assemble workflows with finer step decomposition
+allows for more general processing
+than designing more numerous components each having more
+complex functionality.
+And, as we show in~\autoref{s:eval}, componentizing
+the analysis involves only minor changes
+in overall workflow performance.
 
 
 
+
+
+
+\if 0
 In this section, we first present
 some insights in the design of
 generic workflow components,
@@ -350,3 +412,5 @@ Referring to
 streams and arrays using names allows users to
 easily chain together these
 components into potentially complex workflows.
+
+\fi

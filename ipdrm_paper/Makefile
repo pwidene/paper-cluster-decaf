@@ -1,6 +1,7 @@
 PLOT := $(patsubst %.gp,%.tex,$(wildcard data/*.gp))
 FIGS := $(patsubst %.svg,%.pdf,$(wildcard fig/*.svg))
 PAPER=p
+FINAL_NAME=smartblock
 
 all: clean $(PLOT) ${PAPER}.tex
 	rm -f ${PAPER}.pdf
@@ -15,6 +16,7 @@ all: clean $(PLOT) ${PAPER}.tex
 	pdflatex ${PAPER}.tex
 	pdflatex ${PAPER}.tex
 	pdflatex ${PAPER}.tex
+	cp ${PAPER}.pdf ${FINAL_NAME}.pdf
 
 plot: $(PLOT)
 
@@ -30,6 +32,7 @@ data/%.tex: data/%.gp
 
 clean:
 	rm -f ${PAPER}.pdf
+	rm -f ${FINAL_NAME}.pdf
 	rm -f ${PAPER}.dvi
 	rm -f ${PAPER}.aux
 	rm -f ${PAPER}.bbl
