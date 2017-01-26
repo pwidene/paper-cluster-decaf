@@ -61,24 +61,48 @@ And, as we show in~\autoref{s:eval}, componentizing
 the analysis involves only minor changes
 in overall workflow performance.
 
-\subsection{Components}
+\subsection{Components Overview}
 
 \sys currently consists of four generic components
-that perform commonly used operations
+that perform common operations
 in scientific workflows. These are Select,
 Magnitude, Dim-Reduce, and Histogram.
 Again, the choice of these components
 is not meant to encompass as wide a variety
-of workflow purposes as-is.
-Instead, they are meant to show an approach
-to building a library of such components.
-That we were able to deploy three
+of workflow purposes as possible as-is.
+However, that we were able to deploy three
 very different workflows driven by different
-scientific codes using \sys is promising.
+scientific codes using the existing \sys
+components is promising.
+
+Each component is a single MPI executable
+that uses the self-describing property
+of data exchanged through ADIOS
+to discover the dimensions and their sizes of
+the data it receives from its upstream component;
+in this way, the component is able to
+automatically partition the generally
+large dataset that it receives
+among its constituent processes.
+The component in question
+then operates on the data
+in a way that is specified by the user
+through command-line parameters.
+By specifying the names of the streams
+and the arrays that hold the data
+of interest through additional parameters, the
+user is able to specify an entire
+workflow as a series of command-line
+applications launched together in a single
+job script.
+This procedure is detailed in \TODO{resolve section ref}.
+
+\subsection{Select}
 
 
-
-
+\subsection{Magnitude}
+\subsection{Dim-Reduce}
+\subsection{Histogram}
 
 \if 0
 In this section, we first present
