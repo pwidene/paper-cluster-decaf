@@ -2,6 +2,7 @@
 \label{s:design}
 
 \subsection{Design Goals}
+\label{subsec:design-goals}
 
 \sys components were designed with the
 general goal of presenting an approach
@@ -37,7 +38,7 @@ functionality downstream.
 4) Because programming languages understand
 multi-dimensional data as being in a
 specific order in memory, there is a need for
-glue components that re-arrange data and
+components that re-arrange data and
 re-label its dimensions without necessarily
 changing its size. Indeed, when data is stored
 in a database on disk, it is simple to gain a desired
@@ -49,7 +50,7 @@ This requires a specific ordering of data in
 memory. We expand on this topic in~\autoref{subsec:dimreduce}.
 
 These insights guide the design for the
-reusable glue and analysis
+reusable the workflow
 components presented in this
 paper. From a general perspective, designing a smaller number of
 components to assemble workflows with finer step decomposition
@@ -60,6 +61,20 @@ And, as we show in~\autoref{s:eval}, componentizing
 the analysis involves only minor changes
 in overall workflow performance.
 
+\subsection{Components}
+
+\sys currently consists of four generic components
+that perform commonly used operations
+in scientific workflows. These are Select,
+Magnitude, Dim-Reduce, and Histogram.
+Again, the choice of these components
+is not meant to encompass as wide a variety
+of workflow purposes as-is.
+Instead, they are meant to show an approach
+to building a library of such components.
+That we were able to deploy three
+very different workflows driven by different
+scientific codes using \sys is promising.
 
 
 
