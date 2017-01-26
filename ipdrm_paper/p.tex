@@ -23,7 +23,8 @@
 
 \lstset {% general command to set parameter(s)
 %  language=C,
-   basicstyle=\footnotesize,               % print whole listing small
+  basicstyle=\footnotesize,               % print whole listing small
+  %basicstyle=\ttfamily,
   %     keywordstyle=\color{black}\bfseries, % underlined bold black keywords
   %     identifierstyle =\color{black},  % nothing happens
   %     commentstyle=\color{black}\emph, % white comments
@@ -32,9 +33,13 @@
 %  tabsize=4,
 %  showtabs=false,
 %  showstringspaces=false
-   numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
-   numbersep=3pt,                   % how far the line-numbers are from the code
-   numberstyle=\color{gray}
+   %numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
+  %numbersep=1pt,                   % how far the line-numbers are from the code
+   breakatwhitespace=true,
+   breaklines=true,
+   numberstyle=\color{gray},
+   moredelim=[is][\underbar]{_}{_},
+   escapeinside={(*@}{@*)},
 }
 %can't figure this one out for particles bandwidth
 %\usepackage[caption,label]{subfig}
@@ -82,7 +87,7 @@
 \input{related}
 \input{design}
 \input{workflows}
-\input{design}
+%\input{design}
 \input{reusable-components}
 \input{integrating-reusable-components}
 \input{eval}

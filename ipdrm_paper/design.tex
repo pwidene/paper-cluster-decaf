@@ -73,7 +73,7 @@ of workflow purposes as possible as-is.
 However, that we were able to deploy three
 very different workflows driven by different
 scientific codes using the existing \sys
-components is promising.
+components demonstrates a promising approach.
 
 Each component is a single MPI executable
 that uses the self-describing property
@@ -98,6 +98,48 @@ job script.
 This procedure is detailed in \TODO{resolve section ref}.
 
 \subsection{Select}
+
+\begin{figure}
+  \begin{lstlisting}
+    aprun -n _num-procs_ select _input-stream-name_ _input-array-name_ _dimension-index_ _output-stream-name_ _output-array-name_ [_arg1_] [_arg2_] (*@\ldots@*)
+  \end{lstlisting}
+%  \vspace{-0.15in}
+  \caption{Select component usage}
+  \label{fig:select}
+%  \vspace{-0.10in}
+\end{figure}
+
+Given an input stream that includes an array with
+any number of dimensions,
+Select extracts certain rows (indices) from one of
+the dimensions.
+Thus, it outputs an array
+with the same number of dimensions,
+but with the dimension of interest having a
+smaller size. In order to select the quantities of
+interest, the component uses a header which
+must be passed by the previous component in the
+workflow as part of the meta-data that ADIOS
+allows for in the stream.
+The header is a list of strings that
+name the quantities in the
+dimension of interest.
+This allows the user the specify
+the names of the quantities (rows)
+to select by name, rather than by number,
+which is easier to do when preparing the launch script.
+
+~\autoref{fig:select} illustrates the usage
+of the Select component. 
+The input and output stream and array names
+identify the stream and dataset on
+which Select operates.
+All components
+use similar parameters; this lets
+the user assemble a workflow by
+using the same stream and array names
+in the output of an upstream component
+as in the input of its downstream component.
 
 
 \subsection{Magnitude}
