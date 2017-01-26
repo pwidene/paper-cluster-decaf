@@ -104,7 +104,7 @@ This procedure is detailed in \TODO{resolve section ref}.
     aprun -n _num-procs_ select _input-stream-name_ _input-array-name_ _dimension-index_ _output-stream-name_ _output-array-name_ [_arg1_] [_arg2_] (*@\ldots@*)
   \end{lstlisting}
 %  \vspace{-0.15in}
-  \caption{Select component usage}
+  \caption{Select Component Usage}
   \label{fig:select}
 %  \vspace{-0.10in}
 \end{figure}
@@ -120,31 +120,65 @@ smaller size. In order to select the quantities of
 interest, the component uses a header which
 must be passed by the previous component in the
 workflow as part of the meta-data that ADIOS
-allows for in the stream.
+can include in the stream.
 The header is a list of strings that
 name the quantities in the
 dimension of interest.
 This allows the user the specify
 the names of the quantities (rows)
-to select by name, rather than by number,
+to select by name, rather than by index number,
 which is easier to do when preparing the launch script.
 
 ~\autoref{fig:select} illustrates the usage
 of the Select component. 
 The input and output stream and array names
 identify the stream and dataset on
-which Select operates.
-All components
-use similar parameters; this lets
+which Select operates, as well as how
+the component renames them in its output.
+All components use similar parameters; this lets
 the user assemble a workflow by
 using the same stream and array names
-in the output of an upstream component
-as in the input of its downstream component.
+for the output of an upstream component
+as for the input of its downstream component.
 
+The parameter \texttt{dimension-index} identifies
+the dimension in which Select will filters
+certain rows. ADIOS maintains the number of dimensions
+as meta-data in the stream, and one can identify them
+by number. Finally, the \texttt{arg1} \ldots \ parameters 
+identify the names of the rows to keep in the dimension
+of interest. Select is able identify these rows
+by name using the header described previously.
 
 \subsection{Magnitude}
+
+
+
 \subsection{Dim-Reduce}
+
+\begin{figure}
+  \begin{lstlisting}
+    aprun -n _num-procs_ dim-reduce _input-stream-name_ _input-array-name_ _dim-to-remove_ _dim-to-grow_ _output-stream-name_ _output-array-name_
+  \end{lstlisting}
+%  \vspace{-0.15in}
+  \caption{Dim-Reduce Component Usage}
+  \label{fig:dim-reduce}
+%  \vspace{-0.10in}
+\end{figure}
+
+
 \subsection{Histogram}
+
+\begin{figure}
+  \begin{lstlisting}
+    aprun -n _num-procs_ histogram _input-stream-name_ _input-array-name_ num-bins
+  \end{lstlisting}
+%  \vspace{-0.15in}
+  \caption{Histogram Component Usage}
+  \label{fig:histogram}
+%  \vspace{-0.10in}
+\end{figure}
+
 
 \if 0
 In this section, we first present
