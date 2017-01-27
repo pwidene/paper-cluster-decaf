@@ -4,13 +4,13 @@
 \subsection{Design Goals}
 \label{subsec:design-goals}
 
-\sys components were designed with the
+\sys components are designed with the
 general goal of presenting an approach
 that allows for the assembly
 of a wide variety of in situ workflows.
 Below are some general guidelines
 for the design of such components
-which both guided the design of the \sys
+which both guided the design of the existing \sys
 components and which we also gained in retrospect.
 
 1) To allow for the greatest variety of workflows,
@@ -24,7 +24,11 @@ should export compatible interfaces as much as possible.
 along with the consistent labeling of
 dimensions and quantities as meta-data,
 allows for components that are highly
-adaptable and simple to use.
+adaptable and simple to use. By designing components
+that can operate, as much as possible, on data
+having any number of dimensions, we can
+allow for a large variety of arrangements
+of components.
 
 3) While different types of components understand
 varying levels of semantics, maintaining a
@@ -92,10 +96,10 @@ By specifying the names of the streams
 and the arrays that hold the data
 of interest through additional parameters, the
 user is able to specify an entire
-workflow as a series of command-line
+workflow as a series of 
 applications launched together in a single
 job script.
-This procedure is detailed in \TODO{resolve section ref}.
+This procedure is detailed in~\autoref{s:eval}.
 
 Finally, the components are designed
 based on the assumption that the driving simulation
@@ -126,7 +130,7 @@ this step in an internal queue.
 
 Given an input stream that includes an array with
 any number of dimensions,
-Select extracts certain rows (indices) from one of
+the Select component extracts certain rows (indices) from one of
 the dimensions.
 Thus, it outputs an array
 with the same number of dimensions,
@@ -157,7 +161,7 @@ for the output of an upstream component
 as for the input of its downstream component.
 
 The parameter \texttt{dimension-index} identifies
-the dimension in which Select will filters
+the dimension in which Select will filter
 certain rows. ADIOS maintains the number of dimensions
 as meta-data in the stream, and one can identify them
 by number. Finally, the \texttt{arg1} \ldots \ parameters 
@@ -231,6 +235,17 @@ specifies the desired number of bins.
 %  \vspace{-0.10in}
 \end{figure}
 
+\begin{figure}
+  \centering
+  \vspace{-0.10in}
+  \includegraphics[width=0.7\columnwidth]{fig/Simple_Torus_mod}
+  \vspace{-0.09in}
+  \caption{Representation of GTCP Toroid, modification of \cite{WikimediaCommons:torus}}
+  \label{fig:toroid}
+  \vspace{-0.20in}
+\end{figure}
+
+
 Dim-Reduce is a component that removes one dimension from its
 input array, ``absorbing'' it into another dimension without
 modifying the total size of the data.
@@ -246,12 +261,11 @@ of the multi-dimensional array.
 
 To better explain the need for Dim-Reduce, we turn to one
 workflow which we explain in more detail later.
-GTCP is a toroidal plasma simulator, illustrated in
-~\autoref{fig:gtcp}.
-The simulation breaks up the plasma into grid points,
+GTCP is a toroidal plasma simulator,
+which breaks up the plasma into toroidal slices and grid points,
 each having a number of associated physical quantities
 that describe it (such as the pressure inside it), as illustrated
-in~\autoref{fig:gtcp}.
+in~\autoref{fig:toroid}.
 
 In the workflow that is driven
 by this simulation, we wish to obtain
@@ -274,10 +288,7 @@ To turn this three-dimensional data
 into a format that Histogram can operate
 on, the data must pass through two instances
 of Dim-Reduce. We describe the workflows
-in greater detail in \TODO{resolve section.}
-
-
-
+in greater detail in~\autoref{s:eval}.
 
 
 \if 0
