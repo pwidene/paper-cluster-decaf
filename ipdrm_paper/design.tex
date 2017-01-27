@@ -97,6 +97,21 @@ applications launched together in a single
 job script.
 This procedure is detailed in \TODO{resolve section ref}.
 
+Finally, the components are designed
+based on the assumption that the driving simulation
+outputs data at regular time steps.
+When it is done processing the data belonging
+to a particular time step for a stream, a component
+can request the data in the next time step.
+With FlexPath, this works as follows:
+readers block until
+the corresponding writers
+are ready to output the data;
+similarly, until readers are able to
+request the data for the next time step,
+corresponding writers store the data for
+this step in an internal queue.
+
 \subsection{Select}
 
 \begin{figure}
@@ -152,7 +167,20 @@ by name using the header described previously.
 
 \subsection{Magnitude}
 
+The Magnitude component calculates the magnitudes
+of an array of vectors. That is, it operates
+on a two-dimensional array, when one dimension spans
+the data points, for example the particles that
+make up a simulation, and the other dimension spans any number
+of components of the same vector for each data point, for example
+the three-dimensional components of velocity,
+as we use it in one workflow we demonstrate later.
 
+The output of Magnitude is a one-dimensional array holding
+the magnitudes of the input vectors. This \sys component
+only takes the names of the input and output streams
+as command-line parameters, since it always
+operates on a two-dimensional array.
 
 \subsection{Dim-Reduce}
 
@@ -165,6 +193,34 @@ by name using the header described previously.
   \label{fig:dim-reduce}
 %  \vspace{-0.10in}
 \end{figure}
+
+Dim-Reduce is a component that removes one dimension from its
+input array, ``absorbing'' it into another dimension without
+modifying the total size of the data.
+
+This operation is necessary because certain analytical
+components in workflows expect data having a certain number
+of dimensions; because multi-dimensional data is arranged in a certain way
+in memory, this operation can require a re-arrangement
+of the data in the overall linear representation
+of the multi-dimensional array.
+
+To better explain the need for Dim-Reduce, we turn to one
+workflow which we explain in more detail later.
+GTCP is a toroidal plasma simulator, illustrated in
+~\autoref{fig:gtcp}.
+The simulation breaks up the plasma into grid points,
+each having a number of associated physical quantities
+that describe it (such as the pressure inside it), as illustrated
+in~\autoref{fig:gtcp}.
+In the workflow that is driven
+by this simulation, we wish to obtain
+as a final result a histogram of
+all the pressures at all grid points
+in the entire toroid.
+
+However, the toroid is divided into toroidal slices,
+which make up another dimension. 
 
 
 \subsection{Histogram}
