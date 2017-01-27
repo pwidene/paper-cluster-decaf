@@ -116,7 +116,7 @@ this step in an internal queue.
 
 \begin{figure}
   \begin{lstlisting}
-    aprun -n _num-procs_ select _input-stream-name_ _input-array-name_ _dimension-index_ _output-stream-name_ _output-array-name_ [_arg1_] [_arg2_] (*@\ldots@*)
+    aprun select _input-stream-name_ _input-array-name_ _dimension-index_ _output-stream-name_ _output-array-name_ [_arg1_] [_arg2_] (*@\ldots@*)
   \end{lstlisting}
 %  \vspace{-0.15in}
   \caption{Select Component Usage}
@@ -182,11 +182,48 @@ only takes the names of the input and output streams
 as command-line parameters, since it always
 operates on a two-dimensional array.
 
+\subsection{Histogram}
+
+\begin{figure}
+  \begin{lstlisting}
+    aprun histogram _input-stream-name_ _input-array-name_ num-bins
+  \end{lstlisting}
+%  \vspace{-0.15in}
+  \caption{Histogram Component Usage}
+  \label{fig:histogram}
+%  \vspace{-0.10in}
+\end{figure}
+
+The processes that make up the Histogram component
+partition among themselves a one-dimensional
+array of data. They communicate to discover the global
+minimum and maximum values in the array, create a
+number of bins between these two extremes, and
+then communicate again to count the number of values in the
+globally partitioned array that fall in each bin.
+The number of bins to use must be passed to the
+component when it is launched.
+
+In our current implementation, one of the processes
+of Histogram writes the
+output to a file on disk. We chose this approach
+because this component is often used as an
+endpoint in the workflow and because the output of this
+component is generally very small compared to its input
+and can be easily written by a single process.
+
+~\autoref{fig:histogram} illustrate the usage of
+the Histogram component. Because it is currently
+implemented as an endpoint component, Histogram
+only requires the names of the \textit{input}
+stream and array names. In addition, the user
+specifies the desired number of bins.
+
 \subsection{Dim-Reduce}
 
 \begin{figure}
   \begin{lstlisting}
-    aprun -n _num-procs_ dim-reduce _input-stream-name_ _input-array-name_ _dim-to-remove_ _dim-to-grow_ _output-stream-name_ _output-array-name_
+    aprun dim-reduce _input-stream-name_ _input-array-name_ _dim-to-remove_ _dim-to-grow_ _output-stream-name_ _output-array-name_
   \end{lstlisting}
 %  \vspace{-0.15in}
   \caption{Dim-Reduce Component Usage}
@@ -199,9 +236,11 @@ input array, ``absorbing'' it into another dimension without
 modifying the total size of the data.
 
 This operation is necessary because certain analytical
-components in workflows expect data having a certain number
-of dimensions; because multi-dimensional data is arranged in a certain way
-in memory, this operation can require a re-arrangement
+components in workflows expect data having a particular number
+of dimensions.
+Due to the fact that  multi-dimensional data is arranged
+in a particular order in memory, this operation
+can require a re-arrangement
 of the data in the overall linear representation
 of the multi-dimensional array.
 
@@ -213,27 +252,32 @@ The simulation breaks up the plasma into grid points,
 each having a number of associated physical quantities
 that describe it (such as the pressure inside it), as illustrated
 in~\autoref{fig:gtcp}.
+
 In the workflow that is driven
 by this simulation, we wish to obtain
 as a final result a histogram of
 all the pressures at all grid points
 in the entire toroid.
+However, the Histogram component expects
+one-dimensional data. As it is output
+from the GTCP simulation, the data is
+three-dimensional, with one dimension
+spanning the \textit{toroidal slices}
+of the toroid, another dimension
+spanning the \textit{grid points} inside of each such
+slice, and the last dimension spanning the
+7 quantities that describe
+various \textit{properties} of the plasma
+in each grid point.
 
-However, the toroid is divided into toroidal slices,
-which make up another dimension. 
+To turn this three-dimensional data
+into a format that Histogram can operate
+on, the data must pass through two instances
+of Dim-Reduce. We describe the workflows
+in greater detail in \TODO{resolve section.}
 
 
-\subsection{Histogram}
 
-\begin{figure}
-  \begin{lstlisting}
-    aprun -n _num-procs_ histogram _input-stream-name_ _input-array-name_ num-bins
-  \end{lstlisting}
-%  \vspace{-0.15in}
-  \caption{Histogram Component Usage}
-  \label{fig:histogram}
-%  \vspace{-0.10in}
-\end{figure}
 
 
 \if 0
