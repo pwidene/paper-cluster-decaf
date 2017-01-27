@@ -1,0 +1,87 @@
+\section{Implementation}
+\label{s:impl}
+
+Each component is an MPI executable
+written in C/C++, varying in length from
+191 lines of code (Histogram) to
+459 (Select).
+Their code is publicly available
+in~\cite{champsaur:superglue-repo}.
+The processes that make up a single
+component belong to the same MPI communicator
+once the component is launched.
+For each timestep, these processes
+communicate to determine how to partition
+the overall incoming dataset so that each
+process receives an approximately
+equal amount of data to operate on.
+
+This procedure is made possible by the ADIOS
+read interface, which allows each process
+involved in the read opertion to specify a
+bounding box for the portion of the multi-dimensional
+array that it will receive.
+The underlying transport mechanism, FlexPath,
+carries out the actual MxN exchange of data,
+ensuring each reading process receives
+all the data that it specifes in its bounding box,
+even if this portion is itself partitioned among several writers.
+
+More specifically, FlexPath implements a publish/subscribe,
+asynchronous, \textit{stream-based} data exchange abstracted to the
+components through the ADIOS interface. This facilitates
+the assembly of \sys workflows in a number of ways:
+
+1. Specifying the input and output stream
+names as command-line parameters to the \sys components 
+when they are launched allows the user
+to connect any number of components into
+a full workflow.
+
+2. Components of the workflow can be
+launched in any order: downstream components
+will wait for the availability of data from
+upstream components and upstream
+components will buffer data up to a certain
+size until they are able to send it
+downstream.
+
+3. Even if the number of processes used for one
+component is different from that used for the previous
+one in the workflow, each component can split the data
+(and therefore the computation) evenly among its processes.
+
+4. A FlexPath stream actually corresponds
+to the internal buffering of data on the writer side
+until readers are ready to request the data,
+at which point the data exchange
+on the writer side is carried out
+by a separate thread.
+This asynchronous model allows a 
+\sys component to move on to the computation
+of a subsequent timestep when a downstream
+component is not yet ready to accept data,
+effectively overlapping computation and IO
+and offering high performance to a componentized workflow.
+
+There is no need to re-compile \sys components when using them
+in different workflows. Any configuration
+of a component for a particular workflow
+can be provided through run-time arguments.
+
+To allow for a scientific code driving a workflow to work with
+\sys, one needs to modify its output routines to use ADIOS.
+Specifically, ADIOS expects multi-dimensional
+arrays to be packed linearly, with the variables
+describing the dimensions
+specified in an XML configuration file
+that is used by ADIOS during run time.
+Roughly 70 lines of code were required
+to allow each of the three simulations
+in our evaluation, namely LAMMPS, GTCP, and GROMACS,
+to work with \sys,
+along with an approximately 25-line
+XML file that describes the data to ADIOS
+at run time.
+This moderate, one-time modification to a simulation
+allows it to work with any \sys workflow.
