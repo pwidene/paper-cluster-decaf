@@ -1,7 +1,51 @@
 \section{Evaluation}
 \label{s:eval}
 
-We designed and implemented three realistic online workflows based on
+\begin{figure}
+  \begin{lstlisting}
+  aprun -n 64 histogram velos.fp 16 velocities &
+  aprun -n 256 magnitude lmpselect.fp \
+    lmpsel velos.fp velocities &
+  aprun -n 256 select dump.custom.fp \
+    atoms 1 lmpselect.fp lmpsel vx vy vz &
+  aprun -n 1024 lmp_titan < in.cracksm &
+  wait
+  \end{lstlisting}
+  \vspace{-0.15in}
+  \caption{SuperGlue example launch script, LAMMPS workflow}
+  \label{fig:launch-script}
+  \vspace{-0.10in}
+\end{figure}
+
+\begin{figure*}
+  \vspace{-0.10in}
+  \includegraphics[width=\linewidth]{fig/wflow3}
+  \vspace{-0.35in}
+  \caption{LAMMPS Workflow}
+  \label{fig:lammps-workflow}
+  \vspace{-0.05in}
+\end{figure*}
+
+\begin{figure*}
+  %\vspace{-0.10in}
+  \includegraphics[width=\linewidth]{fig/wflow4}
+  \vspace{-0.35in}
+  \caption{GTCP Workflow}
+  \label{fig:gtcp-workflow}
+  \vspace{-0.15in}
+\end{figure*}
+
+\begin{figure}
+  \center
+  %\vspace{-0.10in}
+  \includegraphics[width=\columnwidth]{fig/wflow_gromacs}
+  \vspace{-0.25in}
+  \caption{GROMACS Workflow}
+  \label{fig:gromacs-workflow}
+  \vspace{-0.15in}
+\end{figure}
+
+We designed, implemented, and ran three realistic in situ workflows based on
 scientific codes having large user bases: the LAMMPS Newtonian particle
 simulator~\cite{plimpton:1997:lammps}, GTCP, a particle-in-cell Tokamak
 simulator~\cite{lin:gtc}, and GROMACS,
