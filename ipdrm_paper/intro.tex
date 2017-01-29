@@ -59,6 +59,13 @@ Specifically, this paper makes the following contributions:
   shows the negligible overhead of \sys workflow construction.
 \end{itemize}
 
+To achieve the above, we leverage the self-describing
+property of data exchanged through the Adaptable I/O System (ADIOS)
+~\cite{lofstead:2009:adaptable} interface,
+as well as the stream-based, publish/subscribe
+model of data exchange implemented by the underlying transport
+system, FlexPath~\cite{dayal:2014:flexpath}.
+
 Currently, \sys consists of four generic components that
 perform commonly used operations in workflows, such
 as multi-dimensional data filtering and histogram
