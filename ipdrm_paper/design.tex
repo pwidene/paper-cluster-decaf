@@ -5,8 +5,8 @@
 \label{subsec:design-goals}
 
 \sys components are designed with the
-general goal of presenting an approach
-that allows for the assembly
+general goal of
+allowing for the assembly
 of a wide variety of in situ workflows.
 Below are some general guidelines
 for the design of such components
@@ -51,11 +51,13 @@ However, in the middle of a real-time workflow,
 data must be presented to the components in a
 format that they expect and understand.
 This requires a specific ordering of data in
-memory. We expand on this topic in~\autoref{subsec:dimreduce}.
+memory.
+We expand on this topic in the description
+of the Dim-Reduce component later in this section.
+%in~\autoref{subsec:dimreduce}.
 
 These insights guide the design for the
-reusable the workflow
-components presented in this
+reusable workflow components presented in this
 paper. From a general perspective, designing a smaller number of
 components to assemble workflows with finer step decomposition
 allows for more general processing
