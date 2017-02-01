@@ -1,3 +1,89 @@
+
+\newcommand{\insitu}{\textit{in situ }}
+\section{Introduction}
+\label{s:intro}
+%\pmw{Intended to be viewed through a ``a reusable-component middleware for
+%  scientific workflows'' lens (or some such)}
+
+Multi-step scientific workflows have become increasingly prominent as
+extreme-scale computing environments have evolved. Made up of collections of
+coupled analytic and/or data processing steps designed to refine data into
+information, such workflows are quickly becoming powerful tools of data-driven
+scientific discovery.
+Performance issues caused by disk I/O between
+workflow stages become prohibitive
+as such workflows grow in size and complexity,
+a situation unlikely to improve
+given the relative future projections of parallel
+file system bandwidth and system
+compute capability. So-called \textit{in situ}
+techniques, or \textit{runtime data analysis},
+in which analysis and visualization
+components perform data reductions and transformations
+on data in memory, are now being widely used to mitigate these issues. 
+
+While tools exist for facilitating \insitu processing
+between data producers and consumers, large-scale workflows
+are still constructed  \textit{ad hoc}. Existing
+tools provide limited traction on the complexities of
+workflow implementation:
+widely varying data formats; impedance mismatches
+between the degrees of parallelism provided by various workflow
+components; and component (re-)deployment.
+However, even as the workflows themselves exhibit
+these differences, many of their component
+analytical routines remain similar.
+
+In this work we introduce \sys, a set of generic, reusable components for the construction of scientific
+workflows.  \sys allows for the assembly and launch of a variety of \insitu -capable workflows ``out of
+the box,'' without recompilation of the components and requiring only one-time modifications to the
+output methods of the driving simulation codes. \sys leverages both self-describing data exchanged
+through the Adaptable I/O System (ADIOS) ~\cite{lofstead:2009:adaptable} interface and the stream-based,
+publish/subscribe interaction model implemented by the underlying transport system,
+FlexPath~\cite{dayal:2014:flexpath}. \sys consists of generic components that perform commonly used
+operations in workflows, such as multi-dimensional data filtering and histogram analysis. We present four
+such components in this paper; while this set is not exhaustive, we demonstrate the standardization
+benefits of the \sys approach by describing their use in the construction and deployment of three very
+different scientific workflows.
+
+% PMW: Not so defensive here...
+% The four components we present in this work
+% are by no means meant to be an exhaustive set.
+% Rather, by deploying three very different workflows
+% using only this set, we demonstrate a promising
+% approach to standardizing such building blocks.
+
+Specifically, this paper makes the following contributions:
+\begin{itemize}
+\item A description of the \sys approach
+  for the construction
+  of in situ scientific workflows;
+\item Details of a representative set of \insitu generic,
+  reusable analytic components designed for deployment
+  full \sys workflows;
+\item A performance evaluation of \sys using three
+  well-known scientific simulation
+  drivers, which demonstrates its strong and weak scaling
+  characteristics; and
+\item A comparison of the assembly of a representative \sys workflow with
+  that of a fixed ``all-in-one'' code performing the same analyses which
+  shows the negligible overhead of \sys workflow construction.
+\end{itemize}
+
+
+The remainder of this paper is organized as follows.
+First is a survey or related
+work in~\autoref{s:related}.
+Second, in~\autoref{s:design},
+\TODO{finish this}
+
+\if 0
+\pmw{The detail on \sys that is in the existing introduction, I would move into
+  the body of the paper. In particular, I
+  don't think it serves the paper well to mention reliance on ADIOS and FlexPath
+  so early, because it clouds the issue of which contributions this paper makes
+  vs. ADIOS/FlexPath.}
+
 \section{Introduction}
 \label{s:intro}
 
@@ -55,8 +141,9 @@ leveraging the properties of the underlying I/O
 system and transport mechanisms that it uses
 and also through a number of
 innovations presented in this work.
-In a \sys workflow, the driving simulation and the various components
-exchange data through the Adaptable I/O System (ADIOS),
+In a \sys workflow, the driving simulation and
+the various components exchange data through
+the Adaptable I/O System (ADIOS),
 which presents a generic interface for both
 reading and writing, allowing for any underlying
 mechanism to implement the actual exchange of data.
@@ -469,3 +556,4 @@ and generic analytical components, we present a flexible way to assemble
 scientific workflows without having to write any additional code. 
 \fi
 
+\fi
