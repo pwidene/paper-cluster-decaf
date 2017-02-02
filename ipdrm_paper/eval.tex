@@ -8,7 +8,75 @@ simulator~\cite{lin:gtc}, and GROMACS,
 a biomolecular dynamics code~\cite{hess2008gromacs}.
 
 The primary purpose of our evaluation is to demonstrate the
-deployment of \sys workflows. In 
+successful assembly and deployment of \sys workflows. We also present promising
+weak and strong scaling properties exhibited by \sys components
+and workflows during these runs, as well as a measurement-based validation of
+the componentized approach to building workflows inherent in the \sys approach.
+
+The large-scale evaluation is performed on Titan, the Cray XK7 machine at Oak Ridge
+National Laboratory. It consists of 18,688 nodes each with 1 16-core AMD
+Opteron CPU and 32 GB of RAM. The interconnect is a Gemini network. There is an
+attached Nvidia Kepler K20X GPU with an additional 6 GB of memory on every
+node.
+
+The smaller-scale results are obtained from the Falcon cluster
+on the Georgia Tech campus, an 80-node cluster of Intel Xeon X5660 machines,
+with 12 cores and 23.5 GB of RAM per node. 
+
+
+\subsection{Workflows}
+
+\if 0
+\begin{figure}
+  \begin{lstlisting}
+  aprun -n 64 histogram velos.fp 16 velocities &
+  aprun -n 256 magnitude lmpselect.fp \
+    lmpsel velos.fp velocities &
+  aprun -n 256 select dump.custom.fp \
+    atoms 1 lmpselect.fp lmpsel vx vy vz &
+  aprun -n 1024 lmp_titan < in.cracksm &
+  wait
+  \end{lstlisting}
+  \vspace{-0.15in}
+  \caption{SuperGlue example launch script, LAMMPS workflow}
+  \label{fig:launch-script}
+  \vspace{-0.10in}
+\end{figure}
+\fi
+
+\begin{figure*}
+  \vspace{-0.10in}
+  \includegraphics[width=\linewidth]{fig/wflow3}
+  \vspace{-0.35in}
+  \caption{LAMMPS Workflow}
+  \label{fig:lammps-workflow}
+  \vspace{-0.05in}
+\end{figure*}
+
+\begin{figure*}
+  %\vspace{-0.10in}
+  \includegraphics[width=\linewidth]{fig/wflow4}
+  \vspace{-0.35in}
+  \caption{GTCP Workflow}
+  \label{fig:gtcp-workflow}
+  \vspace{-0.15in}
+\end{figure*}
+
+\begin{figure}
+  \center
+  %\vspace{-0.10in}
+  \includegraphics[width=\columnwidth]{fig/wflow_gromacs}
+  \vspace{-0.25in}
+  \caption{GROMACS Workflow}
+  \label{fig:gromacs-workflow}
+  \vspace{-0.15in}
+\end{figure}
+
+
+The three \sys workflows used in this evaluation performs
+different kinds of runtime data analyses.
+However, there are similarities.
+First, each driving simulation 
 
 
 \if 0
