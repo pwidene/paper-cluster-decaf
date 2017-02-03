@@ -51,8 +51,8 @@ component is different from that used for the previous
 one in the workflow, each component can split the data
 (and therefore the computation) evenly among its processes.
 
-4. A FlexPath \textit{stream} is implemented through
-the internal buffering of data on the writer side
+4. A FlexPath stream is implemented as
+an internal buffering of data on the writer side
 until readers are ready to request the data,
 at which point the data exchange
 on the writer side is carried out
@@ -83,5 +83,5 @@ to work with \sys,
 along with an approximately 25-line
 XML file that describes the data to ADIOS
 at run time.
-This moderate, one-time modification to a simulation
+This small, one-time modification to a simulation
 allows it to work with any \sys workflow.

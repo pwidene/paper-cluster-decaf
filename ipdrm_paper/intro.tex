@@ -34,11 +34,13 @@ However, even as the workflows themselves exhibit
 these differences, many of their component
 analytical routines remain similar.
 
-In this work we introduce \sys, a set of generic, reusable components for the construction of scientific
-workflows.  \sys allows for the assembly and launch of a variety of \insitu -capable workflows ``out of
+In this work we introduce \sys, an approach to designing generic, reusable components
+for the construction of scientific workflows from start to finish.
+\sys allows for the assembly and launch
+of a variety of \insitu -capable workflows ``out of
 the box,'' without recompilation of the components and requiring only one-time modifications to the
 output methods of the driving simulation codes. \sys leverages both self-describing data exchanged
-through the Adaptable I/O System (ADIOS) ~\cite{lofstead:2009:adaptable} interface and the stream-based,
+through the Adaptable I/O System (ADIOS) ~\cite{lofstead:2009:adaptable} interface as well as the stream-based,
 publish/subscribe interaction model implemented by the underlying transport system,
 FlexPath~\cite{dayal:2014:flexpath}. \sys consists of generic components that perform commonly used
 operations in workflows, such as multi-dimensional data filtering and histogram analysis. We present four

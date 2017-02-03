@@ -1,22 +1,6 @@
 \section{Evaluation}
 \label{s:eval}
 
-\begin{figure}
-  \begin{lstlisting}
-  aprun -n 64 histogram velos.fp 16 velocities &
-  aprun -n 256 magnitude lmpselect.fp \
-    lmpsel velos.fp velocities &
-  aprun -n 256 select dump.custom.fp \
-    atoms 1 lmpselect.fp lmpsel vx vy vz &
-  aprun -n 1024 lmp_titan < in.cracksm &
-  wait
-  \end{lstlisting}
-  \vspace{-0.15in}
-  \caption{SuperGlue example launch script, LAMMPS workflow}
-  \label{fig:launch-script}
-  \vspace{-0.10in}
-\end{figure}
-
 \begin{figure*}
   \vspace{-0.10in}
   \includegraphics[width=\linewidth]{fig/wflow3}
@@ -45,11 +29,249 @@
   \vspace{-0.15in}
 \end{figure}
 
-We designed, implemented, and ran three realistic in situ workflows based on
+\begin{figure}
+  \begin{lstlisting}
+  aprun -n 64 histogram velos.fp 16 velocities &
+  aprun -n 256 magnitude lmpselect.fp lmpsel velos.fp velocities &
+  aprun -n 256 select dump.custom.fp atoms 1 lmpselect.fp lmpsel vx vy vz &
+  aprun -n 1024 lammps < in.cracksm &
+  wait
+  \end{lstlisting}
+  %\vspace{-0.15in}
+  \caption{\sys example launch script, LAMMPS workflow}
+  \label{fig:launch-script}
+  %\vspace{-0.10in}
+\end{figure}
+
+We designed and implemented three realistic in situ workflows based on
 scientific codes having large user bases: the LAMMPS Newtonian particle
 simulator~\cite{plimpton:1997:lammps}, GTCP, a particle-in-cell Tokamak
 simulator~\cite{lin:gtc}, and GROMACS,
 a biomolecular dynamics code~\cite{hess2008gromacs}.
+
+The primary purpose of our evaluation is to demonstrate the
+successful assembly and deployment of \sys workflows. In doing so, 
+we also present promising
+weak and strong scaling properties exhibited by \sys components
+during these runs, as well as a measurement-based validation of
+the componentized method to building workflows, which is inherent in the \sys approach.
+
+The large-scale evaluation is performed on Titan, the Cray XK7 machine at Oak Ridge
+National Laboratory. It consists of 18,688 nodes each with 1 16-core AMD
+Opteron CPU and 32 GB of RAM. The interconnect is a Gemini network. There is an
+attached Nvidia Kepler K20X GPU with an additional 6 GB of memory on every
+node.
+
+The smaller-scale results are obtained from the Falcon cluster
+on the Georgia Tech campus, an 80-node cluster of Intel Xeon X5660 machines,
+with 12 cores and 23.5 GB of RAM per node. 
+
+\subsection{Workflows}
+
+The three \sys workflows used in this evaluation perform
+different kinds of runtime data analysis overall.
+However, there are similarities between them.
+Each driving scientific code is a simulation that
+operates on a large number of units of equal size --- namely, atoms
+in the case of LAMMPS and GROMACS, and grid points
+in the case of GTCP (see~\autoref{fig:toroid}).
+Each simulation operates over these units
+with fine-grained time step granularity
+and outputs the states of these units at coarse-grained
+intervals. From this point on, we refer to these larger
+I/O intervals as ``timesteps.''
+These states correspond to various properties
+of these units, such as the positions of individual atoms or the
+temperatures of individual grid points.
+
+% Finally, addressing here the common question in reviews:
+% ``why these particular components?''
+
+All three \sys workflows based on these simulations result in a
+per-timestep histogram that describes
+the spread of a certain quantity of interest over these
+units.  It is often the case for in situ workflows
+that the resulting data set has a much smaller size than
+the raw data set output by the simulation. A histogram
+illustrates one such final step in a workflow
+that presents a human-readable
+reduction of data, and this explains our choice for
+Histogram as one of the \sys components implemented for this work.
+
+Still, while all three workflows result in histograms,
+how they arrive at their results varies significantly.
+Histogram expects one-dimensional input data, and
+our choices for Select, Dim-Reduce, and Magnitude
+illustrate examples of various generic operations that tranform
+different data sets into a format that the allows
+one final, simple component such as Histogram to operate on.
+
+All components of \sys workflows, including the simulation,
+are launched simultaneously using a script such as
+that shown in~\autoref{fig:launch-script}.
+The asynchronous property of FlexPath
+allows readers to block until the corresponding
+writers are ready to send their data, and vice versa.
+Providing the names of the input and output streams
+lets the user connect any number of components
+in any order.
+For example, the launch script tells Magnitude
+to look for an array named \texttt{lmpsel}
+in a FlexPath stream named \texttt{lmpselect.fp},
+which are the names used to specify the output
+stream and array of Select.
+Thus, this script specifies that Magnitude is
+immediately downstream from Select in this workflow.
+Notice, also, the decreasing numbers of processes
+used in each component
+
+The workflows themselves are illustrated in
+~\autoref{fig:lammps-workflow},~\autoref{fig:gtcp-workflow},
+and~\autoref{fig:gromacs-workflow}.
+
+We configure LAMMPS to simulate a disruption (a ``crack'') in a thin layer of
+particles and output 5 numerical properties describing each particle in the
+simulation at regular timestep intervals. This corresponds to two-dimensional
+data (particles as one dimension and properties of interest as another) and
+among these properties are the three-dimensional components of the particles'
+velocities.
+Select filters out the ID and Type of the particles, keeping
+the velocities. Magnitude computes the magnitudes
+of these velocity vectors, outputting a one-dimension array
+of these magnitudes. Histogram outputs a human-readable distribution
+of the magnitudes of all particles involved in this simulation.
+
+GTCP, a code that simulates a toroidally confined plasma, splits the solid into
+toroidal slices, each made up of a number of grid points. For each of these
+grid points, it outputs 7 properties of the plasma such as pressure and energy
+flux. This division of the toroid is illustrated in~\autoref{fig:toroid}.
+The output of the simulation is therefore a three-dimensional array in which
+the dimensions span: (a) toroidal ranks (toroidal slice number), (b) grid point
+numbers, and (c) various properties that describe each grid point.
+Of these 7 properties, Select filters out all but the pressure in each gridpoint.
+However, the output of Select is still three-dimensional, and the
+data must go through two instances of Dim-Reduce to allow
+Histogram to operate on it, showing in the end
+a distribution of the pressures in the entire toroid.
+
+Among other quantities, GROMACS outputs
+the three-dimensional coordinates
+of the atoms involved in the simulation
+at regular intervals.
+The data array itself is two-dimensional:
+3D coordinates over all atoms.
+From these, we obtain a histogram of the distances
+of the atoms from the origin for each timestep, showing
+an evolution of the spread of the particles through
+the simulation, once again in a human-readable fashion.
+
+\subsection{Weak Scaling}
+GTCP -- getting larger numbers.
+
+\subsection{Comparing Generic and Ad Hoc Approaches}
+
+\begin{table}[tbp]
+  %\vspace{-0.15in}
+  \centering
+  \caption{LAMMPS: \sys vs. All-In-One Comparison}
+  \label{tab:aio}
+  \vspace{-0.07in}
+  \begin{tabular}{|l|l|l|l|l|}
+    \hline
+    SIM output & AIO time (sec) & \sys time (sec) & LMP only (sec) \\
+    \hline
+    20 MB & 115.26 & 116.51 & 115.03\\
+    \hline
+    80 MB & 148.70 & 149.80 & 146.97\\
+    \hline
+    320 MB & 154.65 & 157.65 & 153.69\\
+    \hline
+    1280 MB & 155.32 & 157.98 & 152.48\\
+    \hline
+    5120 MB & 167.39 & 168.79 & 165.22\\
+    \hline
+  \end{tabular}
+  \vspace{-0.15in}
+\end{table}
+
+It is expected that assembling a workflow
+using generic components involves the use
+of finer-grain components
+than when using ad-hoc analytical routines
+specifically coded
+for a workflow of interest.
+One problem that might be anticipated
+in more componentized workflows
+is a decrease in overall performance caused by
+(a) more stages that require the coordination
+of readers and writers
+and (b) more points of actual data transfer.
+
+To investigate this potential problem,
+we wrote a custom, all-in-one (AIO) component
+that performs the same analytical procedure
+as all the components involved in the LAMMPS workflow
+outside of the simulation itself.
+We measured the start-to-end completion times of the two workflows 
+at different scales.
+
+~\autoref{tab:aio} shows the start-to-end
+completion times
+at increasing scales, of
+(a) LAMMPS with the AIO component
+in the second column
+(b) LAMMPS with the full \sys workflow in the 3rd column
+and (c) the LAMMPS simulation only with the output routines
+removed from the code in the last column.
+The measurements in the last column
+are meant to give an idea of the portion
+of the workflow completion time taken up by the simulation
+computation only.
+
+A weak scaling approach
+is used, with approximately the same
+per-process data size throughout the scaling.
+The time is measured from the start of the simulation
+to the point when the last histogram of
+the last timestep is written.
+For each \sys workflow run, the corresponding
+AIO workflow run allocates the same
+number of processes to the AIO component
+as the \sys workflow allocates to the Select component.
+In the \sys workflow, additional processes
+are allocated to the other two components
+(Magnitude and Histogram).
+
+The results show only a small increase in
+workflow completion time for the \sys
+workflows (with a maximum increase of $1.9 \%$).
+The componentized
+approach involves more data exchange points
+in the workflow, thus leading to
+overhead from increased $MxN$ coordination and data exchange.
+However, the overlap of computation and I/O provided by FlexPath
+amortizes the aforementioned overhead.
+
+\TODO{give an idea of process numbers below}
+
+Granted, slightly more resources are allocated to the
+\sys workflow runs to allow the additional
+components to execute.
+Also, much of the start-to-end time is spent on
+the simulation's computation.
+However, the measurements in the last column
+of \autoref{tab:aio}
+only give an idea of the proportion of 
+overall time occupied by the simulation only,
+since when workflows are running, there is much
+overlap in the computation and I/O between the
+simulation and other components. All in all,
+these results show that the 
+the fine-grained component approach
+to assembling workflows
+is reasonable from a performance standpoint.
+
+\subsection{Strong Scaling}
 
 
 
