@@ -109,7 +109,61 @@ one final, simple component such as Histogram to operate on.
 All components of \sys workflows, including the simulation,
 are launched simultaneously using a script such as
 that shown in~\autoref{fig:launch-script}.
+The asynchronous property of FlexPath
+allows readers to block until the corresponding
+writers are ready to send their data, and vice versa.
+Providing the names of the input and output streams
+lets the user connect any number of components
+in any order.
+For example, the launch script tells Magnitude
+to look for an array named \texttt{lmpsel}
+in a FlexPath stream named \texttt{lmpselect.fp},
+which are the names used to specify the output
+stream and array of Select.
+Thus, this script specifies that Magnitude is
+immediately downstream from Select in this workflow.
+Notice, also, the decreasing numbers of processes
+used in each component
 
+The workflows themselves are shown in
+~\autoref{fig:lammps-workflow},~\autoref{fig:gtcp-workflow},
+and~\autoref{fig:gromacs-workflow}.
+
+We configure LAMMPS to simulate a disruption (a ``crack'') in a thin layer of
+particles and output 5 numerical properties describing each particle in the
+simulation at regular timestep intervals. This corresponds to two-dimensional
+data (particles as one dimension and properties of interest as another) and
+among these properties are the three-dimensional components of the particles'
+velocities.
+Select filters out the ID and Type of the particles, keeping
+the velocities. Magnitude computes the magnitudes
+of these velocity vectors, outputting a one-dimension array
+of these magnitudes. Histogram outputs a human-readable distribution
+of the magnitudes of all particles involved in this simulation.
+
+GTCP, a code that simulates a toroidally confined plasma, splits the solid into
+toroidal slices, each made up of a number of grid points. For each of these
+grid points, it outputs 7 properties of the plasma such as pressure and energy
+flux. This division of the toroid is illustrated in~\autoref{fig:toroid}.
+The output of the simulation is therefore a three-dimensional array in which
+the dimensions span: (a) toroidal ranks (toroidal slice number), (b) grid point
+numbers, and (c) various properties that describe each grid point.
+Of these 7 properties, Select filters out all but the pressure in each gridpoint.
+However, the output of Select is still three-dimensional, and the
+data must go through two instances of Dim-Reduce to allow
+Histogram to operate on it, showing in the end
+a distribution of the pressures in the entire toroid.
+
+Among other quantities, GROMACS outputs
+the three-dimensional coordinates
+of the atoms involved in the simulation
+at regular intervals.
+The data array itself is two-dimensional:
+3D coordinates over all atoms.
+From these, we obtain a histogram of the distances
+of the atoms from the origin for each timestep, showing
+an evolution of the spread of the particles through
+the simulation, once again in a human-readable fashion.
 
 
 \if 0
