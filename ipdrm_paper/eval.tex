@@ -1,49 +1,6 @@
 \section{Evaluation}
 \label{s:eval}
 
-We designed and implemented three realistic online workflows based on
-scientific codes having large user bases: the LAMMPS Newtonian particle
-simulator~\cite{plimpton:1997:lammps}, GTCP, a particle-in-cell Tokamak
-simulator~\cite{lin:gtc}, and GROMACS,
-a biomolecular dynamics code~\cite{hess2008gromacs}.
-
-The primary purpose of our evaluation is to demonstrate the
-successful assembly and deployment of \sys workflows. We also present promising
-weak and strong scaling properties exhibited by \sys components
-and workflows during these runs, as well as a measurement-based validation of
-the componentized approach to building workflows inherent in the \sys approach.
-
-The large-scale evaluation is performed on Titan, the Cray XK7 machine at Oak Ridge
-National Laboratory. It consists of 18,688 nodes each with 1 16-core AMD
-Opteron CPU and 32 GB of RAM. The interconnect is a Gemini network. There is an
-attached Nvidia Kepler K20X GPU with an additional 6 GB of memory on every
-node.
-
-The smaller-scale results are obtained from the Falcon cluster
-on the Georgia Tech campus, an 80-node cluster of Intel Xeon X5660 machines,
-with 12 cores and 23.5 GB of RAM per node. 
-
-
-\subsection{Workflows}
-
-\if 0
-\begin{figure}
-  \begin{lstlisting}
-  aprun -n 64 histogram velos.fp 16 velocities &
-  aprun -n 256 magnitude lmpselect.fp \
-    lmpsel velos.fp velocities &
-  aprun -n 256 select dump.custom.fp \
-    atoms 1 lmpselect.fp lmpsel vx vy vz &
-  aprun -n 1024 lmp_titan < in.cracksm &
-  wait
-  \end{lstlisting}
-  \vspace{-0.15in}
-  \caption{SuperGlue example launch script, LAMMPS workflow}
-  \label{fig:launch-script}
-  \vspace{-0.10in}
-\end{figure}
-\fi
-
 \begin{figure*}
   \vspace{-0.10in}
   \includegraphics[width=\linewidth]{fig/wflow3}
@@ -72,11 +29,87 @@ with 12 cores and 23.5 GB of RAM per node.
   \vspace{-0.15in}
 \end{figure}
 
+\begin{figure}
+  \begin{lstlisting}
+  aprun -n 64 histogram velos.fp 16 velocities &
+  aprun -n 256 magnitude lmpselect.fp lmpsel velos.fp velocities &
+  aprun -n 256 select dump.custom.fp atoms 1 lmpselect.fp lmpsel vx vy vz &
+  aprun -n 1024 lammps < in.cracksm &
+  wait
+  \end{lstlisting}
+  %\vspace{-0.15in}
+  \caption{\sys example launch script, LAMMPS workflow}
+  \label{fig:launch-script}
+  %\vspace{-0.10in}
+\end{figure}
 
-The three \sys workflows used in this evaluation performs
-different kinds of runtime data analyses.
-However, there are similarities.
-First, each driving simulation 
+We designed and implemented three realistic in situ workflows based on
+scientific codes having large user bases: the LAMMPS Newtonian particle
+simulator~\cite{plimpton:1997:lammps}, GTCP, a particle-in-cell Tokamak
+simulator~\cite{lin:gtc}, and GROMACS,
+a biomolecular dynamics code~\cite{hess2008gromacs}.
+
+The primary purpose of our evaluation is to demonstrate the
+successful assembly and deployment of \sys workflows. In doing so, however,
+we also present promising
+weak and strong scaling properties exhibited by \sys components
+during these runs, as well as a measurement-based validation of
+the componentized method to building workflows, which is inherent in the \sys approach.
+
+The large-scale evaluation is performed on Titan, the Cray XK7 machine at Oak Ridge
+National Laboratory. It consists of 18,688 nodes each with 1 16-core AMD
+Opteron CPU and 32 GB of RAM. The interconnect is a Gemini network. There is an
+attached Nvidia Kepler K20X GPU with an additional 6 GB of memory on every
+node.
+
+The smaller-scale results are obtained from the Falcon cluster
+on the Georgia Tech campus, an 80-node cluster of Intel Xeon X5660 machines,
+with 12 cores and 23.5 GB of RAM per node. 
+
+\subsection{Workflows}
+
+The three \sys workflows used in this evaluation perform
+different kinds of runtime data analysis overall.
+However, there are similarities between them.
+Each driving scientific code is a simulation that
+operates on a large number of units of equal size --- namely, atoms
+in the case of LAMMPS and GROMACS, and grid points
+in the case of GTCP (see~\autoref{fig:toroid}).
+Each simulation operates over these units
+with fine-grained time step granularity
+and outputs the states of these units at coarse-grained
+intervals. From this point on, we refer to these larger
+I/O intervals as ``timesteps.''
+These states correspond to various properties
+of these units, such as the positions of individual atoms or the
+temperatures of individual grid points.
+
+% Finally, addressing here the common question in reviews:
+% ``why these particular components?''
+
+All three \sys workflows based on these simulations result in a
+per-timestep histogram that describes
+the spread of a certain quantity of interest over these
+units.  It is often the case for in situ workflows
+that the resulting data set has a much smaller size than
+the raw data set output by the simulation. A histogram
+illustrates one such final step in a workflow
+that presents a human-readable
+reduction of data, and this explains our choice for
+Histogram as one of the \sys components implemented for this work.
+
+Still, while all three workflows result in histograms,
+how they arrive at their results varies significantly.
+Histogram expects one-dimensional input data, and
+our choices for Select, Dim-Reduce, and Magnitude
+illustrate examples of various generic operations that tranform
+different data sets into a format that the allows
+one final, simple component such as Histogram to operate on.
+
+All components of \sys workflows, including the simulation,
+are launched simultaneously using a script such as
+that shown in~\autoref{fig:launch-script}.
+
 
 
 \if 0
