@@ -139,7 +139,7 @@ Select filters out the ID and Type of the particles, keeping
 the velocities. Magnitude computes the magnitudes
 of these velocity vectors, outputting a one-dimension array
 of these magnitudes. Histogram outputs a human-readable distribution
-of the magnitudes of all particles involved in this simulation.
+of the velocity magnitudes of all particles involved in this simulation.
 
 GTCP, a code that simulates a toroidally confined plasma, splits the solid into
 toroidal slices, each made up of a number of grid points. For each of these
@@ -252,11 +252,11 @@ overhead from increased $MxN$ coordination and data exchange.
 However, the overlap of computation and I/O provided by FlexPath
 amortizes the aforementioned overhead.
 
-\TODO{give an idea of process numbers below}
-
 Granted, slightly more resources are allocated to the
-\sys workflow runs to allow the additional
-components to execute.
+\sys workflow runs to allow the small number
+of final components to execute (1280 processes
+used in total for the AIO workflow vs. 1600 for
+the \sys workflow at the largest scale).
 Also, much of the start-to-end time is spent on
 the simulation's computation.
 However, the measurements in the last column
