@@ -59,25 +59,29 @@ Specifically, this paper makes the following contributions:
 \begin{itemize}
 \item A description of the \sys approach
   for the construction
-  of in situ scientific workflows;
+  of in situ scientific workflows; and
 \item Details of a representative set of \insitu generic,
   reusable analytic components designed for deployment
   full \sys workflows;
-\item A performance evaluation of \sys using three
-  well-known scientific simulation
-  drivers, which demonstrates its strong and weak scaling
-  characteristics; and
-\item A comparison of the assembly of a representative \sys workflow with
-  that of a fixed ``all-in-one'' code performing the same analyses which
-  shows the negligible overhead of \sys workflow construction.
 \end{itemize}
 
+We demonstrate the effectiveness of the approach by performing
+a performance evaluation of \sys using three
+  well-known scientific simulation
+  drivers, which shows its strong and weak scaling
+  characteristics. Since this modular approach aims to replace custom code, we
+provide 
+a comparison of the assembly of a representative \sys workflow with
+  that of a fixed ``all-in-one'' code performing the same analyses which
+  shows the negligible overhead of \sys workflow construction.
 
 The remainder of this paper is organized as follows.
 First is a survey or related
 work in~\autoref{s:related}.
-Second, in~\autoref{s:design},
-\TODO{finish this}
+Second, in~\autoref{s:design} we present the design approach for the components.
+Next, in~\autoref{s:impl} the demonstration implementation details
+are presented. The evaluation is presented in~\autoref{s:eval} followed
+by conclusions and future work in~\autoref{s:conclusion}
 
 \if 0
 \pmw{The detail on \sys that is in the existing introduction, I would move into
