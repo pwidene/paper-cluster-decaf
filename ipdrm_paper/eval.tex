@@ -166,7 +166,57 @@ an evolution of the spread of the particles through
 the simulation, once again in a human-readable fashion.
 
 \subsection{Weak Scaling}
-GTCP -- getting larger numbers.
+\begin{table*}[tbp]
+  %\vspace{-0.15in}
+  \centering
+  \caption{GTCP-\sys: Weak Scaling Experiment Setup, End-to-End Times}
+  \label{tab:weak-scaling-setup}
+  \vspace{-0.07in}
+  \begin{tabular}{|c|c|c|c|c|c|c|c|}
+    \hline
+%    SIM output & AIO time (sec) & \begin{tabular}[t]{@{}c@{}}\sys\\time (sec)\end{tabular} & LMP only (sec) \\
+    Run Number & GTCP Output (MB) & GTCP Procs & Select Procs & Dim-Red-1 Procs & Dim-Red-2 Procs & Histo Procs & End-to-End Time (s)\\
+    \hline
+    1 & 918.3 & 64 & 10 & 6 & 6 & 2 & 92.72\\
+    \hline
+    2 & 1434.6 & 84 & 16 & 10 & 10 & 2 & 115.23\\
+    \hline
+    3 & 2065.6 & 156 & 18 & 14 & 14 & 4 & 97.27\\
+    \hline
+    4 & 2811.3 & 234 & 25 & 19 & 19 & 5 & 96.36\\
+    \hline
+    5 & 12905.4 & 1024 & 116 & 88 & 88 & 24 & 197.66\\
+    \hline
+  \end{tabular}
+  \vspace{-0.15in}
+\end{table*}
+
+\if 0
+\begin{table*}[tbp]
+  %\vspace{-0.15in}
+  \centering
+  \caption{GTCP-\sys: Weak Scaling Experiment Results}
+  \label{tab:weak-scaling-setup}
+  \vspace{-0.07in}
+  \begin{tabular}{|c|c|c|c|c|c|c|}
+    \hline
+%    SIM output & AIO time (sec) & \begin{tabular}[t]{@{}c@{}}\sys\\time (sec)\end{tabular} & LMP only (sec) \\
+    Run Number & Workflow End-to-End (s) & Select Time Procs & Select Procs & Dim-Red-1 Procs & Dim-Red-2 Procs & Histo Procs\\
+    \hline
+    1 & 918.3 & 64 & 10 & 6 & 6 & 2\\
+    \hline
+    2 & 1434.6 & 84 & 16 & 10 & 10 & 2\\
+    \hline
+    3 & 2065.6 & 156 & 18 & 14 & 14 & 4\\
+    \hline
+    4 & 2811.3 & 234 & 25 & 19 & 19 & 5\\
+    \hline
+    5 & 12905.4 & 1024 & 116 & 88 & 88 & 24\\
+    \hline
+  \end{tabular}
+  \vspace{-0.15in}
+\end{table*}
+\fi
 
 \subsection{Comparing Generic and Ad Hoc Approaches}
 
