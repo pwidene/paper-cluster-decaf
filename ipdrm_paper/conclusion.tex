@@ -1,19 +1,20 @@
 \section{Conclusions and Future Work}
 \label{s:conclusion}
 
-This paper presents SuperGlue, a demonstration of making generic, reusable
-components for scientific simulations. By decomposing the operations into small
+This paper presents \sys, a demonstration of making generic, reusable
+components for scientific workflows. By decomposing the operations into small
 chunks, we achieve components that can be reused, without modification, for
 a variety of different workflows. In this work, we investigate using a
-stream-based structure with generic components to achieve easier to build and
-use workflows.  Stream-based, generic workflow components should be designed 
-to allow the greatest variety in their arrangement and for a maximum
-number of downstream subscribers. Designing components with the ability to
-handle data having any number of dimensions provides a very useful way to link
+stream-based pipeline with generic components to achieve easier to build and
+use workflows. Designing components having the ability to
+handle data having any number of dimensions, 
+and to operate on various streams and arrays
+passed to them at run time,
+provides a very useful way to link
 them together. Maintaining a high level of semantics upstream, for example by
 labeling dimensions and certain quantities inside of these dimensions, gives a
 good understanding of the data to downstream components. There is a need for
-components that organize the data in a format that downstream components can
+components that re-organize the data in a format that downstream components can
 understand.
 
 Through the demonstration of generating a velocity histogram for LAMMPS,
@@ -24,36 +25,31 @@ we demonstrate reusing the same components
 over different data formats and application types.
 
 While this work leverages ADIOS and the FlexPath transport, this is not the
-only approach for addressing reusable components. Other, similar approaches can
-also work well. However, in this case, the data annotation provided by this
+only approach for addressing reusable components. Other, similar approaches can also work well. However, in this case, the data annotation provided by this
 connection infrastructure helps enable reusable components by offering
 necessary metadata to perform general operations.
 
+The approach presented here is limited
+to in situ workflows only, which are launched
+all at once. While there are many other
+commonly used execution models, this
+approach is becoming increasingly useful,
+considering the increasing significance of
+I/O bottlenecks.
+
 Future work involves
 expanding the generic components library 
-to include a variety of analytical operations.
-In particular, the SuperGlue components presented
+to include a variety of other analytical operations.
+In particular, the \sys components presented
 in this paper
 result in an output dataset having either the same
 size or a smaller size as the input.
 Analytical procedures that lead
 to an increase in data size, such as
 all-pairs calculations, are common and
-can be implemented using the SuperGlue approach.
+can be implemented using the \sys approach.
 
-Also common are operations that require the in-memory
-buffering of a dataset throughout a series
-of timesteps. An example of this is the
-calculation of root-mean-square
-deviations of atomic positions from a fixed,
-starting set of positions.
-
-Two current limitations of SuperGlue are
-that 
-all components are launched at once and
-workflows cannot branch.
-
-To turn SuperGlue into a true Workflow Management
+To enrich \sys into a true Workflow Management
 System, we hope to leverage
 ADIOS' ability to have several ``write groups''
 so as to allow for the development
@@ -64,20 +60,9 @@ described by directed acyclic graphs.
 And, to manage the execution of workflows
 over longer periods of time,
 we plan on investigating
-the incorporation of SuperGlue into
+the incorporation of \sys into
 higher-level workflow management systems
 such as Kepler and DAGMan.
-
-The components we have developed in this research cover only a small portion of
-the procedures that computational scientists need for their
-workflows. Eventually, we wish to allow for the development of a large
-collection of generic workflow components. We can take steps in this direction
-by building on our existing components. For example, {\em Magnitude} performs a
-relatively simple operation on multi-dimensional data, where one dimension
-spans a number of quantities involved in each instance of the operation. This
-model can fit any number of operations involving a repeating, fixed number of
-quantities, and it can even be made to work with a formula specified by the
-user at runtime. This opens the door to a large family of generic components.
 
 \if 0
 Finally, while we have kept performance in mind in the development of these
