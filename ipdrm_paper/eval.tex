@@ -230,7 +230,7 @@ We can see that while there is a certain variation
 in these throughputs throughout the runs, especially
 at the largest scale, where communication overhead
 is most significant, both \sys workflows and their
-individual components exhibit excellent weak scaling properties,
+individual components exhibit very good weak scaling properties,
 with a maximum throughput decrease of about 57\% between 
 the two extremes in scale.
 
@@ -343,7 +343,7 @@ approach involves more data exchange points
 in the workflow, thus leading to
 overhead from increased $MxN$ coordination and data exchange.
 However, the overlap of computation and I/O provided by FlexPath
-amortizes the aforementioned overhead.
+amortizes this overhead.
 
 Granted, slightly more resources are allocated to the
 \sys workflow runs to allow the small number
@@ -367,15 +367,31 @@ is reasonable from a performance standpoint.
 \subsection{Strong Scaling}
 \begin{figure}
   \centering
-  %\vspace{-0.17in}
+  \vspace{-0.08in}
   \input{data/gro-mag-strong}
-  %\vspace{-0.06in}
+  \vspace{-0.12in}
   \caption{Magnitude strong scaling in the GROMACS workflow.}
   \label{fig:gtcp-strong}
   \vspace{-0.25in}
 \end{figure}
-
-
+To determine appropriate resources
+to use in workflow runs,
+we run strong scaling experiments such
+as presented in~\autoref{fig:gtcp-strong},
+where only one component's process size
+varies.
+What we generally observe is expected: a linear domain of
+scalability, followed by a turning point
+and eventual flattening of the scaling curve.
+~\autoref{fig:gtcp-strong} shows the
+linear domain of the timestep
+completion time of the Magnitude component
+in the GROMACS workflow; the process size of Magnitude
+varies, with more processes used in the lower
+end of the chart, and the process sizes of
+GROMACS and Histogram are kept the same.
+Such experiments allow users
+to better determine how to allocate resources to \sys workflows.
 
 \if 0
 In this section we use
