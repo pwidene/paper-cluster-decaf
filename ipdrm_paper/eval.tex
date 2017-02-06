@@ -197,7 +197,41 @@ the simulation, once again in a human-readable fashion.
   \end{tabular}
   \vspace{-0.15in}
 \end{table*}
+Different workflows have different requirements in terms
+of the dataset sizes that they operate on and therefore
+on the scale of their components.
+Therefore, if they are to use generic components, it is important
+that the performance of the individual components
+as well as the end-to-end performance of the resulting
+workflow be reasonably predictable.
+To test this, we ran a weak scaling experiment
+whose setup is described in~\autoref{tab:weak-scaling-setup}.
+The table lists the process sizes and dataset sizes used in the 5
+runs of the GTCP workflow for this experiment.
+We measured the end-to-end time of these runs,
+as well as the completion time of individual
+timesteps broken down by component.
 
+These measurements allow us to extract an
+approximate per-process throughput, both for
+the entire workflow, end-to-end, and on
+a per-component basis.
+The last table in ~\autoref{tab:weak-scaling-setup}
+lists these end-to-end results, where the total
+dataset sizes produced by the simulation are divided
+by the total number of processes used in the workflow
+and by the total time taken by the workflow.
+~\autoref{fig:gtcp-weak-perc}
+shows per-component, per-process throughputs for
+three of the components used in these runs, 
+for a timestep taken arbitrarily in the workflow.
+We can see that while there is a certain variation
+in these throughputs throughout the runs, especially
+at the largest scale, where communication overhead
+is most significant, both \sys workflows and their
+individual components exhibit excellent weak scaling properties,
+with a maximum throughput decrease of about 57\% between 
+the two extreme scales.
 
 \if 0
 \begin{table*}[tbp]
