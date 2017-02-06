@@ -7,15 +7,19 @@ set output "`echo $OUT`"
 #set format x "$%g$"
 set format xy '\scriptsize{%g}'
 #set tics font ", 8"
-set label 'Magnitude' at graph 0.45, graph 0.9
+#set label 'Magnitude, GROMACS wflow' at graph 0.45, graph 0.9
+set label 'Magnitude, GROMACS wflow' at graph 0.20, graph 0.9
 #set key font ","
-set key spacing 0.8
-set key samplen 1.2
-set key at graph 0.9, graph 0.65
+#set key spacing 0.8
+#set key samplen 1.2
+#set key at graph 0.9, graph 0.65
+set key off
 set xtics nomirror
 set xlabel "Size per proc (MB)" font ", 10"
 show xlabel
+set ylabel "Timestep 1 (s)" rotate by 90
+show ylabel
 
 #set key at 0,0 bot center
 #set key above
-plot  "data/gro-mag-strong.dat" title "whole step" with linespoints ls 1
+plot  "data/gro-mag-strong.dat" with linespoints ls 1
