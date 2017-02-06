@@ -48,10 +48,13 @@ scientific codes having large user bases: the LAMMPS Newtonian particle
 simulator~\cite{plimpton:1997:lammps}, GTCP, a particle-in-cell Tokamak
 simulator~\cite{lin:gtc}, and GROMACS,
 a biomolecular dynamics code~\cite{hess2008gromacs}.
+These are illustrated in
+~\autoref{fig:lammps-workflow},~\autoref{fig:gtcp-workflow},
+and~\autoref{fig:gromacs-workflow}.
 
 The primary purpose of our evaluation is to demonstrate the
 successful assembly and deployment of \sys workflows. In doing so, 
-we also present promising
+we also present useful
 weak and strong scaling properties exhibited by \sys components
 during these runs, as well as a measurement-based validation of
 the componentized method to building workflows, which is inherent in the \sys approach.
@@ -63,7 +66,7 @@ attached Nvidia Kepler K20X GPU with an additional 6 GB of memory on every
 node.
 
 The smaller-scale results are obtained from the Falcon cluster
-on the Georgia Tech campus, an 80-node cluster of Intel Xeon X5660 machines,
+on the Georgia Tech campus; it is an 80-node cluster of Intel Xeon X5660 machines,
 with 12 cores and 23.5 GB of RAM per node. 
 
 \subsection{Workflows}
@@ -80,7 +83,7 @@ with fine-grained time step granularity
 and outputs the states of these units at coarse-grained
 intervals. From this point on, we refer to these larger
 I/O intervals as ``timesteps.''
-These states correspond to various properties
+These \textit{states} correspond to various properties
 of these units, such as the positions of individual atoms or the
 temperatures of individual grid points.
 
@@ -125,10 +128,6 @@ immediately downstream from Select in this workflow.
 Notice, also, the decreasing numbers of processes
 used in each component
 
-The workflows themselves are illustrated in
-~\autoref{fig:lammps-workflow},~\autoref{fig:gtcp-workflow},
-and~\autoref{fig:gromacs-workflow}.
-
 We configure LAMMPS to simulate a disruption (a ``crack'') in a thin layer of
 particles and output 5 numerical properties describing each particle in the
 simulation at regular timestep intervals. This corresponds to two-dimensional
@@ -162,7 +161,7 @@ The data array itself is two-dimensional:
 3D coordinates over all atoms.
 From these, we obtain a histogram of the distances
 of the atoms from the origin for each timestep, showing
-an evolution of the spread of the particles through
+an evolution of the spread of the particles throughout
 the simulation, once again in a human-readable fashion.
 
 \begin{figure}
@@ -208,7 +207,7 @@ To test this, we ran a weak scaling experiment
 whose setup is described in~\autoref{tab:weak-scaling-setup}.
 The table lists the process sizes and data set sizes used in the 5
 runs of the GTCP workflow for this experiment.
-We measured the end-to-end time of these runs,
+We measured the end-to-end times of these runs,
 as well as the completion time of individual
 timesteps, broken down by component, averaged
 over the component's communicator.
@@ -227,7 +226,7 @@ shows similar per-component, per-process throughputs for
 three of the components used in these runs,
 for a timestep taken arbitrarily in the workflow.
 We can see that while there is a certain variation
-in these throughputs throughout the runs, especially
+in these throughputs across the runs, especially
 at the largest scale, where communication overhead
 is most significant, both \sys workflows and their
 individual components exhibit very good weak scaling properties,

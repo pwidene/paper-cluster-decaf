@@ -16,24 +16,27 @@ the overall incoming dataset so that each
 process receives an approximately
 equal amount of data.
 
-The implementation requirements are simply a common communication
+FlexPath allows for the exchange of data
+between different communicators living
+in different MPI executables, and this
+functionality is presented
+to the components through the ADIOS interface.
+Other implementation paths
+are possible here, requiring mainly a common communication
 mechanism and a typed payload. For example, the HDF5 Virtual Object
 Layer~\cite{folk:2011:hdf5} and Mercury~\cite{Soumagne:2013:mercury} +
-Boost serialization could be used. ADIOS + FlexPath provides
-a trivial way to implement mechanisms like \sys.
+Boost serialization could be used.
 
-The MxN data transfers are organized by the ADIOS
-read interface since it allows each process
+ADIOS allows each process
 involved in the read operation to specify a
 bounding box for the multi-dimensional
 array portion it will receive.
-The underlying transport mechanism, FlexPath,
-carries out the actual MxN exchange of data,
+FlexPath carries out the actual MxN exchange of data,
 ensuring each reading process receives
 all the data that it specifes in its bounding box,
 even if this portion is itself partitioned among several writers.
 
-More specifically, FlexPath implements a publish/subscribe,
+More generally, FlexPath implements a publish/subscribe,
 asynchronous, \textit{stream-based} data exchange abstracted to the
 components through the ADIOS interface. This facilitates
 the assembly of \sys workflows in a number of ways:
@@ -79,13 +82,12 @@ Specifically, ADIOS expects multi-dimensional
 arrays to be packed linearly, with the variables
 describing the dimensions
 specified in an XML configuration file
-that is used by ADIOS during run time.
+that is read by ADIOS at run time.
 Roughly 70 lines of code were required
 to allow each of the three simulations
 in our evaluation, namely LAMMPS, GTCP, and GROMACS,
 to work with \sys,
 along with an approximately 25-line
-XML file that describes the data to ADIOS
-at run time.
+XML file.
 This small, one-time modification to a simulation allows it to work with any
 \sys workflow. Other implementations would have similar requirements.
