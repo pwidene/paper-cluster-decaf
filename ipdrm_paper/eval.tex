@@ -168,7 +168,7 @@ the simulation, once again in a human-readable fashion.
 \begin{figure}
 %\includegraphics[width=\columnwidth]{fig/per-component-throughput}
 \includegraphics[width=\columnwidth]{fig/per-component-throughput}
-\caption{GTCP Weak Scaling Experiment: Per-component, per-process throughput in KB/s.}
+\caption{GTCP workflow weak scaling experiment: Per-component, per-process throughputs in KB/s.}
 \label{fig:gtcp-weak-perc}
 \end{figure}
 
@@ -200,7 +200,7 @@ the simulation, once again in a human-readable fashion.
 Different workflows have different requirements in terms
 of the data set sizes that they operate on and therefore
 on the scales of their components.
-Thus, in order to use generic components, it is important
+Thus, in order to use \textit{generic} components, it is important
 that the performance of the individual components
 as well as the end-to-end performance of the resulting
 workflow be reasonably predictable.
@@ -211,7 +211,7 @@ runs of the GTCP workflow for this experiment.
 We measured the end-to-end time of these runs,
 as well as the completion time of individual
 timesteps, broken down by component, averaged
-over the component's MPI communicator.
+over the component's communicator.
 
 These measurements allow us to extract an
 approximate per-process throughput, both for
@@ -219,11 +219,11 @@ the entire workflow, end-to-end, as well as on
 a per-component basis.
 The last column in ~\autoref{tab:weak-scaling-setup}
 lists these end-to-end results, where the total
-dataset sizes produced by the simulation are divided
+data set size produced by the simulation is divided
 by the total number of processes used in the workflow
 and by the total time taken by the workflow.
 ~\autoref{fig:gtcp-weak-perc}
-shows per-component, per-process throughputs for
+shows similar per-component, per-process throughputs for
 three of the components used in these runs,
 for a timestep taken arbitrarily in the workflow.
 We can see that while there is a certain variation
@@ -232,7 +232,7 @@ at the largest scale, where communication overhead
 is most significant, both \sys workflows and their
 individual components exhibit excellent weak scaling properties,
 with a maximum throughput decrease of about 57\% between 
-the two scale extremes.
+the two extremes in scale.
 
 \if 0
 \begin{table*}[tbp]
