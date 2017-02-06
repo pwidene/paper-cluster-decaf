@@ -165,31 +165,39 @@ of the atoms from the origin for each timestep, showing
 an evolution of the spread of the particles through
 the simulation, once again in a human-readable fashion.
 
+\begin{figure}
+%\includegraphics[width=\columnwidth]{fig/per-component-throughput}
+\includegraphics[width=\columnwidth]{fig/per-component-throughput}
+\caption{GTCP Weak Scaling Experiment: Per-component, per-process throughput in KB/s.}
+\label{fig:gtcp-weak-perc}
+\end{figure}
+
 \subsection{Weak Scaling}
 \begin{table*}[tbp]
   %\vspace{-0.15in}
   \centering
-  \caption{GTCP-\sys: Weak Scaling Experiment Setup, End-to-End Times}
+  \caption{GTCP-\sys: Weak Scaling Experiment Setup, End-to-End Results}
   \label{tab:weak-scaling-setup}
   \vspace{-0.07in}
-  \begin{tabular}{|c|c|c|c|c|c|c|c|}
+  \begin{tabular}{|c|c|c|c|c|c|c|c|c|}
     \hline
 %    SIM output & AIO time (sec) & \begin{tabular}[t]{@{}c@{}}\sys\\time (sec)\end{tabular} & LMP only (sec) \\
-    Run Number & GTCP Output (MB) & GTCP Procs & Select Procs & Dim-Red-1 Procs & Dim-Red-2 Procs & Histo Procs & End-to-End Time (s)\\
+    Run & GTCP Output (MB) & GTCP Procs & Select Procs & Dim-Red1 Procs & Dim-Red2 Procs & Histo Procs & End2End Time (s) & Throughput (KB/s)\\
     \hline
-    1 & 918.3 & 64 & 10 & 6 & 6 & 2 & 92.72\\
+    1 & 918.3 & 64 & 10 & 6 & 6 & 2 & 92.72 & 112,541\\
     \hline
-    2 & 1434.6 & 84 & 16 & 10 & 10 & 2 & 115.23\\
+    2 & 1434.6 & 84 & 16 & 10 & 10 & 2 & 115.23 & 102,046\\
     \hline
-    3 & 2065.6 & 156 & 18 & 14 & 14 & 4 & 97.27\\
+    3 & 2065.6 & 156 & 18 & 14 & 14 & 4 & 97.27 & 103,089\\
     \hline
-    4 & 2811.3 & 234 & 25 & 19 & 19 & 5 & 96.36\\
+    4 & 2811.3 & 234 & 25 & 19 & 19 & 5 & 96.36 & 96,605\\
     \hline
-    5 & 12905.4 & 1024 & 116 & 88 & 88 & 24 & 197.66\\
+    5 & 12905.4 & 1024 & 116 & 88 & 88 & 24 & 197.66 & 48,724\\
     \hline
   \end{tabular}
   \vspace{-0.15in}
 \end{table*}
+
 
 \if 0
 \begin{table*}[tbp]
