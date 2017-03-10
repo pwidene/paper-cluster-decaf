@@ -1,0 +1,10 @@
+Insufficient number of workflows.
+More workflows better, even if they only use 1 SB component.
+Compared to map-reduce.
+AIO is developped by authors... What's the problem?
+
+Implementation relies heavily on ADIOS/FP.
+Not enough workflows: need more complex and diverse.
+
+AnalyzeThis paper suggested. Analysis-workflow-aware
+storage system. 
