@@ -61,13 +61,14 @@ the componentized method to building workflows, which is inherent in the \sys ap
 
 The large-scale evaluation is performed on Titan, the Cray XK7 machine at Oak Ridge
 National Laboratory. It consists of 18,688 nodes each with 1 16-core AMD
-Opteron CPU and 32 GB of RAM. The interconnect is a Gemini network. There is an
-attached Nvidia Kepler K20X GPU with an additional 6 GB of memory on every
-node.
+Opteron CPU and 32 GB of RAM. The interconnect is a Gemini network.
+% There is an
+% attached Nvidia Kepler K20X GPU with an additional 6 GB of memory on every
+% node.
 
 The smaller-scale results are obtained from the Falcon cluster
-on the Georgia Tech campus; it is an 80-node cluster of Intel Xeon X5660 machines,
-with 12 cores and 23.5 GB of RAM per node. 
+on the Georgia Tech campus; it is an 80-node cluster of Intel
+Xeon X5660 machines, with 12 cores and 24 GB of RAM per node. 
 
 \subsection{Workflows}
 
@@ -126,7 +127,7 @@ stream and array of Select.
 Thus, this script specifies that Magnitude is
 immediately downstream from Select in this workflow.
 Notice, also, the decreasing numbers of processes
-used in each component
+used in each component.
 
 We configure LAMMPS to simulate a disruption (a ``crack'') in a thin layer of
 particles and output 5 numerical properties describing each particle in the
@@ -391,6 +392,9 @@ end of the chart, and the process sizes of
 GROMACS and Histogram are kept the same.
 Such experiments allow users
 to better determine how to allocate resources to \sys workflows.
+While limited space only allows us to present this sample
+result, results we have obtained from other components
+and workflows show similar strong scaling characteristics.
 
 \if 0
 In this section we use
