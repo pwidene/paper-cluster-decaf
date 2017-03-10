@@ -37,8 +37,8 @@ must be written outside of the Swift script.
 
 Kepler~\cite{bertram:2006:kepler} offers a nice GUI for assembling different
 kinds of scientific workflows. It offers different directors to manage how the
-workflow will be executed. Each component is an actor with channels connecting
-actors. As mentioned in the Introduction, complex workflows using Kepler have been
+workflow is executed. Each component is an actor with channels connecting
+actors. As mentioned in~\autoref{s:intro}, complex workflows using Kepler have been
 assembled for many communities, including fusion science.
 However, the large collection of components
 that come with Kepler are mainly designed
@@ -89,6 +89,17 @@ This work demonstrates that the placement of the analytics can significantly
 affect the performance of workflows, and that this placement can be determined
 in part by the communication characteristics of the analytics components.
 
+In the Big Data community, there exist several
+widely-used frameworks for the analysis of large
+data sets, which can possibly operate on in-memory
+data and also be chained together over several
+analytical steps. However, these tools are largely
+based on the MapReduce model of data analysis,
+and the types of operations performed
+in scientific analyses generally cannot
+be defined over a key-value view of the data
+and do not lend themselves well to this model.
+
 % need re-work.
 % removing for now since long already.
 \if 0
@@ -112,5 +123,5 @@ semantic integrity across redistributions.
 Overall, while all of these efforts are addressing different portions of the
 online workflows puzzle, none of them address the idea of general,
 reusable data transformation and analysis components for the assembly
-of entire HPC workflows out of the box.
+of entire in situ HPC workflows out of the box.
 
