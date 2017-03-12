@@ -5,17 +5,17 @@
 %\pmw{Intended to be viewed through a ``a reusable-component middleware for
 %  scientific workflows'' lens (or some such)}
 
-Multi-step scientific workflows have become increasingly prominent as
-extreme-scale computing environments have evolved. Made up of collections of
+Multi-step scientific simulation and engineering workflows have become increasingly prominent as
+extreme-scale computing environments evolve. Made up of collections of
 coupled analytic and/or data processing steps designed to refine data into
-information, such workflows are quickly becoming powerful tools of data-driven
+information, such workflows are becoming powerful tools of data-driven
 scientific discovery.
-Performance issues caused by disk I/O between
+Performance issues caused by storage I/O between
 workflow stages become prohibitive
 as such workflows grow in size and complexity,
 a situation unlikely to improve
-given the relative future projections of parallel
-file system bandwidth and system
+given the relative future projections of storage 
+system bandwidth and system
 compute capability. So-called \textit{in situ}
 techniques, or \textit{runtime data analysis},
 in which analysis and visualization
@@ -38,15 +38,15 @@ In this work we introduce \sys, an approach to designing generic, reusable compo
 for the construction of scientific workflows from start to finish.
 \sys allows for the assembly and launch
 of a variety of \insitu -capable workflows ``out of
-the box,'' without recompilation of the components and requiring only one-time modifications to the
-output methods of the driving simulation codes. \sys leverages both self-describing data exchanged
+the box,'' without recompilation and requiring only one-time modifications to the
+output methods of the driving simulation codes. The \sys demonstrations leverage both self-describing data exchanged
 through the Adaptable I/O System (ADIOS) ~\cite{lofstead:2009:adaptable} interface as well as the stream-based,
 publish/subscribe interaction model implemented by the underlying transport system,
 FlexPath~\cite{dayal:2014:flexpath}. \sys consists of generic components that perform commonly used
 operations in workflows, such as multi-dimensional data filtering and histogram analysis. We present four
-such components in this paper; while this set is not exhaustive, we demonstrate the standardization
+such components in this paper. While this set is not exhaustive, it demonstrates the standardization
 benefits of the \sys approach by describing their use in the construction and deployment of three very
-different scientific workflows.
+different workflows.
 
 % PMW: Not so defensive here...
 % The four components we present in this work
@@ -73,16 +73,16 @@ its strong and weak scaling
 characteristics. Since this modular approach aims to
 replace custom code, we provide a comparison of
 the performance of a representative \sys workflow with
-that of a fixed ``all-in-one'' code performing the same analyses,
-which shows the negligible overhead of \sys workflow construction.
+that of a fixed ``all-in-one'' code performing the same analyses.
+%which shows the negligible overhead of \sys workflow construction.
 
 The remainder of this paper is organized as follows.
 First is a survey of related
 work in~\autoref{s:related}.
-Second, in~\autoref{s:design} we present the design
-approach for the components.
-Next, in~\autoref{s:impl} the demonstration implementation details
-are presented. The evaluation is presented in~\autoref{s:eval} followed
+Second, ~\autoref{s:design} presents the design
+approach.
+Next, ~\autoref{s:impl} presents the demonstration implementation details.
+The evaluation is presented in~\autoref{s:eval} followed
 by conclusions and future work in~\autoref{s:conclusion}.
 
 \if 0

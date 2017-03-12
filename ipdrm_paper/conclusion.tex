@@ -2,20 +2,19 @@
 \label{s:conclusion}
 
 This paper presents \sys, a demonstration of making generic, reusable
-components for scientific workflows. By decomposing the operations into small
+components for scientific workflows. By using a stream-based pipeline and decomposing the operations into small
 chunks, we achieve components that can be reused, without modification, for
-a variety of different workflows. In this work, we investigate using a
-stream-based pipeline with generic components to achieve easier to build and
-use workflows. Designing components having the ability to
-handle data having any number of dimensions, 
-and to operate on various streams and arrays
-passed to them at run time,
-provides a very useful way to link
-them together. Maintaining a high level of semantics upstream, for example by
-labeling dimensions and certain quantities inside of these dimensions, gives a
-good understanding of the data to downstream components. There is a need for
-components that re-organize the data in a format that downstream components can
-understand.
+a variety of different workflows. 
+These components 
+handle data having any number of dimensions
+and operate on various streams and arrays
+passed to them at run time.
+Maintaining high level semantics upstream, by
+labeling dimensions and certain quantities inside of these dimensions, gives
+good data understanding to downstream components.
+%There is a need for
+%components that re-organize the data in a format that downstream components can
+%understand.
 
 Through the demonstration of generating a velocity histogram for LAMMPS,
 a pressure histogram for GTCP,
@@ -25,19 +24,16 @@ we demonstrate reusing the same components
 over different data formats and application types.
 
 While this work leverages ADIOS and the FlexPath transport, this is not the
-only approach for addressing reusable components. Other, similar approaches can also work well. However, in this case, the data annotation provided by this
-connection infrastructure helps enable reusable components by offering
-necessary metadata to perform general operations.
+only approach for addressing reusable components. Other, similar approaches can
+also work. However, in this case, the data annotation provided by this
+infrastructure simplifies creating reusable components.
 
-The approach presented here is limited
-to in situ workflows only, which are launched
-all at once. While there are many other
-commonly used execution models, this
-approach is becoming increasingly useful,
-considering the increasing significance of
-I/O bottlenecks.
+The components presented here are limited to in situ workflows with all
+components running simultaneously. However, introducing new components that write
+and read from storage as part of a workflow can break that dependency and are a
+superficially simple addition. Future work will investigate these challanges.
 
-Future work involves
+Other future work involves
 expanding the generic components library 
 to include a variety of other analytical operations.
 In particular, the \sys components presented
@@ -47,7 +43,9 @@ size or a smaller size as the input.
 Analytical procedures that lead
 to an increase in data size, such as
 all-pairs calculations, are common and
-can be implemented using the \sys approach.
+can be implemented using the \sys approach. Understanding the implications of
+data size growing components would further demonstrate the generality of this
+approach.
 
 To enrich \sys into a true Workflow Management
 System, we hope to leverage
