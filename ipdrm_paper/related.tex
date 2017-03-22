@@ -36,10 +36,11 @@ However, these applications themselves
 must be written outside of the Swift script.
 
 Kepler~\cite{bertram:2006:kepler} offers a nice GUI for assembling different
-kinds of scientific workflows. It offers different directors to manage how the
-workflow is executed. Each component is an actor with channels connecting
-actors. As mentioned in~\autoref{s:intro}, complex workflows using Kepler have been
-assembled for many communities, including fusion science.
+kinds of scientific workflows.
+Each component is an actor, with channels connecting
+actors and a director managing the execution.
+Complex workflows using Kepler have been
+assembled for many communities.
 However, the large collection of components
 that come with Kepler are mainly designed
 to work in a single Java Virtual Machine instance;
@@ -51,11 +52,10 @@ Kepler engine.
 
 To address much of the complexity of communicating between separate parallel
 components, inline approaches are being investigated.
-We use ``inline'' in the sense of ``linked into the same process.''
+We use ``inline'' in the sense of ``linked into the driving process.''
 Catalyst~\cite{karimabadi:2013:catalyst} offers a way to integrate the
 ParaView~\cite{Moreland:2008:paraview} analysis and visualization system
-directly into the simulation executable. Catalyst strips out many features to
-reduce the memory footprint and then requires explicit calls from the host
+directly into the simulation executable through explicit calls from the host
 application into Catalyst routines with predictable data types on in-memory
 data structures. While this can work for limited kinds of data processing,
 it clearly cannot take advantage of additional resources
@@ -76,12 +76,20 @@ analysis and visualization to run.
 \fi
 
 Libsim~\cite{whitlock:2011:libsim} has a similar relationship to
-VisIt~\cite{Riedel:2007:visit} as Catalyst has to ParaView. Both Libsim and
+VisIt~\cite{Riedel:2007:visit} as Catalyst has to ParaView.
+As with Catalyst, key limitations of Libsim coming from the
+fact that it runs on the same node as the simulation are
+that scaling limitations can prevent its use at extreme
+scale and that time series analysis and visualization can be difficult.
+
+\if 0
+Both Libsim and
 Catalyst have a strict limitation that offline workflows do not. In both cases,
 because they are running on the same nodes as the simulation, time series
 analysis and visualization can be difficult or impossible. The potential
 scaling impact on the simulation because of limitations in Libsim or Catalyst
 can prevent their use for the most important use cases at extreme scale.
+\fi
 
 A middle path between in situ and offline processing was investigated in
 PreDatA~\cite{zheng:2010:predata}.
